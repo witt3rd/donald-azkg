@@ -37,6 +37,7 @@ Write in Paul Graham's distinctive style: conversational but precise, building a
 
 **Example Transformation:**
 Raw information:
+
 - Teaching LLMs has limited methods with various tradeoffs
 - Initial training is expensive but foundational
 - Finetuning struggles with retrieval
@@ -78,9 +79,68 @@ Each book succeeds because it clearly answers important questions that practitio
 ## Quality Check
 
 Before publishing any section, ask:
+
 1. What question does this answer?
 2. Is this the most direct answer possible?
 3. Does this support the larger question hierarchy?
 4. Would a busy practitioner find this immediately useful?
 
 If any answer is unclear, revise until the question-answer relationship is obvious.
+
+## Chapter Scaffolding Process
+
+**From Notes to Research-Ready Scaffold**
+
+The progression from book-level planning to chapter-level scaffolding follows a systematic question-oriented approach:
+
+### Step 1: Extract the Chapter Question
+
+From chapter notes, identify the core question the chapter must answer. For Chapter 1:
+
+- **Note**: "Why do current frameworks fail at scale?"
+- **Scaffold Purpose**: Demonstrate the orchestration trap through real failure cases
+
+### Step 2: Map Question-Answer Structure
+
+Transform the implicit question into the seven-part structure:
+
+1. **Opening Hook**: Create scenario that raises the question (GPT-5 scramble)
+2. **Context**: Theoretical foundation (evolution mismatch)
+3. **Answer**: Concrete demonstration (anatomy of framework failure)
+4. **Exploration**: Complexities and real costs
+5. **Verification**: Exercises to confirm understanding
+6. **Resolution**: What was accomplished (chapter summary)
+7. **Bridge**: Connect to next chapter's question territory
+
+### Step 3: Insert Research Markers
+
+Clearly mark where specific research is needed before writing:
+
+- `[Research: Specific examples of framework breaks with major model releases]`
+- `[Research: Timeline of LLM capability evolution vs framework design assumptions]`
+- `[Research: Framework version churn statistics and migration costs]`
+
+This approach separates scaffold creation from content research, allowing focused work on structure first, then targeted information gathering.
+
+### Step 4: Maintain Paul Graham Style Framework
+
+Ensure each section answers its implicit question with:
+
+- Strong declarative openings
+- Clear reasoning progression
+- Concrete examples over abstract concepts
+- Dismissal of broken approaches with evidence
+- Building toward clear solutions
+
+### Step 5: Include Practical Elements
+
+For technical books, add:
+
+- Development environment setup (first chapter)
+- Hands-on exercises that reinforce concepts
+- Code examples that support the answer
+- Bridge sections that naturally raise the next question
+
+**Result**: A complete scaffolding that transforms chapter notes into a research-ready structure. Each section knows exactly what question it answers, what research it needs, and how it supports the larger chapter argument.
+
+**Meta-Learning**: This process scales from chapter level to section level to paragraph level. The question-oriented approach provides consistent structure at every granularity, ensuring focused, useful content throughout.
