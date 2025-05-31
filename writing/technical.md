@@ -100,6 +100,7 @@ Every chapter MUST end with a "References" section as the absolute final section
 - Long code listings that duplicate the codebase
 - Hype, superlatives, and sensationalism
 - Academic prose disconnected from practice
+- **Title case in subheadings**: All subheadings (h2+) must use sentence case, not title case with every word capitalized
 - **Unsupported claims**: Every statistic, framework capability, or performance metric needs a citation to original, official sources
 - **Secondary sources**: Never cite interpretive articles, tutorials, or aggregated content when primary sources are available
 
@@ -108,12 +109,13 @@ Every chapter MUST end with a "References" section as the absolute final section
 Each chapter follows this implicit question-answering structure (remember: never state the questions explicitly):
 
 1. **Opening Hook**: Start with a scenario or statement that implicitly poses the chapter's question
-2. **Conceptual Framework**: Provide the theoretical foundation needed to understand the answer
-3. **Practical Answer**: Demonstrate the solution through implementation
-4. **Deep Exploration**: Address complexities and edge cases
-5. **Exercises**: Hands-on activities that confirm understanding
-6. **Chapter Summary**: Summarize what was accomplished (the implicit answer) and implicitly bridge to the next chapter
-7. **References**: IEEE-style numbered citations for all sources used in the chapter
+2. **Publisher Learning Objectives**: End the chapter introduction with a "In this chapter, you'll..." section that accurately reflects what the reader will learn and accomplish (this is a structural requirement of the publisher)
+3. **Conceptual Framework**: Provide the theoretical foundation needed to understand the answer
+4. **Practical Answer**: Demonstrate the solution through implementation
+5. **Deep Exploration**: Address complexities and edge cases
+6. **Exercises**: Hands-on activities that confirm understanding
+7. **Chapter Summary**: Summarize what was accomplished (the implicit answer) and implicitly bridge to the next chapter
+8. **References**: IEEE-style numbered citations for all sources used in the chapter
 
 **CRITICAL Structure Requirements:**
 
