@@ -48,6 +48,51 @@ Raw information:
 Paul Graham style:
 "If you want to teach an LLM something, you have exactly four options, and three of them are broken. Initial training works but costs millions. Finetuning sort of works but can't reliably retrieve what you taught it. Online learning might work someday, but betting on it now is like buying a flying car in 1950. That leaves in-context learning. This is the only method that consistently works, which is why everyone uses it. The standard approach is RAG—you store information in a database and retrieve it when needed. Sounds reasonable, right? Wrong. RAG systems are dumb. They retrieve everything that might be relevant, filling your limited context window with noise."
 
+## References and Citations
+
+**MANDATORY REQUIREMENT**: All research must be conducted using official, original, primary sources only. Secondary sources, aggregated content, and interpretive articles are prohibited unless the interpretation itself is the subject of study.
+
+**Format**: Use IEEE-style numbered citations for technical credibility while maintaining readability.
+
+**Organization**: Per-chapter references work best for technical books—readers can easily find sources relevant to specific topics without scrolling through a massive bibliography.
+
+**Acceptable Source Types and Standards**:
+
+- **Academic Papers**: Peer-reviewed journals, conference proceedings, arXiv preprints with full IEEE format and DOI
+- **Official Documentation**: Framework docs, API references, official guides from the creating organization
+- **Primary Research Reports**: Company research papers, official technical reports, whitepapers from source organizations
+- **Official GitHub Repositories**: Original repositories with specific commit hashes or release tags
+- **Official Company Announcements**: Press releases, blog posts from official company channels
+- **Government/Standards Body Publications**: Technical standards, regulatory documents, official statistics
+
+**PROHIBITED Sources**:
+
+- Secondary analysis or interpretation articles (unless analyzing the interpretation itself)
+- Aggregated statistics without primary source attribution
+- "Best of" lists or comparison articles
+- Tutorial or "how-to" content that interprets original sources
+- Wikipedia or other crowd-sourced content
+- News articles reporting on technical developments (cite the original source instead)
+
+**Citation Style Examples**:
+
+- Academic: [1] J. Smith, "Large Language Model Scaling Laws," _Nature Machine Intelligence_, vol. 4, pp. 123-135, 2024. DOI: 10.1038/s42256-024-0123-4
+- Official Documentation: [2] OpenAI, "GPT-4 API Reference," OpenAI Documentation, v1.2.3, Dec. 2024. [Online]. Available: <https://platform.openai.com/docs/api-reference>
+- Repository: [3] Microsoft, "AutoGen Framework," GitHub repository, commit a1b2c3d, 2024. [Online]. Available: <https://github.com/microsoft/autogen/tree/a1b2c3d>
+- Company Report: [4] OpenAI, "GPT-4 Technical Report," OpenAI Research, Mar. 2024, pp. 15-23. [Online]. Available: <https://openai.com/research/gpt-4>
+
+**Mandatory Source Verification Requirements**:
+
+- **Every quantitative claim** must cite the original data source, not secondary reporting
+- **Framework capabilities** must reference official documentation, not third-party tutorials
+- **Performance benchmarks** must cite the original benchmark study or official evaluation
+- **Industry statistics** must cite primary research organizations, government sources, or company reports
+- **Version numbers and features** must reference official changelogs, documentation, or release notes
+- **Code examples** must reference specific commits or releases in official repositories
+
+**Chapter Reference Format - FINAL SECTION REQUIREMENT**:
+Every chapter MUST end with a "References" section as the absolute final section. This section lists all citations in IEEE numbered format. Keep URLs current and prefer permanent links (DOIs, archived versions, specific commit hashes) when possible. No content may appear after the References section.
+
 ## What to Avoid
 
 - Bullet lists and marketing speak ("revolutionary," "game-changing")
@@ -55,6 +100,8 @@ Paul Graham style:
 - Long code listings that duplicate the codebase
 - Hype, superlatives, and sensationalism
 - Academic prose disconnected from practice
+- **Unsupported claims**: Every statistic, framework capability, or performance metric needs a citation to original, official sources
+- **Secondary sources**: Never cite interpretive articles, tutorials, or aggregated content when primary sources are available
 
 ## Structure Template
 
@@ -64,9 +111,19 @@ Each chapter follows this implicit question-answering structure (remember: never
 2. **Conceptual Framework**: Provide the theoretical foundation needed to understand the answer
 3. **Practical Answer**: Demonstrate the solution through implementation
 4. **Deep Exploration**: Address complexities and edge cases
-5. **Verification**: Exercises that confirm understanding
-6. **Resolution**: Summarize what was accomplished (the implicit answer)
-7. **Bridge**: Connect to the next chapter's territory
+5. **Exercises**: Hands-on activities that confirm understanding
+6. **Chapter Summary**: Summarize what was accomplished (the implicit answer) and implicitly bridge to the next chapter
+7. **References**: IEEE-style numbered citations for all sources used in the chapter
+
+**CRITICAL Structure Requirements:**
+
+- Exercises always come before the chapter summary
+- Chapter summary comes before references
+- **References MUST be the absolute final section of every chapter—no exceptions**
+- The bridge to the next chapter is implicit within the summary—never use explicit "Bridge to Chapter X" headings
+- The summary should naturally raise interest in the next chapter's topic without forced transitions
+- **Every quantitative claim, framework version, or performance metric must cite original, official sources**
+- **All research must be conducted using primary sources only**
 
 ## Examples from Top Books
 
@@ -108,19 +165,19 @@ Transform the implicit question into the seven-part structure:
 2. **Context**: Theoretical foundation (evolution mismatch)
 3. **Answer**: Concrete demonstration (anatomy of framework failure)
 4. **Exploration**: Complexities and real costs
-5. **Verification**: Exercises to confirm understanding
-6. **Resolution**: What was accomplished (chapter summary)
-7. **Bridge**: Connect to next chapter's question territory
+5. **Exercises**: Activities to confirm understanding
+6. **Chapter Summary**: What was accomplished and implicit bridge to next chapter's question territory
+7. **References**: IEEE-style citations for all quantitative claims and sources
 
 ### Step 3: Insert Research Markers
 
-Clearly mark where specific research is needed before writing:
+Clearly mark where specific research is needed before writing, with emphasis on primary source requirements:
 
-- `[Research: Specific examples of framework breaks with major model releases]`
-- `[Research: Timeline of LLM capability evolution vs framework design assumptions]`
-- `[Research: Framework version churn statistics and migration costs]`
+- `[Research: Specific examples of framework breaks with major model releases - requires official changelogs and release notes]`
+- `[Research: Timeline of LLM capability evolution vs framework design assumptions - requires original research papers and official announcements]`
+- `[Research: Framework version churn statistics and migration costs - requires official repository data and primary survey research]`
 
-This approach separates scaffold creation from content research, allowing focused work on structure first, then targeted information gathering.
+This approach separates scaffold creation from content research, allowing focused work on structure first, then targeted information gathering from official, primary sources only.
 
 ### Step 4: Maintain Paul Graham Style Framework
 
