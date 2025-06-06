@@ -46,6 +46,8 @@ Each domain question directly supports answering the central question while bein
 
 Each domain breaks down into specific, focused questions that address particular aspects of that domain's contribution to the central answer.
 
+**CRITICAL**: Question decomposition is a rigorous process requiring systematic methodology. For detailed guidance on how to perform this decomposition rigorously, see the [Hypothesis-Driven Question Decomposition Method](strategy_questions_decomposition.md), which treats decomposition as theory building with testable hypotheses, validation criteria, and iterative refinement.
+
 **Part I Example: What knowledge frameworks exist across human disciplines?**
 
 - **Chapter 1**: What cognitive architectures does psychology reveal about intelligence? → Maps psychological insights to computational models
