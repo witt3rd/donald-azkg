@@ -22,16 +22,16 @@ This style guide provides tone, structure, and language preferences with actiona
 
    - Employ technical terms when relevant and explain complex ideas simply.
    - _Examples:_
-     - "Agentic OS" (context-specific technical term).
+     - "AgentFlow OS" (context-specific technical term).
      - "UX constructs" (precise and relevant to the topic).
-     - "Windows as a sensor" (technical concept explained in everyday terms).
+     - "SkyOS as a sensor" (technical concept explained in everyday terms).
 
 4. **Base arguments on facts and logic.**
 
    - Support points with evidence or reasoning, avoiding speculation.
    - _Examples:_
      - "I have a basic question on: who is the doc most for?" (logical inquiry driving discussion).
-     - "How investments we are targeting are expected to make Windows a better AI-native OS than MacOS, iOS and Android" (fact-based strategic point).
+     - "How investments we are targeting are expected to make SkyOS a better AI-native OS than FruitOS, MobileCore and RobotOS" (fact-based strategic point).
 
 5. **Communicate directly and clearly.**
 
@@ -51,14 +51,14 @@ This style guide provides tone, structure, and language preferences with actiona
 
    - Break down complex ideas into readable lists.
    - _Examples:_
-     - "How investments we are targeting are expected to make ChatGPT on Windows better / more capable than ChatGPT on web" (listed points for clarity).
-     - "Windows can be the best canvas for the AI-first world" (from a list of value areas).
+     - "How investments we are targeting are expected to make IntelliBot on SkyOS better / more capable than IntelliBot on web" (listed points for clarity).
+     - "SkyOS can be the best canvas for the AI-first world" (from a list of value areas).
 
 8. **Reference specific sections or content when providing feedback.**
 
    - Cite exact parts of the document for context.
    - _Examples:_
-     - "Feedback based on: Agentic Windows Framing_SLT 5.7.docx" (specific reference).
+     - "Feedback based on: Agentic SkyOS Framing_SLT 5.7.docx" (specific reference).
      - "The new computing metaphor and the core concepts (what is the new mouse, desktop, recycle bin, documents, folders)" (ties feedback to content).
 
 9. **Ask clarifying questions when necessary.**
@@ -66,13 +66,13 @@ This style guide provides tone, structure, and language preferences with actiona
    - Use questions to ensure understanding or guide discussion.
    - _Examples:_
      - "I have a basic question on: who is the doc most for?" (seeks audience clarity).
-     - "I sometimes wonder about chrome browser too? but don't really know how to think about that" (prompts further thought).
+     - "I sometimes wonder about swift browser too? but don't really know how to think about that" (prompts further thought).
 
 10. **Highlight potential value propositions or strategic insights.**
     - Identify opportunities for differentiation or advantage.
     - _Examples:_
-      - "Windows can provide the Context needed for AI to be able to do a great job" (strategic value).
-      - "Windows can be the cost-effective way for someone to do a LOT of AI" (market differentiation).
+      - "SkyOS can provide the Context needed for AI to be able to do a great job" (strategic value).
+      - "SkyOS can be the cost-effective way for someone to do a LOT of AI" (market differentiation).
 
 ## DON'Ts
 
