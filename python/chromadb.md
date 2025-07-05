@@ -42,11 +42,13 @@ ChromaDB operations begin with client initialization and collection management[^
 """ChromaDB basic operations with Python 3.13 best practices."""
 
 import os
+from typing import cast
 from dotenv import load_dotenv
 from loguru import logger
 import chromadb
+from chromadb import Collection
 from chromadb.utils import embedding_functions
-from chromadb.api.models.Collection import Collection
+from chromadb.api.types import Embeddable, EmbeddingFunction
 
 # Load environment variables
 load_dotenv()
@@ -102,9 +104,11 @@ def create_document_collection(
         model_name=embedding_model
     )
 
+    # Cast the embedding function to the expected generic type to resolve
+    # static analysis errors from type variance.
     collection = client.get_or_create_collection(
         name=collection_name,
-        embedding_function=embedding_function
+        embedding_function=cast(EmbeddingFunction[Embeddable], embedding_function),
     )
 
     logger.info(f"Created collection '{collection_name}' with model '{embedding_model}'")
@@ -192,10 +196,16 @@ def query_collection(
         query_texts=query_texts,
         n_results=n_results,
         where=where,
-        where_document=where_document
+        where_document=where_document,
+        include=["documents", "distances", "metadatas"],
     )
 
-    logger.info(f"Query returned {len(results['documents'][0])} results")
+    # Safely access results, as keys can be None if no results are found
+    documents = results.get("documents")
+    if documents and documents[0]:
+        logger.info(f"Query returned {len(documents[0])} results")
+    else:
+        logger.info("Query returned no results")
     return results
 
 # Example usage
