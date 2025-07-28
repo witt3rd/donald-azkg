@@ -1,4 +1,212 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
+# **OpenAI Python SDK: Responses API vs Chat Completions API**
+
+## **The Current Recommendation: Responses API**
+
+For new Python projects using the OpenAI SDK, **OpenAI officially recommends using the Responses API over Chat Completions**[1][2]. Introduced in March 2025, the Responses API represents OpenAI's newest core API and is designed as an **"agentic API primitive"** that combines the simplicity of Chat Completions with enhanced capabilities for building more sophisticated AI applications[3][1].
+
+## **Key Differences Between the APIs**
+
+### **State Management**
+
+The most significant difference lies in **conversation state management**:
+
+**Chat Completions API** requires manual state management where you must maintain conversation history yourself and send the complete message array with each request[4][5]:
+
+```python
+from openai import OpenAI
+
+client = OpenAI()
+
+completion = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "user", "content": "knock knock."},
+        {"role": "assistant", "content": "Who's there?"},
+        {"role": "user", "content": "Orange."}
+    ]
+)
+print(completion.choices[0].message.content)
+```
+
+**Responses API** offers **built-in stateful conversations** through the `previous_response_id` parameter, eliminating the need to manually track conversation history[3][6]:
+
+```python
+from openai import OpenAI
+
+client = OpenAI()
+
+# First response
+response = client.responses.create(
+    model="gmini",
+    input="tell me a joke"
+)
+
+# Continue conversation using previous response ID
+second_response = client.responses.create(
+    model="gpt-4o-mini",
+    previous_response_id=response.id,
+    input="explain why this is funny"
+)
+```
+
+### **Built-in Tools and Capabilities**
+
+The Responses API includes **native support for advanced tools**[1][7]:
+
+| **Capability**       | **Chat Completions** | **Responses API** |
+| -------------------- | -------------------- | ----------------- |
+| Text generation      | ✓                    | ✓                 |
+| Function calling     | ✓                    | ✓                 |
+| **Web search**       | ✗                    | ✓                 |
+| **File search**      | ✗                    | ✓                 |
+| **Computer use**     | ✗                    | ✓                 |
+| **Code interpreter** | ✗                    | Coming soon       |
+
+### **Simplified API Structure**
+
+**Responses API** offers a cleaner interface[1]:
+
+- Uses `input` parameter instead of `messages` array
+- Returns `output_text` directly via helper method
+- Provides `response` object with unique `id` instead of `choices` array
+- Built-in semantic events for better integration and type safety[2]
+
+## **Migration Considerations**
+
+### **Chat Completions API Remains Supported**
+
+OpenAI has **committed to supporting Chat Completions indefinitely**[1][6]. It remains the industry standard and will continue receiving new models and capabilities. You can confidently continue using Chat Completions if:
+
+- You don't need built-in tools like web search or computer use
+- Your application already works well with manual state management
+- You prefer the established, widely-adopted API format
+
+### **When to Choose Responses API**
+
+The Responses API is recommended for[1][8]:
+
+- **New projects** starting development
+- Applications requiring **agent-like workflows**
+- Projects needing **built-in tools** (web search, file search, computer use)
+- Applications benefiting from **automatic state management**
+- **Multi-step conversational logic** and reasoning tasks
+
+### **Assistants API Deprecation**
+
+The **Assistants API will be sunset in the first half of 2026**[1][6][8], with OpenAI recommending migration to the Responses API. The Responses API incorporates improvements based on developer feedback from the Assistants API beta.
+
+## **Code Examples Comparison**
+
+**Basic text generation:**
+
+```python
+# Chat Completions
+completion = client.chat.completions.create(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Hello"}]
+)
+result = completion.choices[0].message.content
+
+# Responses API
+response = client.responses.create(
+    model="gpt-4o",
+    input="Hello"
+)
+result = response.output_text
+```
+
+**Conversation with state management:**
+
+```python
+# Chat Completions - Manual history management
+history = [{"role": "user", "content": "Tell me a joke"}]
+response1 = client.chat.completions.create(model="gpt-4o", messages=history)
+history.append({"role": "assistant", "content": response1.choices[0].message.content})
+
+# Responses API - Automatic state management
+response1 = client.responses.create(model="gpt-4o", input="Tell me a joke")
+response2 = client.responses.create(
+    model="gpt-4o",
+    input="Tell me another",
+    previous_response_id=response1.id
+)
+```
+
+## **Agent SDK Integration**
+
+For advanced agent development, OpenAI provides the **Agents SDK**[9][10] which defaults to using the Responses API but can be configured to use Chat Completions:
+
+```python
+from agents import set_default_openai_api
+
+# Use Responses API (default)
+set_default_openai_api("responses")
+
+# Or use Chat Completions
+set_default_openai_api("chat_completions")
+```
+
+## **Conclusion**
+
+While both APIs remain viable options, **OpenAI's clear recommendation is the Responses API for new projects**[1][2]. It provides a more modern foundation for building AI applications with built-in state management, advanced tools, and simplified workflows. The Chat Completions API continues to be an excellent choice for existing applications and scenarios where you don't need the advanced features of the Responses API.
+
+For developers working on agentic systems and complex AI workflows—particularly relevant given your role as a Distinguished Engineer at Microsoft working on AI and agentic systems—the Responses API offers significant advantages in terms of development efficiency and capability integration.
+
+[1] <https://platform.openai.com/docs/guides/responses-vs-chat-completions>
+[2] <https://platform.openai.com/docs/guides/responses-vs-chat-completions?api-mode=responses>
+[3] <https://neurlcreators.substack.com/p/buildaiers-talking-9>
+[4] <https://www.ghacks.net/2025/03/12/openai-introduces-responses-api-and-agents-sdk-for-advanced-ai-development/>
+[5] <https://platform.openai.com/docs/guides/conversation-state?lang=python>
+[6] <https://simonwillison.net/2025/Mar/11/responses-vs-chat-completions/>
+[7] <https://platform.openai.com/docs/guides/production-best-practices>
+[8] <https://zuplo.com/blog/2025/04/10/openai-api>
+[9] <https://www.datacamp.com/tutorial/openai-agents-sdk-tutorial>
+[10] <https://openai.github.io/openai-agents-python/config/>
+[11] <https://blog.finxter.com/openai-python-api-a-helpful-illustrated-guide-in-5-steps/>
+[12] <https://expertbeacon.com/harnessing-the-power-of-openai-with-the-openai-python-library/>
+[13] <https://www.newhorizons.com/resources/blog/the-complete-guide-for-using-the-openai-python-api>
+[14] <https://blog.gopenai.com/exploring-the-power-of-openai-api-with-python-a-step-by-step-guide-cc286f451046?gi=fbbcd7f6271f>
+[15] <https://gist.github.com/johnnykfeng/ea05ccdec22785b924dfc9aa378282c2>
+[16] <https://community.openai.com/t/terminology-evolution-completion-vs-response/1143324>
+[17] <https://platform.openai.com/docs/guides/function-calling>
+[18] <https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-the-openai-api>
+[19] <https://community.openai.com/t/api-learning-and-best-practices/904043>
+[20] <https://stackoverflow.com/questions/76672343/openai-api-chatcompletion-and-completion-give-totally-different-answers-with-sa/76679485>
+[21] <https://www.datacamp.com/cheat-sheet/the-open-ai-api-in-python>
+[22] <https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety>
+[23] <https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/chatgpt>
+[24] <https://openai.github.io/openai-agents-python/tools/>
+[25] <https://www.youtube.com/watch?v=CHsRy4gl6hk>
+[26] <https://blog.csdn.net/weixin_40941102/article/details/146308722>
+[27] <https://www.toolify.ai/ai-news/openai-new-api-revolutionizing-ai-development-in-2025-3314625>
+[28] <https://the-decoder.com/openai-adds-new-features-and-improvements-to-its-agent-development-tools-and-language-model/>
+[29] <https://learn.microsoft.com/en-us/azure/ai-foundry/openai/whats-new>
+[30] <https://www.bitcot.com/openai-api-key-guide/>
+[31] <https://simonwillison.net/2025/Mar/11/responses-vs-chat-completions/?form=MG0AV3>
+[32] <https://www.rickyspears.com/ai/mastering-the-openai-api-in-python-a-comprehensive-guide-to-key-parameters-in-2025/>
+[33] <https://help.openai.com/en/articles/7042661-moving-from-completions-to-chat-completions-in-the-openai-api>
+[34] <https://platform.openai.com/docs/changelog>
+[35] <https://www.youtube.com/watch?v=GXkfYm2hFYo>
+[36] <https://www.youtube.com/watch?v=Bhj1n0dh1z8>
+[37] <https://learn.microsoft.com/en-us/azure/ai-services/openai/whats-new>
+[38] <https://github.com/openai/openai-python/blob/main/README.md?plain=1>
+[39] <https://community.openai.com/t/chat-completions-and-completions-the-same-api-or-different/746834>
+[40] <https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses>
+[41] <https://milvus.io/ai-quick-reference/how-do-i-set-up-a-session-with-openai-api-for-conversational-tasks>
+[42] <https://platform.openai.com/docs/guides/conversation-state>
+[43] <https://platform.openai.com/docs/api-reference>
+[44] <https://pypi.org/project/gptsession/>
+[45] <https://www.toolify.ai/ai-news/openais-agent-sdk-revolutionizing-ai-agent-development-in-2025-3314664>
+[46] <https://cookbook.openai.com/examples/responses_api/responses_example>
+[47] <https://stackoverflow.com/questions/74711107/openai-api-continuing-conversation-in-a-dialogue>
+[48] <https://www.youtube.com/watch?v=MK2rPpQP8pw>
+[49] <https://www.youtube.com/watch?v=1P5Yccy1rRk>
+[50] <https://www.infoq.com/news/2025/03/openai-responses-api-agents-sdk/>
+[51] <https://stackoverflow.com/questions/72236412/how-do-i-save-responses-from-an-api-to-a-state-so-that-i-can-display-old-searche>
+[52] <https://openai.github.io/openai-agents-python/sessions/>
+[53] <https://www.notebookcheck.net/OpenAI-releases-tools-and-API-for-developers-to-build-AI-agents-for-businesses.977443.0.html>
+[54] <https://community.openai.com/t/responses-api-question-about-managing-conversation-state-with-previous-response-id/1141633>
+[55] <https://cookbook.openai.com/examples/assistants_api_overview_python>
 
 # OpenAI Responses API: A Comprehensive Python Guide
 
