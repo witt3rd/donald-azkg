@@ -107,12 +107,96 @@ match args.format {
 - State machines with defined states
 - Any scenario where string comparison would be error-prone
 
+## Smart Pointer Selection: Arc vs Vec
+
+### When to Use Arc Instead of Vec
+
+A common pattern in Rust is using `Arc<[T]>` (atomically reference-counted slice) instead of `Vec<T>` for specific scenarios involving large, immutable data that needs to be shared efficiently.
+
+#### Key Reasons to Use Arc
+
+1. **Efficient Cloning**
+   - Cloning an `Arc` is O(1) - just increments reference count
+   - Cloning a `Vec` is O(n) - allocates new memory and copies all data
+   
+2. **Memory Layout**
+   - `Arc<[T]>`: 16 bytes (pointer + length)
+   - `Vec<T>`: 24 bytes (pointer + length + capacity)
+   - Better cache locality with many instances
+
+3. **Immutability Guarantee**
+   - `Vec` is designed for mutability (push/pop/insert/remove)
+   - `Arc` makes immutability explicit at the type level
+   - Prevents accidental modifications
+
+4. **Thread Safety**
+   - `Arc` enables safe sharing between threads
+   - `Rc` is single-threaded only
+
+5. **Ergonomic API**
+   - `Arc<[T]>` implements `Deref` to `&[T]`
+   - Works seamlessly where slices are expected
+
+### Usage Guidelines
+
+| Use Case | Recommended Type |
+|----------|-----------------|
+| Mutable, resizable data owned by one thread | `Vec<T>` |
+| Immutable shared data (single-thread) | `Rc<[T]>` or `Arc<[T]>` |
+| Immutable shared data (multi-thread) | `Arc<[T]>` |
+| No sharing needed | `Box<[T]>` or slice |
+
+### Example Pattern
+
+```rust
+// ❌ Avoid: Cloning large vectors repeatedly
+struct Config {
+    data: Vec<String>,  // Expensive to clone
+}
+
+// ✅ Prefer: Efficient reference counting
+struct Config {
+    data: Arc<[String]>,  // Cheap to clone
+}
+
+// Construction
+let data: Vec<String> = load_data();
+let config = Config {
+    data: data.into(),  // Vec<T> -> Arc<[T]>
+};
+
+// Cloning is now O(1)
+let config_clone = config.clone();
+```
+
+### When to Use Each
+
+**Use `Vec<T>` when:**
+- Data needs to be modified after creation
+- Single ownership is sufficient
+- Building data incrementally
+
+**Use `Arc<[T]>` when:**
+- Data is constructed once, read many times
+- Frequently cloning/sharing large sequences
+- Sharing across threads
+- Optimizing for clone performance
+
+**Consider `Rc<[T]>` when:**
+- Same as Arc but single-threaded only
+- Slightly better performance (no atomics)
+
+**Consider `Box<[T]>` when:**
+- No sharing needed
+- Want simplest immutable container
+
 ## Summary
 
 These patterns form the foundation of idiomatic Rust:
 
 - **Import conventions** ensure readable, maintainable code
 - **Enum-based configuration** leverages Rust's type system for safety
+- **Smart pointer selection** optimizes performance and safety
 - **Compiler-driven development** catches errors early
 - **Explicit over implicit** makes code self-documenting
 
