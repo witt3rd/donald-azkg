@@ -66,3 +66,97 @@ Topaz Labs (Dr. Suraj Raghuraman – Head of AI Engine): “Windows ML will 
 Whether you’re a seasoned AI developer or exploring ML for the first time, Windows ML empowers you to focus on innovation rather than infrastructure management, enabling you to delight your customers with AI-infused applications with reduced app footprints. Windows ML will be generally available later this year. In the meantime, we look forward to your feedback and seeing how you leverage Windows ML to create solutions that redefine possibilities. Join the Windows ML journey today and be part of the next wave of AI innovation!
 
 Editor’s note – May 19, 2025 – The section above about Windows ML being powered by ONNX Runtime Engine was updated to provide additional details.
+
+# Programming Languages Supported by WindowsML
+
+WindowsML (Windows Machine Learning) provides support for multiple programming languages, enabling developers to integrate AI models into Windows applications across different development platforms. Based on the latest documentation, here are the primary programming languages you can use with WindowsML:
+
+## Core Supported Languages
+
+### C# (Primary Support)
+
+C# has the most comprehensive support for WindowsML development. Key features include:[1][2]
+
+- **Native integration** with the Windows App SDK and .NET runtime
+- **Full API access** through the `Microsoft.Windows.AI.MachineLearning` namespace[3][1]
+- Support for both **.NET Framework** and modern **.NET Core/.NET 5+** applications
+- Can be used in **console applications**, **WinUI 3 apps**, **.NET MAUI** applications, and **traditional Windows desktop** applications[4][5]
+- **UWP (Universal Windows Platform)** applications with C# support[6][7]
+
+### C++ (Comprehensive Support)
+
+C++ provides robust integration with WindowsML APIs:[8][2]
+
+- **Native Win32 application** development support
+- Access through **C++/WinRT** projections for modern Windows development[8]
+- **Desktop application** development with full Windows API access[8]
+- Support for both traditional Win32 and **Windows App SDK** applications
+- Integration with **DirectX** and other high-performance Windows technologies
+
+### Python (Experimental Support)
+
+Python support is available through specialized packages:[2][3]
+
+- Available through **pywinrt** Python wheels package (`winui3-Microsoft.Windows.AI.MachineLearning`)[3]
+- Requires **Python versions 3.10 to 3.13** on x64 and ARM64 devices[1]
+- Supports the experimental **`onnxruntime-winml==1.22.0.post2`** package[3]
+- **Windows App SDK initialization** required before using WindowsML APIs[3]
+
+## Platform Integration Options
+
+### Windows App SDK Applications
+
+- **WinUI 3** applications using any supported language[5][9]
+- **Windows desktop** applications with modern UI frameworks
+- Full hardware abstraction across **CPU, GPU, and NPU** acceleration[2]
+
+### Universal Windows Platform (UWP)
+
+- Support for **C#, C++, Visual Basic, F#, and JavaScript**[7][6]
+- Legacy platform but still functional with WindowsML[7]
+- **Cross-device compatibility** across Windows 10/11 devices[7]
+
+### .NET Multi-platform App UI (.NET MAUI)
+
+- **Cross-platform development** with C# targeting Windows via WinUI 3[9][5]
+- Enables **Windows, Android, iOS, and macOS** deployment from single codebase
+- Windows implementation uses **WinUI 3 as native platform**[5]
+
+## Language-Specific Implementation Details
+
+### C# Implementation
+
+```csharp
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.Windows.AI.MachineLearning;
+```
+
+- **NuGet package**: `Microsoft.WindowsAppSDK` (experimental) or `Microsoft.WindowsAppSDK.ML`[1]
+- **Target framework**: .NET 6 or greater with Windows-specific TFM[1]
+- **Runtime requirements**: Windows 11 PC running version 24H2 (build 26100) or greater[1]
+
+### C++ Implementation
+
+- **Headers**: Access through Windows App SDK and Windows ML native APIs[3]
+- **Integration**: Can use ONNX Runtime C API directly after registering execution providers[3]
+- **Compilation**: Requires **C++20 or later** for modern Windows ML features[1]
+
+### Python Implementation
+
+```python
+from winui3.microsoft.windows.applicationmodel.dynamicdependency.bootstrap import initialize
+```
+
+- **Package management**: Separate Python wheel for Windows ML APIs[3]
+- **Execution providers**: Must be registered using Python API directly[3]
+- **Deployment**: Recommended to use separate worker processes for Windows ML operations[3]
+
+## Historical Context and Legacy Support
+
+While WindowsML represents the **modern approach** to machine learning on Windows, the original **Windows.AI.MachineLearning** namespace from 2018 is still available but **superseded by the newer APIs**. The modern Windows ML APIs provide:[10][11]
+
+- **Hardware-agnostic** execution across different Windows devices[12][2]
+- **Automatic execution provider** selection and management[2]
+- **Simplified dependency management** without requiring custom runtime distribution[2]
+
+WindowsML's multi-language support ensures that developers can integrate AI capabilities using their preferred programming language while leveraging the full power of Windows hardware acceleration across CPUs, GPUs, and NPUs.[2]

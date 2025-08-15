@@ -1,8 +1,58 @@
 # Model Context Protocol C# SDK Documentation
 
-## Configuring MCP Server in ASP.NET Core
-Demonstrates how to configure and run an MCP server within an ASP.NET Core application. It shows adding the MCP server service, enabling HTTP transport, discovering tools from the assembly, mapping the MCP endpoint, and defining a simple EchoTool with an Echo method.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/src/ModelContextProtocol.AspNetCore/README.md#_snippet_1
+## Overview
+
+The Model Context Protocol (MCP) is an open protocol that standardizes integration between AI models and external tools. It provides a common mechanism to send context (documents, code, prompts) to AI models and receive structured responses, reducing fragmentation in AI/LLM integration scenarios.
+
+### Key Benefits
+- Connect any LLM/backend to various applications
+- Expose tooling (like code actions) to editors and apps
+- Ensure different products can reuse integrations
+- Provide structured, context-rich information to AI models
+
+## Prerequisites and Installation
+
+### Requirements
+- .NET 8.0 or newer
+- For server-hosted scenarios: `Microsoft.Extensions.Hosting` package
+
+### Installation
+
+```shell
+# Install core MCP SDK
+dotnet add package ModelContextProtocol --prerelease
+
+# For hosted applications
+dotnet add package Microsoft.Extensions.Hosting
+
+# For ASP.NET Core integration
+dotnet add package ModelContextProtocol.AspNetCore --prerelease
+```
+
+## Core Concepts
+
+### Architecture Components
+
+| Component      | Role                                                          |
+|---------------|---------------------------------------------------------------|
+| MCP Server    | Receives tool/context requests from clients                   |
+| MCP Client    | Initiates connections and sends requests to MCP servers       |
+| Tools         | Pluggable actions or services registered with the server      |
+| Resources     | Data streams or artifacts (documents, APIs, user data)        |
+| Prompts       | Instructions or input sent to tools or models via MCP         |
+
+### Transport Options
+
+- **stdio**: Standard input/output for simple local or CLI integration
+- **HTTP**: Network-based communication for distributed scenarios
+- **Named Pipes**: Inter-process communication (Windows/Unix)
+
+## Server Configuration Examples
+
+### Configuring MCP Server in ASP.NET Core
+
+Demonstrates how to configure and run an MCP server within an ASP.NET Core application with HTTP transport. This setup automatically discovers tools from the assembly and maps the MCP endpoint.
+
 ```csharp
 // Program.cs
 using ModelContextProtocol.Server;
@@ -28,9 +78,10 @@ public static class EchoTool
 
 ---
 
-## Basic MCP Server Setup and Echo Tool (C#)
-Demonstrates setting up a basic MCP server using the Host builder pattern and registering tools from the current assembly using `WithToolsFromAssembly()`. Includes a simple 'EchoTool' class with an 'Echo' method decorated with `McpServerTool` and `Description` attributes.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_4
+### Basic Console Application Server
+
+Setting up a basic MCP server using the Host builder pattern with stdio transport. This configuration automatically registers tools from the current assembly and configures logging to stderr.
+
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -60,9 +111,12 @@ public static class EchoTool
 
 ---
 
-## Create MCP Client and Interact with Tools (C#)
-Demonstrates how to create an MCP client using McpClientFactory.CreateAsync, connect to a server via StdioClientTransport, list available tools, and call a specific tool ('echo') with parameters.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_1
+## Client Implementation
+
+### Creating MCP Client and Interacting with Tools
+
+Demonstrates how to create an MCP client, connect to a server, list available tools, and execute tool calls. The client can connect to any MCP server regardless of implementation.
+
 ```csharp
 var clientTransport = new StdioClientTransport(new StdioClientTransportOptions
 {
@@ -91,9 +145,10 @@ Console.WriteLine(result.Content.First(c => c.Type == "text").Text);
 
 ---
 
-## Integrate MCP Tools with AI Chat Client (C#)
-Shows how to retrieve available MCP tools using client.ListToolsAsync() and pass them to an IChatClient instance to enable the chat client to use these tools.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_2
+### Integrating MCP Tools with AI Chat Client
+
+Shows how to bridge MCP tools with Microsoft.Extensions.AI chat clients, enabling AI models to use tools exposed by MCP servers.
+
 ```csharp
 // Get available functions.
 IList<McpClientTool> tools = await client.ListToolsAsync();
@@ -108,9 +163,10 @@ var response = await chatClient.GetResponseAsync(
 
 ---
 
-## Creating and Running MCP Server in C#
-This snippet shows how to create and start an MCP server instance in C#. It uses `McpServerFactory` to create the server with a standard I/O transport and then runs it asynchronously.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_9
+### Manual Server Creation
+
+For scenarios requiring fine-grained control, you can manually create and configure an MCP server instance:
+
 ```csharp
 await using IMcpServer server = McpServerFactory.Create(new StdioServerTransport("MyServer"), options);
 await server.RunAsync();
@@ -118,9 +174,12 @@ await server.RunAsync();
 
 ---
 
-## Tool Demonstrating Server and DI Injection (C#)
-Illustrates how a tool method can receive the `IMcpServer` instance and other dependencies (like `HttpClient`) via method parameters using dependency injection. The example tool downloads content from a URL and uses the server's sampling chat client to summarize it.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_5
+## Tools and Dependency Injection
+
+### Tool with Dependency Injection
+
+Tools can receive dependencies via method parameters, including the server instance itself and any registered services. This example demonstrates a tool that uses HttpClient and the server's sampling capabilities:
+
 ```csharp
 [McpServerTool(Name = "SummarizeContentFromUrl"), Description("Summarizes content downloaded from a specific URI")]
 public static async Task<string> SummarizeDownloadedContent(
@@ -149,9 +208,10 @@ public static async Task<string> SummarizeDownloadedContent(
 
 ---
 
-## Advanced MCP Server Configuration (C#)
-Provides an example of configuring an MCP server with fine-grained control using `McpServerOptions`. Demonstrates setting server information, capabilities, and custom handlers for listing and calling tools, including defining tool schemas manually.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_7
+### Advanced Server Configuration
+
+For complex scenarios, you can configure an MCP server with custom handlers and manually defined tool schemas:
+
 ```csharp
 using ModelContextProtocol.Protocol.Transport;
 using ModelContextProtocol.Protocol.Types;
@@ -203,9 +263,12 @@ McpServerOptions options = new()
 
 ---
 
-## Define a Custom Prompt Type (C#)
-Shows how to define a custom prompt type using the `McpServerPromptType` attribute on a class and `McpServerPrompt` on a static method within that class. The method generates a `ChatMessage` based on input parameters, which can be used by clients.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_6
+## Prompts and Resources
+
+### Defining Custom Prompts
+
+Prompts provide reusable templates for generating AI model inputs. Define them using attributes on static methods:
+
 ```csharp
 [McpServerPromptType]
 public static class MyPrompts
@@ -218,9 +281,10 @@ public static class MyPrompts
 
 ---
 
-## Handling MCP Tool Call in C#
-This snippet demonstrates how to handle a tool call request within an MCP server implementation in C#. It shows returning a successful response for a known tool ('Echo') and throwing an exception for an unknown tool.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_8
+### Handling Tool Calls
+
+When implementing custom tool handlers, return appropriate responses or throw exceptions for unknown tools:
+
 ```csharp
 return Task.FromResult(new CallToolResponse()
 {
@@ -233,28 +297,127 @@ throw new McpException($"Unknown tool: '{request.Params?.Name}'");
 
 ---
 
-## Install MCP C# SDK NuGet Package
-Installs the ModelContextProtocol NuGet package into a .NET project using the dotnet CLI. The --prerelease flag is used to include preview versions.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_0
-```shell
-dotnet add package ModelContextProtocol --prerelease
+## Error Handling and Best Practices
+
+### Error Handling
+
+- **McpException**: Thrown on protocol errors (malformed requests, unsupported tools)
+- **McpErrorCode**: Standardized error codes for robust error handling
+
+### Best Practices
+
+1. **Validate Input**: Always validate incoming context and resource requests
+2. **Graceful Degradation**: Handle edge cases and protocol negotiation gracefully
+3. **Logging**: Log requests and errors for diagnostics
+4. **Discovery**: Clearly define capabilities and expose via MCP discovery endpoints
+5. **Security**: Never expose sensitive data through tools or resources
+6. **Async Operations**: Use async/await patterns for all I/O operations
+7. **Cancellation**: Respect cancellation tokens in all operations
+
+## Advanced Scenarios
+
+### Streaming Responses
+
+For real-time updates or progressive generation:
+
+```csharp
+public class StreamingTool : IMcpTool
+{
+    public async Task ExecuteAsync(
+        McpToolContext context, 
+        IProgress<McpToolResult> progress, 
+        CancellationToken ct)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            progress.Report(new McpToolResult 
+            { 
+                Content = $"Progress: {i * 10}%" 
+            });
+            await Task.Delay(1000, ct);
+        }
+    }
+}
 ```
 
----
+### Custom Resources
 
-## Installing ModelContextProtocol.AspNetCore NuGet Package
-Commands to create a new ASP.NET Core web project and add the ModelContextProtocol.AspNetCore NuGet package using the .NET CLI. This is the first step to integrate the SDK into a project.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/src/ModelContextProtocol.AspNetCore/README.md#_snippet_0
-```shell
-dotnet new web
-dotnet add package ModelContextProtocol.AspNetCore --prerelease
+Implement complex resources like file systems or databases:
+
+```csharp
+[McpResource("filesystem")]
+public class FileSystemResource : IMcpResource
+{
+    public async Task<ResourceContent> GetAsync(
+        string path, 
+        CancellationToken ct)
+    {
+        var content = await File.ReadAllTextAsync(path, ct);
+        return new ResourceContent 
+        { 
+            Data = content, 
+            MimeType = "text/plain" 
+        };
+    }
+}
 ```
 
----
+### Multi-Tool Servers
 
-## Install ModelContextProtocol and Hosting Packages (Shell)
-Installs the necessary ModelContextProtocol and Microsoft.Extensions.Hosting NuGet packages using the .NET CLI. These packages are required to build and run an MCP server application.
-Source: https://github.com/modelcontextprotocol/csharp-sdk/blob/main/README.md#_snippet_3
-```shell
-dotnet add package ModelContextProtocol --prerelease
-dotnet add package Microsoft.Extensions.Hosting
+Register multiple tools with different capabilities:
+
+```csharp
+builder.Services
+    .AddMcpServer()
+    .WithToolsFromAssembly()
+    .WithTool<CodeFormatterTool>()
+    .WithTool<DatabaseQueryTool>()
+    .WithTool<FileSearchTool>()
+    .WithResource<FileSystemResource>();
+```
+
+## Transport Configuration
+
+### stdio Transport
+
+```csharp
+// Server
+builder.Services
+    .AddMcpServer()
+    .WithStdioServerTransport();
+
+// Client
+var transport = new StdioClientTransport(new StdioClientTransportOptions
+{
+    Command = "dotnet",
+    Arguments = ["run", "--project", "MyMcpServer.csproj"]
+});
+```
+
+### HTTP Transport
+
+```csharp
+// Server (ASP.NET Core)
+app.MapMcp("/mcp");
+
+// Client
+var transport = new HttpClientTransport(
+    new Uri("http://localhost:5000/mcp"));
+```
+
+## Status and Updates
+
+**Current Status**: The MCP C# SDK is in preview. APIs may evolve with breaking changes as protocol standards expand.
+
+**Recent Updates**:
+- Integration with Microsoft.Extensions.AI
+- Improved resource management
+- Enhanced IDE integration support
+- Streaming response capabilities
+
+## References
+
+- [Official Documentation](https://learn.microsoft.com/en-us/dotnet/ai/get-started-mcp)
+- [API Reference](https://modelcontextprotocol.github.io/csharp-sdk/api/ModelContextProtocol.html)
+- [GitHub Repository](https://github.com/modelcontextprotocol/csharp-sdk)
+- [MCP Specification](https://modelcontextprotocol.io/specification)

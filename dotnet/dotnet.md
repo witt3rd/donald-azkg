@@ -1,46 +1,168 @@
-# Getting Started
+# Getting Started with .NET Development
 
-Replace "ContosoAgent" with the name of your solution and project as needed.
+This guide provides essential .NET CLI commands and best practices for creating and managing .NET projects. Replace "ContosoAgent" with your actual project name.
 
-## Creating the Solution
+## Creating Solutions and Projects
+
+### Creating a Solution
 
 ```pwsh
+# Create a new solution file
 dotnet new sln -n ContosoAgent
+
+# Create in a specific folder
+dotnet new sln -n ContosoAgent -o solutions/ContosoAgent
 ```
 
-## Creating the Project
+### Creating a Console Project
 
 ```pwsh
+# Create a console application
 dotnet new console -n src/ContosoAgent
+
+# With specific framework
+dotnet new console -n src/ContosoAgent -f net9.0
+
+# Using explicit Program.Main instead of top-level statements (NET 6+)
+dotnet new console -n src/ContosoAgent --use-program-main
 ```
 
-## Adding the Project to the Solution
+### Adding Projects to Solution
 
 ```pwsh
+# Add project to solution
 dotnet sln ContosoAgent.sln add src/ContosoAgent/ContosoAgent.csproj
+
+# Add to solution folder
+dotnet sln ContosoAgent.sln add src/ContosoAgent/ContosoAgent.csproj --solution-folder src
+
+# List all projects in solution
+dotnet sln list
 ```
 
-## Installing Dependencies
+## Managing NuGet Packages
+
+### Installing Packages
 
 ```pwsh
+# Add a package (latest version)
 dotnet add src/ContosoAgent/ContosoAgent.csproj package Microsoft.Extensions.Logging
+
+# Add specific version
+dotnet add package Microsoft.Extensions.Logging --version 9.0.0
+
+# Add prerelease version
+dotnet add package Microsoft.Extensions.AI --prerelease
+
+# Add with specific source
+dotnet add package MyPackage -s https://api.nuget.org/v3/index.json
 ```
 
-## Building the Solution
+### Listing Packages
 
 ```pwsh
+# List outdated packages
+dotnet list package --outdated
+
+# List all packages including transitive
+dotnet list package --include-transitive
+```
+
+## Building Projects
+
+```pwsh
+# Build solution or project
 dotnet build ContosoAgent.sln
+
+# Build in Release configuration
+dotnet build -c Release
+
+# Build for specific runtime
+dotnet build -r win-x64
+
+# Build with specific architecture
+dotnet build -a x64
+
+# Build without restore
+dotnet build --no-restore
+
+# Build with custom output path (NET 8+)
+dotnet build --artifacts-path ./artifacts
 ```
 
-## Running the Project
+## Running Projects
 
 ```pwsh
+# Run project
 dotnet run --project src/ContosoAgent/ContosoAgent.csproj
+
+# Run from current directory
+dotnet run
+
+# Run with arguments
+dotnet run -- arg1 arg2
+
+# Run without building
+dotnet run --no-build
+
+# Run with environment variables
+dotnet run -e ASPNETCORE_ENVIRONMENT=Development
+
+# Run with specific framework
+dotnet run -f net9.0
+
+# Run with specific configuration
+dotnet run -c Release
 ```
 
-## Best Practices for Microsoft.Extensions.AI and Microsoft.Extensions.AI.OpenAI
+## Microsoft.Extensions.AI and Microsoft.Extensions.AI.OpenAI
 
-Based on the provided code and general best practices for these libraries, consider the following when integrating with MCP and OpenTelemetry:
+### Installation
+
+```pwsh
+# Install Microsoft.Extensions.AI (includes abstractions)
+dotnet add package Microsoft.Extensions.AI --prerelease
+
+# Install OpenAI implementation
+dotnet add package Microsoft.Extensions.AI.OpenAI --prerelease
+
+# Latest preview versions (as of August 2025)
+# Microsoft.Extensions.AI: 9.8.0
+# Microsoft.Extensions.AI.OpenAI: 9.7.1-preview.1.25365.4
+```
+
+### Key Features (2025)
+
+- **Unified AI Abstractions**: IChatClient interface for consistent AI service integration
+- **Provider Flexibility**: Easy switching between OpenAI, Azure OpenAI, Ollama, and other providers
+- **Middleware Pipeline**: Layer components for logging, caching, telemetry, and function invocation
+- **Function Calling**: Automatic function invocation with AIFunction and FunctionInvokingChatClient
+- **Multi-modal Support**: Handle text, images, audio, and other content types
+
+### Basic Usage Example
+
+```csharp
+using Microsoft.Extensions.AI;
+
+// Create client with OpenAI
+IChatClient client = new OpenAI.Chat.ChatClient(
+    "gpt-4o-mini", 
+    Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+).AsIChatClient();
+
+// Add middleware layers
+IChatClient enhancedClient = client
+    .AsBuilder()
+    .UseFunctionInvocation()
+    .UseOpenTelemetry()
+    .UseDistributedCache(cache)
+    .Build();
+
+// Send chat request
+var response = await enhancedClient.GetResponseAsync("What is AI?");
+```
+
+### Best Practices for Production
 
 ### Unified AI Abstraction Layer
 
@@ -76,46 +198,111 @@ Based on the provided code and general best practices for these libraries, consi
 
 For production deployments, consider implementing additional best practices such as retry policies, rate limiting, caching, and integrating prompt/content safety filters, potentially using the middleware extensibility points provided by the Microsoft.Extensions.AI libraries.
 
-## Official .NET Documentation for AI Extensions and OpenAI
+## .NET AI Templates (Preview 2 - April 2025)
 
-Here are official documentation references for `Microsoft.Extensions.AI` and related libraries like `Microsoft.Extensions.AI.OpenAI`:
+### Installation
 
-- [Introduction to Microsoft.Extensions.AI](https://learn.microsoft.com/en-us/dotnet/ai/microsoft-extensions-ai)
-- [GitHub Architecture Overview](https://github.com/dotnet/docs/blob/main/docs/ai/ai-extensions.md)
+```pwsh
+# Install AI templates
+dotnet new install Microsoft.Extensions.AI.Templates
+
+# Create AI chat web app
+dotnet new aichatweb -n MyAIChatApp
+
+# List available AI templates
+dotnet new list ai
+```
+
+### Template Features
+
+- **AI Chat Web App**: Blazor-based chat application with RAG support
+- **Data Ingestion**: Built-in data processing and caching
+- **Vector Store Support**: Local storage by default, Qdrant in Preview 2
+- **.NET Aspire Integration**: Cloud-native AI app development (Preview 2)
+- **GitHub Models**: Default model provider for easy startup
+
+### Coming Soon
+
+- AI Console template
+- Minimal API template  
+- Semantic Kernel integration
+- Azure AI Foundry support
+- Default inclusion in .NET SDK
+
+## Official Documentation References
+
+### Microsoft.Extensions.AI
+- [Microsoft.Extensions.AI Documentation](https://learn.microsoft.com/en-us/dotnet/ai/microsoft-extensions-ai)
+- [Introducing Microsoft.Extensions.AI Preview](https://devblogs.microsoft.com/dotnet/introducing-microsoft-extensions-ai-preview/)
+- [NuGet Package](https://www.nuget.org/packages/Microsoft.Extensions.AI)
+
+### .NET AI Development
 - [.NET AI Ecosystem Tools](https://learn.microsoft.com/en-us/dotnet/ai/dotnet-ai-ecosystem)
+- [AI Template Quickstart](https://learn.microsoft.com/en-us/dotnet/ai/quickstarts/ai-templates)
+- [Azure OpenAI with .NET](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/ai.openai-readme)
 
----
+### .NET CLI References
+- [dotnet new Command](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new)
+- [dotnet build Command](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build)
+- [dotnet run Command](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-run)
+- [dotnet add package Command](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package)
+- [dotnet sln Command](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-sln)
 
-Not necessarily. To update all outdated NuGet packages automatically in a .NET solution or project without manually updating each one:
+## Updating NuGet Packages in Bulk
 
-1. **Navigate to the solution/project directory**:
-   ```bash
-   cd path/to/your/solution
-   ```
+To update all outdated NuGet packages efficiently:
 
-2. **Use `dotnet-outdated` tool** (recommended for automation):
-   - Install the tool globally:
-     ```bash
-     dotnet tool install -g dotnet-outdated-tool
-     ```
-   - Run to update all packages to the latest version:
-     ```bash
-     dotnet outdated -u
-     ```
+### Using dotnet-outdated Tool (Recommended)
 
-3. **Alternative: Manual bulk update**:
-   - List outdated packages:
-     ```bash
-     dotnet list package --outdated
-     ```
-   - Update all packages in a project using a script or command loop (e.g., in PowerShell):
-     ```powershell
-     dotnet list package --outdated | ForEach-Object { if ($_ -match '>\s+(\S+)\s+') { dotnet add package $matches[1] } }
-     ```
+The `dotnet-outdated-tool` is actively maintained (last updated March 2025) and provides comprehensive bulk update capabilities.
 
-4. **Verify**:
-   ```bash
-   dotnet build
-   ```
+```bash
+# Install the tool
+dotnet tool install -g dotnet-outdated-tool
 
-**Note**: Install `dotnet-outdated-tool` for the easiest approach. Backup your project before updating. Some packages may require specific versions due to compatibility.
+# Update all packages automatically
+dotnet outdated -u
+
+# Interactive mode - prompts for each package
+dotnet outdated -u:prompt
+
+# Update only minor/patch versions (preserve major version)
+dotnet outdated -u -vl:Major
+
+# Update only patch versions (preserve minor version)  
+dotnet outdated -u -vl:Minor
+
+# Include pre-release packages
+dotnet outdated -u -pre:Always
+
+# Check specific project or solution
+dotnet outdated path/to/project.csproj
+```
+
+### Using Built-in .NET CLI
+
+```bash
+# List outdated packages
+dotnet list package --outdated
+
+# List with sources
+dotnet list package --outdated --include-transitive
+```
+
+### PowerShell Script for Bulk Updates
+
+```powershell
+# Parse and update each outdated package
+dotnet list package --outdated --format json | 
+    ConvertFrom-Json | 
+    ForEach-Object { $_.projects } | 
+    ForEach-Object { $_.frameworks } | 
+    ForEach-Object { $_.topLevelPackages } | 
+    ForEach-Object { dotnet add package $_.id }
+```
+
+**Best Practices**:
+- Always backup or commit your code before bulk updates
+- Test thoroughly after updates
+- Consider using version locking (-vl) to prevent breaking changes
+- Review update changes before applying in production
