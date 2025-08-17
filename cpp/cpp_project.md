@@ -176,6 +176,60 @@ cmake --build --preset clang-gnu-debug
 5. Press `Ctrl+Shift+P` and select "CMake: Build"
 6. Run the executable or use the Run/Debug features
 
+### Advanced: Using CMake Kits with PowerShell Profile
+
+If your development environment relies on PowerShell profile settings (custom paths, environment variables, etc.), you can configure a CMake Kit to load your profile before running CMake:
+
+1. **Create a Setup Script**
+   
+   Create `cmake-env-setup.ps1`:
+   ```powershell
+   # Load PowerShell profile
+   . $PROFILE
+   
+   # Or load specific environment settings
+   $env:VCPKG_ROOT = "C:\tools\vcpkg"
+   $env:PATH = "$env:VCPKG_ROOT;$env:PATH"
+   
+   # Verify critical tools are available
+   if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) {
+       Write-Error "CMake not found in PATH"
+       exit 1
+   }
+   ```
+
+2. **Configure CMake Kit**
+   
+   Press `Ctrl+Shift+P` → "CMake: Edit User-Local CMake Kits"
+   
+   Add this kit configuration:
+   ```json
+   [
+     {
+       "name": "Clang with PowerShell Environment",
+       "environmentSetupScript": "C:\\path\\to\\cmake-env-setup.ps1",
+       "compilers": {
+         "C": "clang",
+         "CXX": "clang++"
+       },
+       "preferredGenerator": {
+         "name": "Ninja"
+       }
+     }
+   ]
+   ```
+
+3. **Select and Use the Kit**
+   - Press `Ctrl+Shift+P` → "CMake: Select a Kit"
+   - Choose "Clang with PowerShell Environment"
+   - Configure and build as normal
+
+**Benefits:**
+- Ensures all PowerShell profile paths and variables are available
+- Works with custom tool installations
+- Maintains consistency between terminal and VS Code builds
+- Useful for corporate environments with complex setups
+
 ## Configuring clangd for IntelliSense
 
 clangd needs a `compile_commands.json` file to understand your project's include paths, especially for dependencies from vcpkg and FetchContent.
@@ -205,9 +259,12 @@ clangd needs a `compile_commands.json` file to understand your project's include
    - ✅ No manual file copying after each build
    - ✅ Easy to switch between build configurations
    
-   For different configurations, just update the path:
-   - Debug: `CompilationDatabase: out/build/clang-gnu-debug`
-   - Release: `CompilationDatabase: out/build/clang-gnu-release`
+   **Note about Debug vs Release**: For header resolution and IntelliSense, it doesn't matter whether you point to the debug or release build directory. The include paths for dependencies (vcpkg, FetchContent) are identical between build types. The only differences are:
+   - Optimization flags (`-O0` vs `-O2`)
+   - Debug symbols (`-g`)
+   - Preprocessor defines like `NDEBUG`
+   
+   None of these affect finding headers, so just point to whichever build directory you've configured most recently.
 
 4. **VS Code Settings**
    Create/update `.vscode/settings.json`:
