@@ -1,38 +1,81 @@
-# Modern C++ Project Setup with CMake, Ninja, Clang, and vcpkg on Windows
+# Modern C++ Project Setup on Windows
 
-This guide provides a working setup for a modern C++ development workflow on Windows using:
+This comprehensive guide covers C++ development workflows on Windows for both:
 
-- **CMake** for build configuration
-- **Ninja** for fast builds
-- **Clang** with GNU-style command line (not MSVC-compatible clang-cl)
+1. **Visual Studio Code** with CMake, Ninja, and Clang
+2. **Visual Studio** (Community/Professional/Enterprise) with MSBuild
+
+Both environments support:
+
 - **vcpkg** for dependency management
-- **VS Code** as the IDE
+- Manual library integration
+- Modern C++ standards
 
-## Prerequisites
+## Part 1: Visual Studio Code Setup
 
-### 1. Visual Studio Build Tools
+### Prerequisites for VS Code
+
+### 1. Toolchain Installation (Prefer WinGet)
+
+**IMPORTANT**: Install development tools via WinGet for better version control and consistency. These installations should take precedence over Visual Studio's bundled versions.
+
+#### Required Tools via WinGet
+
+```powershell
+# CMake - Build system generator
+winget install Kitware.CMake
+
+# LLVM/Clang - Complete compiler toolchain with debugger
+winget install LLVM.LLVM
+
+# Ninja - Fast build system
+winget install Ninja-build.Ninja
+```
+
+#### Visual Studio Build Tools
 
 Install Visual Studio (Community/Professional/Enterprise) with:
 
 - "Desktop development with C++" workload
 - This provides the Windows SDK and necessary libraries
+- **IMPORTANT**: Do NOT install the optional CMake or Clang/LLVM components from Visual Studio Installer
+- We exclusively use WinGet-installed versions for consistency and full feature support
 
-### 2. VS Code Extensions
+### 2. PowerShell Profile Configuration
+
+Add WinGet-installed tools to your PowerShell profile (`$PROFILE`):
+
+```powershell
+# CMake - WinGet installation
+$wingetCmakePath = 'C:\Program Files\CMake\bin'
+if (Test-Path $wingetCmakePath) {
+    $env:PATH = "$wingetCmakePath;$env:PATH"
+}
+
+# LLVM/Clang - Full WinGet LLVM installation (includes LLDB)
+$fullLlvmPath = 'C:\Program Files\LLVM\bin'
+if (Test-Path $fullLlvmPath) {
+    $env:PATH = "$fullLlvmPath;$env:PATH"
+}
+
+# Ninja - WinGet installation
+$wingetNinjaPath = Get-ChildItem "$env:LOCALAPPDATA\Microsoft\WinGet\Packages" -Filter "Ninja-build.Ninja*" -Directory -ErrorAction SilentlyContinue | Select-Object -First 1
+if ($wingetNinjaPath) {
+    $env:PATH = "$($wingetNinjaPath.FullName);$env:PATH"
+}
+```
+
+**Note**: Since Visual Studio's CMake and LLVM components are not installed, these WinGet paths are the only sources for these tools.
+
+### 3. VS Code Extensions
 
 Install these extensions:
 
 - **clangd** (by LLVM) - For IntelliSense with CMake projects
 - **C/C++** (by Microsoft) - Disable IntelliSense if using clangd
+- **CodeLLDB** - Native LLDB debugger support (works with WinGet LLVM)
 
 **WARNING**: Do NOT install the CMake Tools extension. It has serious issues with PowerShell environment inheritance on Windows and will not properly use your configured build environment (PATH, VCPKG_ROOT, etc.). Use VS Code tasks instead (see configuration below).
-
-### 3. Ninja Build System
-
-Download from [ninja-build.org](https://ninja-build.org/) or install via:
-
-```powershell
-winget install Ninja-build.Ninja
-```
 
 ### 4. vcpkg Setup
 
@@ -45,24 +88,11 @@ cd vcpkg
 
 Set the `VCPKG_ROOT` environment variable to your vcpkg directory (e.g., `C:\tools\vcpkg`)
 
-### 5. LLDB Debugger Setup (Required for debugging with Clang)
+### 5. LLDB Debugger (Included with WinGet LLVM)
 
-**Important**: Visual Studio's Clang installation does NOT include LLDB or liblldb.dll. If you need debugging capabilities with LLDB (e.g., for CodeLLDB in VS Code), you must install it separately:
+The WinGet LLVM installation includes LLDB debugger and liblldb.dll, providing complete debugging support for Clang-compiled programs.
 
-1. **Download LLVM from official sources**
-   - Go to the [LLVM releases page](https://github.com/llvm/llvm-project/releases)
-   - Download the Windows installer (LLVM-XX.X.X-win64.exe)
-   - This package includes lldb.exe and liblldb.dll in the `/bin` folder
-
-2. **Configure PATH**
-   - Add the LLVM bin directory (e.g., `C:\Program Files\LLVM\bin`) to your Windows PATH
-   - This ensures lldb.exe can find liblldb.dll
-
-3. **Python Requirement**
-   - LLDB requires Python (typically Python 3.10+)
-   - Install Python and add it to your PATH if not already present
-
-**Note**: This is a known limitation of Visual Studio's Clang tools installation. The Visual Studio installer includes clang, clang++, and clang-cl for compilation but omits the LLDB debugger components.
+**Python Requirement**: LLDB may require Python (typically Python 3.10+) for some features. Install Python and add it to your PATH if needed.
 
 ## Project Structure
 
@@ -70,7 +100,16 @@ Set the `VCPKG_ROOT` environment variable to your vcpkg directory (e.g., `C:\too
 MyApp/
 ├── CMakeLists.txt
 ├── CMakePresets.json
-├── vcpkg.json (optional)
+├── vcpkg.json (optional but recommended)
+├── .clangd (clangd configuration)
+├── .gitignore
+├── .vscode/
+│   ├── settings.json (workspace settings)
+│   ├── tasks.json (build tasks)
+│   └── launch.json (debug configurations)
+├── llm-docs/
+│   └── cpp/
+│       └── cpp_project.md (this file)
 └── src/
     └── main.cpp
 ```
@@ -188,7 +227,14 @@ cmake --build --preset clang-gnu-debug
 .\out\build\clang-gnu-debug\MyApp.exe
 ```
 
-### VS Code with Tasks (Recommended)
+### VS Code Workspace Configuration (Recommended)
+
+#### Why Use Workspace Configuration?
+
+- **Consistency**: All team members use the same settings
+- **Single Tool Source**: Only WinGet-installed tools are available (no Visual Studio variants)
+- **Environment Inheritance**: Tasks run in integrated terminal with full PowerShell profile
+- **No Extension Issues**: Avoids CMake Tools extension environment problems
 
 Since the CMake Tools extension has issues with PowerShell environment variables on Windows, use VS Code tasks instead:
 
@@ -274,6 +320,50 @@ Since the CMake Tools extension has issues with PowerShell environment variables
 }
 ```
 
+#### Recommended settings.json
+
+Create `.vscode/settings.json` with:
+
+```json
+{
+  // Disable Microsoft C++ IntelliSense in favor of clangd
+  "C_Cpp.intelliSenseEngine": "disabled",
+
+  // clangd configuration
+  "clangd.arguments": [
+    "--header-insertion=never",
+    "--clang-tidy",
+    "--background-index",
+    "--completion-style=detailed"
+  ],
+
+  // Terminal configuration - use default PowerShell profile
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    }
+  },
+
+  // File associations
+  "files.associations": {
+    "*.h": "cpp",
+    "*.hpp": "cpp",
+    "*.cpp": "cpp",
+    "*.cc": "cpp",
+    "*.cxx": "cpp",
+    "*.c++": "cpp"
+  },
+
+  // Editor settings for C++
+  "editor.formatOnSave": true,
+  "[cpp]": {
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  }
+}
+```
+
 2. Use the tasks:
    - **Build**: `Ctrl+Shift+B` (runs default build task - Debug)
    - **Run**: `Ctrl+Shift+P` → "Tasks: Run Test Task" (runs Debug executable)
@@ -309,47 +399,38 @@ clangd needs a `compile_commands.json` file to understand your project's include
    - Already included in the CMakeLists.txt above: `set(CMAKE_EXPORT_COMPILE_COMMANDS ON)`
 
 2. **Configure Your Project**
+
    ```powershell
    cmake --preset clang-gnu-debug
    ```
+
    This generates `compile_commands.json` in your build directory (`out/build/clang-gnu-debug/`)
 
 3. **Create .clangd Configuration (Recommended)**
-   
+
    Create a `.clangd` file in your project root with:
+
    ```yaml
    CompileFlags:
      CompilationDatabase: out/build/clang-gnu-debug
    ```
-   
+
    **Benefits of this approach:**
    - ✅ Cross-platform (Windows, Linux, macOS)
    - ✅ No admin privileges required
    - ✅ No manual file copying after each build
    - ✅ Easy to switch between build configurations
-   
+
    **Note about Debug vs Release**: For header resolution and IntelliSense, it doesn't matter whether you point to the debug or release build directory. The include paths for dependencies (vcpkg, FetchContent) are identical between build types. The only differences are:
    - Optimization flags (`-O0` vs `-O2`)
    - Debug symbols (`-g`)
    - Preprocessor defines like `NDEBUG`
-   
+
    None of these affect finding headers, so just point to whichever build directory you've configured most recently.
 
 4. **VS Code Settings**
-   Create/update `.vscode/settings.json`:
-   ```json
-   {
-     // Disable Microsoft C++ IntelliSense in favor of clangd
-     "C_Cpp.intelliSenseEngine": "disabled",
-     
-     // Optional: Additional clangd arguments
-     "clangd.arguments": [
-       "--header-insertion=never",
-       "--clang-tidy"
-     ]
-   }
-   ```
-   
+   The workspace settings should already be configured (see Workspace Configuration section above).
+
    Note: With the `.clangd` file configured, you don't need `--compile-commands-dir` in VS Code settings
 
 5. **Reload VS Code Window**
@@ -372,17 +453,20 @@ clangd needs a `compile_commands.json` file to understand your project's include
 If you can't use `.clangd` file for some reason, here are platform-specific alternatives:
 
 **Windows - Symbolic Link (requires Admin)**
+
 ```powershell
 New-Item -ItemType SymbolicLink -Path ".\compile_commands.json" -Target ".\out\build\clang-gnu-debug\compile_commands.json"
 ```
 
 **Cross-platform - Copy File**
+
 ```powershell
 Copy-Item ".\out\build\clang-gnu-debug\compile_commands.json" -Destination "."
 ```
 
 **VS Code - Direct Configuration**
 Add to `clangd.arguments` in settings.json:
+
 ```json
 "--compile-commands-dir=${workspaceFolder}/out/build/clang-gnu-debug"
 ```
@@ -390,33 +474,73 @@ Add to `clangd.arguments` in settings.json:
 ### Troubleshooting clangd Issues
 
 **Problem: Headers not found after configuration**
+
 - Verify `.clangd` file points to correct build directory
 - Ensure you've run CMake configure after adding dependencies
 - Check that `target_link_libraries()` is properly set
 - Verify the compile_commands.json exists in the build directory
 
 **Problem: clangd not starting**
+
 - Check Output panel → clangd for errors
 - Ensure clangd extension is installed and enabled
 - Try: `clangd --version` in terminal to verify installation
 
 **Problem: Conflicting IntelliSense providers**
+
 - Disable Microsoft C/C++ IntelliSense: Set `"C_Cpp.intelliSenseEngine": "disabled"`
 - Or disable clangd and use Microsoft's IntelliSense
 
 **Problem: Multiple build directories**
+
 - Simply update the path in `.clangd` file when switching configurations
 - Or maintain separate `.clangd` files per configuration and swap them
+
+## Debugging Configuration
+
+### Using CodeLLDB with WinGet LLVM
+
+Create `.vscode/launch.json`:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug (LLDB)",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/out/build/clang-gnu-debug/${workspaceFolderBasename}.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "terminal": "integrated",
+            "preLaunchTask": "CMake Build (Debug)"
+        },
+        {
+            "name": "Debug (LLDB) - Release",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/out/build/clang-gnu-release/${workspaceFolderBasename}.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "terminal": "integrated",
+            "preLaunchTask": "CMake Build (Release)"
+        }
+    ]
+}
+```
 
 ## Key Points
 
 ### Why These Choices?
 
-1. **Ninja instead of MSBuild**: Ninja is faster and simpler than MSBuild for C++ projects
-2. **Clang with GNU CLI**: Uses familiar GCC-style flags (`-Wall`, `-O2`) instead of MSVC-style (`/W4`, `/O2`)
-3. **CMake Presets**: Provides consistent, reproducible builds across different machines
-4. **vcpkg**: Modern C++ package manager that integrates seamlessly with CMake
-5. **clangd**: Provides superior IntelliSense for modern C++ with proper CMake integration
+1. **WinGet-Only Toolchain**: Single source of truth for tools - no Visual Studio CMake/LLVM installed
+2. **Ninja instead of MSBuild**: Ninja is faster and simpler than MSBuild for C++ projects
+3. **Clang with GNU CLI**: Uses familiar GCC-style flags (`-Wall`, `-O2`) instead of MSVC-style (`/W4`, `/O2`)
+4. **CMake Presets**: Provides consistent, reproducible builds across different machines
+5. **vcpkg**: Modern C++ package manager that integrates seamlessly with CMake
+6. **clangd**: Provides superior IntelliSense for modern C++ with proper CMake integration
+7. **Workspace Configuration**: Team-wide consistency with checked-in VS Code settings
 
 ### Common Issues and Solutions
 
@@ -440,7 +564,25 @@ Note: It's recommended to specify the toolchain file in both CMakeLists.txt (for
 
 #### Issue: Clang not found
 
-**Solution**: Install Clang via Visual Studio Installer (under Individual Components) or LLVM directly. Ensure it's in your PATH.
+**Solution**: Install LLVM via WinGet: `winget install LLVM.LLVM`. Ensure your PowerShell profile adds it to PATH.
+
+#### Issue: CMake not found
+
+**Solution**: Install CMake via WinGet: `winget install Kitware.CMake`. Visual Studio's CMake is not installed.
+
+#### Issue: Wrong version of tools being used
+
+**Solution**: Check tool locations with:
+
+```powershell
+Get-Command cmake,clang,ninja | Select-Object Name,Source
+```
+
+All tools should come from WinGet installations:
+
+- CMake: `C:\Program Files\CMake\bin`
+- Clang: `C:\Program Files\LLVM\bin`
+- Ninja: `C:\Users\<username>\AppData\Local\Microsoft\WinGet\Packages\Ninja-build.Ninja*`
 
 ## CMake 3.24+ Dependency Providers (Advanced)
 
@@ -516,6 +658,7 @@ add_subdirectory(external/fmt)
 ```
 
 For git submodules setup:
+
 ```bash
 git submodule add https://github.com/fmtlib/fmt.git external/fmt
 git submodule update --init --recursive
@@ -532,7 +675,7 @@ macro(custom_find_package PACKAGE_NAME)
     if(DEFINED ENV{VCPKG_ROOT})
         find_package(${PACKAGE_NAME} ${ARGN} QUIET)
     endif()
-    
+
     # If not found, check if we have a FetchContent declaration
     if(NOT ${PACKAGE_NAME}_FOUND)
         FetchContent_GetProperties(${PACKAGE_NAME})
@@ -548,6 +691,7 @@ set(CMAKE_FIND_PACKAGE_REDIRECTS_DIR ${CMAKE_CURRENT_BINARY_DIR}/cmake)
 ```
 
 Use it by adding to your preset:
+
 ```json
 "cacheVariables": {
     "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "${sourceDir}/cmake/DependencyProvider.cmake"
@@ -614,6 +758,324 @@ Note: When using vcpkg.json, CMake will automatically install dependencies durin
   - `-target aarch64-pc-windows-gnu` for ARM64 with MinGW ABI
   - `-target x86_64-pc-windows-msvc` for x64 with MSVC ABI
 
+## Best Practices Summary
+
+1. **WinGet-Only Toolchain**: Install CMake, LLVM, and Ninja exclusively via WinGet
+2. **No Visual Studio Tools**: Do NOT install CMake or Clang/LLVM from Visual Studio Installer
+3. **Configure PowerShell Profile**: Add WinGet tool paths to your profile
+4. **Commit VS Code Settings**: Check in `.vscode/` folder for team consistency
+5. **Use Tasks over Extensions**: VS Code tasks properly inherit PowerShell environment
+6. **Leverage clangd**: Superior IntelliSense with proper CMake understanding
+7. **Document in llm-docs**: Keep project-specific documentation for AI assistants
+
+### VS Code Summary
+
+This setup provides a modern, fast, and portable C++ development environment on Windows. By using exclusively WinGet-installed tools, you get:
+
+- **Latest tool versions**: Direct from official sources, not tied to Visual Studio release cycles
+- **Complete toolchains**: Full LLVM with LLDB debugger (not available in Visual Studio's partial installation)
+- **Consistency**: Single source for each tool - no version conflicts
+- **Flexibility**: Easy to update tools independently via WinGet
+- **Simplicity**: No confusion about which tool version is being used
+
+The combination of CMake + Ninja + Clang + vcpkg is widely used in the industry and provides excellent cross-platform compatibility.
+
+---
+
+## Part 2: Visual Studio Setup
+
+### Prerequisites for Visual Studio
+
+1. **Install Visual Studio** (Community/Professional/Enterprise) with:
+   - "Desktop development with C++" workload
+   - Windows SDK
+   - C++ core features
+   - MSVC compiler
+   - CMake tools for Windows (optional, for CMake projects)
+
+2. **Install vcpkg** (same as VS Code setup):
+
+   ```powershell
+   git clone https://github.com/Microsoft/vcpkg.git
+   cd vcpkg
+   .\bootstrap-vcpkg.bat
+   .\vcpkg integrate install
+   ```
+
+### Creating a Visual Studio Project
+
+#### Option 1: Traditional Visual Studio Project
+
+1. **Create New Project**:
+   - File → New → Project
+   - Choose "Console App" or "Empty Project" for C++
+   - Configure project name and location
+
+2. **Project Configuration**:
+   - Right-click project → Properties
+   - Configuration: All Configurations
+   - Platform: All Platforms (or specific x64/x86)
+   - C/C++ → Language → C++ Language Standard: Choose your standard (C++17, C++20, C++23)
+
+#### Option 2: CMake Project in Visual Studio
+
+1. **Create CMake Project**:
+   - File → New → Project
+   - Choose "CMake Project"
+   - Visual Studio will create CMakeLists.txt and CMakePresets.json
+
+2. **Configure CMakePresets.json for Visual Studio**:
+
+   ```json
+   {
+       "version": 3,
+       "configurePresets": [
+           {
+               "name": "windows-base",
+               "hidden": true,
+               "generator": "Visual Studio 17 2022",
+               "binaryDir": "${sourceDir}/out/build/${presetName}",
+               "installDir": "${sourceDir}/out/install/${presetName}",
+               "cacheVariables": {
+                   "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+               }
+           },
+           {
+               "name": "x64-debug",
+               "displayName": "x64 Debug",
+               "inherits": "windows-base",
+               "architecture": {
+                   "value": "x64",
+                   "strategy": "external"
+               },
+               "cacheVariables": {
+                   "CMAKE_BUILD_TYPE": "Debug"
+               }
+           },
+           {
+               "name": "x64-release",
+               "displayName": "x64 Release",
+               "inherits": "windows-base",
+               "architecture": {
+                   "value": "x64",
+                   "strategy": "external"
+               },
+               "cacheVariables": {
+                   "CMAKE_BUILD_TYPE": "Release"
+               }
+           }
+       ]
+   }
+   ```
+
+---
+
+## Part 3: Dependency Management (Both IDEs)
+
+### Adding Dependencies with vcpkg
+
+vcpkg is a C++ package manager that integrates directly with both Visual Studio and VS Code projects.
+
+#### Method 1: Using vcpkg.json (Recommended)
+
+Create `vcpkg.json` in your project root:
+
+```json
+{
+    "name": "myproject",
+    "version": "1.0",
+    "dependencies": [
+        "raylib",
+        "argparse",
+        "fmt",
+        "nlohmann-json"
+    ]
+}
+```
+
+**For Visual Studio Projects**:
+
+- Right-click project → Properties
+- Go to vcpkg section
+- Set "Use Vcpkg" to Yes
+- Set "Use Vcpkg Manifest" to Yes
+
+**For CMake Projects** (both IDEs):
+
+- Dependencies are automatically installed during CMake configuration
+- Add to CMakeLists.txt:
+
+  ```cmake
+  find_package(raylib CONFIG REQUIRED)
+  find_package(fmt CONFIG REQUIRED)
+  target_link_libraries(${PROJECT_NAME} PRIVATE raylib fmt::fmt)
+  ```
+
+#### Method 2: Command Line Installation
+
+```powershell
+# Install individual packages
+.\vcpkg install raylib
+.\vcpkg install argparse
+.\vcpkg install fmt
+
+# Install for specific triplet (architecture)
+.\vcpkg install raylib:x64-windows
+.\vcpkg install raylib:x86-windows
+```
+
+### Manual Library Integration (Not in vcpkg)
+
+For libraries not available in vcpkg (e.g., libtorch):
+
+#### Visual Studio Configuration
+
+1. **Download and Extract Library**:
+   - Download prebuilt binaries from official source
+   - Extract to a location like `C:\libraries\libtorch`
+
+2. **Configure Project Properties**:
+   - Right-click project → Properties
+   - **C/C++ → General → Additional Include Directories**:
+     Add `C:\libraries\libtorch\include`
+   - **Linker → General → Additional Library Directories**:
+     Add `C:\libraries\libtorch\lib`
+   - **Linker → Input → Additional Dependencies**:
+     Add required `.lib` files (e.g., `torch.lib`, `c10.lib`)
+
+3. **Handle Runtime DLLs**:
+   - Copy DLLs to output directory, OR
+   - Add library `bin` folder to PATH, OR
+   - Set Debugging → Environment: `PATH=$(PATH);C:\libraries\libtorch\lib`
+
+#### CMake Configuration (Both IDEs)
+
+For CMake projects, add to CMakeLists.txt:
+
+```cmake
+# Manual library integration
+set(LIBTORCH_DIR "C:/libraries/libtorch")
+find_package(Torch REQUIRED PATHS ${LIBTORCH_DIR})
+target_link_libraries(${PROJECT_NAME} PRIVATE "${TORCH_LIBRARIES}")
+
+# Copy DLLs to output directory
+if(MSVC)
+    file(GLOB TORCH_DLLS "${LIBTORCH_DIR}/lib/*.dll")
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${TORCH_DLLS}
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+endif()
+```
+
+### Dependency Reference Table
+
+| Library          | vcpkg Support | Installation Method              | Notes                                    |
+|------------------|---------------|----------------------------------|------------------------------------------||
+| argparse         | ✅ Yes        | `vcpkg install argparse`         | Header-only argument parser              |
+| raylib           | ✅ Yes        | `vcpkg install raylib`           | Simple game programming library          |
+| fmt              | ✅ Yes        | `vcpkg install fmt`              | Modern formatting library                |
+| nlohmann-json    | ✅ Yes        | `vcpkg install nlohmann-json`    | JSON for Modern C++                     |
+| boost            | ✅ Yes        | `vcpkg install boost`            | Comprehensive C++ libraries             |
+| opencv           | ✅ Yes        | `vcpkg install opencv4`          | Computer vision library                  |
+| libtorch         | ❌ No         | Manual integration               | PyTorch C++ API                         |
+| CUDA Toolkit     | ❌ No         | Manual integration               | NVIDIA GPU computing                    |
+
+### Mixing vcpkg and Manual Libraries
+
+You can use both approaches in the same project:
+
+1. **Use vcpkg for supported libraries**:
+
+   ```json
+   {
+       "dependencies": ["fmt", "raylib", "argparse"]
+   }
+   ```
+
+2. **Manually configure unsupported libraries** in project properties or CMakeLists.txt
+
+3. **Document your dependencies**:
+
+   ```markdown
+   # Dependencies
+   ## vcpkg-managed:
+   - fmt: formatting library
+   - raylib: graphics library
+
+   ## Manually integrated:
+   - libtorch: C:\libraries\libtorch (v2.0.1)
+   ```
+
+### Platform and Architecture Considerations
+
+#### Visual Studio Platform Settings
+
+- **x64**: 64-bit applications (most common)
+- **x86**: 32-bit applications (legacy support)
+- **ARM64**: ARM processors (Surface Pro X, etc.)
+
+Ensure vcpkg triplet matches your project:
+
+- `x64-windows` for 64-bit
+- `x86-windows` for 32-bit
+- `arm64-windows` for ARM64
+
+#### Build Configuration Matching
+
+- **Debug**: Use debug versions of libraries (with debug symbols)
+- **Release**: Use optimized release versions
+- vcpkg typically provides both configurations
+
+### Troubleshooting Common Issues
+
+#### Linker Errors (LNK2019, LNK2001)
+
+1. **Check library paths**: Ensure all directories are correctly specified
+2. **Verify architecture**: x64 library with x64 project, etc.
+3. **Check dependencies**: Some libraries require additional dependencies
+4. **Runtime library**: Ensure consistent use of `/MT` or `/MD`
+
+#### Runtime Errors (DLL not found)
+
+1. **Copy DLLs to output directory**
+2. **Add to PATH environment variable**
+3. **Use Visual Studio's post-build events**:
+
+   ```
+   xcopy /y /d "$(SolutionDir)libs\*.dll" "$(OutDir)"
+   ```
+
+#### vcpkg Integration Issues
+
+1. **Run integration command**:
+
+   ```powershell
+   .\vcpkg integrate install
+   ```
+
+2. **Verify VCPKG_ROOT environment variable**
+
+3. **Check triplet compatibility**:
+
+   ```powershell
+   .\vcpkg list
+   ```
+
+### Best Practices
+
+1. **Use vcpkg.json** for reproducible builds
+2. **Document manual dependencies** with version numbers
+3. **Check in vcpkg.json** but not vcpkg_installed folder
+4. **Use CMake for cross-platform projects**
+5. **Maintain separate debug/release configurations**
+6. **Test on clean machines** to verify all dependencies are properly configured
+
 ## Summary
 
-This setup provides a modern, fast, and portable C++ development environment on Windows without requiring Visual Studio IDE. The combination of CMake + Ninja + Clang + vcpkg is widely used in the industry and provides excellent cross-platform compatibility.
+This guide provides comprehensive C++ development setup for Windows, supporting both:
+
+- **VS Code**: Lightweight, cross-platform development with CMake/Ninja/Clang
+- **Visual Studio**: Full IDE experience with integrated debugging and profiling
+
+Both environments benefit from vcpkg package management while maintaining flexibility for manual library integration when needed.
