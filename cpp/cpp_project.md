@@ -1,6 +1,7 @@
 # Modern C++ Project Setup with CMake, Ninja, Clang, and vcpkg on Windows
 
 This guide provides a working setup for a modern C++ development workflow on Windows using:
+
 - **CMake** for build configuration
 - **Ninja** for fast builds
 - **Clang** with GNU-style command line (not MSVC-compatible clang-cl)
@@ -10,23 +11,30 @@ This guide provides a working setup for a modern C++ development workflow on Win
 ## Prerequisites
 
 ### 1. Visual Studio Build Tools
+
 Install Visual Studio (Community/Professional/Enterprise) with:
+
 - "Desktop development with C++" workload
 - This provides the Windows SDK and necessary libraries
 
 ### 2. VS Code Extensions
+
 Install these extensions:
+
 - **CMake Tools** (by Microsoft)
 - **C/C++** (by Microsoft)
 - **clangd** (by LLVM, optional but recommended for better IntelliSense)
 
 ### 3. Ninja Build System
+
 Download from [ninja-build.org](https://ninja-build.org/) or install via:
+
 ```powershell
 winget install Ninja-build.Ninja
 ```
 
 ### 4. vcpkg Setup
+
 ```powershell
 git clone https://github.com/Microsoft/vcpkg.git
 cd vcpkg
@@ -50,6 +58,7 @@ MyApp/
 ## Configuration Files
 
 ### CMakeLists.txt
+
 ```cmake
 cmake_minimum_required(VERSION 3.20)
 project(MyApp CXX)
@@ -70,6 +79,7 @@ add_executable(MyApp src/main.cpp)
 ```
 
 ### CMakePresets.json
+
 ```json
 {
     "version": 8,
@@ -117,6 +127,7 @@ add_executable(MyApp src/main.cpp)
 ```
 
 ### vcpkg.json (Optional but Recommended)
+
 ```json
 {
     "name": "myapp",
@@ -124,9 +135,11 @@ add_executable(MyApp src/main.cpp)
     "dependencies": []
 }
 ```
+
 Note: When using vcpkg.json, CMake will automatically run `vcpkg install` during configuration to install all dependencies.
 
 ### src/main.cpp
+
 ```cpp
 #include <iostream>
 
@@ -139,6 +152,7 @@ int main() {
 ## Building the Project
 
 ### Command Line
+
 ```powershell
 # Configure
 cmake --preset clang-gnu-debug
@@ -151,6 +165,7 @@ cmake --build --preset clang-gnu-debug
 ```
 
 ### VS Code
+
 1. Open the project folder in VS Code
 2. Press `Ctrl+Shift+P` and select "CMake: Select Configure Preset"
 3. Choose "clang-gnu-debug" or "clang-gnu-release"
@@ -169,26 +184,153 @@ cmake --build --preset clang-gnu-debug
 ### Common Issues and Solutions
 
 #### Issue: CMake generates Visual Studio project files (.sln, .vcxproj)
+
 **Solution**: Make sure your CMakePresets.json includes `"generator": "Ninja"`
 
 #### Issue: "MSBuild version X for .NET Framework" message
+
 **Explanation**: This is MSBuild identifying itself. MSBuild is written in .NET but builds native C++ code. If you see this, CMake is using the Visual Studio generator instead of Ninja.
 
 #### Issue: vcpkg packages not found
+
 **Solution**: Ensure `VCPKG_ROOT` environment variable is set and specify the toolchain file in CMakePresets.json:
+
 ```json
 "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
 ```
+
 Note: It's recommended to specify the toolchain file in both CMakeLists.txt (for fallback) and CMakePresets.json (for explicit configuration).
 
 #### Issue: Clang not found
+
 **Solution**: Install Clang via Visual Studio Installer (under Individual Components) or LLVM directly. Ensure it's in your PATH.
+
+## CMake 3.24+ Dependency Providers (Advanced)
+
+Starting with CMake 3.24, you can configure dependency providers that enable seamless integration between package managers (like vcpkg) and fallback mechanisms (like FetchContent). This allows `find_package()` to:
+
+1. First try to find the package via vcpkg or system packages
+2. Automatically fall back to downloading and building from source if not found
+
+### Setting Up Dependency Provider with FetchContent Fallback
+
+#### CMakeLists.txt with FetchContent Integration
+
+```cmake
+cmake_minimum_required(VERSION 3.24)
+project(MyApp CXX)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# vcpkg integration (if VCPKG_ROOT is set)
+if(DEFINED ENV{VCPKG_ROOT})
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+endif()
+
+# Include FetchContent module
+include(FetchContent)
+
+# Declare dependencies with FIND_PACKAGE_ARGS for automatic fallback
+FetchContent_Declare(
+    fmt
+    GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+    GIT_TAG        10.2.1
+    GIT_SHALLOW    TRUE
+    FIND_PACKAGE_ARGS 10.0 CONFIG
+)
+
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        v1.14.0
+    GIT_SHALLOW    TRUE
+    FIND_PACKAGE_ARGS NAMES GTest
+)
+
+# This will:
+# 1. Try find_package(fmt 10.0 CONFIG) first (uses vcpkg if available)
+# 2. Fall back to FetchContent if not found
+FetchContent_MakeAvailable(fmt googletest)
+
+add_executable(MyApp src/main.cpp)
+target_link_libraries(MyApp PRIVATE fmt::fmt)
+
+# Tests
+add_executable(MyApp_test src/test.cpp)
+target_link_libraries(MyApp_test PRIVATE GTest::gtest_main)
+```
+
+### Git Submodules vs Inlining
+
+**Important**: FetchContent downloads dependencies at configure time but does NOT add them to your git repository. The downloaded sources are placed in your build directory (typically `out/build/*/`), not your source tree.
+
+To use git submodules instead of FetchContent downloads:
+
+```cmake
+# Option 1: Use FetchContent with SOURCE_DIR pointing to a submodule
+FetchContent_Declare(
+    fmt
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/fmt
+)
+
+# Option 2: Traditional add_subdirectory with submodule
+add_subdirectory(external/fmt)
+```
+
+For git submodules setup:
+```bash
+git submodule add https://github.com/fmtlib/fmt.git external/fmt
+git submodule update --init --recursive
+```
+
+### Dependency Provider Configuration
+
+For more control, create a dependency provider script (`cmake/DependencyProvider.cmake`):
+
+```cmake
+# This file configures how find_package() calls are handled
+macro(custom_find_package PACKAGE_NAME)
+    # Try vcpkg first
+    if(DEFINED ENV{VCPKG_ROOT})
+        find_package(${PACKAGE_NAME} ${ARGN} QUIET)
+    endif()
+    
+    # If not found, check if we have a FetchContent declaration
+    if(NOT ${PACKAGE_NAME}_FOUND)
+        FetchContent_GetProperties(${PACKAGE_NAME})
+        if(NOT ${PACKAGE_NAME}_POPULATED)
+            message(STATUS "Package ${PACKAGE_NAME} not found, fetching from source...")
+            FetchContent_MakeAvailable(${PACKAGE_NAME})
+        endif()
+    endif()
+endmacro()
+
+# Set this as the dependency provider
+set(CMAKE_FIND_PACKAGE_REDIRECTS_DIR ${CMAKE_CURRENT_BINARY_DIR}/cmake)
+```
+
+Use it by adding to your preset:
+```json
+"cacheVariables": {
+    "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "${sourceDir}/cmake/DependencyProvider.cmake"
+}
+```
+
+### Benefits of This Approach
+
+1. **User Choice**: Users can choose between system packages, vcpkg, or building from source
+2. **Reproducible Builds**: FetchContent ensures exact versions when packages aren't available
+3. **CI/CD Friendly**: Works in environments where vcpkg might not be set up
+4. **No Repository Pollution**: Dependencies stay out of your git repo
+5. **Caching**: FetchContent caches downloads, avoiding repeated fetches
 
 ## Adding Dependencies with vcpkg
 
 ### Example: Adding raylib library
 
 1. Add to vcpkg.json (recommended):
+
 ```json
 {
     "name": "myapp",
@@ -200,12 +342,14 @@ Note: It's recommended to specify the toolchain file in both CMakeLists.txt (for
 ```
 
 2. Update CMakeLists.txt:
+
 ```cmake
 find_package(raylib CONFIG REQUIRED)
 target_link_libraries(MyApp PRIVATE raylib)
 ```
 
 3. Use in your code:
+
 ```cpp
 #include "raylib.h"
 
