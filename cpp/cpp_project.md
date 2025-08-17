@@ -21,9 +21,10 @@ Install Visual Studio (Community/Professional/Enterprise) with:
 
 Install these extensions:
 
-- **CMake Tools** (by Microsoft)
-- **clangd** (by LLVM) - Recommended for better IntelliSense with CMake projects
+- **clangd** (by LLVM) - For IntelliSense with CMake projects
 - **C/C++** (by Microsoft) - Disable IntelliSense if using clangd
+
+**WARNING**: Do NOT install the CMake Tools extension. It has serious issues with PowerShell environment inheritance on Windows and will not properly use your configured build environment (PATH, VCPKG_ROOT, etc.). Use VS Code tasks instead (see configuration below).
 
 ### 3. Ninja Build System
 
@@ -43,6 +44,25 @@ cd vcpkg
 ```
 
 Set the `VCPKG_ROOT` environment variable to your vcpkg directory (e.g., `C:\tools\vcpkg`)
+
+### 5. LLDB Debugger Setup (Required for debugging with Clang)
+
+**Important**: Visual Studio's Clang installation does NOT include LLDB or liblldb.dll. If you need debugging capabilities with LLDB (e.g., for CodeLLDB in VS Code), you must install it separately:
+
+1. **Download LLVM from official sources**
+   - Go to the [LLVM releases page](https://github.com/llvm/llvm-project/releases)
+   - Download the Windows installer (LLVM-XX.X.X-win64.exe)
+   - This package includes lldb.exe and liblldb.dll in the `/bin` folder
+
+2. **Configure PATH**
+   - Add the LLVM bin directory (e.g., `C:\Program Files\LLVM\bin`) to your Windows PATH
+   - This ensures lldb.exe can find liblldb.dll
+
+3. **Python Requirement**
+   - LLDB requires Python (typically Python 3.10+)
+   - Install Python and add it to your PATH if not already present
+
+**Note**: This is a known limitation of Visual Studio's Clang tools installation. The Visual Studio installer includes clang, clang++, and clang-cl for compilation but omits the LLDB debugger components.
 
 ## Project Structure
 
@@ -74,11 +94,12 @@ if(DEFINED ENV{VCPKG_ROOT})
     set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
 endif()
 
-add_executable(MyApp src/main.cpp)
+# Use ${PROJECT_NAME} instead of hardcoding the executable name
+add_executable(${PROJECT_NAME} src/main.cpp)
 
 # Example: To add packages via vcpkg
 # find_package(fmt CONFIG REQUIRED)
-# target_link_libraries(MyApp PRIVATE fmt::fmt)
+# target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
 ```
 
 ### CMakePresets.json
@@ -167,68 +188,116 @@ cmake --build --preset clang-gnu-debug
 .\out\build\clang-gnu-debug\MyApp.exe
 ```
 
-### VS Code
+### VS Code with Tasks (Recommended)
 
-1. Open the project folder in VS Code
-2. Press `Ctrl+Shift+P` and select "CMake: Select Configure Preset"
-3. Choose "clang-gnu-debug" or "clang-gnu-release"
-4. Press `Ctrl+Shift+P` and select "CMake: Configure" (generates compile_commands.json)
-5. Press `Ctrl+Shift+P` and select "CMake: Build"
-6. Run the executable or use the Run/Debug features
+Since the CMake Tools extension has issues with PowerShell environment variables on Windows, use VS Code tasks instead:
 
-### Advanced: Using CMake Kits with PowerShell Profile
+1. Create `.vscode/tasks.json`:
 
-If your development environment relies on PowerShell profile settings (custom paths, environment variables, etc.), you can configure a CMake Kit to load your profile before running CMake:
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake Configure (Debug)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--preset", "clang-gnu-debug"],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "CMake Configure (Release)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--preset", "clang-gnu-release"],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "CMake Build (Debug)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "--preset", "clang-gnu-debug"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "dependsOn": ["CMake Configure (Debug)"]
+        },
+        {
+            "label": "CMake Build (Release)",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "--preset", "clang-gnu-release"],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "dependsOn": ["CMake Configure (Release)"]
+        },
+        {
+            "label": "Clean Build",
+            "type": "shell",
+            "command": "Remove-Item",
+            "args": ["-Path", "${workspaceFolder}/out", "-Recurse", "-Force", "-ErrorAction", "SilentlyContinue"],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run (Debug)",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-Command",
+                "& (Get-ChildItem '${workspaceFolder}/out/build/clang-gnu-debug/*.exe' | Select-Object -First 1)"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "dependsOn": ["CMake Build (Debug)"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Run (Release)",
+            "type": "shell",
+            "command": "pwsh",
+            "args": [
+                "-Command",
+                "& (Get-ChildItem '${workspaceFolder}/out/build/clang-gnu-release/*.exe' | Select-Object -First 1)"
+            ],
+            "group": "test",
+            "dependsOn": ["CMake Build (Release)"],
+            "problemMatcher": []
+        }
+    ]
+}
+```
 
-1. **Create a Setup Script**
-   
-   Create `cmake-env-setup.ps1`:
-   ```powershell
-   # Load PowerShell profile
-   . $PROFILE
-   
-   # Or load specific environment settings
-   $env:VCPKG_ROOT = "C:\tools\vcpkg"
-   $env:PATH = "$env:VCPKG_ROOT;$env:PATH"
-   
-   # Verify critical tools are available
-   if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) {
-       Write-Error "CMake not found in PATH"
-       exit 1
-   }
-   ```
+2. Use the tasks:
+   - **Build**: `Ctrl+Shift+B` (runs default build task - Debug)
+   - **Run**: `Ctrl+Shift+P` → "Tasks: Run Test Task" (runs Debug executable)
+   - **Other tasks**: `Ctrl+Shift+P` → "Tasks: Run Task" → select task
 
-2. **Configure CMake Kit**
-   
-   Press `Ctrl+Shift+P` → "CMake: Edit User-Local CMake Kits"
-   
-   Add this kit configuration:
-   ```json
-   [
-     {
-       "name": "Clang with PowerShell Environment",
-       "environmentSetupScript": "C:\\path\\to\\cmake-env-setup.ps1",
-       "compilers": {
-         "C": "clang",
-         "CXX": "clang++"
-       },
-       "preferredGenerator": {
-         "name": "Ninja"
-       }
-     }
-   ]
-   ```
+**Note**: The Run tasks use PowerShell to find and execute the first `.exe` file in the build directory. This approach works regardless of your project name, avoiding the need to hardcode the executable name when using `${PROJECT_NAME}` in CMake.
 
-3. **Select and Use the Kit**
-   - Press `Ctrl+Shift+P` → "CMake: Select a Kit"
-   - Choose "Clang with PowerShell Environment"
-   - Configure and build as normal
+This approach ensures all your PowerShell profile environment variables (PATH, VCPKG_ROOT, etc.) are properly loaded.
 
-**Benefits:**
-- Ensures all PowerShell profile paths and variables are available
-- Works with custom tool installations
-- Maintains consistency between terminal and VS Code builds
-- Useful for corporate environments with complex setups
+## CMake Environment Configuration
+
+### PowerShell Profile Integration
+
+If your build environment depends on PowerShell profile settings (custom paths, VCPKG_ROOT, tool locations), the VS Code tasks approach (shown above) automatically inherits these when running in the integrated terminal.
+
+### Why VS Code Tasks Instead of CMake Tools Extension?
+
+The CMake Tools extension has a critical flaw on Windows: it doesn't properly inherit the PowerShell profile environment. This means:
+
+- Environment variables like `VCPKG_ROOT`, custom `PATH` entries, and tool locations set in your PowerShell profile are not available
+- The extension often defaults to using Visual Studio's bundled CMake instead of your configured version
+- Complex workarounds (environment scripts, kits) are fragile and often fail
+
+**VS Code tasks run in the integrated terminal**, which properly loads your PowerShell profile, ensuring all your carefully configured build tools and environment variables work as expected.
 
 ## Configuring clangd for IntelliSense
 
@@ -421,8 +490,8 @@ FetchContent_Declare(
 # 2. Fall back to FetchContent if not found
 FetchContent_MakeAvailable(fmt googletest)
 
-add_executable(MyApp src/main.cpp)
-target_link_libraries(MyApp PRIVATE fmt::fmt)
+add_executable(${PROJECT_NAME} src/main.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
 
 # Tests
 add_executable(MyApp_test src/test.cpp)
@@ -513,7 +582,7 @@ Use it by adding to your preset:
 
 ```cmake
 find_package(raylib CONFIG REQUIRED)
-target_link_libraries(MyApp PRIVATE raylib)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 ```
 
 3. Use in your code:
