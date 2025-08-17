@@ -22,8 +22,8 @@ Install Visual Studio (Community/Professional/Enterprise) with:
 Install these extensions:
 
 - **CMake Tools** (by Microsoft)
-- **C/C++** (by Microsoft)
-- **clangd** (by LLVM, optional but recommended for better IntelliSense)
+- **clangd** (by LLVM) - Recommended for better IntelliSense with CMake projects
+- **C/C++** (by Microsoft) - Disable IntelliSense if using clangd
 
 ### 3. Ninja Build System
 
@@ -65,6 +65,9 @@ project(MyApp CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Generate compile_commands.json for clangd
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # vcpkg integration (if VCPKG_ROOT is set)
 if(DEFINED ENV{VCPKG_ROOT})
@@ -169,8 +172,94 @@ cmake --build --preset clang-gnu-debug
 1. Open the project folder in VS Code
 2. Press `Ctrl+Shift+P` and select "CMake: Select Configure Preset"
 3. Choose "clang-gnu-debug" or "clang-gnu-release"
-4. Press `Ctrl+Shift+P` and select "CMake: Build"
-5. Run the executable or use the Run/Debug features
+4. Press `Ctrl+Shift+P` and select "CMake: Configure" (generates compile_commands.json)
+5. Press `Ctrl+Shift+P` and select "CMake: Build"
+6. Run the executable or use the Run/Debug features
+
+## Configuring clangd for IntelliSense
+
+clangd needs a `compile_commands.json` file to understand your project's include paths, especially for dependencies from vcpkg and FetchContent.
+
+### Setup Steps
+
+1. **Enable Compilation Database Generation**
+   - Already included in the CMakeLists.txt above: `set(CMAKE_EXPORT_COMPILE_COMMANDS ON)`
+
+2. **Configure Your Project**
+   ```powershell
+   cmake --preset clang-gnu-debug
+   ```
+   This generates `compile_commands.json` in your build directory
+
+3. **Link compile_commands.json to Project Root**
+   
+   **Option A: Create a symbolic link (Admin PowerShell required)**
+   ```powershell
+   New-Item -ItemType SymbolicLink -Path ".\compile_commands.json" -Target ".\out\build\clang-gnu-debug\compile_commands.json"
+   ```
+   
+   **Option B: Copy the file**
+   ```powershell
+   Copy-Item ".\out\build\clang-gnu-debug\compile_commands.json" -Destination "."
+   ```
+   
+   **Option C: Configure clangd to look in build directory**
+   Create `.clangd` file in project root:
+   ```yaml
+   CompileFlags:
+     CompilationDatabase: out/build/clang-gnu-debug
+   ```
+
+4. **VS Code Settings**
+   Create/update `.vscode/settings.json`:
+   ```json
+   {
+     // Disable Microsoft C++ IntelliSense in favor of clangd
+     "C_Cpp.intelliSenseEngine": "disabled",
+     
+     // Optional: Point clangd to specific compile_commands.json
+     "clangd.arguments": [
+       "--compile-commands-dir=${workspaceFolder}/out/build/clang-gnu-debug",
+       "--header-insertion=never",
+       "--clang-tidy"
+     ]
+   }
+   ```
+
+5. **Reload VS Code Window**
+   - Press `Ctrl+Shift+P` → "Developer: Reload Window"
+   - clangd should now resolve all includes from vcpkg and FetchContent
+
+### Verifying Configuration
+
+1. Open `compile_commands.json` and check for include paths:
+   - vcpkg paths: Look for `-I` flags containing `vcpkg/installed/`
+   - FetchContent paths: Look for paths in `_deps/` directories
+
+2. Test IntelliSense:
+   - Hover over an include from a dependency
+   - Should show the full path without errors
+   - Ctrl+Click should navigate to the header
+
+### Troubleshooting clangd Issues
+
+**Problem: Headers not found after configuration**
+- Ensure you've run CMake configure after adding dependencies
+- Check that `target_link_libraries()` is properly set
+- Verify the compile_commands.json contains your source files
+
+**Problem: clangd not starting**
+- Check Output panel → clangd for errors
+- Ensure clangd extension is installed and enabled
+- Try: `clangd --version` in terminal to verify installation
+
+**Problem: Conflicting IntelliSense providers**
+- Disable Microsoft C/C++ IntelliSense: Set `"C_Cpp.intelliSenseEngine": "disabled"`
+- Or disable clangd and use Microsoft's IntelliSense
+
+**Problem: Multiple build directories**
+- Update `.clangd` or VS Code settings to point to active build directory
+- Consider using a script to update symlink when switching configurations
 
 ## Key Points
 
@@ -180,6 +269,7 @@ cmake --build --preset clang-gnu-debug
 2. **Clang with GNU CLI**: Uses familiar GCC-style flags (`-Wall`, `-O2`) instead of MSVC-style (`/W4`, `/O2`)
 3. **CMake Presets**: Provides consistent, reproducible builds across different machines
 4. **vcpkg**: Modern C++ package manager that integrates seamlessly with CMake
+5. **clangd**: Provides superior IntelliSense for modern C++ with proper CMake integration
 
 ### Common Issues and Solutions
 
