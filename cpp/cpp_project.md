@@ -101,12 +101,16 @@ MyApp/
 ├── CMakeLists.txt
 ├── CMakePresets.json
 ├── vcpkg.json (optional but recommended)
-├── .clangd (clangd configuration)
+├── .clangd (clangd configuration for IntelliSense)
 ├── .gitignore
 ├── .vscode/
 │   ├── settings.json (workspace settings)
 │   ├── tasks.json (build tasks)
 │   └── launch.json (debug configurations)
+├── out/                    # Build output directory (gitignored)
+│   ├── clang-gnu-debug/   # Debug build with Clang
+│   ├── clang-gnu-release/ # Release build with Clang
+│   └── vs2022/            # Visual Studio solution files
 ├── llm-docs/
 │   └── cpp/
 │       └── cpp_project.md (this file)
@@ -114,12 +118,74 @@ MyApp/
     └── main.cpp
 ```
 
+## Build Directory Best Practices
+
+### Why `out/` Instead of `build/`?
+
+This project uses `out/` as the top-level build directory. Here's our rationale:
+
+1. **Semantic Clarity**: `out/` explicitly indicates "output artifacts" - it's immediately clear this contains generated files, not source code
+2. **Visual Studio Heritage**: Aligns with Visual Studio's convention, making it familiar for Windows developers
+3. **Gitignore Simplicity**: Single pattern `/out/` in `.gitignore` covers all build artifacts
+4. **No Ambiguity**: Unlike `build/`, which could be confused with build scripts or documentation
+
+### Avoiding Redundant Nesting
+
+**Best Practice**: Use a single top-level directory (`out/` or `build/`), then add subdirectories only for different configurations.
+
+**Good Structure** ✅:
+```
+out/
+├── clang-gnu-debug/
+├── clang-gnu-release/
+└── vs2022/
+```
+
+**Avoid Redundant Nesting** ❌:
+```
+out/
+└── build/           # Unnecessary extra layer!
+    ├── debug/
+    └── release/
+```
+
+The nested `out/build/` pattern serves no purpose and just adds complexity to paths, scripts, and documentation.
+
+### Common Conventions
+
+- **`build/`**: Most common in open-source CMake projects (LLVM, OpenCV, etc.)
+- **`out/`**: Common in enterprise/corporate settings and Visual Studio projects
+- **Never `out/build/`**: This redundant nesting is almost never seen in professional projects
+
+### `.gitignore` Configuration
+
+Keep it simple:
+```gitignore
+# Build outputs (includes all CMake artifacts and dependencies)
+/out/
+
+# IDE artifacts
+/.vs/
+/.vscode/settings.local.json
+```
+
+Note: Dependencies managed by vcpkg and FetchContent are automatically placed in subdirectories under `/out/` (e.g., `out/clang-gnu-debug/vcpkg_installed/` and `out/clang-gnu-debug/_deps/`), so they're already covered by the `/out/` pattern.
+
 ## Configuration Files
 
 ### CMakeLists.txt
 
 ```cmake
 cmake_minimum_required(VERSION 3.20)
+
+# vcpkg integration (if available) - must be set before project()
+if(DEFINED ENV{VCPKG_ROOT} AND NOT "$ENV{VCPKG_ROOT}" STREQUAL "")
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+    message(STATUS "Using vcpkg toolchain from: $ENV{VCPKG_ROOT}")
+else()
+    message(STATUS "VCPKG_ROOT not set - dependencies will be fetched automatically if needed")
+endif()
+
 project(MyApp CXX)
 
 set(CMAKE_CXX_STANDARD 23)
@@ -128,17 +194,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Generate compile_commands.json for clangd
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# vcpkg integration (if VCPKG_ROOT is set)
-if(DEFINED ENV{VCPKG_ROOT})
-    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
-endif()
-
 # Use ${PROJECT_NAME} instead of hardcoding the executable name
 add_executable(${PROJECT_NAME} src/main.cpp)
 
 # Example: To add packages via vcpkg
 # find_package(fmt CONFIG REQUIRED)
 # target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+
+# Set this project as the default startup project in Visual Studio
+# (Prevents ALL_BUILD from being the default)
+if(CMAKE_GENERATOR MATCHES "Visual Studio")
+    set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+endif()
 ```
 
 ### CMakePresets.json
@@ -152,13 +219,12 @@ add_executable(${PROJECT_NAME} src/main.cpp)
             "displayName": "Clang (GNU CLI) with Ninja - Debug",
             "description": "Using Ninja generator with Clang compiler (GNU-style)",
             "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "binaryDir": "${sourceDir}/out/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
                 "CMAKE_C_COMPILER": "clang",
                 "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+                "CMAKE_BUILD_TYPE": "Debug"
             }
         },
         {
@@ -166,13 +232,12 @@ add_executable(${PROJECT_NAME} src/main.cpp)
             "displayName": "Clang (GNU CLI) with Ninja - Release",
             "description": "Using Ninja generator with Clang compiler (GNU-style)",
             "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "binaryDir": "${sourceDir}/out/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
                 "CMAKE_C_COMPILER": "clang",
                 "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+                "CMAKE_BUILD_TYPE": "Release"
             }
         }
     ],
@@ -245,75 +310,97 @@ Since the CMake Tools extension has issues with PowerShell environment variables
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "CMake Configure (Debug)",
+            "label": "Configure Debug",
             "type": "shell",
             "command": "cmake",
-            "args": ["--preset", "clang-gnu-debug"],
+            "args": [
+                "--preset",
+                "clang-gnu-debug"
+            ],
             "group": "build",
             "problemMatcher": []
         },
         {
-            "label": "CMake Configure (Release)",
+            "label": "Configure Release",
             "type": "shell",
             "command": "cmake",
-            "args": ["--preset", "clang-gnu-release"],
+            "args": [
+                "--preset",
+                "clang-gnu-release"
+            ],
             "group": "build",
             "problemMatcher": []
         },
         {
-            "label": "CMake Build (Debug)",
+            "label": "Build Debug",
             "type": "shell",
             "command": "cmake",
-            "args": ["--build", "--preset", "clang-gnu-debug"],
+            "args": [
+                "--build",
+                "--preset",
+                "clang-gnu-debug"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "problemMatcher": ["$gcc"],
-            "dependsOn": ["CMake Configure (Debug)"]
+            "dependsOn": ["Configure Debug"]
         },
         {
-            "label": "CMake Build (Release)",
+            "label": "Build Release",
             "type": "shell",
             "command": "cmake",
-            "args": ["--build", "--preset", "clang-gnu-release"],
+            "args": [
+                "--build",
+                "--preset",
+                "clang-gnu-release"
+            ],
             "group": "build",
             "problemMatcher": ["$gcc"],
-            "dependsOn": ["CMake Configure (Release)"]
+            "dependsOn": ["Configure Release"]
         },
         {
-            "label": "Clean Build",
-            "type": "shell",
-            "command": "Remove-Item",
-            "args": ["-Path", "${workspaceFolder}/out", "-Recurse", "-Force", "-ErrorAction", "SilentlyContinue"],
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
-            "label": "Run (Debug)",
+            "label": "Clean",
             "type": "shell",
             "command": "pwsh",
             "args": [
                 "-Command",
-                "& (Get-ChildItem '${workspaceFolder}/out/build/clang-gnu-debug/*.exe' | Select-Object -First 1)"
+                "if (Test-Path '${workspaceFolder}/out') { Remove-Item -Path '${workspaceFolder}/out' -Recurse -Force }"
             ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Debug",
+            "type": "shell",
+            "command": "${workspaceFolder}/out/clang-gnu-debug/MyApp",
             "group": {
                 "kind": "test",
                 "isDefault": true
             },
-            "dependsOn": ["CMake Build (Debug)"],
+            "dependsOn": ["Build Debug"],
             "problemMatcher": []
         },
         {
-            "label": "Run (Release)",
+            "label": "Run Release",
             "type": "shell",
-            "command": "pwsh",
-            "args": [
-                "-Command",
-                "& (Get-ChildItem '${workspaceFolder}/out/build/clang-gnu-release/*.exe' | Select-Object -First 1)"
-            ],
+            "command": "${workspaceFolder}/out/clang-gnu-release/MyApp",
             "group": "test",
-            "dependsOn": ["CMake Build (Release)"],
+            "dependsOn": ["Build Release"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Configure VS2022",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-G",
+                "Visual Studio 17 2022",
+                "-B",
+                "out/vs2022"
+            ],
+            "group": "build",
             "problemMatcher": []
         }
     ]
@@ -369,11 +456,26 @@ Create `.vscode/settings.json` with:
    - **Run**: `Ctrl+Shift+P` → "Tasks: Run Test Task" (runs Debug executable)
    - **Other tasks**: `Ctrl+Shift+P` → "Tasks: Run Task" → select task
 
-**Note**: The Run tasks use PowerShell to find and execute the first `.exe` file in the build directory. This approach works regardless of your project name, avoiding the need to hardcode the executable name when using `${PROJECT_NAME}` in CMake.
+**Note**: The Run tasks directly reference the executable path. If your project name differs from 'MyApp', update the command path accordingly. The VS2022 Configure task generates Visual Studio solution files in a separate build directory for when you need to open the project in Visual Studio.
 
 This approach ensures all your PowerShell profile environment variables (PATH, VCPKG_ROOT, etc.) are properly loaded.
 
 ## CMake Environment Configuration
+
+### CMAKE_TOOLCHAIN_FILE and vcpkg Integration
+
+This project uses a **conditional CMAKE_TOOLCHAIN_FILE** approach that provides flexibility:
+
+1. **Automatic vcpkg detection**: If `VCPKG_ROOT` is set, vcpkg is used for dependencies
+2. **Graceful fallback**: If vcpkg isn't available, dependencies can use FetchContent
+3. **No preset coupling**: Works with any CMake invocation method, not tied to specific presets
+
+The key is setting `CMAKE_TOOLCHAIN_FILE` **before** the `project()` command in CMakeLists.txt. This ensures CMake loads the vcpkg toolchain during initial configuration, making vcpkg packages available via `find_package()`.
+
+**Why not in CMakePresets.json?**
+- Setting it only in CMakeLists.txt makes the project more flexible
+- Users without vcpkg can still build (using FetchContent fallbacks)
+- Simpler configuration - one place to manage the toolchain logic
 
 ### PowerShell Profile Integration
 
@@ -404,15 +506,17 @@ clangd needs a `compile_commands.json` file to understand your project's include
    cmake --preset clang-gnu-debug
    ```
 
-   This generates `compile_commands.json` in your build directory (`out/build/clang-gnu-debug/`)
+   This generates `compile_commands.json` in your build directory (`out/clang-gnu-debug/`)
 
-3. **Create .clangd Configuration (Recommended)**
+3. **Create .clangd Configuration (Required for IntelliSense)**
 
    Create a `.clangd` file in your project root with:
 
    ```yaml
+   # Point to any configured build directory - debug and release have the same include paths
+   # Just ensure you've run cmake --preset on at least one configuration
    CompileFlags:
-     CompilationDatabase: out/build/clang-gnu-debug
+     CompilationDatabase: out/clang-gnu-debug
    ```
 
    **Benefits of this approach:**
@@ -455,20 +559,20 @@ If you can't use `.clangd` file for some reason, here are platform-specific alte
 **Windows - Symbolic Link (requires Admin)**
 
 ```powershell
-New-Item -ItemType SymbolicLink -Path ".\compile_commands.json" -Target ".\out\build\clang-gnu-debug\compile_commands.json"
+New-Item -ItemType SymbolicLink -Path ".\compile_commands.json" -Target ".\out\clang-gnu-debug\compile_commands.json"
 ```
 
 **Cross-platform - Copy File**
 
 ```powershell
-Copy-Item ".\out\build\clang-gnu-debug\compile_commands.json" -Destination "."
+Copy-Item ".\out\clang-gnu-debug\compile_commands.json" -Destination "."
 ```
 
 **VS Code - Direct Configuration**
 Add to `clangd.arguments` in settings.json:
 
 ```json
-"--compile-commands-dir=${workspaceFolder}/out/build/clang-gnu-debug"
+"--compile-commands-dir=${workspaceFolder}/out/clang-gnu-debug"
 ```
 
 ### Troubleshooting clangd Issues
@@ -510,7 +614,7 @@ Create `.vscode/launch.json`:
             "name": "Debug (LLDB)",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/out/build/clang-gnu-debug/${workspaceFolderBasename}.exe",
+            "program": "${workspaceFolder}/out/clang-gnu-debug/${workspaceFolderBasename}.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "terminal": "integrated",
@@ -520,7 +624,7 @@ Create `.vscode/launch.json`:
             "name": "Debug (LLDB) - Release",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/out/build/clang-gnu-release/${workspaceFolderBasename}.exe",
+            "program": "${workspaceFolder}/out/clang-gnu-release/${workspaceFolderBasename}.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "terminal": "integrated",
@@ -554,13 +658,19 @@ Create `.vscode/launch.json`:
 
 #### Issue: vcpkg packages not found
 
-**Solution**: Ensure `VCPKG_ROOT` environment variable is set and specify the toolchain file in CMakePresets.json:
+**Solution**: Ensure `VCPKG_ROOT` environment variable is set. The project automatically detects and uses vcpkg when available through the conditional check in CMakeLists.txt:
 
-```json
-"CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+```cmake
+# This must appear BEFORE project() to work correctly
+if(DEFINED ENV{VCPKG_ROOT} AND NOT "$ENV{VCPKG_ROOT}" STREQUAL "")
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+endif()
 ```
 
-Note: It's recommended to specify the toolchain file in both CMakeLists.txt (for fallback) and CMakePresets.json (for explicit configuration).
+**Note**: Setting CMAKE_TOOLCHAIN_FILE in CMakeLists.txt (before project()) is the recommended approach as it:
+- Works with any CMake invocation method
+- Automatically falls back to FetchContent when vcpkg isn't available
+- Doesn't require preset-specific configuration
 
 #### Issue: Clang not found
 
@@ -584,6 +694,26 @@ All tools should come from WinGet installations:
 - Clang: `C:\Program Files\LLVM\bin`
 - Ninja: `C:\Users\<username>\AppData\Local\Microsoft\WinGet\Packages\Ninja-build.Ninja*`
 
+#### Issue: Visual Studio Opens with ALL_BUILD as Startup Project
+
+**Problem**: When opening the generated `.sln` file in Visual Studio, `ALL_BUILD` is set as the default startup project instead of your executable. Attempting to run the project fails with "Unable to start program ALL_BUILD. Access is denied."
+
+**Why This Happens**: This is **normal CMake behavior**. CMake creates utility targets like `ALL_BUILD` (builds all projects) and `ZERO_CHECK` (checks if CMake needs to regenerate). Visual Studio sets the first project in the `.sln` file as the startup project, and CMake lists `ALL_BUILD` first by default.
+
+**Solution**: Add the following to your `CMakeLists.txt` after defining your executable:
+
+```cmake
+# Set this project as the default startup project in Visual Studio
+# (Requires CMake 3.6+, prevents ALL_BUILD from being the default)
+if(CMAKE_GENERATOR MATCHES "Visual Studio")
+    set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+endif()
+```
+
+This tells CMake to set your actual executable as the startup project in the generated Visual Studio solution. The `if` statement ensures this only applies when using the Visual Studio generator, maintaining compatibility with other build systems.
+
+**Alternative Manual Fix**: Right-click your project (e.g., `MyApp`) in Solution Explorer and select "Set as Startup Project". You only need to do this once - Visual Studio remembers your choice.
+
 ## CMake 3.24+ Dependency Providers (Advanced)
 
 Starting with CMake 3.24, you can configure dependency providers that enable seamless integration between package managers (like vcpkg) and fallback mechanisms (like FetchContent). This allows `find_package()` to:
@@ -602,9 +732,12 @@ project(MyApp CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# vcpkg integration (if VCPKG_ROOT is set)
-if(DEFINED ENV{VCPKG_ROOT})
+# vcpkg integration (if VCPKG_ROOT is set) - must be set before project()
+if(DEFINED ENV{VCPKG_ROOT} AND NOT "$ENV{VCPKG_ROOT}" STREQUAL "")
     set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+    message(STATUS "Using vcpkg toolchain from: $ENV{VCPKG_ROOT}")
+else()
+    message(STATUS "VCPKG_ROOT not set - dependencies will be fetched automatically if needed")
 endif()
 
 # Include FetchContent module
@@ -642,7 +775,7 @@ target_link_libraries(MyApp_test PRIVATE GTest::gtest_main)
 
 ### Git Submodules vs Inlining
 
-**Important**: FetchContent downloads dependencies at configure time but does NOT add them to your git repository. The downloaded sources are placed in your build directory (typically `out/build/*/`), not your source tree.
+**Important**: FetchContent downloads dependencies at configure time but does NOT add them to your git repository. The downloaded sources are placed in your build directory (typically `out/*/`), not your source tree.
 
 To use git submodules instead of FetchContent downloads:
 
@@ -834,7 +967,7 @@ The combination of CMake + Ninja + Clang + vcpkg is widely used in the industry 
                "name": "windows-base",
                "hidden": true,
                "generator": "Visual Studio 17 2022",
-               "binaryDir": "${sourceDir}/out/build/${presetName}",
+               "binaryDir": "${sourceDir}/out/${presetName}",
                "installDir": "${sourceDir}/out/install/${presetName}",
                "cacheVariables": {
                    "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
