@@ -2,6 +2,9 @@
   "permissions": {
     "additionalDirectories": [
       "c:\\Users\\donal\\OneDrive\\Documents\\PowerShell\\"
+    ],
+    "allow": [
+      "mcp__perplexity-ask__perplexity_ask"
     ]
   }
 }
