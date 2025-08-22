@@ -1,4 +1,4 @@
-# C++ Project Setup on Windows with VS Code - Best Practices
+# C++ Project Setup on Windows with VS Code and MSVC - Best Practices
 
 ## The Core Problem and Solution
 
@@ -13,11 +13,11 @@
 Use WinGet for consistent, system-wide installations:
 
 ```powershell
+# Visual Studio Build Tools (includes MSVC compiler)
+winget install Microsoft.VisualStudio.2022.BuildTools
+
 # CMake - Build system generator
 winget install Kitware.CMake
-
-# LLVM/Clang - Complete compiler toolchain
-winget install LLVM.LLVM
 
 # Ninja - Fast build system
 winget install Ninja-build.Ninja
@@ -92,7 +92,7 @@ $env:VCPKG_ROOT = "C:\vcpkg"
 | Tool | Typical Path | Notes |
 |------|--------------|-------|
 | CMake | `C:\Program Files\CMake\bin` | From WinGet installation |
-| LLVM/Clang | `C:\Program Files\LLVM\bin` | Must appear BEFORE any Visual Studio paths |
+| MSVC | `C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\*\bin\Hostx64\x64` | Installed with Build Tools |
 | Ninja | `%LOCALAPPDATA%\Microsoft\WinGet\Packages\Ninja-build.Ninja_*` | Path varies with WinGet version |
 
 **How to set:** Use System Properties → Environment Variables, or run `set-system-env.ps1` as Administrator (see repository).
@@ -104,8 +104,7 @@ $env:VCPKG_ROOT = "C:\vcpkg"
 Required:
 
 - **CMake Tools** (ms-vscode.cmake-tools)
-- **C/C++** (ms-vscode.cpptools)
-- **clangd** (llvm-vs-code-extensions.vscode-clangd) - For better IntelliSense
+- **C/C++** (ms-vscode.cpptools) - Microsoft IntelliSense
 
 ## Project Structure
 
@@ -113,7 +112,6 @@ Required:
 MyProject/
 ├── CMakeLists.txt          # Build configuration
 ├── CMakePresets.json       # Build presets
-├── .clangd                 # Clangd configuration
 ├── .gitignore
 ├── .vscode/
 │   ├── settings.json       # VS Code settings
@@ -150,7 +148,7 @@ project(MyProject CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)  # For clangd
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)  # For IntelliSense
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 
@@ -185,8 +183,8 @@ endif()
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/out/${presetName}",
       "cacheVariables": {
-        "CMAKE_C_COMPILER": "clang",
-        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_C_COMPILER": "cl",
+        "CMAKE_CXX_COMPILER": "cl",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
       }
     },
@@ -215,17 +213,6 @@ endif()
 }
 ```
 
-### .clangd
-
-```yaml
-# Point clangd to the compile_commands.json for IntelliSense
-# Update path based on your architecture:
-#   out/windows-x64-debug    (for x64)
-#   out/windows-arm64-debug  (for ARM64)
-CompileFlags:
-  CompilationDatabase: out/windows-arm64-debug  # Change based on your architecture
-```
-
 ### .vscode/settings.json
 
 ```json
@@ -233,16 +220,9 @@ CompileFlags:
   "cmake.configureOnOpen": true,
   "cmake.useCMakePresets": "always",
 
-  // Disable Microsoft IntelliSense for clangd
-  "C_Cpp.intelliSenseEngine": "disabled",
-
-  // clangd configuration
-  "clangd.arguments": [
-    "--header-insertion=never",
-    "--clang-tidy",
-    "--background-index",
-    "--completion-style=detailed"
-  ]
+  // Microsoft IntelliSense configuration
+  "C_Cpp.intelliSenseEngine": "default",
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }
 ```
 
@@ -252,30 +232,28 @@ CompileFlags:
 {
   "recommendations": [
     "ms-vscode.cmake-tools",
-    "ms-vscode.cpptools",
-    "llvm-vs-code-extensions.vscode-clangd"
+    "ms-vscode.cpptools"
   ]
 }
 ```
 
 ### Debugging
 
-**Note**: VS Code does not currently support native debugging on Windows ARM64 with Clang. For debugging with breakpoints, use Visual Studio:
+VS Code fully supports debugging with MSVC on Windows:
 
-1. Generate a Visual Studio solution:
+1. **In VS Code**: Set breakpoints and press `F5` to debug directly
+2. **Alternative - Visual Studio**: Generate a Visual Studio solution:
 
    ```powershell
    cmake --preset vs2022-x64    # For x64
    cmake --preset vs2022-arm64  # For ARM64
    ```
 
-2. Open the solution in Visual Studio:
+   Open the solution in Visual Studio:
 
    ```powershell
    start out\vs2022-x64\MyProject.sln  # or vs2022-arm64
    ```
-
-3. Set breakpoints and press `F5` to debug in Visual Studio
 
 ### src/main.cpp (Example with vcpkg dependencies)
 
@@ -413,14 +391,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE your_package::your_package)
 
 ## Troubleshooting
 
-### CMake Tools uses wrong compiler
-
-**Symptom**: CMake Tools uses Visual Studio's clang instead of LLVM
-**Solution**:
-
-- Ensure LLVM's bin directory is BEFORE Visual Studio paths in system PATH
-- Verify with `where clang` - LLVM should appear first
-
 ### vcpkg packages not found
 
 **Symptom**: CMake can't find vcpkg packages
@@ -433,35 +403,34 @@ target_link_libraries(${PROJECT_NAME} PRIVATE your_package::your_package)
 - Verify toolchain file exists: `Test-Path "$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake"`
 - After setting, restart VS Code to pick up the new environment variable
 
-### clangd can't find headers
+### IntelliSense can't find headers
 
 **Symptom**: Red squiggles under #include statements
 **Solution**:
 
-1. Ensure `.clangd` file exists and points to correct build directory for your architecture
+1. Ensure CMake has configured successfully
 2. Run the appropriate cmake preset:
    - `cmake --preset windows-x64-debug` for x64
    - `cmake --preset windows-arm64-debug` for ARM64
-3. Update `.clangd` to match your architecture's build directory
-4. Reload VS Code window (`Ctrl+Shift+P` → "Developer: Reload Window")
+3. Reload VS Code window (`Ctrl+Shift+P` → "Developer: Reload Window")
 
 ### VS Code doesn't find tools
 
-**Symptom**: CMake Tools can't find cmake, clang, or ninja
+**Symptom**: CMake Tools can't find cmake, cl (MSVC compiler), or ninja
 **Solution**: Tools must be in SYSTEM PATH, not PowerShell profile:
 
-1. Run `check-system-env.ps1` to verify
-2. Run `set-system-env.ps1` as Administrator if needed
-3. Restart computer or log out/in
+1. Ensure Visual Studio Build Tools are installed
+2. Run Developer Command Prompt for VS to verify MSVC is available
+3. Restart computer or log out/in after PATH changes
 
 ## Key Principles
 
 1. **System Environment Variables**: The root of all solutions - VS Code needs system-level variables
 2. **Dual vcpkg Approach**: Use both `CMAKE_TOOLCHAIN_FILE` in presets and `VCPKG_ROOT` fallback for maximum compatibility
 3. **Minimal Configuration**: Just the essentials - CMakePresets.json, basic VS Code settings
-4. **Standard Tools**: CMake + Ninja + Clang + vcpkg - industry standard, cross-platform
+4. **Standard Tools**: CMake + Ninja + MSVC + vcpkg - industry standard on Windows
 5. **One Build Directory**: Use `out/` with subdirectories for different configurations
-6. **clangd for IntelliSense**: Better C++ support than Microsoft's IntelliSense
+6. **Microsoft IntelliSense**: Native C++ support with full debugging capabilities
 7. **CMake Tools Extension Works**: When environment is properly configured
 
 ## Summary
