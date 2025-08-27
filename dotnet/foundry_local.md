@@ -484,6 +484,902 @@ public class FoundryLocalStructuredService
 }
 ```
 
+## REST API Reference
+
+### API Overview
+
+Foundry Local provides both OpenAI-compatible endpoints and custom management endpoints. The API is currently in preview and may have breaking changes.
+
+### Base URL
+```
+http://localhost:{port}
+```
+Default port is typically 1234, but can vary based on configuration.
+
+### OpenAI Compatible Endpoints
+
+#### Chat Completions
+```http
+POST /v1/chat/completions
+```
+
+Standard OpenAI chat completions endpoint with full compatibility.
+
+**Request Body:**
+```json
+{
+  "model": "string",                    // Required: Model ID
+  "messages": [                         // Required: Conversation history
+    {
+      "role": "system|user|assistant|tool",
+      "content": "string",
+      "name": "string",                 // Optional: User/assistant name
+      "tool_call_id": "string"          // Optional: For tool responses
+    }
+  ],
+  "temperature": 0.7,                   // Optional: 0-2, default 1
+  "top_p": 1.0,                         // Optional: 0-1, default 1
+  "n": 1,                               // Optional: Number of choices
+  "max_tokens": 1000,                   // Optional: Max response tokens
+  "stream": false,                      // Optional: Enable SSE streaming
+  "stop": ["string"],                   // Optional: Up to 4 stop sequences
+  "presence_penalty": 0,                // Optional: -2 to 2
+  "frequency_penalty": 0,               // Optional: -2 to 2
+  "logit_bias": {},                     // Optional: Token ID to bias map
+  "user": "string",                     // Optional: User identifier
+  "response_format": {                  // Optional: Response structure
+    "type": "text|json_object|json_schema",
+    "json_schema": {                    // When type is json_schema
+      "name": "string",
+      "schema": {},
+      "strict": true
+    }
+  },
+  "tools": [                            // Optional: Tool definitions
+    {
+      "type": "function",
+      "function": {
+        "name": "string",
+        "description": "string",
+        "parameters": {}                // JSON Schema
+      }
+    }
+  ],
+  "tool_choice": "none|auto|required"   // Optional: Tool selection
+}
+```
+
+**Response:**
+```json
+{
+  "id": "chatcmpl-xxx",
+  "object": "chat.completion",
+  "created": 1234567890,
+  "model": "model-name",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "string",              // May be null when using tools
+        "tool_calls": [                   // Optional: Tool invocations
+          {
+            "id": "call_xxx",
+            "type": "function",
+            "function": {
+              "name": "function_name",
+              "arguments": "json_string"
+            }
+          }
+        ]
+      },
+      "finish_reason": "stop|length|tool_calls|content_filter"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 10,
+    "completion_tokens": 20,
+    "total_tokens": 30
+  }
+}
+```
+
+**Streaming Response (when stream=true):**
+```
+data: {"id":"chatcmpl-xxx","object":"chat.completion.chunk","created":1234567890,"model":"model-name","choices":[{"index":0,"delta":{"content":"Hello"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-xxx","object":"chat.completion.chunk","created":1234567890,"model":"model-name","choices":[{"index":0,"delta":{"content":" world"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-xxx","object":"chat.completion.chunk","created":1234567890,"model":"model-name","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}
+
+data: [DONE]
+```
+
+#### Embeddings
+```http
+POST /v1/embeddings
+```
+
+Generate text embeddings compatible with OpenAI's embedding API.
+
+**Request Body:**
+```json
+{
+  "model": "string",
+  "input": "string or array of strings",
+  "encoding_format": "float"
+}
+```
+
+### Custom Foundry Endpoints
+
+#### List Available Models
+```http
+GET /foundry/list
+```
+
+Returns catalog of all available Foundry Local models.
+
+**Response:**
+```json
+{
+  "models": [
+    {
+      "name": "model-name",
+      "displayName": "Model Display Name",
+      "providerType": "FoundryLocal",
+      "version": "1.0.0",
+      "runtime": {
+        "type": "ONNX",
+        "version": "1.18"
+      },
+      "modelSettings": {
+        "contextLength": 4096,
+        "embeddingDimension": 768
+      }
+    }
+  ]
+}
+```
+
+#### Load Model
+```http
+GET /openai/load/{modelName}
+```
+
+Load a specific model into memory.
+
+**Query Parameters:**
+- `unload` (boolean): Unload other models first
+- `ttl` (integer): Time-to-live in seconds
+- `ep` (string): Execution provider (CPU, CUDA, DirectML)
+
+#### Unload Model
+```http
+GET /openai/unload/{modelName}
+```
+
+Remove a specific model from memory.
+
+#### List Loaded Models
+```http
+GET /openai/loadedmodels
+```
+
+Returns array of currently loaded model names.
+
+#### Download Model
+```http
+POST /openai/download
+```
+
+Download a model to local storage.
+
+**Request Body:**
+```json
+{
+  "modelName": "string",
+  "provider": "FoundryLocal",
+  "stream": true
+}
+```
+
+#### Register External Model
+```http
+POST /openai/register
+```
+
+Register an external OpenAI-compatible model provider.
+
+**Request Body:**
+```json
+{
+  "TypeName": "provider-name",
+  "ModelName": "model-name",
+  "BaseUri": "https://api.example.com"
+}
+```
+
+#### Get All Models
+```http
+GET /openai/models
+```
+
+List all available models (local and registered external).
+
+#### Server Status
+```http
+GET /openai/status
+```
+
+Get server health and status information.
+
+#### Token Counting
+```http
+POST /v1/chat/completions/tokenizer/encode/count
+```
+
+Count tokens without performing inference.
+
+**Request Body:**
+```json
+{
+  "model": "string",
+  "messages": [
+    {
+      "role": "string",
+      "content": "string"
+    }
+  ]
+}
+```
+
+**Response:**
+```json
+{
+  "tokenCount": 123
+}
+```
+
+### GPU Management
+
+#### Get GPU Device
+```http
+GET /openai/getgpudevice
+```
+
+Returns current GPU device ID.
+
+#### Set GPU Device
+```http
+GET /openai/setgpudevice/{deviceId}
+```
+
+Switch to specified GPU device.
+
+## C#/.NET REST API Usage Examples
+
+### Direct REST API Usage with HttpClient
+
+While the `FoundryLocalManager` provides convenient programmatic control, you can also interact directly with the REST API:
+
+```csharp
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+
+public class FoundryLocalRestClient
+{
+    private readonly HttpClient _httpClient;
+    private readonly string _baseUrl;
+    
+    public FoundryLocalRestClient(string baseUrl = "http://localhost:1234")
+    {
+        _baseUrl = baseUrl;
+        _httpClient = new HttpClient { BaseAddress = new Uri(baseUrl) };
+    }
+    
+    // List all available models in the catalog
+    public async Task<JsonDocument> ListAvailableModelsAsync()
+    {
+        var response = await _httpClient.GetAsync("/foundry/list");
+        response.EnsureSuccessStatusCode();
+        
+        var json = await response.Content.ReadAsStringAsync();
+        return JsonDocument.Parse(json);
+    }
+    
+    // Load a specific model
+    public async Task<bool> LoadModelAsync(string modelName, string executionProvider = "CPU")
+    {
+        var response = await _httpClient.GetAsync(
+            $"/openai/load/{Uri.EscapeDataString(modelName)}?ep={executionProvider}");
+        
+        return response.IsSuccessStatusCode;
+    }
+    
+    // Get currently loaded models
+    public async Task<string[]> GetLoadedModelsAsync()
+    {
+        var response = await _httpClient.GetAsync("/openai/loadedmodels");
+        response.EnsureSuccessStatusCode();
+        
+        var json = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<string[]>(json) ?? Array.Empty<string>();
+    }
+    
+    // Count tokens without inference
+    public async Task<int> CountTokensAsync(string model, List<ChatMessage> messages)
+    {
+        var request = new
+        {
+            model = model,
+            messages = messages.Select(m => new { role = m.Role, content = m.Content })
+        };
+        
+        var json = JsonSerializer.Serialize(request);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        
+        var response = await _httpClient.PostAsync(
+            "/v1/chat/completions/tokenizer/encode/count", content);
+        response.EnsureSuccessStatusCode();
+        
+        var responseJson = await response.Content.ReadAsStringAsync();
+        using var doc = JsonDocument.Parse(responseJson);
+        return doc.RootElement.GetProperty("tokenCount").GetInt32();
+    }
+    
+    // Download a model with progress tracking
+    public async Task DownloadModelAsync(
+        string modelName, 
+        IProgress<double>? progress = null)
+    {
+        var request = new
+        {
+            modelName = modelName,
+            provider = "FoundryLocal",
+            stream = true
+        };
+        
+        var json = JsonSerializer.Serialize(request);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        
+        using var response = await _httpClient.PostAsync("/openai/download", content);
+        response.EnsureSuccessStatusCode();
+        
+        // Handle streaming response if needed
+        using var stream = await response.Content.ReadAsStreamAsync();
+        // Process download stream and report progress
+    }
+    
+    // Register an external OpenAI-compatible provider
+    public async Task RegisterExternalProviderAsync(
+        string providerName, 
+        string modelName, 
+        string baseUri)
+    {
+        var request = new
+        {
+            TypeName = providerName,
+            ModelName = modelName,
+            BaseUri = baseUri
+        };
+        
+        var json = JsonSerializer.Serialize(request);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        
+        var response = await _httpClient.PostAsync("/openai/register", content);
+        response.EnsureSuccessStatusCode();
+    }
+}
+
+// Chat message helper class
+public record ChatMessage(string Role, string Content);
+```
+
+### Advanced Model Management
+
+```csharp
+public class FoundryModelManager
+{
+    private readonly FoundryLocalRestClient _restClient;
+    private readonly ILogger<FoundryModelManager> _logger;
+    
+    public FoundryModelManager(
+        FoundryLocalRestClient restClient, 
+        ILogger<FoundryModelManager> logger)
+    {
+        _restClient = restClient;
+        _logger = logger;
+    }
+    
+    // Ensure a model is loaded with automatic download if needed
+    public async Task<bool> EnsureModelLoadedAsync(
+        string modelName, 
+        string? executionProvider = null)
+    {
+        // Check if already loaded
+        var loadedModels = await _restClient.GetLoadedModelsAsync();
+        if (loadedModels.Contains(modelName))
+        {
+            _logger.LogInformation("Model {ModelName} is already loaded", modelName);
+            return true;
+        }
+        
+        // Try to load the model
+        var ep = executionProvider ?? GetOptimalExecutionProvider();
+        var loaded = await _restClient.LoadModelAsync(modelName, ep);
+        
+        if (!loaded)
+        {
+            _logger.LogInformation("Model not found locally, downloading {ModelName}", modelName);
+            
+            // Download the model
+            var progress = new Progress<double>(p => 
+                _logger.LogInformation("Download progress: {Progress:P}", p));
+            
+            await _restClient.DownloadModelAsync(modelName, progress);
+            
+            // Try loading again
+            loaded = await _restClient.LoadModelAsync(modelName, ep);
+        }
+        
+        return loaded;
+    }
+    
+    // Determine optimal execution provider based on hardware
+    private string GetOptimalExecutionProvider()
+    {
+        // Check for NVIDIA GPU
+        if (IsNvidiaGpuAvailable())
+            return "CUDA";
+        
+        // Check for DirectML support (Windows)
+        if (OperatingSystem.IsWindows())
+            return "DirectML";
+        
+        return "CPU";
+    }
+    
+    private bool IsNvidiaGpuAvailable()
+    {
+        // Implementation to check for NVIDIA GPU
+        // This could check for CUDA runtime or query system info
+        return false; // Placeholder
+    }
+}
+```
+
+### Hybrid Approach: Combining FoundryLocalManager with REST API
+
+```csharp
+public class HybridFoundryClient
+{
+    private readonly FoundryLocalManager _manager;
+    private readonly HttpClient _httpClient;
+    
+    public async Task InitializeAsync(string modelAlias)
+    {
+        // Use FoundryLocalManager for service management
+        _manager = await FoundryLocalManager.StartModelAsync(modelAlias);
+        
+        // Create HttpClient for direct REST calls
+        _httpClient = new HttpClient 
+        { 
+            BaseAddress = new Uri(_manager.ServiceUri) 
+        };
+        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_manager.ApiKey}");
+    }
+    
+    // Use REST API for custom operations not in SDK
+    public async Task<int> GetTokenCountAsync(string text)
+    {
+        var request = new
+        {
+            model = "current-model",
+            messages = new[] { new { role = "user", content = text } }
+        };
+        
+        var response = await _httpClient.PostAsJsonAsync(
+            "/v1/chat/completions/tokenizer/encode/count", request);
+        
+        response.EnsureSuccessStatusCode();
+        var result = await response.Content.ReadFromJsonAsync<TokenCountResponse>();
+        return result?.TokenCount ?? 0;
+    }
+    
+    // Use REST API to check GPU status
+    public async Task<int> GetCurrentGpuDeviceAsync()
+    {
+        var response = await _httpClient.GetAsync("/openai/getgpudevice");
+        response.EnsureSuccessStatusCode();
+        
+        var deviceId = await response.Content.ReadAsStringAsync();
+        return int.Parse(deviceId);
+    }
+    
+    // Switch GPU device for multi-GPU systems
+    public async Task SetGpuDeviceAsync(int deviceId)
+    {
+        var response = await _httpClient.GetAsync($"/openai/setgpudevice/{deviceId}");
+        response.EnsureSuccessStatusCode();
+    }
+    
+    private record TokenCountResponse(int TokenCount);
+}
+```
+
+### Working with Tool/Function Calling
+
+```csharp
+using System.Text.Json;
+using System.Net.Http;
+
+public class FoundryToolCallingExample
+{
+    private readonly HttpClient _httpClient;
+    
+    public async Task<string> ExecuteWithToolsAsync(string userPrompt)
+    {
+        var request = new
+        {
+            model = "qwen2.5-coder-7b-instruct",
+            messages = new[]
+            {
+                new { role = "system", content = "You are a helpful assistant with access to tools." },
+                new { role = "user", content = userPrompt }
+            },
+            tools = new[]
+            {
+                new
+                {
+                    type = "function",
+                    function = new
+                    {
+                        name = "get_weather",
+                        description = "Get the current weather in a location",
+                        parameters = new
+                        {
+                            type = "object",
+                            properties = new
+                            {
+                                location = new { type = "string", description = "City name" },
+                                unit = new { type = "string", @enum = new[] { "celsius", "fahrenheit" } }
+                            },
+                            required = new[] { "location" }
+                        }
+                    }
+                }
+            },
+            tool_choice = "auto"
+        };
+        
+        var response = await _httpClient.PostAsJsonAsync("/v1/chat/completions", request);
+        var result = await response.Content.ReadFromJsonAsync<ChatCompletionResponse>();
+        
+        // Check if the model wants to call a tool
+        if (result?.Choices?[0].Message.ToolCalls != null)
+        {
+            foreach (var toolCall in result.Choices[0].Message.ToolCalls)
+            {
+                if (toolCall.Function.Name == "get_weather")
+                {
+                    // Parse arguments and execute the function
+                    var args = JsonSerializer.Deserialize<WeatherArgs>(toolCall.Function.Arguments);
+                    var weatherData = await GetWeatherData(args.Location, args.Unit);
+                    
+                    // Send the tool response back to the model
+                    var followUpRequest = new
+                    {
+                        model = "qwen2.5-coder-7b-instruct",
+                        messages = new object[]
+                        {
+                            new { role = "system", content = "You are a helpful assistant." },
+                            new { role = "user", content = userPrompt },
+                            result.Choices[0].Message,  // Include the assistant's message with tool calls
+                            new 
+                            { 
+                                role = "tool",
+                                content = JsonSerializer.Serialize(weatherData),
+                                tool_call_id = toolCall.Id
+                            }
+                        }
+                    };
+                    
+                    var finalResponse = await _httpClient.PostAsJsonAsync("/v1/chat/completions", followUpRequest);
+                    var finalResult = await finalResponse.Content.ReadFromJsonAsync<ChatCompletionResponse>();
+                    return finalResult?.Choices?[0].Message.Content ?? "";
+                }
+            }
+        }
+        
+        return result?.Choices?[0].Message.Content ?? "";
+    }
+    
+    private record WeatherArgs(string Location, string Unit = "celsius");
+    private async Task<object> GetWeatherData(string location, string unit)
+    {
+        // Simulate weather API call
+        return new { location, temperature = 22, unit, condition = "sunny" };
+    }
+}
+```
+
+### Streaming Responses with HttpClient
+
+```csharp
+using System.Text;
+using System.Text.Json;
+using System.Runtime.CompilerServices;
+
+public class FoundryStreamingClient
+{
+    private readonly HttpClient _httpClient;
+    
+    public async IAsyncEnumerable<string> StreamChatAsync(
+        string prompt,
+        [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        var request = new
+        {
+            model = "phi-3.5-mini",
+            messages = new[] { new { role = "user", content = prompt } },
+            stream = true,
+            temperature = 0.7f,
+            max_tokens = 500
+        };
+        
+        var httpRequest = new HttpRequestMessage(HttpMethod.Post, "/v1/chat/completions")
+        {
+            Content = new StringContent(
+                JsonSerializer.Serialize(request),
+                Encoding.UTF8,
+                "application/json")
+        };
+        
+        using var response = await _httpClient.SendAsync(
+            httpRequest, 
+            HttpCompletionOption.ResponseHeadersRead,
+            cancellationToken);
+        
+        response.EnsureSuccessStatusCode();
+        
+        using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+        using var reader = new StreamReader(stream);
+        
+        while (!reader.EndOfStream && !cancellationToken.IsCancellationRequested)
+        {
+            var line = await reader.ReadLineAsync();
+            
+            if (string.IsNullOrWhiteSpace(line) || !line.StartsWith("data: "))
+                continue;
+            
+            var data = line.Substring(6); // Remove "data: " prefix
+            
+            if (data == "[DONE]")
+                break;
+            
+            try
+            {
+                using var doc = JsonDocument.Parse(data);
+                var root = doc.RootElement;
+                
+                if (root.TryGetProperty("choices", out var choices) &&
+                    choices.GetArrayLength() > 0)
+                {
+                    var delta = choices[0].GetProperty("delta");
+                    if (delta.TryGetProperty("content", out var content))
+                    {
+                        var text = content.GetString();
+                        if (!string.IsNullOrEmpty(text))
+                            yield return text;
+                    }
+                }
+            }
+            catch (JsonException)
+            {
+                // Skip malformed JSON chunks
+                continue;
+            }
+        }
+    }
+    
+    // Usage example
+    public async Task StreamExample()
+    {
+        await foreach (var chunk in StreamChatAsync("Write a haiku about coding"))
+        {
+            Console.Write(chunk);
+        }
+        Console.WriteLine();
+    }
+}
+```
+
+### Advanced OpenAI Parameters Usage
+
+```csharp
+public class AdvancedFoundryClient
+{
+    private readonly HttpClient _httpClient;
+    
+    // Example using all advanced parameters
+    public async Task<ChatCompletionResponse> AdvancedCompletionAsync()
+    {
+        var request = new
+        {
+            model = "qwen2.5-coder-7b-instruct",
+            messages = new[]
+            {
+                new { role = "system", content = "You are a code reviewer." },
+                new { role = "user", content = "Review this function: def add(a,b): return a+b" }
+            },
+            
+            // Temperature and sampling controls
+            temperature = 0.3f,          // Lower for more focused responses
+            top_p = 0.95f,              // Nucleus sampling threshold
+            
+            // Output controls
+            max_tokens = 300,           // Limit response length
+            n = 1,                      // Number of completions
+            
+            // Repetition penalties
+            presence_penalty = 0.1f,    // Encourage new topics
+            frequency_penalty = 0.1f,   // Reduce repetition
+            
+            // Stop sequences
+            stop = new[] { "\n\n", "END" },
+            
+            // Bias specific tokens
+            logit_bias = new Dictionary<string, float>
+            {
+                ["1234"] = -100,        // Suppress token 1234
+                ["5678"] = 5            // Boost token 5678
+            },
+            
+            // Structured output
+            response_format = new
+            {
+                type = "json_object"    // Force JSON response
+            },
+            
+            // User tracking
+            user = "user-123"           // For usage tracking
+        };
+        
+        var response = await _httpClient.PostAsJsonAsync("/v1/chat/completions", request);
+        return await response.Content.ReadFromJsonAsync<ChatCompletionResponse>();
+    }
+    
+    // Example with JSON Schema response format
+    public async Task<T> GetStructuredResponseAsync<T>(string prompt)
+    {
+        var schema = JsonSchemaGenerator.Generate<T>();
+        
+        var request = new
+        {
+            model = "phi-3.5-mini",
+            messages = new[] { new { role = "user", content = prompt } },
+            response_format = new
+            {
+                type = "json_schema",
+                json_schema = new
+                {
+                    name = typeof(T).Name.ToLower(),
+                    schema = schema,
+                    strict = true
+                }
+            },
+            temperature = 0.1f  // Very low for consistent structured output
+        };
+        
+        var response = await _httpClient.PostAsJsonAsync("/v1/chat/completions", request);
+        var result = await response.Content.ReadFromJsonAsync<ChatCompletionResponse>();
+        
+        var jsonContent = result?.Choices?[0].Message.Content;
+        return JsonSerializer.Deserialize<T>(jsonContent);
+    }
+}
+
+// Response models
+public record ChatCompletionResponse(
+    string Id,
+    string Object,
+    long Created,
+    string Model,
+    Choice[] Choices,
+    Usage Usage
+);
+
+public record Choice(
+    int Index,
+    Message Message,
+    string FinishReason
+);
+
+public record Message(
+    string Role,
+    string Content,
+    ToolCall[] ToolCalls = null
+);
+
+public record ToolCall(
+    string Id,
+    string Type,
+    FunctionCall Function
+);
+
+public record FunctionCall(
+    string Name,
+    string Arguments
+);
+
+public record Usage(
+    int PromptTokens,
+    int CompletionTokens,
+    int TotalTokens
+);
+```
+
+### Error Handling for REST API Calls
+
+```csharp
+public class ResilientFoundryClient
+{
+    private readonly HttpClient _httpClient;
+    private readonly ILogger<ResilientFoundryClient> _logger;
+    private readonly int _maxRetries = 3;
+    
+    public async Task<T?> ExecuteWithRetryAsync<T>(
+        Func<Task<HttpResponseMessage>> operation,
+        Func<string, T> parseResponse)
+    {
+        for (int attempt = 1; attempt <= _maxRetries; attempt++)
+        {
+            try
+            {
+                using var response = await operation();
+                
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    return parseResponse(content);
+                }
+                
+                // Handle specific error codes
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.NotFound:
+                        _logger.LogWarning("Resource not found");
+                        return default;
+                        
+                    case HttpStatusCode.ServiceUnavailable:
+                        if (attempt < _maxRetries)
+                        {
+                            await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, attempt)));
+                            continue;
+                        }
+                        break;
+                }
+                
+                _logger.LogError("Request failed: {StatusCode}", response.StatusCode);
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError(ex, "HTTP request failed on attempt {Attempt}", attempt);
+                
+                if (attempt < _maxRetries)
+                    await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, attempt)));
+                else
+                    throw;
+            }
+        }
+        
+        return default;
+    }
+}
+```
+
 ## Hardware Considerations
 
 ### Model Selection by Hardware
