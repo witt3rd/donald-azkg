@@ -60,7 +60,9 @@ Recent developments indicate some uncertainty in the DirectML ecosystem, with di
 Windows ML serves as the **foundation for the broader Windows AI platform**, including:[8]
 
 - **Windows AI APIs**: Built-in models for common tasks
-- **Foundry Local**: Ready-to-use AI models from various catalogs
+- **Windows Foundry Local**: Ready-to-use AI models from various catalogs (sits above Windows ML)
+- **ONNX Runtime**: Core inference engine powering Windows ML
+- **DirectML**: Hardware acceleration layer accessed through ONNX Runtime
 - **Custom model support**: Direct API access for advanced scenarios
 
 This comprehensive approach positions Windows ML as Microsoft's strategic platform for AI development on Windows, building upon DirectML's proven hardware abstraction capabilities while dramatically simplifying the developer experience.
@@ -74,7 +76,7 @@ The relationship between Windows ML and DirectML exemplifies Microsoft's commitm
 There are **two different Windows ML API sets** that can cause confusion:
 
 #### 1. Legacy Windows ML APIs (Ships with Windows - 2018)
-⚠️ **Note**: These are the **original Windows ML APIs from 2018** that ship with Windows. While still functional and convenient for simple scenarios, Microsoft now recommends using the newer Windows App SDK version for new development.
+⚠️ **Note**: These are the **original Windows ML APIs from 2018** that ship with Windows. While still functional and convenient for simple scenarios, these APIs use an older architecture. The modern Windows ML (2024+) has been rearchitected to use ONNX Runtime as its core engine.
 
 - **Status**: Legacy/superseded (but still works)
 - **Released**: 2018 with Windows 10 version 1809
@@ -94,8 +96,8 @@ LearningModelDevice device(LearningModelDeviceKind::DirectXHighPerformance);
 auto tensor = TensorFloat::CreateFromArray(shape, data);
 ```
 
-#### 2. Current Windows ML APIs via Windows App SDK (2025)
-✅ **Note**: These are the **current, recommended Windows ML APIs** that supersede the 2018 version. Part of the Windows AI Foundry platform launched in May 2025.
+#### 2. Current Windows ML APIs via Windows App SDK (2024-2025)
+✅ **Note**: These are the **current, recommended Windows ML APIs** that represent the modern Windows ML architecture. Part of the Windows AI Foundry platform announced at Build 2024 and launched in 2024-2025. This version uses ONNX Runtime as its core inference engine.
 
 - **Status**: Current/recommended
 - **Released**: 2025 with Windows App SDK
@@ -118,7 +120,7 @@ catalog.EnsureAndRegisterAllAsync().get();
 
 | Aspect | Legacy APIs (2018) | Current APIs (2025) |
 |--------|-------------------|---------------------|
-| **Status** | Superseded but functional | Current/recommended |
+| **Status** | Legacy but functional | Current/recommended |
 | **Installation** | None - ships with Windows | Requires NuGet package |
 | **Availability** | Windows 10 1809+ | Windows App SDK |
 | **Namespace** | `Windows::AI::MachineLearning` | `Microsoft.Windows.AI.MachineLearning` |

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Windows Foundry Local is Microsoft's official desktop runtime for serving AI models locally on Windows and macOS. It enables developers to run large language models directly on their hardware, providing privacy-preserving, low-latency AI inference without cloud dependencies.
+Windows Foundry Local is Microsoft's official desktop runtime for serving AI models locally on Windows and macOS. Part of the broader Windows AI Foundry platform (announced at Build 2024), it enables developers to run large language models directly on their hardware, providing privacy-preserving, low-latency AI inference without cloud dependencies. Foundry Local serves as the model management and deployment layer that sits above Windows ML and ONNX Runtime in the Windows AI stack.
 
 ### Key Benefits
 
@@ -11,12 +11,14 @@ Windows Foundry Local is Microsoft's official desktop runtime for serving AI mod
 - **Cost Effective**: No cloud inference fees or API usage charges
 - **Offline Capable**: Works without internet connectivity
 - **Hardware Optimized**: Automatically selects the best model variant for your hardware (CPU, GPU, NPU)
+- **Integrated Stack**: Works seamlessly with Windows ML and ONNX Runtime for hardware acceleration
 
 ## Installation and Setup
 
 ### Installing Foundry Local
 
 #### Windows
+
 ```powershell
 # Using winget (recommended)
 winget install Microsoft.FoundryLocal
@@ -26,12 +28,14 @@ Add-AppxPackage .\FoundryLocal.msix -DependencyPath .\VcLibs.appx
 ```
 
 #### macOS (Apple Silicon)
+
 ```bash
 brew tap microsoft/foundrylocal
 brew install foundrylocal
 ```
 
 ### Verify Installation
+
 ```bash
 foundry --help
 foundry model list
@@ -42,6 +46,7 @@ foundry model list
 ### Available Models
 
 Foundry Local supports various models optimized for different hardware configurations:
+
 - **phi-3.5-mini**: Microsoft's efficient language model
 - **qwen2.5-coder-7b-instruct**: Specialized for code generation
 - **mistral-7b**: General-purpose language model
@@ -101,7 +106,7 @@ Console.WriteLine($"Service running: {manager.IsServiceRunning}");
 
 // Configure OpenAI client with the programmatically managed endpoint
 var client = new OpenAIClient(
-    new ApiKeyCredential(manager.ApiKey), 
+    new ApiKeyCredential(manager.ApiKey),
     new OpenAIClientOptions
     {
         Endpoint = manager.Endpoint
@@ -134,21 +139,21 @@ public class FoundryLocalChatService : IDisposable
     private readonly FoundryLocalManager _manager;
     private readonly OpenAIClient _openAiClient;
     private ChatClient _chatClient;
-    
+
     public async Task InitializeAsync(string modelAlias = "phi-3.5-mini")
     {
         // Initialize the manager
         _manager = new FoundryLocalManager();
-        
+
         // Start the service if not running
         if (!_manager.IsServiceRunning)
         {
             await _manager.StartServiceAsync();
         }
-        
+
         // Get or download the model
         var modelInfo = await _manager.GetModelInfoAsync(modelAlias);
-        
+
         if (modelInfo == null)
         {
             // List available models if requested model not found
@@ -157,25 +162,25 @@ public class FoundryLocalChatService : IDisposable
                 $"Model '{modelAlias}' not found. Available models: " +
                 string.Join(", ", catalog.Select(m => m.Alias)));
         }
-        
+
         // Create OpenAI client with Foundry endpoint
         _openAiClient = new OpenAIClient(
             new ApiKeyCredential(_manager.ApiKey),
             new OpenAIClientOptions { Endpoint = _manager.Endpoint }
         );
-        
+
         // Get chat client for the specific model
         _chatClient = _openAiClient.GetChatClient(modelInfo.ModelId);
     }
-    
+
     public async Task<string> ChatAsync(string message)
     {
         var completion = await _chatClient.CompleteChatAsync(
             [new UserChatMessage(message)]);
-        
+
         return completion.Value.Content[0].Text;
     }
-    
+
     public void Dispose()
     {
         // Optionally stop the service when done
@@ -208,7 +213,7 @@ public record PowerShellScript(
 
 // Example: Generate a PowerShell script with structured output
 public async Task<PowerShellScript> GeneratePowerShellScript(
-    ChatClient chatClient, 
+    ChatClient chatClient,
     string task)
 {
     // Define the JSON schema for our output
@@ -261,7 +266,7 @@ public async Task<PowerShellScript> GeneratePowerShellScript(
 
 // Usage example
 var script = await GeneratePowerShellScript(
-    chatClient, 
+    chatClient,
     "list all files larger than 100MB in the current directory"
 );
 
@@ -381,7 +386,7 @@ public async Task<ApiDocumentation> GenerateApiDocs(
     );
 
     var json = completion.Value.Content[0].Text;
-    return JsonSerializer.Deserialize<ApiDocumentation>(json, 
+    return JsonSerializer.Deserialize<ApiDocumentation>(json,
         new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 }
 ```
@@ -413,10 +418,10 @@ public async Task<T?> GetStructuredOutput<T>(
         );
 
         var jsonResponse = completion.Value.Content[0].Text;
-        
+
         // Validate JSON before deserializing
         using var doc = JsonDocument.Parse(jsonResponse);
-        
+
         return JsonSerializer.Deserialize<T>(jsonResponse);
     }
     catch (JsonException ex)
@@ -441,25 +446,25 @@ public class FoundryLocalStructuredService
 {
     private readonly FoundryLocalManager _manager;
     private readonly ChatClient _chatClient;
-    
+
     public async Task<bool> InitializeAsync(string modelAlias = "qwen2.5-coder-7b-instruct")
     {
         // Use the single-line initialization for simplicity
         _manager = await FoundryLocalManager.StartModelAsync(modelAlias);
-        
+
         // Create OpenAI client with managed endpoint
         var client = new OpenAIClient(
             new ApiKeyCredential(_manager.ApiKey),
             new OpenAIClientOptions { Endpoint = _manager.Endpoint }
         );
-        
+
         // Get model info to use the correct model ID
         var modelInfo = await _manager.GetModelInfoAsync(modelAlias);
         _chatClient = client.GetChatClient(modelInfo.ModelId);
-        
+
         return _manager.IsServiceRunning;
     }
-    
+
     public ChatCompletionOptions GetOptimalStructuredOutputOptions(
         ChatResponseFormat responseFormat)
     {
@@ -473,7 +478,7 @@ public class FoundryLocalStructuredService
             PresencePenalty = 0.0f   // No penalty for repeated structures
         };
     }
-    
+
     public async Task ShutdownAsync()
     {
         if (_manager?.IsServiceRunning == true)
@@ -491,14 +496,17 @@ public class FoundryLocalStructuredService
 Foundry Local provides both OpenAI-compatible endpoints and custom management endpoints. The API is currently in preview and may have breaking changes.
 
 ### Base URL
+
 ```
 http://localhost:{port}
 ```
+
 Default port is typically 1234, but can vary based on configuration.
 
 ### OpenAI Compatible Endpoints
 
 #### Chat Completions
+
 ```http
 POST /v1/chat/completions
 ```
@@ -506,6 +514,7 @@ POST /v1/chat/completions
 Standard OpenAI chat completions endpoint with full compatibility.
 
 **Request Body:**
+
 ```json
 {
   "model": "string",                    // Required: Model ID
@@ -550,6 +559,7 @@ Standard OpenAI chat completions endpoint with full compatibility.
 ```
 
 **Response:**
+
 ```json
 {
   "id": "chatcmpl-xxx",
@@ -585,6 +595,7 @@ Standard OpenAI chat completions endpoint with full compatibility.
 ```
 
 **Streaming Response (when stream=true):**
+
 ```
 data: {"id":"chatcmpl-xxx","object":"chat.completion.chunk","created":1234567890,"model":"model-name","choices":[{"index":0,"delta":{"content":"Hello"},"finish_reason":null}]}
 
@@ -596,6 +607,7 @@ data: [DONE]
 ```
 
 #### Embeddings
+
 ```http
 POST /v1/embeddings
 ```
@@ -603,6 +615,7 @@ POST /v1/embeddings
 Generate text embeddings compatible with OpenAI's embedding API.
 
 **Request Body:**
+
 ```json
 {
   "model": "string",
@@ -614,6 +627,7 @@ Generate text embeddings compatible with OpenAI's embedding API.
 ### Custom Foundry Endpoints
 
 #### List Available Models
+
 ```http
 GET /foundry/list
 ```
@@ -621,6 +635,7 @@ GET /foundry/list
 Returns catalog of all available Foundry Local models.
 
 **Response:**
+
 ```json
 {
   "models": [
@@ -643,6 +658,7 @@ Returns catalog of all available Foundry Local models.
 ```
 
 #### Load Model
+
 ```http
 GET /openai/load/{modelName}
 ```
@@ -650,11 +666,13 @@ GET /openai/load/{modelName}
 Load a specific model into memory.
 
 **Query Parameters:**
+
 - `unload` (boolean): Unload other models first
 - `ttl` (integer): Time-to-live in seconds
 - `ep` (string): Execution provider (CPU, CUDA, DirectML)
 
 #### Unload Model
+
 ```http
 GET /openai/unload/{modelName}
 ```
@@ -662,6 +680,7 @@ GET /openai/unload/{modelName}
 Remove a specific model from memory.
 
 #### List Loaded Models
+
 ```http
 GET /openai/loadedmodels
 ```
@@ -669,6 +688,7 @@ GET /openai/loadedmodels
 Returns array of currently loaded model names.
 
 #### Download Model
+
 ```http
 POST /openai/download
 ```
@@ -676,6 +696,7 @@ POST /openai/download
 Download a model to local storage.
 
 **Request Body:**
+
 ```json
 {
   "modelName": "string",
@@ -685,6 +706,7 @@ Download a model to local storage.
 ```
 
 #### Register External Model
+
 ```http
 POST /openai/register
 ```
@@ -692,6 +714,7 @@ POST /openai/register
 Register an external OpenAI-compatible model provider.
 
 **Request Body:**
+
 ```json
 {
   "TypeName": "provider-name",
@@ -701,6 +724,7 @@ Register an external OpenAI-compatible model provider.
 ```
 
 #### Get All Models
+
 ```http
 GET /openai/models
 ```
@@ -708,6 +732,7 @@ GET /openai/models
 List all available models (local and registered external).
 
 #### Server Status
+
 ```http
 GET /openai/status
 ```
@@ -715,6 +740,7 @@ GET /openai/status
 Get server health and status information.
 
 #### Token Counting
+
 ```http
 POST /v1/chat/completions/tokenizer/encode/count
 ```
@@ -722,6 +748,7 @@ POST /v1/chat/completions/tokenizer/encode/count
 Count tokens without performing inference.
 
 **Request Body:**
+
 ```json
 {
   "model": "string",
@@ -735,6 +762,7 @@ Count tokens without performing inference.
 ```
 
 **Response:**
+
 ```json
 {
   "tokenCount": 123
@@ -744,6 +772,7 @@ Count tokens without performing inference.
 ### GPU Management
 
 #### Get GPU Device
+
 ```http
 GET /openai/getgpudevice
 ```
@@ -751,6 +780,7 @@ GET /openai/getgpudevice
 Returns current GPU device ID.
 
 #### Set GPU Device
+
 ```http
 GET /openai/setgpudevice/{deviceId}
 ```
@@ -772,42 +802,42 @@ public class FoundryLocalRestClient
 {
     private readonly HttpClient _httpClient;
     private readonly string _baseUrl;
-    
+
     public FoundryLocalRestClient(string baseUrl = "http://localhost:1234")
     {
         _baseUrl = baseUrl;
         _httpClient = new HttpClient { BaseAddress = new Uri(baseUrl) };
     }
-    
+
     // List all available models in the catalog
     public async Task<JsonDocument> ListAvailableModelsAsync()
     {
         var response = await _httpClient.GetAsync("/foundry/list");
         response.EnsureSuccessStatusCode();
-        
+
         var json = await response.Content.ReadAsStringAsync();
         return JsonDocument.Parse(json);
     }
-    
+
     // Load a specific model
     public async Task<bool> LoadModelAsync(string modelName, string executionProvider = "CPU")
     {
         var response = await _httpClient.GetAsync(
             $"/openai/load/{Uri.EscapeDataString(modelName)}?ep={executionProvider}");
-        
+
         return response.IsSuccessStatusCode;
     }
-    
+
     // Get currently loaded models
     public async Task<string[]> GetLoadedModelsAsync()
     {
         var response = await _httpClient.GetAsync("/openai/loadedmodels");
         response.EnsureSuccessStatusCode();
-        
+
         var json = await response.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<string[]>(json) ?? Array.Empty<string>();
     }
-    
+
     // Count tokens without inference
     public async Task<int> CountTokensAsync(string model, List<ChatMessage> messages)
     {
@@ -816,22 +846,22 @@ public class FoundryLocalRestClient
             model = model,
             messages = messages.Select(m => new { role = m.Role, content = m.Content })
         };
-        
+
         var json = JsonSerializer.Serialize(request);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
-        
+
         var response = await _httpClient.PostAsync(
             "/v1/chat/completions/tokenizer/encode/count", content);
         response.EnsureSuccessStatusCode();
-        
+
         var responseJson = await response.Content.ReadAsStringAsync();
         using var doc = JsonDocument.Parse(responseJson);
         return doc.RootElement.GetProperty("tokenCount").GetInt32();
     }
-    
+
     // Download a model with progress tracking
     public async Task DownloadModelAsync(
-        string modelName, 
+        string modelName,
         IProgress<double>? progress = null)
     {
         var request = new
@@ -840,22 +870,22 @@ public class FoundryLocalRestClient
             provider = "FoundryLocal",
             stream = true
         };
-        
+
         var json = JsonSerializer.Serialize(request);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
-        
+
         using var response = await _httpClient.PostAsync("/openai/download", content);
         response.EnsureSuccessStatusCode();
-        
+
         // Handle streaming response if needed
         using var stream = await response.Content.ReadAsStreamAsync();
         // Process download stream and report progress
     }
-    
+
     // Register an external OpenAI-compatible provider
     public async Task RegisterExternalProviderAsync(
-        string providerName, 
-        string modelName, 
+        string providerName,
+        string modelName,
         string baseUri)
     {
         var request = new
@@ -864,10 +894,10 @@ public class FoundryLocalRestClient
             ModelName = modelName,
             BaseUri = baseUri
         };
-        
+
         var json = JsonSerializer.Serialize(request);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
-        
+
         var response = await _httpClient.PostAsync("/openai/register", content);
         response.EnsureSuccessStatusCode();
     }
@@ -884,18 +914,18 @@ public class FoundryModelManager
 {
     private readonly FoundryLocalRestClient _restClient;
     private readonly ILogger<FoundryModelManager> _logger;
-    
+
     public FoundryModelManager(
-        FoundryLocalRestClient restClient, 
+        FoundryLocalRestClient restClient,
         ILogger<FoundryModelManager> logger)
     {
         _restClient = restClient;
         _logger = logger;
     }
-    
+
     // Ensure a model is loaded with automatic download if needed
     public async Task<bool> EnsureModelLoadedAsync(
-        string modelName, 
+        string modelName,
         string? executionProvider = null)
     {
         // Check if already loaded
@@ -905,42 +935,42 @@ public class FoundryModelManager
             _logger.LogInformation("Model {ModelName} is already loaded", modelName);
             return true;
         }
-        
+
         // Try to load the model
         var ep = executionProvider ?? GetOptimalExecutionProvider();
         var loaded = await _restClient.LoadModelAsync(modelName, ep);
-        
+
         if (!loaded)
         {
             _logger.LogInformation("Model not found locally, downloading {ModelName}", modelName);
-            
+
             // Download the model
-            var progress = new Progress<double>(p => 
+            var progress = new Progress<double>(p =>
                 _logger.LogInformation("Download progress: {Progress:P}", p));
-            
+
             await _restClient.DownloadModelAsync(modelName, progress);
-            
+
             // Try loading again
             loaded = await _restClient.LoadModelAsync(modelName, ep);
         }
-        
+
         return loaded;
     }
-    
+
     // Determine optimal execution provider based on hardware
     private string GetOptimalExecutionProvider()
     {
         // Check for NVIDIA GPU
         if (IsNvidiaGpuAvailable())
             return "CUDA";
-        
+
         // Check for DirectML support (Windows)
         if (OperatingSystem.IsWindows())
             return "DirectML";
-        
+
         return "CPU";
     }
-    
+
     private bool IsNvidiaGpuAvailable()
     {
         // Implementation to check for NVIDIA GPU
@@ -957,20 +987,20 @@ public class HybridFoundryClient
 {
     private readonly FoundryLocalManager _manager;
     private readonly HttpClient _httpClient;
-    
+
     public async Task InitializeAsync(string modelAlias)
     {
         // Use FoundryLocalManager for service management
         _manager = await FoundryLocalManager.StartModelAsync(modelAlias);
-        
+
         // Create HttpClient for direct REST calls
-        _httpClient = new HttpClient 
-        { 
-            BaseAddress = new Uri(_manager.ServiceUri) 
+        _httpClient = new HttpClient
+        {
+            BaseAddress = new Uri(_manager.ServiceUri)
         };
         _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_manager.ApiKey}");
     }
-    
+
     // Use REST API for custom operations not in SDK
     public async Task<int> GetTokenCountAsync(string text)
     {
@@ -979,32 +1009,32 @@ public class HybridFoundryClient
             model = "current-model",
             messages = new[] { new { role = "user", content = text } }
         };
-        
+
         var response = await _httpClient.PostAsJsonAsync(
             "/v1/chat/completions/tokenizer/encode/count", request);
-        
+
         response.EnsureSuccessStatusCode();
         var result = await response.Content.ReadFromJsonAsync<TokenCountResponse>();
         return result?.TokenCount ?? 0;
     }
-    
+
     // Use REST API to check GPU status
     public async Task<int> GetCurrentGpuDeviceAsync()
     {
         var response = await _httpClient.GetAsync("/openai/getgpudevice");
         response.EnsureSuccessStatusCode();
-        
+
         var deviceId = await response.Content.ReadAsStringAsync();
         return int.Parse(deviceId);
     }
-    
+
     // Switch GPU device for multi-GPU systems
     public async Task SetGpuDeviceAsync(int deviceId)
     {
         var response = await _httpClient.GetAsync($"/openai/setgpudevice/{deviceId}");
         response.EnsureSuccessStatusCode();
     }
-    
+
     private record TokenCountResponse(int TokenCount);
 }
 ```
@@ -1018,7 +1048,7 @@ using System.Net.Http;
 public class FoundryToolCallingExample
 {
     private readonly HttpClient _httpClient;
-    
+
     public async Task<string> ExecuteWithToolsAsync(string userPrompt)
     {
         var request = new
@@ -1053,10 +1083,10 @@ public class FoundryToolCallingExample
             },
             tool_choice = "auto"
         };
-        
+
         var response = await _httpClient.PostAsJsonAsync("/v1/chat/completions", request);
         var result = await response.Content.ReadFromJsonAsync<ChatCompletionResponse>();
-        
+
         // Check if the model wants to call a tool
         if (result?.Choices?[0].Message.ToolCalls != null)
         {
@@ -1067,7 +1097,7 @@ public class FoundryToolCallingExample
                     // Parse arguments and execute the function
                     var args = JsonSerializer.Deserialize<WeatherArgs>(toolCall.Function.Arguments);
                     var weatherData = await GetWeatherData(args.Location, args.Unit);
-                    
+
                     // Send the tool response back to the model
                     var followUpRequest = new
                     {
@@ -1077,25 +1107,25 @@ public class FoundryToolCallingExample
                             new { role = "system", content = "You are a helpful assistant." },
                             new { role = "user", content = userPrompt },
                             result.Choices[0].Message,  // Include the assistant's message with tool calls
-                            new 
-                            { 
+                            new
+                            {
                                 role = "tool",
                                 content = JsonSerializer.Serialize(weatherData),
                                 tool_call_id = toolCall.Id
                             }
                         }
                     };
-                    
+
                     var finalResponse = await _httpClient.PostAsJsonAsync("/v1/chat/completions", followUpRequest);
                     var finalResult = await finalResponse.Content.ReadFromJsonAsync<ChatCompletionResponse>();
                     return finalResult?.Choices?[0].Message.Content ?? "";
                 }
             }
         }
-        
+
         return result?.Choices?[0].Message.Content ?? "";
     }
-    
+
     private record WeatherArgs(string Location, string Unit = "celsius");
     private async Task<object> GetWeatherData(string location, string unit)
     {
@@ -1115,7 +1145,7 @@ using System.Runtime.CompilerServices;
 public class FoundryStreamingClient
 {
     private readonly HttpClient _httpClient;
-    
+
     public async IAsyncEnumerable<string> StreamChatAsync(
         string prompt,
         [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1128,7 +1158,7 @@ public class FoundryStreamingClient
             temperature = 0.7f,
             max_tokens = 500
         };
-        
+
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, "/v1/chat/completions")
         {
             Content = new StringContent(
@@ -1136,34 +1166,34 @@ public class FoundryStreamingClient
                 Encoding.UTF8,
                 "application/json")
         };
-        
+
         using var response = await _httpClient.SendAsync(
-            httpRequest, 
+            httpRequest,
             HttpCompletionOption.ResponseHeadersRead,
             cancellationToken);
-        
+
         response.EnsureSuccessStatusCode();
-        
+
         using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
         using var reader = new StreamReader(stream);
-        
+
         while (!reader.EndOfStream && !cancellationToken.IsCancellationRequested)
         {
             var line = await reader.ReadLineAsync();
-            
+
             if (string.IsNullOrWhiteSpace(line) || !line.StartsWith("data: "))
                 continue;
-            
+
             var data = line.Substring(6); // Remove "data: " prefix
-            
+
             if (data == "[DONE]")
                 break;
-            
+
             try
             {
                 using var doc = JsonDocument.Parse(data);
                 var root = doc.RootElement;
-                
+
                 if (root.TryGetProperty("choices", out var choices) &&
                     choices.GetArrayLength() > 0)
                 {
@@ -1183,7 +1213,7 @@ public class FoundryStreamingClient
             }
         }
     }
-    
+
     // Usage example
     public async Task StreamExample()
     {
@@ -1202,7 +1232,7 @@ public class FoundryStreamingClient
 public class AdvancedFoundryClient
 {
     private readonly HttpClient _httpClient;
-    
+
     // Example using all advanced parameters
     public async Task<ChatCompletionResponse> AdvancedCompletionAsync()
     {
@@ -1214,48 +1244,48 @@ public class AdvancedFoundryClient
                 new { role = "system", content = "You are a code reviewer." },
                 new { role = "user", content = "Review this function: def add(a,b): return a+b" }
             },
-            
+
             // Temperature and sampling controls
             temperature = 0.3f,          // Lower for more focused responses
             top_p = 0.95f,              // Nucleus sampling threshold
-            
+
             // Output controls
             max_tokens = 300,           // Limit response length
             n = 1,                      // Number of completions
-            
+
             // Repetition penalties
             presence_penalty = 0.1f,    // Encourage new topics
             frequency_penalty = 0.1f,   // Reduce repetition
-            
+
             // Stop sequences
             stop = new[] { "\n\n", "END" },
-            
+
             // Bias specific tokens
             logit_bias = new Dictionary<string, float>
             {
                 ["1234"] = -100,        // Suppress token 1234
                 ["5678"] = 5            // Boost token 5678
             },
-            
+
             // Structured output
             response_format = new
             {
                 type = "json_object"    // Force JSON response
             },
-            
+
             // User tracking
             user = "user-123"           // For usage tracking
         };
-        
+
         var response = await _httpClient.PostAsJsonAsync("/v1/chat/completions", request);
         return await response.Content.ReadFromJsonAsync<ChatCompletionResponse>();
     }
-    
+
     // Example with JSON Schema response format
     public async Task<T> GetStructuredResponseAsync<T>(string prompt)
     {
         var schema = JsonSchemaGenerator.Generate<T>();
-        
+
         var request = new
         {
             model = "phi-3.5-mini",
@@ -1272,10 +1302,10 @@ public class AdvancedFoundryClient
             },
             temperature = 0.1f  // Very low for consistent structured output
         };
-        
+
         var response = await _httpClient.PostAsJsonAsync("/v1/chat/completions", request);
         var result = await response.Content.ReadFromJsonAsync<ChatCompletionResponse>();
-        
+
         var jsonContent = result?.Choices?[0].Message.Content;
         return JsonSerializer.Deserialize<T>(jsonContent);
     }
@@ -1329,7 +1359,7 @@ public class ResilientFoundryClient
     private readonly HttpClient _httpClient;
     private readonly ILogger<ResilientFoundryClient> _logger;
     private readonly int _maxRetries = 3;
-    
+
     public async Task<T?> ExecuteWithRetryAsync<T>(
         Func<Task<HttpResponseMessage>> operation,
         Func<string, T> parseResponse)
@@ -1339,20 +1369,20 @@ public class ResilientFoundryClient
             try
             {
                 using var response = await operation();
-                
+
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     return parseResponse(content);
                 }
-                
+
                 // Handle specific error codes
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.NotFound:
                         _logger.LogWarning("Resource not found");
                         return default;
-                        
+
                     case HttpStatusCode.ServiceUnavailable:
                         if (attempt < _maxRetries)
                         {
@@ -1361,20 +1391,20 @@ public class ResilientFoundryClient
                         }
                         break;
                 }
-                
+
                 _logger.LogError("Request failed: {StatusCode}", response.StatusCode);
             }
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex, "HTTP request failed on attempt {Attempt}", attempt);
-                
+
                 if (attempt < _maxRetries)
                     await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, attempt)));
                 else
                     throw;
             }
         }
-        
+
         return default;
     }
 }
@@ -1411,6 +1441,7 @@ public class ResilientFoundryClient
 ## Common Use Cases
 
 ### 1. Code Generation and Analysis
+
 ```csharp
 public record CodeReview(
     string Summary,
@@ -1426,6 +1457,7 @@ var review = await GetStructuredOutput<CodeReview>(
 ```
 
 ### 2. Data Extraction
+
 ```csharp
 public record ExtractedData(
     string[] Names,
@@ -1441,6 +1473,7 @@ var data = await GetStructuredOutput<ExtractedData>(
 ```
 
 ### 3. Content Generation
+
 ```csharp
 public record BlogPost(
     string Title,
