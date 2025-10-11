@@ -1,0 +1,3802 @@
+{
+  "metadata": {
+    "created": "2025-10-11",
+    "version": "15.0",
+    "total_notes": 93,
+    "forward_pass_batches_complete": 12,
+    "backward_pass_complete": false,
+    "description": "Complete knowledge graph for LLM context repository - Batches 1-7, 8, 9, 10, 11, and 5 complete (92 notes analyzed)"
+  },
+  "batches": [
+    {
+      "batch_number": 1,
+      "name": "Core AI/Agents",
+      "notes": [
+        "a2a.md",
+        "alita.md",
+        "agents.md",
+        "debate.md",
+        "semantic_routing.md",
+        "agent_mcp_apis.md",
+        "react_agent_pattern.md",
+        "llm_evolve.md",
+        "memory.md",
+        "verify_claims.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 2,
+      "name": "MCP Protocol",
+      "notes": [
+        "mcp_overview.md",
+        "mcp_architecture.md",
+        "mcp_resources.md",
+        "mcp_tools.md",
+        "mcp_prompts.md",
+        "mcp_security.md",
+        "mcp_implementation.md",
+        "mcp_sdk.md",
+        "csharp_mcp_sdk_docs.md",
+        "fastmcp_shutdown.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 3,
+      "name": "Python Stack",
+      "notes": [
+        "python.md",
+        "python_role.md",
+        "python3_13.md",
+        "uv.md",
+        "tenacity.md",
+        "click_repl.md",
+        "openai_embeddings_python.md",
+        "openai_responses_python.md",
+        "openrouter_openai_python_sdk.md",
+        "youtube_transcript_api.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 4,
+      "name": "TypeScript/Frontend",
+      "notes": [
+        "typescript.md",
+        "typescript_role.md",
+        "ts.md",
+        "react_framework.md",
+        "vite.md",
+        "tailwind.md",
+        "node.md",
+        "openai_responses_typescript.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 5,
+      "name": "Rust/Performance",
+      "notes": [
+        "burn.md",
+        "cargo.md",
+        "cli.md",
+        "best_practices.md",
+        "cubecl.md",
+        "numpy_pytorch_rust_guide.md",
+        "optimization.md",
+        "cpu_vs_gpu_decision_guide.md",
+        "nvidia_small.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 6,
+      "name": "Windows/.NET/C++",
+      "notes": [
+        "windows_ai_stack_explained.md",
+        "windows_ml.md",
+        "windows_app_sdk_setup.md",
+        "dotnet.md",
+        "copilot_runtime.md",
+        "cpp_project.md",
+        "cpp_spec.md",
+        "powershell.md",
+        "onnx_runtime.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 7,
+      "name": "Theory/Foundations",
+      "notes": [
+        "bayes_theory.md",
+        "category_theory.md",
+        "game_theory.md",
+        "type_theory.md",
+        "dhcg.md",
+        "sutton.md",
+        "eponymous_laws.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 8,
+      "name": "Strategy/Methodology",
+      "notes": [
+        "strategy_first_principles.md",
+        "strategy_critical_assessment.md",
+        "strategy_question_asking.md",
+        "strategy_question_decomposition.md",
+        "strategy_question_knowledge.md",
+        "strategy_reverse_questions.md",
+        "strategy_systems_thinking.md",
+        "strategy_technical_chapter_plan.md",
+        "socratic_interlocutor_prompt.md",
+        "verify_references.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 9,
+      "name": "Writing/Content",
+      "notes": [
+        "style_technical.md",
+        "style_business.md",
+        "role_technical_author.md",
+        "x_engagement_strategy.md",
+        "x_posts.md",
+        "x_style_guide.md",
+        "x_style_research.md",
+        "li_engagement_strategy.md",
+        "adding_to_claude_code.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 10,
+      "name": "Tools/Infrastructure",
+      "notes": [
+        "chromadb.md",
+        "firecrawl.md",
+        "marker.md",
+        "perplexity.md",
+        "filesystem.md",
+        "foundry_local.md",
+        "motion_canvas_cheatsheet.md"
+      ],
+      "complete": true
+    },
+    {
+      "batch_number": 11,
+      "name": "Prompting/Techniques",
+      "notes": [
+        "micro_prompt.md",
+        "json_prompting.md",
+        "spr.md"
+      ],
+      "complete": true
+    }
+  ],
+  "notes": [
+    {
+      "filename": "copilot_runtime.md",
+      "title": "copilot runtime",
+      "tags": [
+        "api",
+        "patterns",
+        "development"
+      ],
+      "summary": "Windows Copilot Runtime provides AI-powered APIs for .NET developers to integrate local, on-device AI capabilities into Windows applications. Leverages NPUs on Copilot+ PCs.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Need to understand where Copilot Runtime fits in the AI stack"
+          },
+          {
+            "note": "dotnet.md",
+            "why": ".NET knowledge required for Copilot Runtime APIs"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "windows_ml.md",
+            "why": "Copilot Runtime sits above Windows ML layer"
+          },
+          {
+            "note": "windows_app_sdk_setup.md",
+            "why": "Accessed through Windows App SDK"
+          },
+          {
+            "note": "onnx_runtime.md",
+            "why": "Uses ONNX Runtime under the hood"
+          }
+        ],
+        "extends": [
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Higher-level AI runtime layer in the stack"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "cpp_project.md",
+      "title": "cpp project",
+      "tags": [
+        "cpp",
+        "guide",
+        "best-practices"
+      ],
+      "summary": "C++ project setup on Windows with VS Code and MSVC. Covers CMake, vcpkg, and environment configuration best practices.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "powershell.md",
+            "why": "PowerShell used for Windows environment and build automation"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "cpp_spec.md",
+            "why": "C++23 language features used in projects"
+          },
+          {
+            "note": "windows_app_sdk_setup.md",
+            "why": "Windows-specific SDK setup builds on this"
+          },
+          {
+            "note": "windows_ml.md",
+            "why": "Windows ML provides C++ APIs"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "windows_app_sdk_setup.md",
+            "why": "Specialized Windows-specific C++ project setup"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "cpp_spec.md",
+      "title": "cpp spec",
+      "tags": [
+        "cpp",
+        "python"
+      ],
+      "summary": "C++23 modern output: std::format, std::print, and std::println. Type-safe, Python-inspired formatting for C++.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "cpp_project.md",
+            "why": "Modern C++ features used in projects"
+          },
+          {
+            "note": "python.md",
+            "why": "C++23 formatting inspired by Python f-strings"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "dotnet.md",
+      "title": "dotnet",
+      "tags": [
+        "csharp",
+        "dotnet",
+        "reference",
+        "guide",
+        "api",
+        "best-practices"
+      ],
+      "summary": "Essential .NET CLI commands and best practices for creating and managing .NET projects. Covers Microsoft.Extensions.AI, AI templates, and modern .NET development.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "csharp_mcp_sdk_docs.md",
+            "why": ".NET is the foundation for C# MCP SDK"
+          },
+          {
+            "note": "windows_ml.md",
+            "why": "Windows ML provides .NET/C# APIs"
+          },
+          {
+            "note": "copilot_runtime.md",
+            "why": "Copilot Runtime provides .NET APIs"
+          },
+          {
+            "note": "powershell.md",
+            "why": "PowerShell often used alongside .NET development"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "csharp_mcp_sdk_docs.md",
+            "why": "C# MCP SDK built on .NET foundation"
+          }
+        ],
+        "alternatives": [
+          {
+            "note": "python.md",
+            "why": "Python alternative for development"
+          },
+          {
+            "note": "typescript.md",
+            "why": "TypeScript alternative for development"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "onnx_runtime.md",
+      "title": "onnx runtime",
+      "tags": [
+        "onnx",
+        "reference",
+        "guide",
+        "api",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "ONNX Runtime comprehensive guide for Windows 11. Cross-platform ML inference engine with hardware acceleration through execution providers. Core engine behind Windows ML.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Need to understand ONNX Runtime role in the stack"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "windows_ml.md",
+            "why": "Windows ML uses ONNX Runtime as core engine"
+          },
+          {
+            "note": "python.md",
+            "why": "ONNX Runtime available for Python"
+          },
+          {
+            "note": "dotnet.md",
+            "why": "ONNX Runtime available for .NET/C#"
+          },
+          {
+            "note": "cpp_project.md",
+            "why": "ONNX Runtime available for C++"
+          }
+        ],
+        "extends": [
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Detailed implementation of inference engine layer"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "windows_ml.md",
+            "why": "Windows ML for simplified Windows-only development"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "powershell.md",
+      "title": "powershell",
+      "tags": [
+        "powershell",
+        "guide",
+        "api",
+        "patterns"
+      ],
+      "summary": "Master PowerShell cheat sheet and productivity guide. Covers profiles, modules, remoting, performance, and Windows automation.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "dotnet.md",
+            "why": "PowerShell often used alongside .NET development"
+          },
+          {
+            "note": "cpp_project.md",
+            "why": "PowerShell used for C++ build automation on Windows"
+          },
+          {
+            "note": "windows_app_sdk_setup.md",
+            "why": "PowerShell used for Windows environment configuration"
+          },
+          {
+            "note": "cli.md",
+            "why": "Similar CLI patterns in different languages"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "cli.md",
+            "why": "Rust CLI alternative for cross-platform tools"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "windows_ai_stack_explained.md",
+      "title": "windows ai stack explained",
+      "tags": [
+        "windows",
+        "ai",
+        "ml",
+        "architecture",
+        "onnx",
+        "directml"
+      ],
+      "summary": "The Windows AI ecosystem consists of multiple layers working together to provide AI capabilities from high-level APIs to low-level hardware acceleration. This document clarifies the relationships between Windows ML, ONNX Runtime, DirectML, and the local Windows AI stack.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "windows_ml.md",
+            "why": "Windows ML is a key layer in the stack"
+          },
+          {
+            "note": "onnx_runtime.md",
+            "why": "ONNX Runtime is the core inference engine"
+          },
+          {
+            "note": "copilot_runtime.md",
+            "why": "Copilot Runtime sits above Windows ML for Copilot+ PCs"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "windows_ml.md",
+            "why": "Detailed implementation of Windows ML layer"
+          },
+          {
+            "note": "onnx_runtime.md",
+            "why": "Detailed implementation of inference engine"
+          },
+          {
+            "note": "copilot_runtime.md",
+            "why": "Higher-level AI runtime layer"
+          }
+        ],
+        "alternatives": [],
+        "examples": [
+          {
+            "note": "windows_app_sdk_setup.md",
+            "why": "Practical setup example using Windows App SDK"
+          }
+        ]
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "windows_app_sdk_setup.md",
+      "title": "windows app sdk setup",
+      "tags": [
+        "windows",
+        "reference",
+        "guide",
+        "api",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "Complete guide for setting up a modern C++23 CMake project to use Windows App SDK, WinRT APIs, and NuGet packages. Windows App SDK is the modern successor to UWP.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "cpp_project.md",
+            "why": "Need C++ project setup fundamentals first"
+          },
+          {
+            "note": "powershell.md",
+            "why": "PowerShell used for Windows environment configuration"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "windows_ml.md",
+            "why": "Windows App SDK provides access to Windows ML APIs"
+          },
+          {
+            "note": "dotnet.md",
+            "why": "Windows App SDK also available for .NET projects"
+          },
+          {
+            "note": "copilot_runtime.md",
+            "why": "Windows App SDK provides access to Copilot Runtime APIs"
+          }
+        ],
+        "extends": [
+          {
+            "note": "cpp_project.md",
+            "why": "Specialized Windows-specific C++ project setup"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "windows_ml.md",
+      "title": "windows ml",
+      "tags": [
+        "windows",
+        "ml",
+        "api",
+        "directml",
+        "onnx",
+        "csharp"
+      ],
+      "summary": "Windows ML represents an evolution from DirectML, providing simplified development experience while maintaining high performance across diverse hardware configurations. It uses ONNX Runtime as its core engine.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Need to understand overall architecture before diving into Windows ML specifics"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "onnx_runtime.md",
+            "why": "Windows ML is powered by ONNX Runtime internally"
+          },
+          {
+            "note": "dotnet.md",
+            "why": "Windows ML provides .NET/C# APIs"
+          },
+          {
+            "note": "cpp_project.md",
+            "why": "Windows ML provides C++ APIs"
+          }
+        ],
+        "extends": [
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Detailed implementation of Windows ML layer from the stack"
+          }
+        ],
+        "extended_by": [
+          {
+            "note": "windows_app_sdk_setup.md",
+            "why": "Shows how to set up Windows ML via App SDK"
+          }
+        ],
+        "alternatives": [
+          {
+            "note": "onnx_runtime.md",
+            "why": "Direct ONNX Runtime for cross-platform scenarios"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "a2a.md",
+      "title": "Google's Agent2Agent (A2A) Protocol: A Comprehensive Technical Brief",
+      "tags": [
+        "agents",
+        "guide",
+        "api"
+      ],
+      "summary": "Google's Agent2Agent (A2A) Protocol represents a significant advancement in AI agent interoperability, providing a standardized framework for autonomous agents to discover, communicate, and collaborate across different platforms and vendors.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "A2A enables agent-to-agent communication for systems described in agents.md"
+          },
+          {
+            "note": "agent_mcp_apis.md",
+            "why": "A2A and MCP are complementary protocols for agent integration"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "alita.md",
+      "title": "Alita: A Paradigm Shift in AI Agent Design",
+      "tags": [
+        "agents",
+        "development"
+      ],
+      "summary": "Alita represents a significant advancement in the design of AI agents, emphasizing minimal predefinition and maximal self-evolution. By utilizing a dynamic capability expansion model through its Model Context Protocols (MCP), Alita autonomously creates, refines, and stores tools as needed.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "agents.md",
+            "why": "Need to understand agent fundamentals before exploring Alita's innovations"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "agent_mcp_apis.md",
+            "why": "Alita uses MCP to dynamically create and manage tools"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "agents.md",
+      "title": "Claude Code Agents: Complete Guide to Context Management and Parallelization",
+      "tags": [
+        "ai",
+        "agents",
+        "mcp",
+        "architecture",
+        "system-design"
+      ],
+      "summary": "Claude Code agents, specifically subagents, are specialized AI assistants that operate within the Claude Code environment with isolated context windows and specific expertise areas.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "semantic_routing.md",
+            "why": "Routing enables intelligent agent task delegation"
+          },
+          {
+            "note": "debate.md",
+            "why": "Multi-agent debate is a collaboration pattern for agents"
+          },
+          {
+            "note": "memory.md",
+            "why": "Agents use memory systems for context persistence"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "agent_mcp_apis.md",
+            "why": "MCP APIs enable agent functionality"
+          },
+          {
+            "note": "react_agent_pattern.md",
+            "why": "ReAct is a specific agent implementation pattern"
+          }
+        ],
+        "alternatives": [],
+        "examples": [
+          {
+            "note": "alita.md",
+            "why": "Alita is a concrete example of self-evolving agent"
+          },
+          {
+            "note": "a2a.md",
+            "why": "A2A protocol enables multi-agent interoperability"
+          }
+        ]
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "debate.md",
+      "title": "Comprehensive Research Review: Multi-Agent Debate in Generative AI",
+      "tags": [
+        "agents",
+        "reference"
+      ],
+      "summary": "Multi-agent debate in generative AI involves multiple AI agents arguing to refine responses, aiming to improve reasoning and factual accuracy.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "agents.md",
+            "why": "Need to understand agent fundamentals before multi-agent patterns"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "a2a.md",
+            "why": "A2A protocol facilitates agent-to-agent debate communication"
+          }
+        ],
+        "extends": [
+          {
+            "note": "agents.md",
+            "why": "Extends agent architecture with collaborative debate pattern"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "semantic_routing.md",
+      "title": "Semantic Routing for LLM Inference",
+      "tags": [
+        "ai",
+        "routing",
+        "llm",
+        "inference",
+        "optimization"
+      ],
+      "summary": "Semantic routing models in LLM inference serving systems use lightweight neural classifiers, semantic embeddings, and task-type detection to classify incoming requests and route them efficiently to the most appropriate model instance.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "Agents use semantic routing for intelligent task delegation"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "agent_mcp_apis.md",
+      "title": "Agents, MCP Server Tools, and Raw APIs",
+      "tags": [
+        "mcp",
+        "api",
+        "agents",
+        "integration",
+        "reference",
+        "tools"
+      ],
+      "summary": "An agent is a system that uses an LLM to reason about tasks, create execution plans, and invoke tools to accomplish goals. MCP (Model Context Protocol) servers expose tools that agents can invoke.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "agents.md",
+            "why": "Need to understand agent architecture before MCP integration"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "a2a.md",
+            "why": "A2A and MCP are complementary protocols"
+          }
+        ],
+        "extends": [
+          {
+            "note": "agents.md",
+            "why": "Extends agents with MCP tool integration"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "react_agent_pattern.md",
+      "title": "Comprehensive Brief on the ReAct AI Agent Approach",
+      "tags": [
+        "react",
+        "agents",
+        "patterns",
+        "ui",
+        "architecture",
+        "design-patterns"
+      ],
+      "summary": "The ReAct (Reason + Act) AI agent approach is a framework that integrates reasoning and action in large language models, enabling them to tackle complex, multi-step tasks.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "agents.md",
+            "why": "Need agent fundamentals before specific patterns"
+          }
+        ],
+        "related_concepts": [],
+        "extends": [
+          {
+            "note": "agents.md",
+            "why": "ReAct is a specific implementation pattern for agents"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "llm_evolve.md",
+      "title": "The Evolution of Large Language Models: From Attention Is All You Need to Modern AI Systems",
+      "tags": [
+        "ai",
+        "reference",
+        "tutorial",
+        "guide",
+        "api",
+        "patterns"
+      ],
+      "summary": "The landscape of artificial intelligence has undergone a profound transformation since Google researchers introduced the transformer architecture in their seminal 2017 paper. Modern LLMs now incorporate sophisticated reasoning capabilities, dynamic memory systems, tool integration, and agentic behaviors.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "Modern LLMs exhibit agentic behaviors described in agents.md"
+          },
+          {
+            "note": "memory.md",
+            "why": "LLM evolution includes memory augmentation systems"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "memory.md",
+      "title": "Knowledge Graph Memory Server",
+      "tags": [
+        "reference",
+        "api",
+        "memory"
+      ],
+      "summary": "A basic implementation of persistent memory using a local knowledge graph. This lets Claude remember information about the user across chats.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "Agents use memory systems for context persistence"
+          },
+          {
+            "note": "llm_evolve.md",
+            "why": "Memory augmentation is part of LLM evolution"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "verify_claims.md",
+      "title": "Unquantified Claims Checker Process",
+      "tags": [
+        "ai",
+        "verification"
+      ],
+      "summary": "A process for identifying and handling unquantified claims in technical writing by assessing claim importance, evaluating evidence requirements, and applying appropriate qualifiers or context.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "mcp_overview.md",
+      "title": "Model Context Protocol (MCP) - Overview",
+      "tags": [
+        "mcp",
+        "protocol",
+        "ai",
+        "overview"
+      ],
+      "summary": "MCP is an open protocol that standardizes how AI applications integrate with external data sources and tools - essentially 'USB-C for AI applications.' Introduced by Anthropic in November 2024.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "Claude Code agents use MCP for tool access and integration"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "mcp_architecture.md",
+            "why": "Architecture provides technical foundation for MCP"
+          },
+          {
+            "note": "mcp_resources.md",
+            "why": "Resources implement one of three core MCP capabilities"
+          },
+          {
+            "note": "mcp_tools.md",
+            "why": "Tools implement one of three core MCP capabilities"
+          },
+          {
+            "note": "mcp_prompts.md",
+            "why": "Prompts implement one of three core MCP capabilities"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "mcp_architecture.md",
+      "title": "MCP Architecture",
+      "tags": [
+        "mcp",
+        "protocol",
+        "architecture",
+        "specification",
+        "technical"
+      ],
+      "summary": "Client-server architecture enabling standardized communication between AI applications and external systems through JSON-RPC 2.0 protocol.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Need to understand MCP fundamentals before diving into architecture"
+          }
+        ],
+        "related_concepts": [],
+        "extends": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Provides detailed technical architecture for MCP protocol"
+          }
+        ],
+        "extended_by": [
+          {
+            "note": "mcp_security.md",
+            "why": "Security model built on top of architecture"
+          },
+          {
+            "note": "mcp_implementation.md",
+            "why": "Implementation guide provides practical realization of architecture"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "mcp_resources.md",
+      "title": "MCP Resources",
+      "tags": [
+        "mcp",
+        "protocol",
+        "resources",
+        "data-access",
+        "api"
+      ],
+      "summary": "Resources provide AI models with structured, read-only access to external data sources through a safe, discoverable interface.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Need to understand MCP fundamentals first"
+          },
+          {
+            "note": "mcp_architecture.md",
+            "why": "Need to understand how resources operate within MCP architecture"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_tools.md",
+            "why": "Tools provide write capabilities while resources are read-only"
+          },
+          {
+            "note": "mcp_prompts.md",
+            "why": "Prompts can utilize resources for data access"
+          }
+        ],
+        "extends": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Implements the resources capability of MCP"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "mcp_tools.md",
+      "title": "MCP Tools",
+      "tags": [
+        "mcp",
+        "protocol",
+        "tools",
+        "function-execution",
+        "api"
+      ],
+      "summary": "Tools enable AI models to perform actions and execute functions in external systems, providing controlled access to operations with side effects.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Need to understand MCP fundamentals first"
+          },
+          {
+            "note": "mcp_architecture.md",
+            "why": "Need to understand how tools operate within MCP architecture"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_resources.md",
+            "why": "Resources provide read capabilities while tools perform actions"
+          },
+          {
+            "note": "mcp_prompts.md",
+            "why": "Prompts orchestrate tool usage in workflows"
+          },
+          {
+            "note": "agent_mcp_apis.md",
+            "why": "Agents use MCP tools for task execution"
+          }
+        ],
+        "extends": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Implements the tools capability of MCP"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "mcp_prompts.md",
+      "title": "MCP Prompts",
+      "tags": [
+        "mcp",
+        "protocol",
+        "prompts",
+        "templates",
+        "workflows"
+      ],
+      "summary": "Prompts provide reusable templates and workflows that codify best practices for combining resources and tools to accomplish specific tasks.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Need to understand MCP fundamentals first"
+          },
+          {
+            "note": "mcp_architecture.md",
+            "why": "Need to understand how prompts are delivered through architecture"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_resources.md",
+            "why": "Prompts coordinate access to resources"
+          },
+          {
+            "note": "mcp_tools.md",
+            "why": "Prompts orchestrate tool execution in workflows"
+          }
+        ],
+        "extends": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Implements the prompts capability of MCP"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "mcp_security.md",
+      "title": "MCP Security",
+      "tags": [
+        "mcp",
+        "protocol",
+        "security",
+        "authentication",
+        "authorization",
+        "privacy"
+      ],
+      "summary": "Comprehensive security framework for MCP emphasizing user consent, least privilege, and transparent data handling.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Need to understand MCP fundamentals before security model"
+          },
+          {
+            "note": "mcp_architecture.md",
+            "why": "Security model built on top of MCP architecture"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_resources.md",
+            "why": "Security considerations for resource access control"
+          },
+          {
+            "note": "mcp_tools.md",
+            "why": "Critical security for tool execution and side effects"
+          }
+        ],
+        "extends": [
+          {
+            "note": "mcp_architecture.md",
+            "why": "Adds comprehensive security layer to architecture"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "mcp_implementation.md",
+      "title": "MCP Implementation Guide",
+      "tags": [
+        "mcp",
+        "protocol",
+        "implementation",
+        "sdk",
+        "deployment",
+        "guide"
+      ],
+      "summary": "Practical guide to implementing MCP servers and clients using official SDKs, with configuration and deployment strategies.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Need to understand MCP fundamentals before implementation"
+          },
+          {
+            "note": "mcp_architecture.md",
+            "why": "Need to understand architecture before implementing"
+          },
+          {
+            "note": "mcp_security.md",
+            "why": "Need to understand security requirements for implementation"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_resources.md",
+            "why": "Implementation of resource servers"
+          },
+          {
+            "note": "mcp_tools.md",
+            "why": "Implementation of tool servers"
+          },
+          {
+            "note": "mcp_prompts.md",
+            "why": "Implementation of prompt servers"
+          }
+        ],
+        "extends": [
+          {
+            "note": "mcp_architecture.md",
+            "why": "Practical implementation of the architecture"
+          }
+        ],
+        "extended_by": [
+          {
+            "note": "mcp_sdk.md",
+            "why": "Python-specific SDK implementation details"
+          },
+          {
+            "note": "csharp_mcp_sdk_docs.md",
+            "why": "C#-specific SDK implementation details"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "mcp_sdk.md",
+      "title": "Comprehensive Guide to MCP Python SDKs",
+      "tags": [
+        "mcp",
+        "guide",
+        "api",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "Complete guide for official MCP Python SDK and FastMCP, covering hosts, clients, and servers with modern Python 3.13+ practices.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_implementation.md",
+            "why": "Need general implementation knowledge before Python-specific SDK"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "csharp_mcp_sdk_docs.md",
+            "why": "Alternative language SDK for MCP"
+          }
+        ],
+        "extends": [
+          {
+            "note": "mcp_implementation.md",
+            "why": "Python-specific implementation of MCP SDK"
+          }
+        ],
+        "extended_by": [
+          {
+            "note": "fastmcp_shutdown.md",
+            "why": "Specific FastMCP implementation issue"
+          }
+        ],
+        "alternatives": [
+          {
+            "note": "csharp_mcp_sdk_docs.md",
+            "why": "Use C# instead of Python for MCP development"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "csharp_mcp_sdk_docs.md",
+      "title": "Model Context Protocol C# SDK Documentation",
+      "tags": [
+        "csharp",
+        "mcp",
+        "sdk",
+        "dotnet",
+        "api",
+        "reference"
+      ],
+      "summary": "Complete C# SDK documentation for MCP covering server and client implementation, tools, dependency injection, and ASP.NET Core integration.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_implementation.md",
+            "why": "Need general implementation knowledge before C#-specific SDK"
+          },
+          {
+            "note": "dotnet.md",
+            "why": ".NET foundation required for C# MCP SDK"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_sdk.md",
+            "why": "Alternative language SDK for MCP"
+          },
+          {
+            "note": "dotnet.md",
+            "why": ".NET is the foundation for C# MCP SDK"
+          }
+        ],
+        "extends": [
+          {
+            "note": "mcp_implementation.md",
+            "why": "C#-specific implementation of MCP SDK"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "mcp_sdk.md",
+            "why": "Use Python instead of C# for MCP development"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "fastmcp_shutdown.md",
+      "title": "Diagnosing FastMCP STDIO Shutdown Hangs",
+      "tags": [
+        "mcp",
+        "python",
+        "fastmcp",
+        "implementation",
+        "patterns",
+        "best-practices"
+      ],
+      "summary": "FastMCP's STDIO transport keep_alive behavior causes zombie processes. Document explains the bug and provides four proven mitigation strategies.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_sdk.md",
+            "why": "Need to understand FastMCP SDK before diagnosing shutdown issues"
+          }
+        ],
+        "related_concepts": [],
+        "extends": [
+          {
+            "note": "mcp_sdk.md",
+            "why": "Specific implementation detail and bug in FastMCP"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "python.md",
+      "title": "Python 3.13+ Coding Standards",
+      "tags": [
+        "python",
+        "programming",
+        "async",
+        "types",
+        "guide",
+        "best-practices"
+      ],
+      "summary": "Comprehensive Python 3.13+ coding standards covering type hints, documentation, configuration, logging, error handling, workspace standards, CLI development, and testing with uv.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "python_role.md",
+            "why": "Role-specific guidance applies Python standards"
+          },
+          {
+            "note": "typescript.md",
+            "why": "Alternative language with similar async patterns"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "python_role.md",
+            "why": "Role applies Python standards to specific context"
+          },
+          {
+            "note": "python3_13.md",
+            "why": "Specific Python 3.13 features and enhancements"
+          },
+          {
+            "note": "mcp_sdk.md",
+            "why": "MCP SDK uses Python for implementation"
+          }
+        ],
+        "alternatives": [
+          {
+            "note": "typescript.md",
+            "why": "TypeScript alternative for similar use cases"
+          },
+          {
+            "note": "dotnet.md",
+            "why": ".NET/C# alternative for development"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "python_role.md",
+      "title": "Role: Senior Python Developer",
+      "tags": [
+        "python",
+        "role",
+        "guidelines",
+        "standards",
+        "best-practices",
+        "process"
+      ],
+      "summary": "Senior Python developer role with expertise in Python 3.13+, CLI development, API integration, uv workspace architecture, and production applications.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "python.md",
+            "why": "Need Python language knowledge before applying role guidelines"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "typescript_role.md",
+            "why": "Similar role concept for TypeScript"
+          },
+          {
+            "note": "role_technical_author.md",
+            "why": "Related role definition pattern"
+          }
+        ],
+        "extends": [
+          {
+            "note": "python.md",
+            "why": "Applies Python knowledge to specific role context"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "python3_13.md",
+      "title": "Python 3.13 Best Practices Guide",
+      "tags": [
+        "python",
+        "guide",
+        "api",
+        "best-practices"
+      ],
+      "summary": "Python 3.13 best practices covering built-in type hints, NumPy-style docstrings, python-dotenv configuration, loguru logging, and minimalist comments.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "python.md",
+            "why": "Shares Python 3.13 coding standards content"
+          }
+        ],
+        "extends": [
+          {
+            "note": "python.md",
+            "why": "Specific Python 3.13 version features and practices"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "uv.md",
+      "title": "uv Support for Workspaces and Projects",
+      "tags": [
+        "reference",
+        "guide",
+        "python"
+      ],
+      "summary": "uv workspace management for Python projects with shared code and per-package isolation, inspired by Rust's Cargo model.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "python.md",
+            "why": "uv is used for Python workspace management"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "tenacity.md",
+      "title": "Best Practices for Using Tenacity in Python",
+      "tags": [
+        "api",
+        "best-practices",
+        "python"
+      ],
+      "summary": "Tenacity Python library for retrying operations with configurable strategies, ideal for handling transient failures with decorators, backoff, and async support.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "python.md",
+            "why": "Tenacity is a Python library following Python best practices"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "click_repl.md",
+      "title": "click-repl",
+      "tags": [
+        "cli",
+        "reference",
+        "python"
+      ],
+      "summary": "click-repl adds REPL capabilities to Click CLI applications with tab-completion, context persistence, and shell command execution.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "python.md",
+            "why": "click-repl is a Python CLI library"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "openai_embeddings_python.md",
+      "title": "Comprehensive Guide to OpenAI Python SDK for Text Embeddings",
+      "tags": [
+        "python",
+        "openai",
+        "ai",
+        "reference",
+        "tutorial",
+        "guide"
+      ],
+      "summary": "Complete guide for OpenAI Python SDK text embeddings covering setup, preferred models (text-embedding-3-small), implementation examples, and optimization strategies.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "python.md",
+            "why": "Need Python knowledge to use OpenAI Python SDK"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "openai_responses_python.md",
+            "why": "Same OpenAI SDK for different capabilities"
+          },
+          {
+            "note": "openrouter_openai_python_sdk.md",
+            "why": "Alternative provider using OpenAI-compatible SDK"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "openai_responses_python.md",
+      "title": "OpenAI Python SDK: Responses API vs Chat Completions API",
+      "tags": [
+        "python",
+        "openai",
+        "ai",
+        "reference",
+        "tutorial",
+        "guide"
+      ],
+      "summary": "Comprehensive guide to OpenAI Responses API vs Chat Completions API, covering differences, migration, Jinja2 templating, and advanced function calling patterns.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "python.md",
+            "why": "Need Python knowledge to use OpenAI Python SDK"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "openai_embeddings_python.md",
+            "why": "Same OpenAI SDK for different capabilities"
+          },
+          {
+            "note": "openrouter_openai_python_sdk.md",
+            "why": "Alternative provider using OpenAI-compatible SDK"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "openrouter_openai_python_sdk.md",
+            "why": "OpenRouter uses OpenAI SDK with different endpoint"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "openrouter_openai_python_sdk.md",
+      "title": "OpenRouter with OpenAI Python SDK",
+      "tags": [
+        "python",
+        "openai",
+        "ai",
+        "reference",
+        "guide",
+        "api"
+      ],
+      "summary": "OpenRouter exposes OpenAI-compatible /v1 endpoint enabling use of official OpenAI Python SDK to call hundreds of models through OpenRouter.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "python.md",
+            "why": "Need Python knowledge to use SDK"
+          },
+          {
+            "note": "openai_responses_python.md",
+            "why": "OpenRouter uses OpenAI SDK interface"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "openai_embeddings_python.md",
+            "why": "Same SDK can be used for embeddings via OpenRouter"
+          },
+          {
+            "note": "openai_responses_python.md",
+            "why": "Same SDK patterns apply to OpenRouter"
+          }
+        ],
+        "extends": [
+          {
+            "note": "openai_responses_python.md",
+            "why": "Uses OpenAI SDK with OpenRouter endpoint"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "openai_responses_python.md",
+            "why": "Direct OpenAI instead of OpenRouter for model access"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "youtube_transcript_api.md",
+      "title": "YouTube Transcript API Documentation",
+      "tags": [
+        "api",
+        "python",
+        "development"
+      ],
+      "summary": "Python library for fetching YouTube video transcripts with language selection, translation, authentication, proxy support, and multiple output formatters.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "python.md",
+            "why": "Need Python knowledge to use YouTube Transcript API"
+          }
+        ],
+        "related_concepts": [],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "typescript.md",
+      "title": "Comprehensive TypeScript React Developer Standards",
+      "tags": [
+        "typescript",
+        "react",
+        "guide",
+        "api",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "Comprehensive TypeScript 5.8+ and React 19 coding standards covering type hints, JSDoc documentation, component patterns, error handling, testing standards, Vite 6 configuration, Tailwind CSS 4.0 integration, and Node.js 24 runtime.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "typescript_role.md",
+            "why": "Role-specific guidance applies TypeScript standards"
+          },
+          {
+            "note": "react_framework.md",
+            "why": "TypeScript used extensively with React 19 development"
+          },
+          {
+            "note": "python.md",
+            "why": "Alternative language with similar async patterns"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "typescript_role.md",
+            "why": "Role applies TypeScript standards to specific context"
+          },
+          {
+            "note": "ts.md",
+            "why": "Specific TypeScript 5.8 features and enhancements"
+          }
+        ],
+        "alternatives": [
+          {
+            "note": "python.md",
+            "why": "Python alternative for similar use cases"
+          },
+          {
+            "note": "dotnet.md",
+            "why": ".NET/C# alternative for development"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "typescript_role.md",
+      "title": "Role: Senior TypeScript React Developer",
+      "tags": [
+        "typescript",
+        "react",
+        "role",
+        "guidelines",
+        "standards",
+        "best-practices"
+      ],
+      "summary": "Senior TypeScript React developer role with expertise in React 18+, TypeScript 5.0+, Vite build tooling, Tailwind CSS, and Node.js runtime.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "typescript.md",
+            "why": "Need TypeScript language knowledge before applying role guidelines"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "python_role.md",
+            "why": "Similar role concept for Python"
+          },
+          {
+            "note": "role_technical_author.md",
+            "why": "Related role definition pattern"
+          }
+        ],
+        "extends": [
+          {
+            "note": "typescript.md",
+            "why": "Applies TypeScript knowledge to specific role context"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "ts.md",
+      "title": "TypeScript 5.8 Features & Best Practices Guide",
+      "tags": [
+        "typescript",
+        "guide",
+        "api",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "TypeScript 5.8 features guide covering enhanced conditional type inference (27% reduction in manual type assertions), performance improvements (15-20% faster CI), module system enhancements, and declaration file improvements.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "typescript.md",
+            "why": "Shares TypeScript 5.8+ coding standards content"
+          }
+        ],
+        "extends": [
+          {
+            "note": "typescript.md",
+            "why": "Specific TypeScript 5.8 version features and practices"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "react_framework.md",
+      "title": "React 19 Best Practices & Modern Patterns",
+      "tags": [
+        "react",
+        "typescript",
+        "guide",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "React 19 best practices covering Actions API, simplified refs (no more forwardRef), enhanced Context API, Web Components support, and improved hydration error reporting.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "typescript.md",
+            "why": "React development uses TypeScript for type safety"
+          },
+          {
+            "note": "node.md",
+            "why": "Node.js provides runtime environment for React development"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "vite.md",
+            "why": "Vite is the recommended build tool for React"
+          },
+          {
+            "note": "tailwind.md",
+            "why": "Tailwind CSS commonly used for React styling"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "react_agent_pattern.md",
+            "why": "ReAct agent pattern uses React concepts"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "vite.md",
+      "title": "Vite 6 Best Practices & Configuration",
+      "tags": [
+        "vite",
+        "typescript",
+        "react",
+        "build-tools",
+        "guide",
+        "best-practices"
+      ],
+      "summary": "Vite 6 configuration guide for React + TypeScript + Tailwind with performance optimization (18-25% smaller bundles with esnext target), environment-based builds, and production-ready setup.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "node.md",
+            "why": "Vite runs on Node.js runtime"
+          },
+          {
+            "note": "typescript.md",
+            "why": "Vite configured for TypeScript projects"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "react_framework.md",
+            "why": "Vite is the recommended build tool for React"
+          },
+          {
+            "note": "tailwind.md",
+            "why": "Vite integrates with Tailwind CSS"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "tailwind.md",
+      "title": "Tailwind CSS 4.0 Best Practices & Migration",
+      "tags": [
+        "tailwind",
+        "css",
+        "react",
+        "guide",
+        "best-practices"
+      ],
+      "summary": "Tailwind CSS 4.0 best practices covering CSS-first configuration (moved from JavaScript to CSS), container queries, OKLCH color space, composable variants, and migration from v3.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "react_framework.md",
+            "why": "Tailwind commonly used for React styling"
+          },
+          {
+            "note": "vite.md",
+            "why": "Vite integrates with Tailwind CSS"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "node.md",
+      "title": "Node.js 24 Features & Best Practices",
+      "tags": [
+        "nodejs",
+        "javascript",
+        "typescript",
+        "guide",
+        "best-practices"
+      ],
+      "summary": "Node.js 24 features guide covering native TypeScript support, V8 13.6 upgrade (30% faster HTTP), Undici v7, permission model for security, and stable Fetch API.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "typescript.md",
+            "why": "Node.js 24 provides native TypeScript support"
+          },
+          {
+            "note": "react_framework.md",
+            "why": "Node.js provides runtime for React development"
+          },
+          {
+            "note": "vite.md",
+            "why": "Vite runs on Node.js runtime"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "openai_responses_typescript.md",
+      "title": "OpenAI Responses API: TypeScript Implementation Guide",
+      "tags": [
+        "typescript",
+        "openai",
+        "ai",
+        "reference",
+        "tutorial",
+        "guide"
+      ],
+      "summary": "Comprehensive TypeScript guide for OpenAI Responses API with Zod validation, template literals, function calling, and advanced patterns.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "typescript.md",
+            "why": "Need TypeScript knowledge to use OpenAI TypeScript patterns"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "openai_responses_python.md",
+            "why": "Same OpenAI API with Python implementation for comparison"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "openai_responses_python.md",
+            "why": "Python alternative for OpenAI SDK"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "micro_prompt.md",
+      "title": "The Case for Micro-Prompting with SLMs/SRMs",
+      "tags": [
+        "api",
+        "prompting",
+        "python",
+        "development"
+      ],
+      "summary": "Micro-prompting with Small Language Models (SLMs) and Small Reasoning Models (SRMs) transforms agentic programs by breaking down tasks into discrete, modular prompts. This approach treats prompts as functional blocks executed by local models for fast, cost-effective processing of micro-tasks.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "Micro-prompting is designed for agentic workflows described in agents.md"
+          },
+          {
+            "note": "json_prompting.md",
+            "why": "Both are structured approaches to prompt engineering"
+          },
+          {
+            "note": "react_agent_pattern.md",
+            "why": "ReAct agents can use micro-prompting for decomposed reasoning steps"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "json_prompting.md",
+            "why": "JSON prompting offers structured control while micro-prompting focuses on decomposition"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "json_prompting.md",
+      "title": "The Engineering Approach to Large Language Models: Why JSON Prompting is the Future",
+      "tags": [
+        "api",
+        "prompting",
+        "python"
+      ],
+      "summary": "JSON prompting structures LLM inputs using JSON format for precision, control, and repeatability. This engineering-driven approach enables deterministic outputs, seamless system integration, and scalable AI-powered systems by treating LLMs as programmable interfaces.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "micro_prompt.md",
+            "why": "Both are structured approaches to prompt engineering with different focuses"
+          },
+          {
+            "note": "spr.md",
+            "why": "Both are advanced prompting techniques for LLM optimization"
+          },
+          {
+            "note": "mcp_prompts.md",
+            "why": "MCP prompts use structured formats similar to JSON prompting"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "micro_prompt.md",
+            "why": "Micro-prompting focuses on task decomposition while JSON focuses on structure"
+          },
+          {
+            "note": "spr.md",
+            "why": "SPR uses compressed natural language while JSON uses structured format"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "spr.md",
+      "title": "Sparse Priming Representation (SPR)",
+      "tags": [
+        "ai",
+        "llm",
+        "prompting",
+        "methodology",
+        "reference"
+      ],
+      "summary": "Sparse Priming Representation (SPR) compresses information into distilled statements, assertions, and associations that activate LLM latent space efficiently. Uses minimal words to capture maximum conceptual content for priming language models.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "json_prompting.md",
+            "why": "Both are advanced prompting techniques optimizing LLM inputs"
+          },
+          {
+            "note": "micro_prompt.md",
+            "why": "Both focus on efficiency in prompting - SPR via compression, micro-prompting via decomposition"
+          },
+          {
+            "note": "llm_evolve.md",
+            "why": "SPR leverages understanding of LLM latent space and architecture"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "json_prompting.md",
+            "why": "JSON provides structured control while SPR provides compressed natural language"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "bayes_theory.md",
+      "title": "Bayesian Theory Cheat Sheet for Computer Scientists",
+      "tags": [
+        "theory",
+        "python"
+      ],
+      "summary": "Bayesian inference uses probability to represent uncertainty and updates beliefs with Bayes' theorem. Covers Bayesian networks, causal networks, MCMC, variational inference, and applications in ML and AI.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "game_theory.md",
+            "why": "Both provide mathematical frameworks for decision-making under uncertainty"
+          },
+          {
+            "note": "python.md",
+            "why": "Python tools (PyMC, Stan) used for Bayesian inference"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "category_theory.md",
+      "title": "Category Theory Cheat Sheet for Computer Scientists",
+      "tags": [
+        "theory",
+        "patterns"
+      ],
+      "summary": "Category theory abstracts mathematical structures providing a framework for modeling programming languages, type systems, and databases. Covers functors, monads, natural transformations, Kan extensions, and HoTT.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "type_theory.md",
+            "why": "Category theory provides semantics for type systems and dependent types"
+          },
+          {
+            "note": "react_framework.md",
+            "why": "Monads from category theory used in functional programming patterns"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "type_theory.md",
+            "why": "Type theory builds on categorical foundations, especially HoTT"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "game_theory.md",
+      "title": "Game Theory Cheat Sheet for Computer Scientists",
+      "tags": [
+        "theory",
+        "reference"
+      ],
+      "summary": "Mathematical study of strategic interactions among rational decision-makers. Covers Nash equilibrium, algorithmic game theory, mechanism design, and CS applications in multi-agent systems and auctions.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "bayes_theory.md",
+            "why": "Both provide mathematical frameworks for decision-making under uncertainty"
+          },
+          {
+            "note": "agents.md",
+            "why": "Game theory applies to multi-agent system design and strategic behavior"
+          },
+          {
+            "note": "debate.md",
+            "why": "Multi-agent debate can be modeled using game-theoretic concepts"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "type_theory.md",
+      "title": "Type Theory Cheat Sheet for Computer Scientists",
+      "tags": [
+        "theory",
+        "development"
+      ],
+      "summary": "Type theory classifies data to ensure correct operations. Covers dependent types, polymorphism, Curry-Howard correspondence, and Homotopy Type Theory (HoTT) which treats types as spaces.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "category_theory.md",
+            "why": "Category theory provides semantics for type theory, especially HoTT"
+          },
+          {
+            "note": "typescript.md",
+            "why": "TypeScript implements practical type system based on type theory"
+          },
+          {
+            "note": "python.md",
+            "why": "Python 3.13+ uses type hints based on type theory principles"
+          }
+        ],
+        "extends": [
+          {
+            "note": "category_theory.md",
+            "why": "Type theory builds on categorical foundations for HoTT"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": [
+          {
+            "note": "typescript.md",
+            "why": "TypeScript is practical application of type theory"
+          },
+          {
+            "note": "python.md",
+            "why": "Python type hints are practical application of type theory"
+          }
+        ]
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "dhcg.md",
+      "title": "Towards Homotopy-Aware Neural Representations",
+      "tags": [
+        "guide"
+      ],
+      "summary": "Deep Homotopical Conceptual Geometry proposes homotopy-aware neural representations combining Gardenfors conceptual spaces, category theory, and topology for interpretable embeddings learnable with SGD.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "category_theory.md",
+            "why": "Uses categorical concepts like functors and morphisms"
+          },
+          {
+            "note": "type_theory.md",
+            "why": "Builds on homotopy type theory foundations"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "Proposes better representations for agent reasoning"
+          },
+          {
+            "note": "llm_evolve.md",
+            "why": "Addresses limitations in current LLM embeddings"
+          }
+        ],
+        "extends": [
+          {
+            "note": "type_theory.md",
+            "why": "Applies HoTT concepts to neural network representations"
+          },
+          {
+            "note": "category_theory.md",
+            "why": "Uses categorical structures for semantic meaning"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "sutton.md",
+      "title": "Sutton Reinforcement Learning for the Next Generation of AI",
+      "tags": [
+        "guide",
+        "api",
+        "patterns"
+      ],
+      "summary": "Richard Sutton's vision for next-gen AI through reinforcement learning emphasizing experiential learning over data-driven approaches. Covers RL principles, critique of current AI, path to AGI, and the Era of Experience.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "RL agents are a fundamental type of AI agent"
+          },
+          {
+            "note": "llm_evolve.md",
+            "why": "RL represents next evolution beyond current LLMs"
+          },
+          {
+            "note": "game_theory.md",
+            "why": "RL can be viewed through game-theoretic lens for multi-agent scenarios"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "eponymous_laws.md",
+      "title": "Eponymous Laws and Principles",
+      "tags": [
+        "reference",
+        "guide",
+        "api",
+        "patterns"
+      ],
+      "summary": "Comprehensive collection of laws, principles, rules, and concepts named after people across mathematics, physics, computer science, and engineering. Includes Amdahl's law, Moore's law, Conway's law, and many others.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "strategy_first_principles.md",
+      "title": "How Do We Solve Complex Problems by Reasoning from Fundamental Truths Rather Than Assumptions?",
+      "tags": [
+        "strategy",
+        "methodology",
+        "thinking",
+        "problem-solving",
+        "innovation",
+        "mental-models"
+      ],
+      "summary": "First principles thinking is a problem-solving methodology that deconstructs complex issues into fundamental components and reconstructs them to uncover innovative solutions. This systematic four-step process (identify, break down, question, reassemble) enables breakthrough insights by reasoning from demonstrably true foundations rather than relying on analogies or conventional wisdom.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "strategy_systems_thinking.md",
+            "why": "Both are foundational problem-solving methodologies that examine complex systems, though first principles focuses on deconstruction while systems thinking emphasizes interconnections"
+          },
+          {
+            "note": "strategy_critical_assessment.md",
+            "why": "Critical assessment tests whether work properly applies first principles reasoning by evaluating assumption examination and evidence quality"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "strategy_question_decomposition.md",
+            "why": "Question decomposition applies first principles approach to breaking down complex questions into fundamental components"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "strategy_critical_assessment.md",
+      "title": "The Critical Assessment Framework: Question-Oriented Evaluation of Knowledge Works",
+      "tags": [
+        "strategy",
+        "reference",
+        "guide",
+        "patterns"
+      ],
+      "summary": "A systematic methodology for identifying weaknesses in thinking, arguments, and intellectual rigor through five dimensions: question architecture, decomposition rigor, answer completeness, intellectual rigor, and innovation opportunities. The framework inverts the question-oriented approach by testing quality of questions asked, rigor of decomposition, and completeness of answers provided.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Need to understand question-oriented methodology before critically assessing its implementation"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "strategy_first_principles.md",
+            "why": "Critical assessment validates whether work applies first principles reasoning by checking for unexamined assumptions"
+          },
+          {
+            "note": "socratic_interlocutor_prompt.md",
+            "why": "Both use systematic questioning to identify weaknesses and strengthen arguments"
+          }
+        ],
+        "extends": [
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Provides evaluation framework for question-oriented methodology quality"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "strategy_question_asking.md",
+      "title": "Precision Questioning, Socratic Method, and Question Formulation Strategies",
+      "tags": [
+        "strategy",
+        "guide",
+        "methodology"
+      ],
+      "summary": "Comprehensive analysis of precision questioning (structured modern approach for professional settings) and Socratic method (ancient philosophical technique using questions to challenge assumptions). Includes strategies for knowing what questions to ask using frameworks like Bloom's Taxonomy, open-ended questions, and active listening.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "socratic_interlocutor_prompt.md",
+            "why": "Implements Socratic questioning methodology as an AI system prompt for deep critical inquiry"
+          },
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Both focus on strategic questioning as a methodology for understanding"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "socratic_interlocutor_prompt.md",
+            "why": "Transforms theoretical Socratic method into practical AI implementation"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "strategy_question_decomposition.md",
+      "title": "The Hypothesis-Driven Question Decomposition Method",
+      "tags": [
+        "strategy",
+        "guide",
+        "api",
+        "patterns",
+        "methodology"
+      ],
+      "summary": "Question decomposition is theory building that proposes testable hypotheses about question structure, knowledge architecture, synthesis pathways, and investigation sequences. This methodology provides decomposition patterns (component analysis, process analysis, tension resolution, stakeholder perspectives) with MECE testing, synthesis viability validation, and iterative refinement.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Need to understand question-oriented approach before learning rigorous decomposition methodology"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "strategy_first_principles.md",
+            "why": "Decomposition applies first principles thinking to breaking questions into fundamental components"
+          },
+          {
+            "note": "strategy_critical_assessment.md",
+            "why": "Critical assessment validates decomposition quality through MECE and synthesis tests"
+          }
+        ],
+        "extends": [
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Adds scientific rigor and hypothesis-driven validation to question decomposition process"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "strategy_question_knowledge.md",
+      "title": "The Question-Oriented Approach: A Systematic Method for Complex Knowledge Architecture",
+      "tags": [
+        "strategy",
+        "reference",
+        "guide",
+        "patterns",
+        "methodology"
+      ],
+      "summary": "A rigorous methodology for organizing complex information by anchoring every piece of work around a central question it seeks to answer. Creates hierarchical question trees where branches systematically contribute to answering core inquiry through ten-step process: define central question, identify domains, decompose systematically, answer with evidence, synthesize hierarchically, structure accordingly, validate rigorously, adapt to domain, enable progression, refine iteratively.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "strategy_technical_chapter_plan.md",
+            "why": "Chapter planning applies question-oriented methodology to technical writing with pedagogical flow"
+          },
+          {
+            "note": "strategy_reverse_questions.md",
+            "why": "Reverse engineering extracts implicit question structures from existing content using same principles"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "strategy_question_decomposition.md",
+            "why": "Adds hypothesis-driven rigor and validation to question decomposition process"
+          },
+          {
+            "note": "strategy_critical_assessment.md",
+            "why": "Provides evaluation framework to test question-oriented implementation quality"
+          },
+          {
+            "note": "strategy_reverse_questions.md",
+            "why": "Extends methodology to analyze existing content by extracting implicit question architecture"
+          },
+          {
+            "note": "strategy_technical_chapter_plan.md",
+            "why": "Specializes methodology for technical writing with pedagogical optimization"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "strategy_reverse_questions.md",
+      "title": "Question-Oriented Content Synthesis: Transform Any Work into Systematic Knowledge Architecture",
+      "tags": [
+        "strategy",
+        "tutorial",
+        "patterns",
+        "methodology"
+      ],
+      "summary": "Methodology for reverse-engineering implicit question structures from existing content to create comprehensive educational documents. Five-step synthesis process: identify central question, create document architecture, develop comprehensive content, integrate answers, create synthesis sections. Transforms scattered information into systematic knowledge that teaches subject matter while demonstrating question-oriented rigor.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Need to understand question-oriented methodology before applying it to analyze existing content"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "strategy_critical_assessment.md",
+            "why": "Both analyze existing work structure, though reverse questions extracts implicit architecture while critical assessment evaluates quality"
+          }
+        ],
+        "extends": [
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Applies question-oriented approach to reverse-engineer and synthesize existing unstructured content"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "strategy_systems_thinking.md",
+      "title": "Systems Thinking: A Holistic Framework for Understanding Complex Systems",
+      "tags": [
+        "strategy",
+        "guide",
+        "patterns"
+      ],
+      "summary": "Systems thinking emerged as a cornerstone methodology for addressing interconnected 21st century challenges by focusing on relationships, feedback mechanisms, and emergent properties rather than isolated components. Methodologies include Soft Systems Methodology (SSM) for wicked problems, Critical Systems Thinking (CST) for power imbalances, Viable System Model (VSM) for organizational resilience, with applications in healthcare, urban planning, and corporate sustainability.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "strategy_first_principles.md",
+            "why": "Both are fundamental problem-solving methodologies; first principles deconstructs to basics while systems thinking emphasizes interconnections"
+          },
+          {
+            "note": "strategy_critical_assessment.md",
+            "why": "Critical assessment can validate systems thinking application by checking for overlooked interdependencies and feedback loops"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "strategy_first_principles.md",
+            "why": "Different approaches to complex problems: systems thinking for interconnected wholes vs first principles for fundamental components"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "strategy_technical_chapter_plan.md",
+      "title": "Comprehensive Chapter Writing Guidelines",
+      "tags": [
+        "strategy",
+        "reference",
+        "tutorial",
+        "guide",
+        "api",
+        "patterns"
+      ],
+      "summary": "Complete guidelines for planning, preparing, and tracking chapters with question-oriented methodology, research rigor, and optimal pedagogical flow. Combines question foundation with primary source research, 8-phase pedagogical flow (concept, philosophy, foundation, implementation, problem, solution, integration, validation), and systematic quality assurance validated through Chapter 2's successful implementation.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Chapter planning builds on question-oriented methodology for technical writing"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "style_technical.md",
+            "why": "Both guide technical writing; chapter plan focuses on structure while style guide addresses clarity and tone"
+          }
+        ],
+        "extends": [
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Specializes question-oriented approach for technical chapter writing with pedagogical optimization patterns"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "socratic_interlocutor_prompt.md",
+      "title": "Socratic AI Interlocutor: System Prompt for Deep Critical Inquiry",
+      "tags": [
+        "tutorial",
+        "guide",
+        "patterns",
+        "methodology",
+        "prompting"
+      ],
+      "summary": "Advanced Socratic AI interlocutor system prompt that guides thinkers toward rigorous first-principles understanding through strategic questioning and systematic critical assessment. Embodies three methodologies: Socratic questioning (challenge assumptions), critical assessment (evaluate reasoning systematically), and first principles thinking (deconstruct and rebuild). Includes questioning framework, advanced techniques (Devil's Advocate Protocol, Perspective Multiplexer), and conversation arc management.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "strategy_question_asking.md",
+            "why": "Need to understand Socratic method and precision questioning before implementing as AI system"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "strategy_first_principles.md",
+            "why": "Socratic interlocutor explicitly uses first principles thinking as core methodology"
+          },
+          {
+            "note": "strategy_critical_assessment.md",
+            "why": "Both use systematic questioning to identify weaknesses and strengthen arguments"
+          }
+        ],
+        "extends": [
+          {
+            "note": "strategy_question_asking.md",
+            "why": "Transforms theoretical Socratic method into practical AI system prompt implementation"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "verify_references.md",
+      "title": "References and Citations Checker Process",
+      "tags": [
+        "reference",
+        "verification"
+      ],
+      "summary": "Five-step process for verifying references and citations in documents: locate reference markers in text, find corresponding citations, research citation sources (online fetch or web search), verify sources support referenced claims, report issues (missing citations, inaccessible sources, unsupported claims).",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "strategy_critical_assessment.md",
+            "why": "Reference verification is part of evidence quality assessment dimension in critical framework"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "chromadb.md",
+      "title": "ChromaDB Vector Database Guide",
+      "tags": [
+        "database",
+        "vector",
+        "embeddings",
+        "api",
+        "python"
+      ],
+      "summary": "ChromaDB is an open-source vector database designed for AI applications, providing persistent storage for embeddings with metadata filtering, similarity search, and Python/JavaScript SDKs.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "openai_embeddings_python.md",
+            "why": "Need embeddings to store in vector database"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "python.md",
+            "why": "ChromaDB provides Python SDK"
+          },
+          {
+            "note": "memory.md",
+            "why": "Vector databases enable persistent memory for agents"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "firecrawl.md",
+      "title": "Firecrawl Web Scraping Service",
+      "tags": [
+        "api",
+        "web-scraping",
+        "automation",
+        "python"
+      ],
+      "summary": "Firecrawl is a web scraping service and API that converts websites into LLM-ready markdown and structured data, with built-in proxy rotation, JavaScript rendering, and rate limiting.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "python.md",
+            "why": "Firecrawl provides Python SDK"
+          },
+          {
+            "note": "marker.md",
+            "why": "Both tools convert content to markdown for LLMs"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "marker.md",
+            "why": "Marker for PDF conversion instead of web scraping"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "marker.md",
+      "title": "Marker PDF to Markdown Converter",
+      "tags": [
+        "pdf",
+        "markdown",
+        "conversion",
+        "python",
+        "api"
+      ],
+      "summary": "Marker is a high-quality PDF to markdown converter optimized for LLM consumption, handling complex layouts, tables, equations, and producing clean, structured markdown output.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "python.md",
+            "why": "Marker provides Python SDK"
+          },
+          {
+            "note": "firecrawl.md",
+            "why": "Both tools convert content to markdown for LLMs"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "firecrawl.md",
+            "why": "Firecrawl for web scraping instead of PDF conversion"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "perplexity.md",
+      "title": "Perplexity AI API",
+      "tags": [
+        "api",
+        "ai",
+        "search",
+        "llm"
+      ],
+      "summary": "Perplexity provides an OpenAI-compatible API for their online LLMs with real-time search capabilities, enabling up-to-date information retrieval through AI-powered search.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "openai_responses_python.md",
+            "why": "Perplexity uses OpenAI-compatible API format"
+          },
+          {
+            "note": "openrouter_openai_python_sdk.md",
+            "why": "Both provide OpenAI-compatible endpoints for alternative models"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "openrouter_openai_python_sdk.md",
+            "why": "OpenRouter for broader model access without built-in search"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "filesystem.md",
+      "title": "Filesystem MCP Server",
+      "tags": [
+        "mcp",
+        "filesystem",
+        "tools",
+        "api"
+      ],
+      "summary": "MCP server providing secure file system operations with explicit user consent for each directory access, enabling agents to read, write, search, and manage files.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Need to understand MCP protocol"
+          },
+          {
+            "note": "mcp_tools.md",
+            "why": "Filesystem implements MCP tools"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "agent_mcp_apis.md",
+            "why": "Agents use filesystem tools via MCP"
+          },
+          {
+            "note": "mcp_security.md",
+            "why": "Filesystem access requires careful security considerations"
+          }
+        ],
+        "extends": [
+          {
+            "note": "mcp_tools.md",
+            "why": "Implements MCP tool specification for file operations"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "foundry_local.md",
+      "title": "Windows Foundry Local with C#/.NET",
+      "tags": [
+        "reference",
+        "guide",
+        "api",
+        "best-practices"
+      ],
+      "summary": "Windows Foundry Local is Microsoft's desktop runtime for serving AI models locally on Windows and macOS, providing privacy-preserving, low-latency AI inference with OpenAI-compatible APIs and .NET integration.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "dotnet.md",
+            "why": ".NET knowledge required for Foundry Local C# integration"
+          },
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Foundry Local sits as model management layer in Windows AI stack"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "windows_ml.md",
+            "why": "Foundry Local uses Windows ML and ONNX Runtime underneath"
+          },
+          {
+            "note": "onnx_runtime.md",
+            "why": "Foundry Local leverages ONNX Runtime for model serving"
+          },
+          {
+            "note": "copilot_runtime.md",
+            "why": "Both provide local AI capabilities on Windows"
+          },
+          {
+            "note": "openai_responses_python.md",
+            "why": "Foundry Local provides OpenAI-compatible API"
+          }
+        ],
+        "extends": [
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Adds local model serving layer to Windows AI stack"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "openrouter_openai_python_sdk.md",
+            "why": "Cloud-based alternative to local model serving"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "motion_canvas_cheatsheet.md",
+      "title": "Motion Canvas Comprehensive Cheatsheet",
+      "tags": [
+        "reference",
+        "api",
+        "patterns"
+      ],
+      "summary": "Motion Canvas is a TypeScript-based animation library for creating programmatic animations with code, providing React-like JSX syntax, signal-based reactivity, and timeline control for video content creation.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "typescript.md",
+            "why": "Motion Canvas uses TypeScript"
+          },
+          {
+            "note": "node.md",
+            "why": "Motion Canvas runs on Node.js runtime"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "react_framework.md",
+            "why": "Motion Canvas uses React-like JSX component syntax"
+          },
+          {
+            "note": "vite.md",
+            "why": "Motion Canvas projects typically use Vite for bundling"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "cargo.md",
+      "title": "Comprehensive Cargo Cheatsheet & Reference Guide",
+      "tags": [
+        "rust",
+        "cargo",
+        "build-tools",
+        "package-manager",
+        "reference",
+        "cheatsheet"
+      ],
+      "summary": "Cargo is Rust's package manager and build tool providing project creation, dependency management, building, testing, documentation, and publishing capabilities with workspace support for multi-crate projects.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "powershell.md",
+            "why": "Cargo used from PowerShell command line on Windows"
+          },
+          {
+            "note": "uv.md",
+            "why": "Similar workspace management concepts between Cargo and uv"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "burn.md",
+            "why": "Burn projects use Cargo for dependency and build management"
+          },
+          {
+            "note": "cli.md",
+            "why": "Cargo used to build and run Rust CLI applications"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "burn.md",
+      "title": "Burn Rust Deep Learning Framework - Comprehensive Cheatsheet",
+      "tags": [
+        "rust",
+        "ml",
+        "deep-learning",
+        "framework",
+        "burn",
+        "tensors"
+      ],
+      "summary": "Burn is a Rust deep learning framework providing flexible dynamic computational graphs, multi-backend support (CPU, GPU, WebGPU), automatic kernel fusion, JIT compilation, and memory safety through Rust's type system.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "cargo.md",
+            "why": "Cargo required to build and manage Burn dependencies"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "cubecl.md",
+            "why": "CubeCL provides GPU compute backend for Burn"
+          },
+          {
+            "note": "numpy_pytorch_rust_guide.md",
+            "why": "Burn tensors are Rust equivalent to NumPy/PyTorch tensors"
+          },
+          {
+            "note": "optimization.md",
+            "why": "Burn includes optimization algorithms for training"
+          },
+          {
+            "note": "cpu_vs_gpu_decision_guide.md",
+            "why": "Burn supports both CPU and GPU backends with different characteristics"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "cubecl.md",
+      "title": "CubeCL: Comprehensive Guide & Cheatsheet",
+      "tags": [
+        "reference",
+        "guide",
+        "api",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "CubeCL is a multi-platform GPU compute language extension for Rust enabling GPU kernel writing in Rust syntax with automatic vectorization, comptime optimizations, and support for CUDA, WebGPU, ROCm, Metal, and Vulkan.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "cargo.md",
+            "why": "Cargo needed to build CubeCL projects"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "burn.md",
+            "why": "CubeCL provides GPU compute backend for Burn framework"
+          },
+          {
+            "note": "numpy_pytorch_rust_guide.md",
+            "why": "CubeCL Array type is GPU equivalent to NumPy/PyTorch tensors"
+          },
+          {
+            "note": "cpu_vs_gpu_decision_guide.md",
+            "why": "CubeCL implements GPU computing for high-parallelism tasks"
+          },
+          {
+            "note": "nvidia_small.md",
+            "why": "CubeCL can target NVIDIA GPUs via CUDA backend"
+          },
+          {
+            "note": "optimization.md",
+            "why": "CubeCL includes optimization features like autotuning and kernel fusion"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "cli.md",
+      "title": "The Complete Guide to Building Amazing CLI Applications in Rust",
+      "tags": [
+        "cli",
+        "tutorial",
+        "guide",
+        "api",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "Comprehensive guide for building Rust CLI applications using clap for argument parsing, indicatif for progress bars, dialoguer for interactive prompts, colored and crossterm for terminal styling.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "cargo.md",
+            "why": "Cargo used to build and manage CLI application dependencies"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "powershell.md",
+            "why": "Both provide CLI interfaces with similar command patterns"
+          },
+          {
+            "note": "best_practices.md",
+            "why": "CLI guide demonstrates Rust best practices for argument parsing"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "powershell.md",
+            "why": "PowerShell alternative for Windows CLI automation"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "best_practices.md",
+      "title": "Rust Best Practices - Distilled",
+      "tags": [
+        "reference",
+        "guide",
+        "api",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "Concise guide to idiomatic Rust patterns covering import conventions, type-safe enum-based configuration for CLI arguments, and smart pointer selection (Arc vs Vec) for efficient memory management.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "cli.md",
+            "why": "Best practices demonstrate enum-based CLI argument handling"
+          },
+          {
+            "note": "cargo.md",
+            "why": "Cargo project structure follows Rust best practices"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": [
+          {
+            "note": "cli.md",
+            "why": "CLI guide shows practical application of best practices"
+          },
+          {
+            "note": "burn.md",
+            "why": "Burn framework follows Rust best practices"
+          }
+        ]
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "numpy_pytorch_rust_guide.md",
+      "title": "NumPy to PyTorch to Rust (Burn & CubeCL) Tensor Translation Guide",
+      "tags": [
+        "rust",
+        "reference",
+        "guide",
+        "api",
+        "patterns"
+      ],
+      "summary": "Comprehensive translation guide between NumPy arrays, PyTorch tensors, and their Rust equivalents in Burn and CubeCL, covering tensor creation, operations, slicing, and migration strategies.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "python.md",
+            "why": "Need Python knowledge for NumPy/PyTorch sections"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "burn.md",
+            "why": "Guide covers Burn tensor API as Rust equivalent to PyTorch"
+          },
+          {
+            "note": "cubecl.md",
+            "why": "Guide covers CubeCL Array API for GPU computing"
+          },
+          {
+            "note": "python.md",
+            "why": "NumPy and PyTorch are Python libraries"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "optimization.md",
+      "title": "Optimization and Constraint Satisfaction Cheat Sheet for Computer Scientists",
+      "tags": [
+        "optimization",
+        "reference",
+        "guide"
+      ],
+      "summary": "Overview of constraint satisfaction problems (CSPs) and constrained optimization covering backtracking, constraint propagation, Lagrange multipliers, KKT conditions, and applications in scheduling, planning, and resource allocation.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "game_theory.md",
+            "why": "Both provide mathematical frameworks for decision-making"
+          },
+          {
+            "note": "bayes_theory.md",
+            "why": "Optimization used in Bayesian inference algorithms"
+          },
+          {
+            "note": "burn.md",
+            "why": "Burn includes optimization algorithms for deep learning"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "cpu_vs_gpu_decision_guide.md",
+      "title": "CPU vs. GPU for High-Intensity Computing: A Decision Guide for Software Systems",
+      "tags": [
+        "gpu",
+        "guide",
+        "api",
+        "patterns"
+      ],
+      "summary": "Decision framework for selecting CPU or GPU for high-intensity computing tasks based on computational nature, parallelizability, memory patterns, and latency vs throughput requirements.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "burn.md",
+            "why": "Burn supports both CPU and GPU backends"
+          },
+          {
+            "note": "cubecl.md",
+            "why": "CubeCL provides GPU computing capabilities"
+          },
+          {
+            "note": "nvidia_small.md",
+            "why": "GPU considerations for running AI models"
+          },
+          {
+            "note": "onnx_runtime.md",
+            "why": "ONNX Runtime supports both CPU and GPU execution"
+          },
+          {
+            "note": "windows_ml.md",
+            "why": "Windows ML supports CPU and GPU hardware acceleration"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "nvidia_small.md",
+      "title": "NVIDIA's Small Language Models: The Future of Agentic AI",
+      "tags": [
+        "gpu"
+      ],
+      "summary": "NVIDIA research validating small language models (SLMs) under 10B parameters as superior to large models for agentic AI, demonstrating sufficient power, economic advantages, and operational excellence with heterogeneous architecture recommendations.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "SLMs designed specifically for agentic AI systems"
+          },
+          {
+            "note": "llm_evolve.md",
+            "why": "SLMs represent evolution toward efficient, specialized models"
+          },
+          {
+            "note": "micro_prompt.md",
+            "why": "Micro-prompting with SLMs for decomposed task execution"
+          },
+          {
+            "note": "cpu_vs_gpu_decision_guide.md",
+            "why": "SLMs enable edge deployment with consumer-grade hardware"
+          },
+          {
+            "note": "cubecl.md",
+            "why": "CubeCL can accelerate SLM inference on multiple GPU platforms"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "style_technical.md",
+      "title": "Technical Writing Style Guide",
+      "tags": [
+        "writing",
+        "style-guide",
+        "technical-writing",
+        "citations",
+        "methodology",
+        "best-practices"
+      ],
+      "summary": "Comprehensive technical writing style guide built on question-oriented methodology, emphasizing Paul Graham's conversational authority, precision over padding, showing rather than telling, and mandatory primary source citations in IEEE format. Every piece of content must answer a clear reader question without explicitly stating questions.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "strategy_technical_chapter_plan.md",
+            "why": "Style guide complements strategic chapter planning by providing voice and citation standards"
+          },
+          {
+            "note": "role_technical_author.md",
+            "why": "Style guide defines how technical authors should write"
+          },
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Style guide implements question-oriented methodology through implicit question structure"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "style_business.md",
+            "why": "Different writing style for business vs technical audiences"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "style_business.md",
+      "title": "Business Writing Style Guide",
+      "tags": [
+        "writing",
+        "reference",
+        "guide",
+        "patterns"
+      ],
+      "summary": "Professional business writing guide emphasizing direct communication, logical organization, constructive feedback, and avoiding hyperbole, flowery language, or corporate jargon. Maintains conversational professionalism while being precise and evidence-based.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "role_technical_author.md",
+            "why": "Business style complements technical author role for stakeholder communication"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "style_technical.md",
+            "why": "Different writing style for business vs technical audiences"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "role_technical_author.md",
+      "title": "Role: Technical Book Author",
+      "tags": [
+        "writing",
+        "role",
+        "technical-writing",
+        "pedagogy",
+        "documentation",
+        "process"
+      ],
+      "summary": "Technical book author role definition emphasizing question-oriented knowledge structure, research methodology with primary sources, progressive curriculum design, code integration for pedagogy, and IEEE citation standards. Book is primary deliverable with code serving educational purpose.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "style_technical.md",
+            "why": "Technical author role implements technical style guide principles"
+          },
+          {
+            "note": "style_business.md",
+            "why": "Technical author may use business style for stakeholder communication"
+          },
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Technical author applies question-oriented methodology to book structure"
+          },
+          {
+            "note": "python_role.md",
+            "why": "Similar role definition pattern for different domain"
+          },
+          {
+            "note": "typescript_role.md",
+            "why": "Similar role definition pattern for different domain"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "x_engagement_strategy.md",
+      "title": "Comprehensive X Engagement Strategy: Building Thought Leadership in Cognitive AI Agents",
+      "tags": [
+        "strategy",
+        "reference",
+        "tutorial",
+        "guide",
+        "best-practices",
+        "patterns"
+      ],
+      "summary": "Complete X (Twitter) engagement strategy for establishing expertise in cognitive AI agents, covering profile optimization, content strategy across three pillars (Future of Work, Cognitive AI Agents, Operating Systems in AI Era), posting tactics, safety boundaries, growth metrics, and authenticity framework avoiding academic language patterns.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "x_style_guide.md",
+            "why": "Strategy provides overall approach while style guide defines specific voice patterns"
+          },
+          {
+            "note": "x_style_research.md",
+            "why": "Strategy built on research of successful X posting styles"
+          },
+          {
+            "note": "li_engagement_strategy.md",
+            "why": "Parallel engagement strategy for LinkedIn with professional adaptations"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "x_posts.md",
+            "why": "Posts implement the engagement strategy in practice"
+          }
+        ],
+        "alternatives": [
+          {
+            "note": "li_engagement_strategy.md",
+            "why": "Different platform with different content approach and audience"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "x_posts.md",
+      "title": "X Posts Archive",
+      "tags": [
+        "content-strategy"
+      ],
+      "summary": "Archive of actual X posts demonstrating implementation of cognitive AI engagement strategy, capturing real-world examples of thought leadership content.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "x_engagement_strategy.md",
+            "why": "Posts implement the strategy defined in engagement guide"
+          },
+          {
+            "note": "x_style_guide.md",
+            "why": "Posts follow the Karpathy-Blow-Carmack style synthesis"
+          }
+        ],
+        "related_concepts": [],
+        "extends": [
+          {
+            "note": "x_engagement_strategy.md",
+            "why": "Provides concrete examples of strategy implementation"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "x_style_guide.md",
+      "title": "Twitter Style Guide: The Karpathy-Blow-Carmack Synthesis",
+      "tags": [
+        "writing",
+        "reference",
+        "guide",
+        "patterns"
+      ],
+      "summary": "Comprehensive X (Twitter) style guide synthesizing Andrej Karpathy's philosophical technologist voice, Jonathan Blow's critical craftsman approach, and John Carmack's pragmatic engineer wisdom. Provides content categories, language patterns, tweet structure templates, and quality checklist for technical thought leadership.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "x_engagement_strategy.md",
+            "why": "Style guide defines voice patterns that support engagement strategy"
+          },
+          {
+            "note": "x_style_research.md",
+            "why": "Style guide built from research on successful X influencers"
+          },
+          {
+            "note": "style_technical.md",
+            "why": "Both define writing style but for different mediums and audiences"
+          }
+        ],
+        "extends": [
+          {
+            "note": "x_style_research.md",
+            "why": "Synthesizes research into actionable style framework"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "x_style_research.md",
+      "title": "X Posting Style Research: Karpathy, Blow, and Carmack Analysis",
+      "tags": [
+        "writing",
+        "guide",
+        "api",
+        "patterns"
+      ],
+      "summary": "Detailed analysis of X posting habits from three prominent tech influencers (Andrej Karpathy, Jonathan Blow, John Carmack) examining tweeting styles, typical content, tone approaches, and common patterns. Research foundation for developing authentic technical thought leadership voice.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "x_engagement_strategy.md",
+            "why": "Research informs engagement strategy development"
+          },
+          {
+            "note": "x_style_guide.md",
+            "why": "Research synthesized into actionable style guide"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "x_style_guide.md",
+            "why": "Research patterns synthesized into comprehensive style framework"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "li_engagement_strategy.md",
+      "title": "LinkedIn Engagement Strategy Guide for Thought Leadership in Cognitive AI",
+      "tags": [
+        "strategy",
+        "guide",
+        "api",
+        "patterns",
+        "content-strategy"
+      ],
+      "summary": "LinkedIn engagement strategy adapting X approach for professional long-form content, emphasizing cognitive AI, future of work, and book updates. Includes profile optimization, 2-3 weekly posts, multimedia content (articles, carousels, videos), professional authenticity framework avoiding consulting speak, and business context integration.",
+      "relationships": {
+        "prerequisites": [],
+        "related_concepts": [
+          {
+            "note": "x_engagement_strategy.md",
+            "why": "Parallel engagement strategy with professional adaptations for LinkedIn platform"
+          },
+          {
+            "note": "style_business.md",
+            "why": "LinkedIn strategy incorporates business writing principles for professional audience"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "x_engagement_strategy.md",
+            "why": "Different platform requiring longer-form professional content vs X's concise technical insights"
+          }
+        ],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    },
+    {
+      "filename": "adding_to_claude_code.md",
+      "title": "Adding MCP Servers to Claude Code",
+      "tags": [
+        "claude",
+        "agents",
+        "configuration",
+        "deployment",
+        "tutorial",
+        "guide"
+      ],
+      "summary": "Comprehensive guide for adding and managing Model Context Protocol (MCP) servers to Claude Code CLI, covering commands (list, add, add-json, remove, get), configuration scopes, platform-specific considerations (Windows cmd wrapper, Unix npx), common server examples (Perplexity, filesystem, GitHub), and troubleshooting.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Need to understand MCP fundamentals before configuring servers"
+          },
+          {
+            "note": "mcp_architecture.md",
+            "why": "Understanding MCP architecture helps with server configuration"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "agents.md",
+            "why": "MCP servers extend agent capabilities in Claude Code"
+          },
+          {
+            "note": "mcp_implementation.md",
+            "why": "Related to implementing MCP in practice"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      },
+      "forward_pass_complete": true,
+      "backward_pass_complete": false
+    }
+  ]
+}

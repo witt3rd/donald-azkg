@@ -1,10 +1,11 @@
 {
   "permissions": {
-    "additionalDirectories": [
-      "c:\\Users\\donal\\OneDrive\\Documents\\PowerShell\\"
-    ],
     "allow": [
-      "mcp__perplexity-ask__perplexity_ask"
-    ]
+      "Bash(pwsh:*)",
+      "Bash(python3:*)",
+      "Bash(python -c \"import json, sys; data = json.load(open(''''C:/Users/dothompson/OneDrive/src/witt3rd/llm-docs/knowledge_graph_full.json'''')); print(''''JSON validated'''')\")"
+    ],
+    "deny": [],
+    "ask": []
   }
 }

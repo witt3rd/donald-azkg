@@ -1,3 +1,7 @@
+---
+tags: [gpu, guide, api, patterns]
+---
+
 # CPU vs. GPU for High-Intensity Computing: A Decision Guide for Software Systems
 
 When designing software systems for high-intensity computing tasks, selecting the appropriate processor—CPU or GPU—is essential for achieving optimal performance. CPUs and GPUs have distinct architectural strengths, making them suited to different types of workloads. This guide outlines the key differences, provides a decision-making framework, and offers examples of tasks best suited for each processor type to help developers make informed choices for future software systems.
