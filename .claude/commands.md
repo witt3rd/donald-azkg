@@ -2,42 +2,64 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 
   Core Creation & Expansion
 
-  /create-note [topic] - Guided atomic note creation
+  /create-note [topic] - ✅ IMPLEMENTED - Guided atomic note creation
 
 - Check for duplicate concepts in existing notes
 - Research topic via Perplexity
 - Generate initial structured content
 - Discover relationships to existing notes (auto-expansion!)
-- Add to appropriate batch in knowledge_graph_full.json
+- Add to appropriate batch via `.claude/scripts/add_note.py`
 - Auto-generate 3-6 tags using tag_system.md catalog
 - Update relevant MOC files
+- Auto-validates graph integrity after creation using `/graph-validate`
 
-  /expand-graph [note.md] - Discover missing relationships
+  /expand-graph [note.md] - ✅ IMPLEMENTED - Discover missing relationships
 
-- Analyze note content for implicit connections
-- Search existing notes for unlinked related concepts
-- Research (Perplexity) to discover prerequisite chains
-- Suggest new typed relationships with "why" explanations
+- Multi-strategy relationship discovery (content search, tags, wikilinks, Perplexity)
+- Confidence scoring (high/medium/low with evidence)
+- Classify relationships by type (prerequisites, related, extends, examples, alternatives)
+- Interactive review mode with approval workflow
 - Update knowledge_graph_full.json bidirectionally
 - Sync to "Related Concepts" sections
+- Comprehensive completion report with statistics
 
-  /link-notes [note1.md] [note2.md] [relationship-type] - Manual relationship creation
+  Graph Operations
 
-- Prompt for "why" explanation
-- Establish bidirectional link (e.g., extends ↔ extended_by)
-- Update JSON and both markdown files
-- Validate relationship makes semantic sense
+  /graph-validate - ✅ IMPLEMENTED - Run integrity checks
 
-  Graph Integrity
+- Verify metadata counts match actual counts
+- Check all batch references point to existing notes
+- Validate all relationship targets exist
+- Check bidirectionality consistency (extends ↔ extended_by)
+- Uses `.claude/scripts/validate_graph.py`
+- Exit code 0 (valid) or 1 (errors)
 
-  /validate-graph - Comprehensive integrity check
+  /graph-stats - ✅ IMPLEMENTED - Display graph statistics
 
-- Verify all wikilinks point to existing files
-- Check bidirectionality consistency
-- Detect orphaned notes (no incoming/outgoing links)
-- Find circular dependencies in prerequisite chains
-- Report notes in JSON but missing as files
-- Validate relationship types are valid
+- Total notes and batches
+- Relationship counts by type
+- Unique tag count and top 10 tags
+- Uses `.claude/scripts/query_graph.py stats`
+
+  /graph-note [filename] - ✅ IMPLEMENTED - Show note details
+
+- Display title, tags, summary
+- Complete relationship breakdown with "why" explanations
+- Uses `.claude/scripts/query_graph.py note`
+
+  /graph-batch [name] - ✅ IMPLEMENTED - Show batch contents
+
+- Display batch number, name, note count
+- List all notes in batch with titles
+- Uses `.claude/scripts/query_graph.py batch`
+
+  /graph-add-relationship [source] [target] [type] [why] - ✅ IMPLEMENTED - Add relationships
+
+- Establish typed relationship with explanation
+- Optional bidirectional link (e.g., extends ↔ extended_by)
+- Uses `.claude/scripts/add_relationship.py`
+- Validates both notes exist and type is valid
+- Updates metadata timestamp
 
   /sync-graph - Force synchronization
 
@@ -103,12 +125,20 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 - Update wikilinks in other notes
 - Update knowledge graph
 
-  My Top 5 Recommendations
+  Implemented Commands Summary
 
-  1. /create-note - Most frequent operation, high automation value
-  2. /expand-graph - Your exact use case, combines research + relationship discovery
-  3. /validate-graph - Essential for maintaining graph integrity
-  4. /find-gaps - Proactive knowledge discovery
-  5. /learning-path - High user value, showcases graph power
+  ✅ /create-note - Create atomic notes with research and relationship discovery
+  ✅ /expand-graph - Auto-discover missing relationships with multi-strategy analysis
+  ✅ /graph-validate - Check graph integrity
+  ✅ /graph-stats - View graph statistics
+  ✅ /graph-note - Inspect note details and relationships
+  ✅ /graph-batch - View batch contents
+  ✅ /graph-add-relationship - Manually add relationships
 
-  Want me to implement any of these? I'd suggest starting with /create-note and /expand-graph since they directly support your research and creation workflow.
+  High-Value Next Implementations
+
+  1. /sync-graph - Rebuild "Related Concepts" sections from JSON
+  2. /find-gaps - Identify missing knowledge areas
+  3. /learning-path - Generate prerequisite learning sequences
+  4. /generate-moc - Auto-generate Maps of Content by tag/domain
+  5. /search-notes - Search with context across all notes
