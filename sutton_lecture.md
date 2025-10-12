@@ -7,7 +7,6 @@ video_id: IKFqk3fjESk
 tags: ["nus120", "distinguished", "speaker", "series", "professor"]
 authors: ["NUScast"]
 ---
-
 # Understanding the Future of AI and Reinforcement Learning: Insights from Dr. Richard Sutton
 
 ## Central Question Statement

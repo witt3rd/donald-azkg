@@ -1,7 +1,6 @@
 ---
 tags: [strategy, reference, tutorial, guide, api, patterns]
 ---
-
 # Comprehensive Chapter Writing Guidelines
 
 This document provides complete guidelines for planning, preparing, and tracking chapters with question-oriented methodology, research rigor, and optimal pedagogical flow.

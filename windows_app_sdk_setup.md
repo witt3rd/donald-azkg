@@ -1,7 +1,6 @@
 ---
 tags: [windows, reference, guide, api, best-practices, patterns]
 ---
-
 # Windows App SDK Setup Guide for CMake C++ Projects
 
 ## Overview

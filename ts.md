@@ -1,7 +1,6 @@
 ---
 tags: [typescript, guide, api, best-practices, patterns]
 ---
-
 # TypeScript 5.8 Features & Best Practices Guide
 
 ## Overview

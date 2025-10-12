@@ -1,7 +1,6 @@
 ---
 tags: [reference, guide, python]
 ---
-
 ## uv Support for Workspaces and Projects
 
 uv fully supports workspaces, inspired by the Cargo model from Rust. A _workspace_ in uv is a collection of one or more packages (workspace members) managed together, each with its own `pyproject.toml`, but sharing a single lockfile for consistent dependency resolution across the entire workspace[1][4]. This setup is ideal for organizing large codebases, such as a technical book with shared code and per-chapter examples.

@@ -1,7 +1,6 @@
 ---
 tags: [moc, writing, documentation, technical-writing]
 ---
-
 # Technical Writing - Map of Content
 
 This MOC connects all notes related to technical writing, documentation, and content creation.

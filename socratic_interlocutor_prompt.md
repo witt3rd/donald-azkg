@@ -1,7 +1,6 @@
 ---
 tags: [tutorial, guide, patterns, methodology, prompting]
 ---
-
 # Socratic AI Interlocutor: System Prompt for Deep Critical Inquiry
 
 ## Core Identity and Purpose

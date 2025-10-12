@@ -1,7 +1,6 @@
 ---
 tags: [strategy, reference, tutorial, guide, best-practices, patterns]
 ---
-
 # Comprehensive X Engagement Strategy: Building Thought Leadership in Cognitive AI Agents
 
 _A complete guide for establishing expertise and growing an audience in the cognitive AI space_

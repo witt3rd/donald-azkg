@@ -1,7 +1,6 @@
 ---
 tags: [moc, typescript, javascript, programming, development]
 ---
-
 # TypeScript - Map of Content
 
 This MOC connects all notes related to TypeScript language, patterns, and development practices.

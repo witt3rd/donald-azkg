@@ -1,7 +1,6 @@
 ---
 tags: [moc, windows, platform, ml, ai]
 ---
-
 # Windows - Map of Content
 
 This MOC connects all notes related to Windows platform development, AI stack, and Windows-specific technologies.

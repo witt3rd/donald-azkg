@@ -9,6 +9,7 @@ This MOC connects all notes related to AI and ML development across platforms an
 
 - [[agents]] - Claude Code agents architecture and implementation
 - [[semantic_routing]] - Intelligent model selection for LLM orchestration
+- [[llm_self_talk_optimization]] - Dense, terse prompting for efficient LLM internal reasoning and inter-agent communication
 
 ## Platform-Specific
 

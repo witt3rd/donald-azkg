@@ -1,7 +1,6 @@
 ---
 tags: [tailwind, css, styling, ui, framework, design-system]
 ---
-
 # Tailwind CSS 4.0 Best Practices & Configuration Guide
 
 ## Overview

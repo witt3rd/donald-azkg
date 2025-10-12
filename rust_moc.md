@@ -1,7 +1,6 @@
 ---
 tags: [moc, rust, programming, development]
 ---
-
 # Rust - Map of Content
 
 This MOC connects all notes related to Rust language, tools, and frameworks.

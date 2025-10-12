@@ -1,7 +1,6 @@
 ---
 tags: [writing, guide, api, patterns]
 ---
-
 ### Key Points
 
 - Research suggests Andrej Karpathy’s X posts mix technical insights, humor, and personal reflections, often sparking curiosity.

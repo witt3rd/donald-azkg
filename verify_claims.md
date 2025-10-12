@@ -1,7 +1,6 @@
 ---
 tags: [ai, verification]
 ---
-
 # Unquantified Claims Checker Process
 
 1. **Identify Unquantified Claims**

@@ -1,7 +1,6 @@
 ---
 tags: [windows, ml, api, directml, onnx, csharp]
 ---
-
 # The Relationship Between Windows ML and DirectML
 
 **Windows ML is an evolution of DirectML** that represents Microsoft's next-generation machine learning platform for Windows, designed to simplify AI deployment while maintaining high performance across diverse hardware configurations.[1][2]

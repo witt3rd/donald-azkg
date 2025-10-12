@@ -1,7 +1,6 @@
 ---
 tags: [ai, routing, llm, inference, optimization]
 ---
-
 # Semantic Routing for LLM Inference
 
 Semantic routing models in LLM inference serving systems use lightweight neural classifiers, semantic embeddings, and task-type detection to classify incoming requests and route them efficiently to the most appropriate model instance—whether SLM (Small Language Model), SRM (Small Reasoning Model), LLM (Large Language Model), or LRM (Large Reasoning Model)—based on estimated complexity, domain, and reasoning requirements.

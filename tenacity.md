@@ -1,7 +1,6 @@
 ---
 tags: [api, best-practices, python]
 ---
-
 # Best Practices for Using Tenacity in Python
 
 ## Overview

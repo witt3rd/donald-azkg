@@ -1,7 +1,6 @@
 ---
 tags: [api, python, development]
 ---
-
 # YouTube Transcript API Documentation
 
 **Context7 Library ID:** `/jdepoix/youtube-transcript-api`

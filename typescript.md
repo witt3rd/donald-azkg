@@ -1,7 +1,6 @@
 ---
 tags: [typescript, javascript, types, async, programming, guide]
 ---
-
 # TypeScript React Developer - Modern Stack Coding Standards
 
 ## Core Technology Stack Standards

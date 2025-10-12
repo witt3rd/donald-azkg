@@ -10,6 +10,7 @@ This MOC connects all notes related to AI agents, agentic workflows, and agent a
 - [[agents]] - Complete guide to Claude Code agents including architecture, API usage, and implementation patterns
 - [[semantic_routing]] - Intelligent model selection based on query semantics for optimal LLM routing
 - [[react_agent_pattern]] - Design pattern for building AI agents using React as the UI framework
+- [[llm_self_talk_optimization]] - Token-efficient prompting technique for LLM-to-LLM communication in multi-agent systems
 
 ## Integration & APIs
 

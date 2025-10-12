@@ -1,7 +1,6 @@
 ---
 tags: [strategy, reference, guide, patterns]
 ---
-
 # The Critical Assessment Framework: Question-Oriented Evaluation of Knowledge Works
 
 **A Systematic Methodology for Identifying Weaknesses in Thinking, Arguments, and Intellectual Rigor**

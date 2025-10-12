@@ -1,7 +1,6 @@
 ---
 tags: [content-strategy]
 ---
-
 # X Posts Archive
 
 ---

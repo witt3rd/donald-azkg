@@ -1,7 +1,6 @@
 ---
 tags: [meta, system, reference]
 ---
-
 # Tag System Catalog
 
 This is the living reference for the tag system used throughout this repository. Tags enable multi-dimensional discovery across the knowledge network.

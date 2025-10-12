@@ -1,7 +1,6 @@
 ---
 tags: [theory, development]
 ---
-
 # Type Theory Cheat Sheet for Computer Scientists
 
 ## Key Points

@@ -1,7 +1,6 @@
 ---
 tags: [strategy, methodology, thinking, problem-solving, innovation, mental-models]
 ---
-
 # How Do We Solve Complex Problems by Reasoning from Fundamental Truths Rather Than Assumptions?
 
 _A Question-Oriented Analysis of First Principles Thinking_

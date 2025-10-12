@@ -1,7 +1,6 @@
 ---
 tags: [writing, reference, guide, patterns]
 ---
-
 # Twitter Style Guide: The Karpathy-Blow-Carmack Synthesis
 
 _A comprehensive guide for writing resonant, insightful technical tweets_

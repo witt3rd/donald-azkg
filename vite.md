@@ -1,7 +1,6 @@
 ---
 tags: [vite, build-tools, react, typescript, tailwind, configuration]
 ---
-
 # Vite 6 Best Practices & Configuration Guide
 
 ## Overview

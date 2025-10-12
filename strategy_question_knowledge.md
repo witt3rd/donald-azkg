@@ -1,7 +1,6 @@
 ---
 tags: [strategy, reference, guide, patterns, methodology]
 ---
-
 # The Question-Oriented Approach: A Systematic Method for Complex Knowledge Architecture
 
 The question-oriented approach is a rigorous methodology for organizing and presenting complex information by anchoring every piece of work around a central question it seeks to answer. This approach transforms scattered knowledge into coherent understanding by creating a hierarchical "question tree" where each branch contributes systematically to answering the core inquiry. The method scales from simple topics to the most sophisticated interdisciplinary challenges, making it particularly powerful for complex technical and research domains.

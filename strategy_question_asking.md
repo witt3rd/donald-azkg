@@ -1,7 +1,6 @@
 ---
 tags: [strategy, guide, methodology]
 ---
-
 ### Key Points
 
 - Precision questioning is likely a structured method for asking focused questions to clarify thinking, often used in business.

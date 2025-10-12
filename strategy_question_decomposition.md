@@ -1,7 +1,6 @@
 ---
 tags: [strategy, guide, api, patterns, methodology]
 ---
-
 # The Hypothesis-Driven Question Decomposition Method
 
 ## Core Principle: Decomposition as Theory Building

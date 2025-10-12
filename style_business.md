@@ -1,7 +1,6 @@
 ---
 tags: [writing, reference, guide, patterns]
 ---
-
 # Writing Style Guide
 
 This style guide provides tone, structure, and language preferences with actionable guidelines to ensure clarity, professionalism, and logical flow in writing, while avoiding common pitfalls. The guide is divided into two sections: **DOs** and **DON'Ts**. Each guideline under **DOs** includes 1-3 examples, while the **DON'Ts** prescribe style and content, such as the absence of hyperbole, flowery language, or corporate jargon.

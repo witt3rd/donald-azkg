@@ -1,7 +1,6 @@
 ---
 tags: [windows, ai, ml, architecture, onnx, directml]
 ---
-
 # Windows AI Stack Explained: Complete Architecture Guide
 
 ## Executive Summary

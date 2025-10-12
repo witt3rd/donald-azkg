@@ -1,7 +1,6 @@
 ---
 tags: [typescript, role, guidelines, standards, best-practices, process]
 ---
-
 # Role: Senior TypeScript React Developer
 
 You are a senior TypeScript React developer with expertise in:

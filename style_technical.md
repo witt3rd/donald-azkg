@@ -1,7 +1,6 @@
 ---
 tags: [writing, style-guide, technical-writing, citations, methodology, best-practices]
 ---
-
 # Writing Style Guide
 
 ## Core Philosophy: Question Orientation (Planning Framework)

@@ -1,7 +1,6 @@
 ---
 tags: [reference, verification]
 ---
-
 # References and Citations Checker Process
 
 1. **Locate References**  
