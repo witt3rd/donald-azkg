@@ -146,70 +146,64 @@ Complete, self-contained explanation organized into logical sections.
 
 ## 7. Update Knowledge Graph
 
-**Read `knowledge_graph_full.json`**
+**Use .claude/scripts/add_note.py to update graph**
+
+**Note:** The knowledge graph JSON is too large to fit in context window. Use the generic Python scripts in `.claude/scripts/` directory instead of direct manipulation.
 
 **Determine appropriate batch:**
-- Review existing batches (Core AI/Agents, MCP Protocol, Python Stack, etc.)
+- Review existing batches using `python .claude/scripts/query_graph.py metadata`
+- Common batches: Core AI/Agents, MCP Protocol, Python Stack, Rust Stack, TypeScript Stack, Windows Platform, Writing & Strategy
 - Place in most semantically appropriate batch
 - If unclear, suggest new batch or add to most relevant existing
 
-**Update the JSON structure:**
-
-1. **Add note to batch:**
+**Prepare relationships JSON:**
+Build a relationships object with discovered relationships:
 ```json
 {
-  "batch_number": N,
-  "name": "Batch Name",
-  "notes": ["existing.md", "new_note.md", ...]
+  "prerequisites": [
+    {"note": "prereq.md", "why": "explanation"}
+  ],
+  "related_concepts": [
+    {"note": "related.md", "why": "explanation"}
+  ],
+  "extends": [
+    {"note": "base.md", "why": "explanation"}
+  ],
+  "extended_by": [],
+  "alternatives": [
+    {"note": "alternative.md", "why": "explanation"}
+  ],
+  "examples": [
+    {"note": "example.md", "why": "explanation"}
+  ]
 }
 ```
 
-2. **Add note entry with relationships:**
-```json
-{
-  "notes": {
-    "new_note.md": {
-      "relationships": {
-        "prerequisites": [
-          {"note": "prereq.md", "why": "explanation"}
-        ],
-        "related_concepts": [
-          {"note": "related.md", "why": "explanation"}
-        ],
-        "extends": [
-          {"note": "base.md", "why": "explanation"}
-        ],
-        "extended_by": [],
-        "alternatives": [
-          {"note": "alternative.md", "why": "explanation"}
-        ],
-        "examples": [
-          {"note": "example.md", "why": "explanation"}
-        ]
-      }
-    }
-  }
-}
+**Call add_note.py script:**
+```bash
+python .claude/scripts/add_note.py \
+  "new_note.md" \
+  "Note Title" \
+  "tag1,tag2,tag3" \
+  "Brief summary" \
+  "Batch Name" \
+  '{"prerequisites": [{"note": "other.md", "why": "reason"}], ...}'
 ```
 
-3. **Establish bidirectional relationships:**
-- If new note extends `base.md`, add to base's `extended_by`
-- If new note has `example.md` as example, add to example's `extended_by`
-- Update ALL inverse relationships
+The script will:
+1. Add note entry with metadata
+2. Add to specified batch
+3. Establish bidirectional relationships automatically
+4. Update metadata (increment version, update count, set timestamp)
+5. Save graph
 
-4. **Update metadata:**
-```json
-{
-  "metadata": {
-    "version": "17.0",  // Increment version
-    "total_notes": 94,  // Increment count
-    "forward_pass_batches_complete": 12,
-    "backward_pass_complete": true
-  }
-}
+**Verify graph integrity:**
+After adding, run validation:
+```bash
+python .claude/scripts/validate_graph.py
 ```
 
-**Write updated JSON back to file**
+This ensures all relationships are valid and bidirectional consistency is maintained.
 
 ## 8. Update MOC Files
 
@@ -250,8 +244,9 @@ Created new note: `new_note.md`
 
 **Next steps:**
 - Review the note at `new_note.md`
-- Use `/expand-graph new_note.md` to discover additional relationships
-- Use `/validate-graph` to ensure graph integrity
+- Use `/graph-note new_note.md` to verify graph entry
+- Use `/graph-validate` to ensure graph integrity
+- Use `/expand-graph new_note.md` to discover additional relationships (if available)
 ```
 
 ## Important Constraints
