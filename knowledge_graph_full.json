@@ -1,12 +1,12 @@
 {
   "metadata": {
     "created": "2025-10-11",
-    "version": "16.0",
+    "version": "17.0",
     "total_notes": 93,
     "forward_pass_batches_complete": 12,
     "backward_pass_complete": true,
-    "description": "Backward pass complete - bidirectional relationships established",
-    "last_updated": "2025-10-11"
+    "description": "Added llm_self_talk_optimization.md with bidirectional relationships",
+    "last_updated": "2025-10-12"
   },
   "batches": [
     {
@@ -22,7 +22,8 @@
         "react_agent_pattern.md",
         "llm_evolve.md",
         "memory.md",
-        "verify_claims.md"
+        "verify_claims.md",
+        "llm_self_talk_optimization.md"
       ],
       "complete": true
     },
@@ -864,6 +865,10 @@
           {
             "note": "debate.md",
             "why": "Need to understand agent fundamentals before multi-agent patterns"
+          },
+          {
+            "note": "llm_self_talk_optimization.md",
+            "why": "LLM self-talk enables efficient multi-agent communication"
           }
         ],
         "alternatives": [],
@@ -1023,6 +1028,10 @@
           {
             "note": "micro_prompt.md",
             "why": "ReAct agents can use micro-prompting for decomposed reasoning steps"
+          },
+          {
+            "note": "llm_self_talk_optimization.md",
+            "why": "ReAct agents can use self-talk for compressed reasoning chains"
           }
         ],
         "extends": [
@@ -1079,7 +1088,12 @@
           }
         ],
         "extends": [],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "llm_self_talk_optimization.md",
+            "why": "Self-talk optimization leverages understanding of LLM latent space"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
@@ -2573,6 +2587,10 @@
           {
             "note": "nvidia_small.md",
             "why": "Micro-prompting with SLMs for decomposed task execution"
+          },
+          {
+            "note": "llm_self_talk_optimization.md",
+            "why": "Complementary techniques - micro-prompting decomposes, self-talk compresses"
           }
         ],
         "extends": [],
@@ -2611,6 +2629,10 @@
           {
             "note": "mcp_prompts.md",
             "why": "MCP prompts use structured formats similar to JSON prompting"
+          },
+          {
+            "note": "llm_self_talk_optimization.md",
+            "why": "Different optimization axes - JSON for structure, self-talk for density"
           }
         ],
         "extends": [],
@@ -2655,6 +2677,10 @@
           {
             "note": "llm_evolve.md",
             "why": "SPR leverages understanding of LLM latent space and architecture"
+          },
+          {
+            "note": "llm_self_talk_optimization.md",
+            "why": "Both optimize prompt efficiency - SPR via static priming, self-talk via dynamic compression"
           }
         ],
         "extends": [],
@@ -2663,6 +2689,10 @@
           {
             "note": "json_prompting.md",
             "why": "JSON provides structured control while SPR provides compressed natural language"
+          },
+          {
+            "note": "llm_self_talk_optimization.md",
+            "why": "Different approaches to prompt compression and efficiency"
           }
         ],
         "examples": []
@@ -4385,6 +4415,62 @@
       },
       "forward_pass_complete": true,
       "backward_pass_complete": true
+    },
+    {
+      "filename": "llm_self_talk_optimization.md",
+      "title": "LLM Self-Talk Optimization",
+      "tags": [
+        "llm",
+        "prompting",
+        "optimization",
+        "agents",
+        "methodology"
+      ],
+      "summary": "A prompting technique where LLMs are instructed to communicate in maximally dense, terse language optimized for their own comprehension rather than human readability.",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "agents.md",
+            "why": "Self-talk optimization enables efficient multi-agent communication"
+          },
+          {
+            "note": "llm_evolve.md",
+            "why": "Understanding of LLM latent space and internal representations required"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "spr.md",
+            "why": "Alternative compression technique for human→model priming"
+          },
+          {
+            "note": "micro_prompt.md",
+            "why": "Complementary decomposition strategy for task modularity"
+          },
+          {
+            "note": "json_prompting.md",
+            "why": "Structured output control (different optimization axis)"
+          },
+          {
+            "note": "react_agent_pattern.md",
+            "why": "Can use self-talk for compressed reasoning chains"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [
+          {
+            "note": "spr.md",
+            "why": "SPR uses static keyword priming vs dynamic recursive compression"
+          }
+        ],
+        "examples": [
+          {
+            "note": "agents.md",
+            "why": "Multi-agent systems benefit from inter-agent self-talk compression"
+          }
+        ]
+      }
     }
   ]
 }
