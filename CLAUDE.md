@@ -106,6 +106,19 @@ External citations if applicable.
 - Uses: `mcp__perplexity-ask__perplexity_ask` tool
 - Preserves existing content, citations, and relationship sections
 
+**`/rename-note`** - Rename a note and update all references
+- Location: `.claude/commands/rename-note.md`
+- Script: `.claude/scripts/rename_note.py`
+- Usage: `/rename-note old_filename new_filename`
+- Process:
+  1. Renames physical markdown file
+  2. Updates all references in `knowledge_graph_full.json`
+  3. Updates all wikilinks `[[old]]` → `[[new]]` in markdown files
+  4. Creates timestamped backup before changes
+  5. Validates graph integrity after completion
+- Safety: Reverts file rename if knowledge graph update fails
+- Use cases: Clarify naming (mcp_sdk → python_mcp_sdk), fix typos, reorganize
+
 ### Knowledge Graph Operations
 
 **Reading the graph**:
@@ -234,6 +247,12 @@ MOCs contain links and brief context, not content itself.
 1. Use `/refresh-topic topic_name.md`
 2. Review and verify Perplexity updates
 3. Update `last_refresh` in YAML
+
+**Rename a note**:
+1. Use `/rename-note old_name new_name`
+2. Script automatically handles file, graph, and wikilink updates
+3. Review changes with git diff
+4. Update note title/tags if needed to match new filename
 
 **Explore concept relationships**:
 1. Check `knowledge_graph_full.json` for typed relationships

@@ -646,11 +646,11 @@ signal.signal(signal.SIGTERM, lambda: shutdown(server))
 - [[mcp_resources]] - Implementation of resource servers
 - [[mcp_tools]] - Implementation of tool servers
 - [[mcp_prompts]] - Implementation of prompt servers
-- [[adding_to_claude_code]] - Related to implementing MCP in practice
+- [[adding_mcp_to_claude_code]] - Related to implementing MCP in practice
 
 ### Extends
 - [[mcp_architecture]] - Practical implementation of the architecture
 
 ### Extended By
-- [[mcp_sdk]] - Python-specific SDK implementation details
+- [[python_mcp_sdk]] - Python-specific SDK implementation details
 - [[csharp_mcp_sdk_docs]] - C#-specific SDK implementation details

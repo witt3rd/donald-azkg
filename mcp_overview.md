@@ -95,4 +95,4 @@ With growing adoption across major technology companies and a robust ecosystem o
 - [[mcp_security]] - Need to understand MCP fundamentals before security model
 - [[mcp_implementation]] - Need to understand MCP fundamentals before implementation
 - [[filesystem]] - Need to understand MCP protocol
-- [[adding_to_claude_code]] - Need to understand MCP fundamentals before configuring servers
+- [[adding_mcp_to_claude_code]] - Need to understand MCP fundamentals before configuring servers

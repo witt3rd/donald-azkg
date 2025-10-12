@@ -20,11 +20,11 @@ This MOC connects all notes related to the Model Context Protocol specification,
 ## Implementation
 
 - [[mcp_implementation]] - SDK ecosystem, language support, and deployment guide
-- [[mcp_sdk]] - Multi-language SDK guide covering Python, TypeScript, and C#
+- [[python_mcp_sdk]] - Multi-language SDK guide covering Python, TypeScript, and C#
 - [[csharp_mcp_sdk_docs]] - Complete C# MCP SDK documentation
 - [[fastmcp_shutdown]] - Graceful shutdown handling in FastMCP servers
 
 ## Integration
 
 - [[agent_mcp_apis]] - Agent-specific MCP APIs for tool integration
-- [[adding_to_claude_code]] - Adding MCP servers to Claude Code
+- [[adding_mcp_to_claude_code]] - Adding MCP servers to Claude Code

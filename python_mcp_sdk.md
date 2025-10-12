@@ -1,13 +1,16 @@
 ---
-tags: [mcp, guide, api, best-practices, patterns]
+tags: [python, mcp, fastmcp, guide, api, sdk]
+last_refresh: 2025-10-12
 ---
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
-# Comprehensive Guide to MCP Python SDKs
+# Python MCP SDK: Comprehensive Guide to FastMCP
 
 ## Overview
 
 The **Model Context Protocol (MCP)** enables secure, standardized communication between LLM applications and external data sources. This comprehensive guide covers both the official MCP Python SDK and FastMCP, showing how to build hosts, clients, and servers using modern Python practices[^1][^2].
+
+**Latest Update (October 2025)**: FastMCP 2.10 is now fully integrated into the official MCP Python SDK, providing unified codebase with compliance to the June 18, 2025 MCP specification update. Key improvements include middleware architecture, automatic type conversion, OAuth 2.0 authentication, and MCP Registry integration[^13][^14][^15].
 
 ## Installation and Setup
 
@@ -48,8 +51,10 @@ dependencies = [
 MCP supports three transport mechanisms[^3][^4]:
 
 1. **Stdio**: Local communication via standard input/output
-2. **SSE (Server-Sent Events)**: Legacy HTTP streaming (deprecated)
-3. **HTTP Streaming**: Modern streamable HTTP transport (recommended)
+2. **SSE (Server-Sent Events)**: HTTP streaming with improved back-pressure handling
+3. **HTTP Streaming**: Modern streamable HTTP transport (recommended for production)
+
+**Note (2025 Update)**: Direct WebSocket support has been deprecated in favor of HTTP streaming and SSE, which now offer enhanced back-pressure and fragmentation handling for better reliability on slow or unreliable networks[^14][^15].
 
 ## Building MCP Servers
 
@@ -583,7 +588,9 @@ class TypedMCPServer:
 
 ## Advanced Features
 
-### FastMCP 2.0 Advanced Features
+### FastMCP 2.10+ Advanced Features
+
+**New in 2025**: FastMCP now includes middleware architecture, automatic type conversion, and MCP Registry integration[^13][^15].
 
 ```python
 from fastmcp import FastMCP
@@ -608,17 +615,68 @@ from fastmcp.generators import from_openapi
 api_server = from_openapi("https://api.example.com/openapi.json")
 ```
 
+### Middleware Architecture (2025)
+
+```python
+from fastmcp import FastMCP
+from fastmcp.middleware import Middleware
+
+class LoggingMiddleware(Middleware):
+    async def process_request(self, request):
+        print(f"Request: {request}")
+        return await self.next(request)
+
+class RateLimitMiddleware(Middleware):
+    async def process_request(self, request):
+        # Implement rate limiting logic
+        return await self.next(request)
+
+mcp = FastMCP("Server with Middleware")
+mcp.add_middleware(LoggingMiddleware())
+mcp.add_middleware(RateLimitMiddleware())
+
+@mcp.tool()
+def protected_operation(data: str) -> str:
+    """Operation with middleware protection"""
+    return f"Processed: {data}"
+```
+
+### MCP Registry Integration (2025)
+
+```python
+from fastmcp import FastMCP
+from mcp.registry import RegistryClient
+
+mcp = FastMCP("Discoverable Server")
+
+# Register with MCP Registry for service discovery
+async def register_server():
+    registry = RegistryClient("https://registry.mcp.example.com")
+    await registry.register(
+        server_id="my-server",
+        endpoint="http://localhost:8080/mcp",
+        capabilities=["tools", "resources", "prompts"]
+    )
+
+@mcp.tool()
+def registered_tool(data: str) -> str:
+    """Tool discoverable via MCP Registry"""
+    return f"Result: {data}"
+```
+
 ### Authentication and Security
+
+**2025 Update**: OAuth 2.0 is now the recommended standard for authentication, replacing legacy token-based approaches. Middleware-based enforcement is preferred for auth layers and permission checks[^14][^15].
 
 ```python
 from mcp.server.fastmcp import FastMCP
 from mcp.server.auth.provider import TokenVerifier, TokenInfo
 from mcp.server.auth.settings import AuthSettings
 
-class CustomTokenVerifier(TokenVerifier):
+class OAuth2TokenVerifier(TokenVerifier):
     async def verify_token(self, token: str) -> TokenInfo:
-        # Implement your token verification logic
-        # Typically via token introspection with your auth server
+        # OAuth 2.0 token verification via introspection endpoint
+        # Implements RFC 7662 token introspection
         return TokenInfo(
             sub="user123",
             scopes=["mcp:read", "mcp:write"],
@@ -627,17 +685,18 @@ class CustomTokenVerifier(TokenVerifier):
 
 mcp = FastMCP(
     "Secure Server",
-    token_verifier=CustomTokenVerifier(),
+    token_verifier=OAuth2TokenVerifier(),
     auth=AuthSettings(
         issuer_url="https://auth.example.com",
         resource_server_url="http://localhost:3001",
-        required_scopes=["mcp:read", "mcp:write"]
+        required_scopes=["mcp:read", "mcp:write"],
+        oauth2_enabled=True  # New in 2025
     )
 )
 
 @mcp.tool()
 async def secure_operation(data: str) -> str:
-    """Protected operation requiring authentication"""
+    """Protected operation requiring OAuth 2.0 authentication"""
     return f"Processed: {data}"
 ```
 
@@ -703,9 +762,10 @@ if __name__ == "__main__":
 
 1. **Project Structure**: Use `uv` for dependency management[^2][^7]
 2. **Testing**: Use MCP Inspector for development testing[^8]
-3. **Typing**: Follow Python 3.13+ typing practices[^9][^10]
+3. **Typing**: Follow Python 3.13+ typing practices with strict type enforcement[^9][^10][^16]
 4. **Transports**: Prefer HTTP streaming for production[^11]
 5. **Configuration**: Use JSON configuration for hosts[^5]
+6. **Registry Integration**: Register servers with MCP Registry for discoverability[^14]
 
 ### Performance Considerations
 
@@ -713,13 +773,23 @@ if __name__ == "__main__":
 - Implement proper error handling and timeouts[^5]
 - Use async/await for I/O operations[^1]
 - Consider server composition for modularity[^12]
+- Leverage middleware for cross-cutting concerns without overhead[^15]
+- Use automatic type conversion to reduce error rates[^15]
 
 ### Security Guidelines
 
-- Implement proper authentication for production servers[^1]
+- Implement OAuth 2.0 authentication for production servers[^14][^15]
 - Use environment variables for sensitive configuration[^5]
-- Validate all inputs and outputs[^1]
-- Follow OAuth 2.1 standards for authentication[^1]
+- Validate all inputs and outputs with dataclass schemas[^16]
+- Implement auth and permission checks via middleware[^15]
+- Follow context isolation and explicit tool whitelisting[^16]
+
+### Migration from Legacy Features (2025)
+
+- **Deprecated**: Legacy tool registration methods - use new type signature conventions[^15][^16]
+- **Deprecated**: Direct WebSocket transports - migrate to HTTP streaming or SSE[^14][^15]
+- **Deprecated**: Ad-hoc serialization methods - use standardized interfaces[^15]
+- **Required**: Pin both FastMCP and official SDK to matching protocol versions[^14]
 
 This comprehensive guide provides the foundation for building robust MCP applications using modern Python practices. The examples demonstrate real-world usage patterns while following the latest typing conventions and development practices.
 
@@ -737,20 +807,29 @@ This comprehensive guide provides the foundation for building robust MCP applica
 [^10]: <https://www.reddit.com/r/mcp/comments/1k0v8n3/announcing_fastmcp_20/>
 [^11]: <https://brightdata.com/blog/ai/sse-vs-streamable-http>
 [^12]: <https://cdn.cdata.com/help/DJK/mcp/pg_connectionmcp.htm>
+[^13]: <https://pypi.org/project/fastmcp/1.0/>
+[^14]: <https://modelcontextprotocol.info/blog/mcp-next-version-update/>
+[^15]: <https://gofastmcp.com/updates>
+[^16]: <https://pypi.org/project/mcp/1.9.0/>
 
 ## Related Concepts
 
 ### Prerequisites
+
 - [[mcp_implementation]] - Need general implementation knowledge before Python-specific SDK
 
 ### Related Topics
+
 - [[csharp_mcp_sdk_docs]] - Alternative language SDK for MCP
 
 ### Extends
+
 - [[mcp_implementation]] - Python-specific implementation of MCP SDK
 
 ### Extended By
+
 - [[fastmcp_shutdown]] - Specific FastMCP implementation issue
 
 ### Alternatives
+
 - [[csharp_mcp_sdk_docs]] - Use C# instead of Python for MCP development

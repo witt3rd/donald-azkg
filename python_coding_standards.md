@@ -616,7 +616,7 @@ This comprehensive guide ensures high-quality, maintainable Python code that fol
 ### Extended By
 - [[python_role]] - Role applies Python standards to specific context
 - [[python3_13]] - Specific Python 3.13 features and enhancements
-- [[mcp_sdk]] - MCP SDK uses Python for implementation
+- [[python_mcp_sdk]] - MCP SDK uses Python for implementation
 - [[openai_embeddings_python]] - Need Python knowledge to use OpenAI Python SDK
 - [[openai_responses_python]] - Need Python knowledge to use OpenAI Python SDK
 - [[openrouter_openai_python_sdk]] - Need Python knowledge to use SDK

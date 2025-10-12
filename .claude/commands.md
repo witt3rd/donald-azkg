@@ -23,6 +23,28 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 - Sync to "Related Concepts" sections
 - Comprehensive completion report with statistics
 
+  Note Maintenance
+
+  /conform-note [filename] - ✅ IMPLEMENTED - Restructure note to standard format
+
+- Ensures proper YAML frontmatter structure
+- Fixes title and summary sections
+- Reorganizes content to match standard structure
+- Converts "Citations:" to "## References" heading
+- Removes extraneous separators and attribution lines
+- Preserves all content and "Related Concepts" section
+- Maintains wikilink format `[[note]]`
+
+  /rename-note [old_filename] [new_filename] - ✅ IMPLEMENTED - Rename note and update references
+
+- Renames physical markdown file
+- Updates all references in knowledge_graph_full.json
+- Updates all wikilinks `[[old]]` → `[[new]]` in markdown files
+- Creates backup before making changes
+- Validates graph integrity after completion
+- Uses `.claude/scripts/rename_note.py`
+- Reverts on failure
+
   Graph Operations
 
   /graph-validate - ✅ IMPLEMENTED - Run integrity checks
@@ -60,6 +82,14 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 - Uses `.claude/scripts/add_relationship.py`
 - Validates both notes exist and type is valid
 - Updates metadata timestamp
+
+  /update-note [filename] --title|--tags|--summary - ✅ IMPLEMENTED - Update note metadata
+
+- Update note's title, tags, or summary in knowledge graph
+- Can update one or multiple fields in a single command
+- Uses `.claude/scripts/update_note.py`
+- Increments version (minor bump: 18.0 → 18.1)
+- Does NOT modify markdown file (use /conform-note to sync)
 
   /sync-graph - Force synchronization
 
@@ -129,11 +159,14 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 
   ✅ /create-note - Create atomic notes with research and relationship discovery
   ✅ /expand-graph - Auto-discover missing relationships with multi-strategy analysis
+  ✅ /conform-note - Restructure note to standard format
+  ✅ /rename-note - Rename note and update all references throughout knowledge base
   ✅ /graph-validate - Check graph integrity
   ✅ /graph-stats - View graph statistics
   ✅ /graph-note - Inspect note details and relationships
   ✅ /graph-batch - View batch contents
   ✅ /graph-add-relationship - Manually add relationships
+  ✅ /update-note - Update note metadata (title, tags, summary)
 
   High-Value Next Implementations
 

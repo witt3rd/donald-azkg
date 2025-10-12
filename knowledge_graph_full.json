@@ -1,11 +1,11 @@
 {
   "metadata": {
     "created": "2025-10-11",
-    "version": "17.0",
-    "total_notes": 93,
+    "version": "23.0",
+    "total_notes": 99,
     "forward_pass_batches_complete": 12,
     "backward_pass_complete": true,
-    "description": "Added llm_self_talk_optimization.md with bidirectional relationships",
+    "description": "Added claude_code_hooks.md",
     "last_updated": "2025-10-12"
   },
   "batches": [
@@ -23,7 +23,9 @@
         "llm_evolve.md",
         "memory.md",
         "verify_claims.md",
-        "llm_self_talk_optimization.md"
+        "llm_self_talk_optimization.md",
+        "agentic_development_context.md",
+        "claude_code_hooks.md"
       ],
       "complete": true
     },
@@ -38,7 +40,7 @@
         "mcp_prompts.md",
         "mcp_security.md",
         "mcp_implementation.md",
-        "mcp_sdk.md",
+        "python_mcp_sdk.md",
         "csharp_mcp_sdk_docs.md",
         "fastmcp_shutdown.md"
       ],
@@ -165,7 +167,11 @@
         "perplexity.md",
         "filesystem.md",
         "foundry_local.md",
-        "motion_canvas_cheatsheet.md"
+        "motion_canvas_cheatsheet.md",
+        "claude_code_agents.md",
+        "claude_code.md",
+        "claude_code_plugins.md",
+        "zettelkasten_claude_plugin.md"
       ],
       "complete": true
     },
@@ -787,15 +793,15 @@
     },
     {
       "filename": "agents.md",
-      "title": "Claude Code Agents: Complete Guide to Context Management and Parallelization",
+      "title": "AI Agents: Autonomous Intelligence Systems",
       "tags": [
         "ai",
         "agents",
-        "mcp",
+        "llm",
         "architecture",
-        "system-design"
+        "autonomous-systems"
       ],
-      "summary": "Claude Code agents, specifically subagents, are specialized AI assistants that operate within the Claude Code environment with isolated context windows and specific expertise areas.",
+      "summary": "Autonomous artificial intelligence entities capable of independent, goal-directed action in complex environments, using LLMs, LRMs, SLMs, and hybrid architectures",
       "relationships": {
         "prerequisites": [],
         "related_concepts": [
@@ -869,6 +875,10 @@
           {
             "note": "llm_self_talk_optimization.md",
             "why": "LLM self-talk enables efficient multi-agent communication"
+          },
+          {
+            "note": "claude_code_agents.md",
+            "why": "Claude Code subagents are a specific implementation of the general agent pattern with isolated contexts and parallel execution"
           }
         ],
         "alternatives": [],
@@ -1544,7 +1554,7 @@
         ],
         "extended_by": [
           {
-            "note": "mcp_sdk.md",
+            "note": "python_mcp_sdk.md",
             "why": "Python-specific SDK implementation details"
           },
           {
@@ -1559,7 +1569,7 @@
       "backward_pass_complete": true
     },
     {
-      "filename": "mcp_sdk.md",
+      "filename": "python_mcp_sdk.md",
       "title": "Comprehensive Guide to MCP Python SDKs",
       "tags": [
         "mcp",
@@ -1630,7 +1640,7 @@
         ],
         "related_concepts": [
           {
-            "note": "mcp_sdk.md",
+            "note": "python_mcp_sdk.md",
             "why": "Alternative language SDK for MCP"
           },
           {
@@ -1647,7 +1657,7 @@
         "extended_by": [],
         "alternatives": [
           {
-            "note": "mcp_sdk.md",
+            "note": "python_mcp_sdk.md",
             "why": "Use Python instead of C# for MCP development"
           }
         ],
@@ -1671,14 +1681,14 @@
       "relationships": {
         "prerequisites": [
           {
-            "note": "mcp_sdk.md",
+            "note": "python_mcp_sdk.md",
             "why": "Need to understand FastMCP SDK before diagnosing shutdown issues"
           }
         ],
         "related_concepts": [],
         "extends": [
           {
-            "note": "mcp_sdk.md",
+            "note": "python_mcp_sdk.md",
             "why": "Specific implementation detail and bug in FastMCP"
           }
         ],
@@ -1772,7 +1782,7 @@
             "why": "Specific Python 3.13 features and enhancements"
           },
           {
-            "note": "mcp_sdk.md",
+            "note": "python_mcp_sdk.md",
             "why": "MCP SDK uses Python for implementation"
           },
           {
@@ -4470,6 +4480,267 @@
             "why": "Multi-agent systems benefit from inter-agent self-talk compression"
           }
         ]
+      }
+    },
+    {
+      "filename": "claude_code_agents.md",
+      "title": "Claude Code Agents: Complete Guide to Context Management and Parallelization",
+      "tags": [
+        "ai",
+        "agents",
+        "mcp",
+        "architecture",
+        "claude-code",
+        "tools"
+      ],
+      "summary": "Specialized AI assistants (subagents) within Claude Code for parallel task execution and context management with isolated context windows",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "agents.md",
+            "why": "Understanding general AI agent concepts is essential before learning Claude Code-specific implementation"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Claude Code agents use MCP for tool access and integration"
+          }
+        ],
+        "extends": [
+          {
+            "note": "agents.md",
+            "why": "Claude Code subagents are a specific implementation of the general agent pattern with isolated contexts and parallel execution"
+          },
+          {
+            "note": "claude_code.md",
+            "why": "Claude Code subagents are a specific feature within the broader Claude Code platform"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
+      }
+    },
+    {
+      "filename": "claude_code.md",
+      "title": "Claude Code: Agentic AI Coding Assistant",
+      "tags": [
+        "ai",
+        "coding-assistant",
+        "agents",
+        "tools",
+        "ide"
+      ],
+      "summary": "Anthropic's agentic AI coding assistant with native terminal operations, multi-agent workflows, and MCP integration",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "agents.md",
+            "why": "Understanding AI agents is foundational to comprehending Claude Code's agentic architecture"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Claude Code uses MCP for deep tool integration"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "claude_code_agents.md",
+            "why": "Claude Code subagents are a specific feature within the broader Claude Code platform"
+          },
+          {
+            "note": "claude_code_plugins.md",
+            "why": "Plugins extend Claude Code's capabilities through modular extensions"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      }
+    },
+    {
+      "filename": "claude_code_plugins.md",
+      "title": "Claude Code Plugins: Extensibility Architecture",
+      "tags": [
+        "claude-code",
+        "plugins",
+        "extensibility",
+        "mcp",
+        "tools"
+      ],
+      "summary": "Modular extension packages for Claude Code including slash commands, subagents, MCP servers, and hooks",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "claude_code.md",
+            "why": "Understanding Claude Code platform is essential before learning about its plugin system"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_overview.md",
+            "why": "Plugins use MCP for external tool integration"
+          },
+          {
+            "note": "claude_code_agents.md",
+            "why": "Subagent plugins are a type of agent extension in Claude Code"
+          }
+        ],
+        "extends": [
+          {
+            "note": "claude_code.md",
+            "why": "Plugins extend Claude Code's capabilities through modular extensions"
+          }
+        ],
+        "extended_by": [
+          {
+            "note": "agentic_development_context.md",
+            "why": "Claude Code plugins demonstrate practical implementation of ADC concepts"
+          },
+          {
+            "note": "claude_code_hooks.md",
+            "why": "Hooks are a specific type of plugin extension mechanism"
+          }
+        ],
+        "alternatives": [],
+        "examples": []
+      }
+    },
+    {
+      "filename": "zettelkasten_claude_plugin.md",
+      "title": "Zettelkasten Claude Code Plugin: Implementation Guide",
+      "tags": [
+        "claude-code",
+        "plugins",
+        "zettelkasten",
+        "knowledge-graph",
+        "project"
+      ],
+      "summary": "Implementation guide for building a Claude Code plugin from the Obsidian-based Zettelkasten knowledge graph system",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "claude_code_plugins.md",
+            "why": "Understanding plugin architecture is essential for implementation"
+          },
+          {
+            "note": "mcp_overview.md",
+            "why": "MCP protocol is the foundation for the knowledge graph server"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "claude_code.md",
+            "why": "Platform that will host the plugin"
+          },
+          {
+            "note": "claude_code_agents.md",
+            "why": "Subagent system used by knowledge worker agents"
+          }
+        ],
+        "extends": [],
+        "extended_by": [
+          {
+            "note": "zettelkasten_claude_plugin.md",
+            "why": "This note describes a concrete example of building a Claude Code plugin"
+          }
+        ],
+        "alternatives": [],
+        "examples": [
+          {
+            "note": "zettelkasten_claude_plugin.md",
+            "why": "This note describes a concrete example of building a Claude Code plugin"
+          }
+        ]
+      }
+    },
+    {
+      "filename": "agentic_development_context.md",
+      "title": "Agentic Development Context (ADC)",
+      "tags": [
+        "agents",
+        "ai",
+        "development",
+        "architecture",
+        "pattern"
+      ],
+      "summary": "Comprehensive, version-controlled development ecosystem extending environment standardization to include shared context, documentation, AI configurations, and team knowledge for AI-augmented development teams",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "agents.md",
+            "why": "Understanding AI agents is foundational to comprehending how agents operate within development contexts"
+          },
+          {
+            "note": "claude_code.md",
+            "why": "Claude Code is a primary implementation platform for agentic development patterns"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "mcp_overview.md",
+            "why": "MCP provides the protocol layer for agent-tool integration within ADCs"
+          },
+          {
+            "note": "memory.md",
+            "why": "Persistent memory is a core component of ADC state management"
+          },
+          {
+            "note": "claude_code_plugins.md",
+            "why": "Plugins enable the modular, shareable components that make up ADCs"
+          }
+        ],
+        "extends": [],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": [
+          {
+            "note": "claude_code_plugins.md",
+            "why": "Claude Code plugins demonstrate practical implementation of ADC concepts"
+          }
+        ]
+      }
+    },
+    {
+      "filename": "claude_code_hooks.md",
+      "title": "Claude Code Hooks: Lifecycle Event System",
+      "tags": [
+        "claude-code",
+        "automation",
+        "lifecycle",
+        "extensibility",
+        "workflow"
+      ],
+      "summary": "Lifecycle event system for injecting custom shell commands at specific Claude Code workflow stages, enabling deterministic automation and tool integration",
+      "relationships": {
+        "prerequisites": [
+          {
+            "note": "claude_code.md",
+            "why": "Understanding Claude Code platform is essential before learning about its hook system"
+          }
+        ],
+        "related_concepts": [
+          {
+            "note": "claude_code_plugins.md",
+            "why": "Hooks are one of four extension types in the Claude Code plugin architecture"
+          },
+          {
+            "note": "claude_code_agents.md",
+            "why": "Hooks complement agents by providing deterministic automation alongside AI-driven workflows"
+          }
+        ],
+        "extends": [
+          {
+            "note": "claude_code_plugins.md",
+            "why": "Hooks are a specific type of plugin extension mechanism"
+          }
+        ],
+        "extended_by": [],
+        "alternatives": [],
+        "examples": []
       }
     }
   ]

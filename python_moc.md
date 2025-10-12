@@ -12,7 +12,7 @@ This MOC connects all notes related to Python language, tools, libraries, and de
 
 ## MCP Integration
 
-- [[mcp_sdk]] - Building MCP servers using FastMCP Python SDK
+- [[python_mcp_sdk]] - Building MCP servers using FastMCP Python SDK
 - [[fastmcp_shutdown]] - Implementing graceful shutdown in FastMCP servers
 
 ## Related Topics

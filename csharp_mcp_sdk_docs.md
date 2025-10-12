@@ -432,11 +432,11 @@ var transport = new HttpClientTransport(
 - [[dotnet]] - .NET foundation required for C# MCP SDK
 
 ### Related Topics
-- [[mcp_sdk]] - Alternative language SDK for MCP
+- [[python_mcp_sdk]] - Alternative language SDK for MCP
 - [[dotnet]] - .NET is the foundation for C# MCP SDK
 
 ### Extends
 - [[mcp_implementation]] - C#-specific implementation of MCP SDK
 
 ### Alternatives
-- [[mcp_sdk]] - Use Python instead of C# for MCP development
+- [[python_mcp_sdk]] - Use Python instead of C# for MCP development

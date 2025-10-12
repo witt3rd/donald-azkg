@@ -8,7 +8,7 @@ This MOC connects all notes related to C# and .NET development, APIs, and implem
 ## MCP Integration
 
 - [[csharp_mcp_sdk_docs]] - Complete C# MCP SDK documentation and implementation guide
-- [[mcp_sdk]] - Multi-language SDK guide including C#
+- [[python_mcp_sdk]] - Multi-language SDK guide including C#
 
 ## Windows ML
 

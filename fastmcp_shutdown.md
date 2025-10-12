@@ -268,7 +268,7 @@ Yes—your manual task-cancellation section is compensating for a documented Fas
 ## Related Concepts
 
 ### Prerequisites
-- [[mcp_sdk]] - Need to understand FastMCP SDK before diagnosing shutdown issues
+- [[python_mcp_sdk]] - Need to understand FastMCP SDK before diagnosing shutdown issues
 
 ### Extends
-- [[mcp_sdk]] - Specific implementation detail and bug in FastMCP
+- [[python_mcp_sdk]] - Specific implementation detail and bug in FastMCP

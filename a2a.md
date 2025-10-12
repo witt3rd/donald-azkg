@@ -1,9 +1,10 @@
 ---
 tags: [agents, guide, api]
+last_refresh: 2025-10-12
 ---
 # Google's Agent2Agent (A2A) Protocol: A Comprehensive Technical Brief
 
-Google's Agent2Agent (A2A) Protocol represents a significant advancement in AI agent interoperability, providing a standardized framework for autonomous agents to discover, communicate, and collaborate across different platforms and vendors. This protocol addresses the fundamental challenge of enabling seamless multi-agent workflows in an increasingly diverse ecosystem of AI systems[1][5].
+Google's Agent2Agent (A2A) Protocol represents a significant advancement in AI agent interoperability, providing a standardized framework for autonomous agents to discover, communicate, and collaborate across different platforms and vendors. This protocol addresses the fundamental challenge of enabling seamless multi-agent workflows in an increasingly diverse ecosystem of AI systems[1][5]. Launched in April 2025 and donated to the Linux Foundation in June 2025, A2A has evolved to version 0.3 with enhanced enterprise features, though industry momentum has increasingly shifted toward the complementary Model Context Protocol (MCP) as of late 2025.
 
 ## Introduction and Purpose
 
@@ -43,6 +44,8 @@ The A2A protocol defines three core actors in its communication model[6][16]:
 
 A2A communication must occur over HTTP(S), with the A2A Server exposing its service at a URL defined in its AgentCard[5]. The protocol uses JSON-RPC 2.0 as the payload format for all requests and responses, with the Content-Type header set to application/json[5].
 
+As of version 0.3 (July 2025), A2A also supports **gRPC transport** for high-performance, streaming, and push notifications, providing an alternative to the standard HTTP/JSON-RPC 2.0 transport layer[28].
+
 For streaming operations, the protocol employs Server-Sent Events (SSE) with HTTP 200 OK status and Content-Type of text/event-stream, where each SSE data field contains a complete JSON-RPC 2.0 Response object[5].
 
 ### Core Communication Objects
@@ -76,9 +79,11 @@ A2A implements enterprise-grade security through multiple mechanisms[5][16]:
 
 **Authentication Schemes**: Support for various OpenAPI-compatible authentication methods including API keys, HTTP authentication, OAuth2, and OpenID Connect.
 
+**Signed Security Cards**: Introduced in version 0.3, signed security cards enhance agent identification and trust management, representing a significant upgrade in authentication capabilities[28].
+
 **Permission Model**: Local-first, explicit permission model where hosts maintain strict control over which agents can be accessed and what capabilities they can use.
 
-**Transport Security**: Mandatory HTTPS for production deployments, with HTTP permitted only for local development and testing.
+**Transport Security**: Mandatory HTTPS for production deployments, with HTTP permitted only for local development and testing. Enhanced emphasis on robust authentication and encrypted communication channels across all transport options[28].
 
 **Sandboxed Execution**: Each MCP client handles communication to one MCP server, maintaining isolation for security purposes.
 
@@ -137,6 +142,8 @@ Google positions A2A as complementary to MCP rather than competitive[1][8]. This
 
 A comprehensive multi-agent system would typically employ both protocols: MCP to ensure each agent has access to necessary tools and data, and A2A to coordinate collaboration between multiple specialized agents[1][4].
 
+As of late 2025, while A2A and MCP remain technically complementary and share some JSON compatibility, the industry has increasingly favored MCP as the preferred standard for agent integration[28][29]. Many platforms are now building direct MCP support while reducing emphasis on A2A development, though both protocols continue to serve distinct architectural roles in multi-agent systems[28].
+
 ## Implementation Considerations for System Design
 
 ### Technical Integration Points
@@ -167,19 +174,34 @@ Enterprise adoption of A2A requires attention to several operational factors[16]
 
 ## Current Adoption and Ecosystem
 
-A2A has gained significant traction since its introduction, with over 50 technology partners including MongoDB, Atlassian, SAP, PayPal, and Cohere adopting the protocol[13]. The rapid industry adoption demonstrates the protocol's potential to become a foundational standard for multi-agent systems.
+A2A has gained significant traction since its introduction, with over 50 technology partners initially including MongoDB, Atlassian, SAP, PayPal, and Cohere adopting the protocol[13]. By July 2025, adoption expanded to over 150 organizations with major enterprise integrations at Adobe, ServiceNow, S&P Global, and Twilio[28]. Notable enterprise use cases include Tyson Foods and Gordon Food Service using A2A for supply chain optimization and data sharing between agents[28].
 
-Google has released official Python SDKs for A2A development and continues to enhance the protocol with regular specification updates[18]. The protocol is currently at version 0.2.1, with ongoing improvements based on community feedback and real-world deployment experiences[5][18].
+In June 2025, Google donated the A2A Protocol to the Linux Foundation, establishing it as a community-driven project under open governance[28][29].
 
-The ecosystem is expanding to include platforms that provide enhanced capabilities for building, deploying, and securing A2A agents, establishing the infrastructure necessary for sophisticated multi-agent systems across enterprise environments[18].
+Google has released official Python SDKs for A2A development and continues to enhance the protocol with regular specification updates[18]. The protocol reached version 0.3 in July 2025, introducing gRPC support, signed security cards, improved Python SDK, enterprise orchestration features, and a more stabilized API[28][30]. Comprehensive developer tooling includes the Agent Development Kit (ADK), deployment support via Agent Engine, Cloud Run, and GKE, and marketplace integrations such as Agentspace and the AI Agent Marketplace[28].
+
+The ecosystem is expanding to include platforms that provide enhanced capabilities for building, deploying, and securing A2A agents, establishing the infrastructure necessary for sophisticated multi-agent systems across enterprise environments[18]. However, as of late 2025, industry momentum has increasingly consolidated around the Model Context Protocol (MCP), with many platforms now building direct MCP support while de-emphasizing A2A development[28]. Google Cloud has begun adding MCP compatibility into its AI agent services, reflecting this ecosystem shift[28]. Despite reduced momentum for new A2A features, Google and partners continue to maintain legacy support for existing enterprise A2A deployments[28].
 
 ## Conclusion
 
 Google's A2A Protocol represents a crucial advancement in AI agent interoperability, providing the standardized communication framework necessary for sophisticated multi-agent systems. By addressing the fundamental challenges of agent discovery, secure communication, and collaborative task management, A2A enables organizations to build complex, distributed AI workflows that leverage specialized agents across different platforms and vendors.
 
-The protocol's emphasis on enterprise-ready features, combined with its complementary relationship to MCP, positions A2A as a foundational technology for the next generation of AI systems. For system designers, A2A offers a mature, standards-based approach to implementing multi-agent collaboration while maintaining security, scalability, and operational control necessary for enterprise deployment.
+The protocol's emphasis on enterprise-ready features, combined with its complementary relationship to MCP, positions A2A as a foundational technology for the next generation of AI systems. Version 0.3 (July 2025) brought significant enhancements including gRPC transport support, signed security cards, and improved enterprise orchestration capabilities, establishing A2A as a mature specification now governed by the Linux Foundation[28][30].
 
-Citations:
+For system designers, A2A offers a mature, standards-based approach to implementing multi-agent collaboration while maintaining security, scalability, and operational control necessary for enterprise deployment. However, as of late 2025, industry adoption is increasingly consolidating around MCP, with A2A seeing reduced momentum for new feature development while maintaining strong support for existing enterprise deployments[28]. Organizations should consider both protocols' roles in their multi-agent architecture, with MCP handling tool and resource integration while A2A manages inter-agent communication for systems requiring that capability.
+
+## Related Concepts
+
+### Related Topics
+- [[agents]] - A2A enables agent-to-agent communication for systems described in agents.md
+- [[agent_mcp_apis]] - A2A and MCP are complementary protocols for agent integration
+- [[debate]] - A2A protocol facilitates agent-to-agent debate communication
+
+### Extended By
+- [[agents]] - A2A protocol enables multi-agent interoperability
+
+## References
+
 [1] <https://google.github.io/A2A/>
 [2] <https://developers.google.com/identity/protocols/oauth2>
 [3] <https://www.anthropic.com/news/model-context-protocol>
@@ -207,17 +229,6 @@ Citations:
 [25] <https://modelcontextprotocol.io/specification/2025-03-26>
 [26] <https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/agent-in-the-middle-abusing-agent-cards-in-the-agent-2-agent-protocol-to-win-all-the-tasks/>
 [27] <https://usa.yamaha.com/products/audio_visual/av_receivers_amps/rx-a2a/specs.html>
-
----
-
-Answer from Perplexity: pplx.ai/share
-
-## Related Concepts
-
-### Related Topics
-- [[agents]] - A2A enables agent-to-agent communication for systems described in agents.md
-- [[agent_mcp_apis]] - A2A and MCP are complementary protocols for agent integration
-- [[debate]] - A2A protocol facilitates agent-to-agent debate communication
-
-### Extended By
-- [[agents]] - A2A protocol enables multi-agent interoperability
+[28] <https://blog.fka.dev/blog/2025-09-11-what-happened-to-googles-a2a/>
+[29] <https://www.ibm.com/think/topics/agent2agent-protocol>
+[30] <https://cloud.google.com/blog/products/ai-machine-learning/agent2agent-protocol-is-getting-an-upgrade>

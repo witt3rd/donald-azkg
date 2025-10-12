@@ -18,7 +18,7 @@ This MOC connects all notes related to TypeScript language, patterns, and develo
 
 - [[react_framework]] - React commonly uses TypeScript for type safety
 - [[vite]] - Build tool configuration for TypeScript projects
-- [[mcp_sdk]] - Building MCP servers using TypeScript SDK
+- [[python_mcp_sdk]] - Building MCP servers using TypeScript SDK
 
 ## Related Topics
 

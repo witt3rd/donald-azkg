@@ -264,4 +264,4 @@ Common deployment strategies:
 - [[mcp_resources]] - Need to understand how resources operate within MCP architecture
 - [[mcp_tools]] - Need to understand how tools operate within MCP architecture
 - [[mcp_prompts]] - Need to understand how prompts are delivered through architecture
-- [[adding_to_claude_code]] - Understanding MCP architecture helps with server configuration
+- [[adding_mcp_to_claude_code]] - Understanding MCP architecture helps with server configuration
