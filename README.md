@@ -18,7 +18,20 @@ This is not traditional documentation. This is a **living, agent-maintained know
 
 ## How This Works
 
-This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_plugin_azkg]] implementation:
+This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_plugin_azkg]] implementation.
+
+**Plugin Installation:**
+```bash
+# Add the marketplace
+/plugin marketplace add witt3rd/claude-plugins
+
+# Install AZKG plugin
+/plugin install azkg@witt3rd
+
+# Restart Claude Code to load the plugin
+```
+
+**Once installed, the plugin provides 11 slash commands** for automated knowledge management.
 
 **I (human) provide direction:**
 - "Create a note about X"
@@ -380,28 +393,30 @@ This system is **Obsidian-compatible** but **agent-enhanced**:
 
 ## Agentic Operations
 
-The agent provides 10+ automated slash commands for knowledge management:
+**Commands provided by the installed AZKG plugin** (`azkg@witt3rd`):
 
 **Creation & Discovery:**
-- `/create-note [topic]` - Research via Perplexity, create note, discover relationships (Write, Edit, Grep)
-- `/expand-graph [note]` - Multi-strategy relationship discovery with confidence scoring (Read, Grep, Edit)
+- `/create-note [topic]` - Research via Perplexity, create note, discover relationships
+- `/expand-graph [note]` - Multi-strategy relationship discovery with confidence scoring
+- `/search-notes [query]` - Semantic search across all notes
+- `/learning-path [target]` - Generate prerequisite learning sequence
 
 **Maintenance & Quality:**
-- `/conform-note [file]` - Restructure notes to standard format (Edit tool)
-- `/rename-note [old] [new]` - Rename file + update all wikilinks (Grep, Edit, Bash)
-- `/update-note [file]` - Update YAML frontmatter metadata (Edit tool)
+- `/conform-note [file]` - Restructure notes to standard format
+- `/rename-note [old] [new]` - Rename file + update all wikilinks
 
 **Graph Operations:**
-- `/graph-validate` - Check wikilinks, bidirectionality, YAML frontmatter (Grep, Glob, Read)
-- `/graph-stats` - Count notes, relationships, tags (Grep, Glob)
-- `/graph-note [file]` - Show relationships and backlinks (Read, Grep)
-- `/graph-moc [name]` - View MOC (Map of Content) files (Read)
-- `/graph-add-relationship` - Add typed relationship to both notes (Edit)
+- `/graph-validate` - Check wikilinks, bidirectionality, YAML frontmatter
+- `/graph-stats` - Count notes, relationships, tags
+- `/graph-note [file]` - Show relationships and backlinks
+- `/graph-moc [name]` - View MOC (Map of Content) files
 
 **Research & Updates:**
-- `/refresh-topic [file]` - Query Perplexity, update note with latest info (mcp__perplexity-ask, Edit)
+- `/refresh-topic [file]` - Query Perplexity, update note with latest info
 
 **All operations use Claude's built-in tools** - no Python scripts, no JSON files. Markdown is the graph.
+
+See the [AZKG plugin repository](https://github.com/witt3rd/claude-plugins/tree/main/plugins/azkg) for complete command documentation.
 
 ## What This Is NOT
 

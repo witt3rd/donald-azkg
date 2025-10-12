@@ -1,6 +1,6 @@
 ---
 tags: [mcp, protocol, security, authentication, authorization, privacy]
-last_refresh: 2025-10-11
+last_refresh: 2025-10-12
 ---
 # MCP Security
 
@@ -70,8 +70,19 @@ MCP supports multiple authentication methods to accommodate different deployment
 
 **MCP servers are classified as OAuth Resource Servers** (2025 update), enabling robust authorization discovery where each server advertises its own authorization server[2].
 
+**Authorization is optional but strongly recommended when:**
+- Server accesses user-specific data (emails, documents, databases)
+- Need to audit who performed which actions
+- Server grants access to APIs requiring user consent
+- Building for enterprise environments with strict access controls
+- Implementing rate limiting or usage tracking per user
+
+**Transport-specific considerations:**
+- **STDIO transport:** Can use environment-based credentials or third-party library credentials directly embedded in the server (runs locally with flexible credential acquisition options)
+- **HTTP transport:** OAuth flows designed for remotely-hosted servers where client uses OAuth to establish user authorization
+
 **Supported flows:**
-- Authorization Code flow (most secure)
+- Authorization Code flow with PKCE (most secure, follows OAuth 2.1)
 - Client Credentials flow (service-to-service)
 - Device Code flow (limited input devices)
 
@@ -131,19 +142,54 @@ MCP supports multiple authentication methods to accommodate different deployment
 - SSO providers
 - OAuth Resource Server integration (required 2025 standard)[2]
 - Custom authentication connectors[15]
+- OpenID Connect (OIDC) Discovery
+- OAuth 2.0 Authorization Server Metadata (RFC 8414)
 
 **Integration points:**
 - Microsoft Copilot Studio connector framework[15]
 - Custom authentication handlers
 - Identity provider integration
 - Role-based access control
+- Dynamic Client Registration (DCR) support
 
 **2025 Enterprise Requirements:**
 - **Mandatory authentication:** Unauthenticated MCP server access now considered critical misconfiguration[1][2]
 - **Policy controls:** Endpoint agents with allow/block policies to monitor and vet MCP servers[4]
 - **Runtime enforcement:** Automated policy checks before allowing model→MCP access[4]
+- **Protected Resource Metadata (PRM):** Servers must respond with 401 Unauthorized and WWW-Authenticate header containing `resource_metadata` parameter pointing to OAuth Protected Resource Metadata document (RFC 9728)
 
 ## Authorization Model
+
+### Authorization Flow Overview
+
+**Standard OAuth 2.1 flow with MCP extensions:**
+
+1. **Initial Handshake:** Server responds with `401 Unauthorized` and `WWW-Authenticate` header containing Protected Resource Metadata URI
+2. **Protected Resource Metadata Discovery:** Client fetches PRM document (RFC 9728) to learn authorization server, supported scopes, and resource information
+3. **Authorization Server Discovery:** Client fetches authorization server metadata via OIDC Discovery or OAuth 2.0 Metadata endpoints
+4. **Client Registration:** Either pre-registered credentials or Dynamic Client Registration (DCR) via RFC 7591
+5. **User Authorization:** Authorization Code flow with PKCE where user grants permissions in browser
+6. **Token Exchange:** Client exchanges authorization code for access token and refresh token
+7. **Authenticated Requests:** Client includes access token in `Authorization: Bearer` header
+
+**Protected Resource Metadata document example:**
+```json
+{
+  "resource": "https://your-server.com/mcp",
+  "authorization_servers": ["https://auth.your-server.com"],
+  "scopes_supported": ["mcp:tools", "mcp:resources"]
+}
+```
+
+**Authorization Server Metadata example:**
+```json
+{
+  "issuer": "https://auth.your-server.com",
+  "authorization_endpoint": "https://auth.your-server.com/authorize",
+  "token_endpoint": "https://auth.your-server.com/token",
+  "registration_endpoint": "https://auth.your-server.com/register"
+}
+```
 
 ### User-Based Authorization
 
@@ -416,19 +462,30 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
 - Implement sandboxing for all command execution
 - Regular security audits for command handling code
 
-**2. Error Handling**
+**2. Token Validation (CRITICAL)**
+- **Always verify tokens** - use well-tested libraries, not custom implementations
+- **Validate audience claim** - ensure token's `aud` claim matches your server's resource indicator
+- **Use token introspection** - verify tokens with authorization server's introspection endpoint
+- **Check token expiration** - reject expired tokens immediately
+- **Verify required scopes** - ensure token contains necessary scopes for requested operation
+- **Never skip validation** - receiving a token doesn't mean it's valid or meant for your server
+
+**3. Error Handling**
 - Don't leak sensitive information in errors
 - Use generic error messages for users
-- Log detailed errors securely
+- Log detailed errors securely with correlation IDs
 - Handle timeouts and failures gracefully
+- Return proper 401 challenges with `WWW-Authenticate` header including `Bearer`, `realm`, and `resource_metadata`
 
-**3. Secure Credential Management**
-- Never log credentials
+**4. Secure Credential Management**
+- Never log credentials, tokens, authorization codes, or secrets
+- Scrub `Authorization` headers and query strings from logs
 - Use environment variables or secret managers
 - Rotate credentials regularly
 - Support credential revocation
+- Separate app vs. resource server credentials - don't reuse MCP server's client secret for end-user flows
 
-**4. Rate Limiting**
+**5. Rate Limiting**
 - Implement request rate limits
 - Prevent abuse and DoS
 - Provide clear error messages when limits exceeded
@@ -445,21 +502,32 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
 - **Deploy endpoint policy agents** to monitor and vet server access[4]
 - **Require authentication by default** - no unauthenticated server access[1][2]
 
-**2. Server Verification**
+**2. OAuth Flow Implementation**
+- **Discover Protected Resource Metadata** - fetch PRM document from server's `resource_metadata` URI
+- **Discover Authorization Server** - fetch metadata via OIDC Discovery or OAuth 2.0 Metadata endpoints
+- **Handle Client Registration** - support both pre-registered credentials and Dynamic Client Registration (DCR)
+- **Support authorization code with PKCE** - most secure flow for user authorization
+- **Implement token refresh** - handle token expiration gracefully
+- **Use Resource Indicators (RFC 8707)** - always specify audience during token requests
+- **Store tokens securely** - use encrypted storage with proper access controls
+
+**3. Server Verification**
 - Verify server identity
 - Check server signatures if available
 - Maintain server allowlist
 - Warn on untrusted servers
+- Validate Protected Resource Metadata responses
 
-**3. Secure Transport**
-- Use HTTPS for remote connections
+**4. Secure Transport**
+- Use HTTPS for remote connections (enforce in production)
+- Accept plain HTTP only for `localhost` during development
 - Encrypt sensitive data
 - Validate certificates
 - Implement certificate pinning for high-security scenarios
 
-**4. Audit Trails (Enhanced Observability - 2025)**
+**5. Audit Trails (Enhanced Observability - 2025)**
 - Log all significant events
-- Include context for audit review
+- Include context for audit review with correlation IDs
 - Protect logs from tampering
 - Implement log retention policies
 - **Track full model→MCP→tool chains** for end-to-end visibility[4]
@@ -572,6 +640,13 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
 [6] https://businessinsights.bitdefender.com/security-risks-agentic-ai-model-context-protocol-mcp-introduction
 [7] https://www.pomerium.com/blog/june-2025-mcp-content-round-up
 [15] Previous enterprise integration references
+[16] https://modelcontextprotocol.io/docs/tutorials/security/authorization - Official MCP authorization tutorial
+[17] https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization - MCP authorization specification
+[18] https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-13 - OAuth 2.1
+[19] https://datatracker.ietf.org/doc/html/rfc8414 - OAuth 2.0 Authorization Server Metadata
+[20] https://datatracker.ietf.org/doc/html/rfc7591 - Dynamic Client Registration
+[21] https://datatracker.ietf.org/doc/html/rfc9728 - Protected Resource Metadata
+[22] https://datatracker.ietf.org/doc/html/rfc8707 - Resource Indicators
 
 ## Related Concepts
 
