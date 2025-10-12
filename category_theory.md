@@ -1,7 +1,6 @@
 ---
 tags: [theory, patterns]
 ---
-
 # Category Theory Cheat Sheet for Computer Scientists
 
 Category theory abstracts and generalizes mathematical structures, offering a powerful framework for computer science. It models complex systems like programming languages, type systems, and databases. This cheat sheet covers motivations, goals, basic and advanced concepts, and applications for computer scientists.
@@ -81,3 +80,13 @@ Category theory abstracts and generalizes mathematical structures, offering a po
   - Pierce, B. C. (1991). *Basic Category Theory for Computer Scientists*.
   - Awodey, S. (2010). *Category Theory, 2nd Edition*.
   - [EECS 598 Course](https://maxsnew.com/teaching/eecs-598-w22/)
+
+## Related Concepts
+
+### Related Topics
+- [[type_theory]] - Category theory provides semantics for type systems and dependent types
+- [[react_framework]] - Monads from category theory used in functional programming patterns
+
+### Extended By
+- [[type_theory]] - Type theory builds on categorical foundations, especially HoTT
+- [[dhcg]] - Uses categorical concepts like functors and morphisms

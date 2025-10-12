@@ -291,15 +291,14 @@ When upgrading:
 
 This configuration provides an optimal balance between performance, developer experience, and scalability for modern React + TypeScript + Tailwind CSS applications using Vite 6.
 
-
 ## Related Concepts
 
 ### Prerequisites
-
-- [[node]] - Vite runs on Node.js
-- [[typescript]] - TypeScript configuration knowledge needed
+- [[node]] - Vite runs on Node.js runtime
+- [[typescript]] - Vite configured for TypeScript projects
 
 ### Related Topics
-
-- [[react_framework]] - Vite commonly used with React
-- [[tailwind]] - Guide covers Tailwind integration with Vite
+- [[react_framework]] - Vite is the recommended build tool for React
+- [[tailwind]] - Vite integrates with Tailwind CSS
+- [[node]] - Vite runs on Node.js runtime
+- [[motion_canvas_cheatsheet]] - Motion Canvas projects typically use Vite for bundling

@@ -64,7 +64,6 @@ Traditional Zettelkasten uses **atomic notes** - one complete idea per note. But
 - Example: `Python_MOC.md` - navigation hub for Python contexts
 - Purpose: Create structure without hierarchies
 - Contains: Links and brief context, not content itself
-
 ### Our Hybrid Approach
 
 For LLM context, we use a pragmatic hybrid:
@@ -134,21 +133,122 @@ Traditional Zettelkasten: *"What is a promise in JavaScript?"* (one idea)
 4. **Cross-domain**: `python_mcp_sdk.md` links to `mcp_protocol.md` and `python_best_practices.md` naturally
 5. **Evolution**: The knowledge graph adapts as connections emerge
 
+## The Knowledge Graph System
+
+Beyond Obsidian's manual wikilinks, this repository maintains an **automated knowledge graph** that discovers and tracks typed relationships between all notes.
+
+### Structure: knowledge_graph_full.json
+
+The knowledge graph is stored in `knowledge_graph_full.json` and contains:
+
+- **Metadata**: Version tracking, completion status, total note count
+- **Typed relationships** for each note across six categories
+- **Bidirectional mappings**: If A extends B, then B is extended_by A
+- **Relationship context**: Each relationship includes a "why" explanation
+
+### Relationship Types
+
+The graph tracks six types of semantic relationships:
+
+1. **Prerequisites** - Concepts you must understand first
+   - Example: `[[type_theory]]` is a prerequisite for `[[dhcg]]`
+
+2. **Related Concepts** - Connected ideas at the same conceptual level
+   - Example: `[[agents]]` relates to `[[semantic_routing]]` because routing enables task delegation
+
+3. **Extends** - This note builds upon another concept
+   - Example: `[[agent_mcp_apis]]` extends `[[mcp_overview]]`
+
+4. **Extended By** - Other notes that build upon this concept (inverse of extends)
+   - Example: `[[agents]]` is extended by `[[react_agent_pattern]]`
+
+5. **Alternatives** - Different approaches to the same problem
+   - Example: `[[marker]]` is an alternative to `[[firecrawl]]` for content conversion
+
+6. **Examples** - Concrete implementations of abstract concepts
+   - Example: `[[alita]]` is an example implementation of `[[agents]]`
+
+### How It Works
+
+**Graph Construction**:
+1. **Forward pass**: Discovers outbound relationships from each note
+2. **Backward pass**: Establishes inverse relationships (e.g., extends → extended_by)
+3. **Synchronization**: Writes "Related Concepts" sections to all markdown files
+
+**In Markdown Files**:
+Every note has a "Related Concepts" section at the end:
+
+```markdown
+## Related Concepts
+
+### Prerequisites
+- [[type_theory]] - Builds on homotopy type theory foundations
+
+### Related Topics
+- [[agents]] - Proposes better representations for agent reasoning
+
+### Extends
+- [[category_theory]] - Uses categorical structures for semantic meaning
+```
+
+**Why This Matters**:
+- **Automated discovery**: Relationships emerge from content analysis, not manual curation
+- **Consistency**: Bidirectional relationships guaranteed (no orphaned links)
+- **Context-aware**: Each relationship explains WHY concepts connect
+- **LLM-friendly**: Structured JSON enables programmatic traversal
+- **Human-readable**: Markdown sections provide navigable links in Obsidian
+
+### Relationship Discovery Process
+
+The graph is built through a two-pass algorithm:
+
+**Forward Pass** (Batched):
+- Analyzes each note's content and existing links
+- Identifies natural relationships based on semantic content
+- Records outbound relationships in the graph
+
+**Backward Pass**:
+- Processes all forward relationships
+- Creates inverse mappings (extends → extended_by, examples → examples_of)
+- Ensures graph bidirectionality
+
+**Synchronization**:
+- Writes all relationships back to markdown "Related Concepts" sections
+- Maintains wikilink format `[[note]]` for Obsidian compatibility
+- Places sections before citations/references
+
+### Knowledge Graph Benefits
+
+1. **Traversability**: LLMs can explore concept dependencies programmatically
+2. **Discovery**: Find related concepts through typed relationships, not just text search
+3. **Consistency**: Bidirectional relationships prevent broken connections
+4. **Evolution**: Graph updates as notes are added or modified
+5. **Multi-dimensional**: Six relationship types capture different semantic connections
+6. **Explainability**: Every relationship includes context explaining the connection
+
+The knowledge graph transforms this from a static note collection into a **living, queryable knowledge network** that both humans and AI agents can navigate semantically.
+
 ## How to Work With This Repository
 
 ### Finding Context for a Task
 
-**Method 1: Start with MOC notes**
+**Method 1: Navigate via knowledge graph**
+- Check `knowledge_graph_full.json` for typed relationships
+- Look for "Related Concepts" sections at the end of markdown files
+- Follow prerequisite chains to understand dependencies
+- Explore "extended_by" relationships to find advanced topics
+
+**Method 2: Start with MOC notes**
 - Look for `Topic_MOC.md` files (e.g., `Python_MOC.md`)
 - Follow links to relevant notes
 - Compose the contexts you need
 
-**Method 2: Use Obsidian search/graph**
+**Method 3: Use Obsidian search/graph**
 - Search by topic or tag
 - Explore the graph view to find connections
 - Use backlinks to discover related concepts
 
-**Method 3: Tag-based discovery**
+**Method 4: Tag-based discovery**
 - Every note has tags like `#python #mcp #agents`
 - Search by tag combinations to find cross-cutting concepts
 - See [[tag_system]] for the complete tag catalog and strategy
@@ -209,7 +309,6 @@ External sources if applicable.
 - Is it focused on one topic/task?
 - Are links meaningful (not just "related")?
 - Do tags accurately describe cross-cutting themes?
-
 ## Organization Principles
 
 - **Minimal folders**: Flat structure preferred, folders only for broad functional separation if needed

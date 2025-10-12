@@ -117,14 +117,14 @@ For the Windows Agent, semantic routing is critical for:
 - Track routing accuracy and model performance
 - Continuous learning: Update routing based on success/failure patterns
 
-## Related Concepts
-
-### Related Topics
-- [[agents]] - AI systems that use semantic routing for intelligent task delegation
-
 ## References
 
 - [vLLM Semantic Router](https://blog.vllm.ai/2025/09/11/semantic-router.html)
 - [Red Hat LLM Semantic Router](https://developers.redhat.com/articles/2025/05/20/llm-semantic-router-intelligent-request-routing)
 - [vLLM Semantic Router: Improving Efficiency AI Reasoning](https://developers.redhat.com/articles/2025/09/11/vllm-semantic-router-improving-efficiency-ai-reasoning)
 - [Semantic Routing Overview](https://jimmysong.io/en/ai/semantic-router/)
+
+## Related Concepts
+
+### Related Topics
+- [[agents]] - Agents use semantic routing for intelligent task delegation

@@ -193,3 +193,15 @@ Assess how atomic answers combine to address specific questions, specific answer
 ---
 
 **Remember**: This methodology framework supports your primary synthesis objective. Use it to identify question structures, then create comprehensive educational content that teaches readers about the subject matter while demonstrating systematic intellectual architecture.
+
+## Related Concepts
+
+### Prerequisites
+- [[strategy_question_knowledge]] - Need to understand question-oriented methodology before applying it to analyze existing content
+
+### Related Topics
+- [[strategy_critical_assessment]] - Both analyze existing work structure, though reverse questions extracts implicit architecture while critical assessment evaluates quality
+- [[strategy_question_knowledge]] - Reverse engineering extracts implicit question structures from existing content using same principles
+
+### Extends
+- [[strategy_question_knowledge]] - Applies question-oriented approach to reverse-engineer and synthesize existing unstructured content

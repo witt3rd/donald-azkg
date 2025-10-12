@@ -1,7 +1,6 @@
 ---
 tags: [agents, development]
 ---
-
 # Alita: A Paradigm Shift in AI Agent Design
 
 ## Central Question Statement
@@ -57,3 +56,14 @@ Alita represents a significant advancement in the design of AI agents, emphasizi
 ## Final Synthesis
 
 Alita's innovative design, characterized by minimal predefinition and maximal self-evolution, positions it as a leading AI agent capable of outperforming existing systems like OpenAI and Manus AI. By autonomously generating tools and adapting to new challenges in real-time, Alita not only enhances its own capabilities but also sets a new standard for the future of AI development. The implications of this technology suggest a transformative shift towards more autonomous, efficient, and adaptable AI systems, redefining the landscape of artificial intelligence.
+
+## Related Concepts
+
+### Prerequisites
+- [[agents]] - Need to understand agent fundamentals before exploring Alita's innovations
+
+### Related Topics
+- [[agent_mcp_apis]] - Alita uses MCP to dynamically create and manage tools
+
+### Extended By
+- [[agents]] - Alita is a concrete example of self-evolving agent

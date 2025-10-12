@@ -1,7 +1,6 @@
 ---
 tags: [reference, guide, api, patterns]
 ---
-
 ## A--B
 
 - [Acton\'s dictum](Acton's_dictum "Acton's dictum"){.wikilink}: \"Power

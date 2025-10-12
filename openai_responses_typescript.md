@@ -1,7 +1,6 @@
 ---
 tags: [typescript, openai, ai, guide, api, best-practices]
 ---
-
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
 # OpenAI Responses API: A Comprehensive TypeScript Guide
@@ -1365,3 +1364,14 @@ As the AI development landscape continues evolving, the Responses API provides a
 The patterns and practices outlined in this guide serve as a foundation for TypeScript developers to build sophisticated, reliable, and performant AI applications that take full advantage of the Responses API's capabilities while maintaining the type safety and developer experience that makes TypeScript an excellent choice for AI development.
 
 <div style="text-align: center">⁂</div>
+
+## Related Concepts
+
+### Prerequisites
+- [[typescript]] - Need TypeScript knowledge to use OpenAI TypeScript patterns
+
+### Related Topics
+- [[openai_responses_python]] - Same OpenAI API with Python implementation for comparison
+
+### Alternatives
+- [[openai_responses_python]] - Python alternative for OpenAI SDK

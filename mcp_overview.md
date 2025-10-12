@@ -1,7 +1,6 @@
 ---
 tags: [mcp, protocol, ai, overview]
 ---
-
 # Model Context Protocol (MCP) - Overview
 
 MCP is an open protocol that standardizes how AI applications integrate with external data sources and tools - essentially "USB-C for AI applications."
@@ -85,26 +84,15 @@ With growing adoption across major technology companies and a robust ecosystem o
 
 ## Related Concepts
 
-- [[claude_code_agents]] - Claude Code uses MCP for tool access
-- [[ai_agent_architecture]] - MCP provides the integration layer for agent systems
-- [[llm_tool_use]] - MCP standardizes how LLMs access tools
+### Related Topics
+- [[agents]] - Claude Code agents use MCP for tool access and integration
 
-## References
-
-[1] https://modelcontextprotocol.io/introduction
-[2] https://modelcontextprotocol.io/specification/2025-03-26
-[3] https://developers.cloudflare.com/agents/model-context-protocol/
-[4] https://www.k2view.com/model-context-protocol/
-[5] https://github.com/modelcontextprotocol
-[6] https://code.visualstudio.com/docs/copilot/chat/mcp-servers
-[7] https://modelcontextprotocol.io/examples
-[8] https://www.anthropic.com/news/model-context-protocol
-[9] https://openai.github.io/openai-agents-python/mcp/
-[10] https://github.blog/changelog/2025-04-04-github-mcp-server-public-preview/
-[11] https://en.wikipedia.org/wiki/Model_Context_Protocol
-[12] https://github.com/idosal/git-mcp
-[13] https://www.philschmid.de/mcp-introduction
-[14] https://www.youtube.com/watch?v=d3QpQO6Paeg
-[15] https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/introducing-model-context-protocol-mcp-in-copilot-studio-simplified-integration-with-ai-apps-and-agents/
-[16] https://github.com/github/github-mcp-server
-[17] https://github.com/modelcontextprotocol/servers
+### Extended By
+- [[mcp_architecture]] - Architecture provides technical foundation for MCP
+- [[mcp_resources]] - Resources implement one of three core MCP capabilities
+- [[mcp_tools]] - Tools implement one of three core MCP capabilities
+- [[mcp_prompts]] - Prompts implement one of three core MCP capabilities
+- [[mcp_security]] - Need to understand MCP fundamentals before security model
+- [[mcp_implementation]] - Need to understand MCP fundamentals before implementation
+- [[filesystem]] - Need to understand MCP protocol
+- [[adding_to_claude_code]] - Need to understand MCP fundamentals before configuring servers

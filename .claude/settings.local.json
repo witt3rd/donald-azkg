@@ -3,7 +3,8 @@
     "allow": [
       "Bash(pwsh:*)",
       "Bash(python3:*)",
-      "Bash(python -c \"import json, sys; data = json.load(open(''''C:/Users/dothompson/OneDrive/src/witt3rd/llm-docs/knowledge_graph_full.json'''')); print(''''JSON validated'''')\")"
+      "Bash(python -c \"import json, sys; data = json.load(open(''''C:/Users/dothompson/OneDrive/src/witt3rd/llm-docs/knowledge_graph_full.json'''')); print(''''JSON validated'''')\")",
+      "Read(//c/Users/dothompson/.claude/**)"
     ],
     "deny": [],
     "ask": []

@@ -1,7 +1,6 @@
 ---
 tags: [moc, react, ui, frontend, framework]
 ---
-
 # React - Map of Content
 
 This MOC connects all notes related to React framework, patterns, and ecosystem.

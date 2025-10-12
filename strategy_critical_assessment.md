@@ -1069,3 +1069,19 @@ This framework ensures that critical assessment serves knowledge advancement rat
 - [ ] Monitor framework effectiveness and refine implementation
 
 The Critical Assessment Framework transforms evaluation from art to science while maintaining the intellectual rigor necessary for advancing human knowledge and capability.
+
+## Related Concepts
+
+### Prerequisites
+- [[strategy_question_knowledge]] - Need to understand question-oriented methodology before critically assessing its implementation
+
+### Related Topics
+- [[strategy_first_principles]] - Critical assessment validates whether work applies first principles reasoning by checking for unexamined assumptions
+- [[socratic_interlocutor_prompt]] - Both use systematic questioning to identify weaknesses and strengthen arguments
+- [[strategy_question_decomposition]] - Critical assessment validates decomposition quality through MECE and synthesis tests
+- [[strategy_reverse_questions]] - Both analyze existing work structure, though reverse questions extracts implicit architecture while critical assessment evaluates quality
+- [[strategy_systems_thinking]] - Critical assessment can validate systems thinking application by checking for overlooked interdependencies and feedback loops
+- [[verify_references]] - Reference verification is part of evidence quality assessment dimension in critical framework
+
+### Extends
+- [[strategy_question_knowledge]] - Provides evaluation framework for question-oriented methodology quality

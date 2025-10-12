@@ -1,7 +1,6 @@
 ---
 tags: [moc, mcp, protocol, integration, api]
 ---
-
 # Model Context Protocol (MCP) - Map of Content
 
 This MOC connects all notes related to the Model Context Protocol specification, SDKs, and implementations.

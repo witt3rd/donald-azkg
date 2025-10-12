@@ -1,7 +1,6 @@
 ---
 tags: [optimization, reference, guide]
 ---
-
 # Optimization and Constraint Satisfaction Cheat Sheet for Computer Scientists
 
 ## Introduction
@@ -57,3 +56,11 @@ Constrained optimization extends CSPs by adding an objective function. CSP techn
 - [Constrained Optimization](https://en.wikipedia.org/wiki/Constrained_optimization)
 - [OR-Tools](https://developers.google.com/optimization/cp)
 - [ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0377221798003646)
+
+## Related Concepts
+
+### Related Topics
+- [[game_theory]] - Both provide mathematical frameworks for decision-making
+- [[bayes_theory]] - Optimization used in Bayesian inference algorithms
+- [[burn]] - Burn includes optimization algorithms for deep learning
+- [[cubecl]] - CubeCL includes optimization features like autotuning and kernel fusion

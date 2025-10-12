@@ -1,7 +1,6 @@
 ---
 tags: [api, prompting, python, development]
 ---
-
 # The Case for Micro-Prompting with SLMs/SRMs
 
 I’m optimistic about the potential of Small Language Models (SLMs) and Small Reasoning Models (SRMs) to transform how we design "agentic" programs through a technique I call **"micro-prompting."** Unlike Large Language Models (LLMs) and Large Reasoning Models (LRMs), which excel at processing large, complex prompts packed with instructions, guardrails, and context, SLMs and SRMs are better suited for the numerous discrete, modular steps that agentic workflows demand.
@@ -34,3 +33,15 @@ By leveraging SLMs/SRMs for each step, we improve efficiency and modularity, ult
 This approach isn’t just an optimization—it’s a paradigm shift. Micro-prompting with SLMs/SRMs paves the way for a truly **AI-native operating system or platform**, where natural language drives development. It’s a natural evolution that makes AI more accessible and integral to how we build intelligent systems, aligning with the vision of language as the future of programming.
 
 In short, SLMs/SRMs, through micro-prompting, unlock a more efficient, modular, and innovative way to create agentic programs—heralding a new era of AI-driven development.
+
+## Related Concepts
+
+### Related Topics
+- [[agents]] - Micro-prompting is designed for agentic workflows described in agents.md
+- [[json_prompting]] - Both are structured approaches to prompt engineering
+- [[react_agent_pattern]] - ReAct agents can use micro-prompting for decomposed reasoning steps
+- [[spr]] - Both focus on efficiency in prompting - SPR via compression, micro-prompting via decomposition
+- [[nvidia_small]] - Micro-prompting with SLMs for decomposed task execution
+
+### Alternatives
+- [[json_prompting]] - JSON prompting offers structured control while micro-prompting focuses on decomposition

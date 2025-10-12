@@ -1,7 +1,6 @@
 ---
 tags: [reference]
 ---
-
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
 # Understanding MCP Filesystem Server Path Behavior
@@ -44,6 +43,7 @@ Some MCP filesystem servers **do support relative paths** by using the current w
 - The MCP host must set the `cwd` to the intended project directory when launching the server[^5]
 
 
+
 ### Session-Based Path Management
 
 Other implementations provide session-aware path management[^7][^8]:
@@ -51,6 +51,7 @@ Other implementations provide session-aware path management[^7][^8]:
 - A `set_filesystem_default` tool that sets a default absolute path for the current session[^7]
 - Relative paths in subsequent tool calls are resolved against this default[^7]
 - This provides more flexible path handling while maintaining security[^7]
+
 
 
 ## Recommendations
@@ -177,3 +178,15 @@ Your experience highlights a significant usability issue with the standard Anthr
 
 [^51]: https://dev.to/codecowboydotio/creating-an-mcp-server-with-anthropic-3m87
 
+## Related Concepts
+
+### Prerequisites
+- [[mcp_overview]] - Need to understand MCP protocol
+- [[mcp_tools]] - Filesystem implements MCP tools
+
+### Related Topics
+- [[agent_mcp_apis]] - Agents use filesystem tools via MCP
+- [[mcp_security]] - Filesystem access requires careful security considerations
+
+### Extends
+- [[mcp_tools]] - Implements MCP tool specification for file operations

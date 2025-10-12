@@ -530,17 +530,15 @@ Verify prompt implementations:
 
 ## Related Concepts
 
-- [[mcp_overview]] - High-level introduction to MCP (prerequisite)
-- [[mcp_architecture]] - How prompts are delivered through MCP
-- [[mcp_resources]] - Prompts coordinate resource access
-- [[mcp_tools]] - Prompts orchestrate tool usage
-- [[mcp_security]] - Security considerations for prompt execution
-- [[mcp_implementation]] - Implementing prompt servers
-- [[llm_prompting]] - General LLM prompting techniques
+### Prerequisites
+- [[mcp_overview]] - Need to understand MCP fundamentals first
+- [[mcp_architecture]] - Need to understand how prompts are delivered through architecture
 
-## References
+### Related Topics
+- [[mcp_resources]] - Prompts coordinate access to resources
+- [[mcp_tools]] - Prompts orchestrate tool execution in workflows
+- [[mcp_implementation]] - Implementation of prompt servers
+- [[json_prompting]] - MCP prompts use structured formats similar to JSON prompting
 
-[1] https://modelcontextprotocol.io/introduction
-[2] https://modelcontextprotocol.io/specification/2025-03-26
-[7] https://modelcontextprotocol.io/examples
-[13] https://www.philschmid.de/mcp-introduction
+### Extends
+- [[mcp_overview]] - Implements the prompts capability of MCP

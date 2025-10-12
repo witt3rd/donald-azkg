@@ -1,7 +1,6 @@
 ---
 tags: [agents, reference]
 ---
-
 **Key Points**
 
 - Research suggests multi-agent debate enhances AI reasoning and accuracy.
@@ -116,3 +115,16 @@ Multi-agent debate frameworks offer a robust approach to enhancing generative AI
 - [Multiagent Debate Project Website](https://composable-models.github.io/llm_debate/)
 - [NYU Debate Modeling Code Repository](https://github.com/samuelarnesen/nyu-debate-modeling)
 - [Reddit Discussion on Multi-Agent Debate](https://www.reddit.com/r/AI_Agents/comments/1k2vlju/multiagent_debate_how_can_we_build_a_smarter_ai/)
+
+## Related Concepts
+
+### Prerequisites
+- [[agents]] - Need to understand agent fundamentals before multi-agent patterns
+
+### Related Topics
+- [[a2a]] - A2A protocol facilitates agent-to-agent debate communication
+- [[agents]] - Multi-agent debate is a collaboration pattern for agents
+- [[game_theory]] - Multi-agent debate can be modeled using game-theoretic concepts
+
+### Extends
+- [[agents]] - Extends agent architecture with collaborative debate pattern

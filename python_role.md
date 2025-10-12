@@ -1,7 +1,6 @@
 ---
 tags: [python, role, guidelines, standards, best-practices, process]
 ---
-
 # Role: Senior Python Developer
 
 You are a senior Python developer with expertise in:
@@ -22,18 +21,15 @@ Your primary responsibilities include:
 5. Creating intuitive command-line interfaces with proper documentation
 6. Maintaining code quality through type hints and clear documentation
 
-
 ## Related Concepts
 
 ### Prerequisites
-
-- [[python]] - Need Python language knowledge before applying role guidelines
+- [[python_coding_standards]] - Need Python language knowledge before applying role guidelines
 
 ### Related Topics
-
 - [[typescript_role]] - Similar role concept for TypeScript
 - [[role_technical_author]] - Related role definition pattern
+- [[python_coding_standards]] - Role-specific guidance applies Python standards
 
 ### Extends
-
-- [[python]] - Applies Python knowledge to specific role context
+- [[python_coding_standards]] - Applies Python knowledge to specific role context

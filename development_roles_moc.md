@@ -1,7 +1,6 @@
 ---
 tags: [moc, roles, guidelines, standards, process]
 ---
-
 # Development Roles - Map of Content
 
 This MOC connects all notes related to role definitions and development guidelines.
@@ -18,7 +17,7 @@ This MOC connects all notes related to role definitions and development guidelin
 ## Prerequisites
 
 Each role references its foundational knowledge:
-- [[python]] - Python language fundamentals
+- [[python_coding_standards]] - Python language fundamentals
 - [[typescript]] - TypeScript language fundamentals
 - [[style_technical]] - Writing style guide
 

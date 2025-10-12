@@ -1,7 +1,6 @@
 ---
 tags: [guide]
 ---
-
 # Towards Homotopy-Aware Neural Representations
 
 > "Deep Homotopical Conceptual Geometry"
@@ -128,3 +127,17 @@ Mapping from vector embeddings to conceptual spaces and onward to homotopy-type 
 [^26]: <https://arxiv.org/abs/2402.15332>
 [^27]: <http://arxiv.org/pdf/1706.01540.pdf>
 [^28]: <https://arxiv.org/pdf/2302.03836v1.pdf>
+
+## Related Concepts
+
+### Prerequisites
+- [[category_theory]] - Uses categorical concepts like functors and morphisms
+- [[type_theory]] - Builds on homotopy type theory foundations
+
+### Related Topics
+- [[agents]] - Proposes better representations for agent reasoning
+- [[llm_evolve]] - Addresses limitations in current LLM embeddings
+
+### Extends
+- [[type_theory]] - Applies HoTT concepts to neural network representations
+- [[category_theory]] - Uses categorical structures for semantic meaning

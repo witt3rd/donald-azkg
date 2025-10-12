@@ -1,7 +1,6 @@
 ---
 tags: [cpp, guide, best-practices]
 ---
-
 # C++ Project Setup on Windows with VS Code and MSVC - Best Practices
 
 ## The Core Problem and Solution
@@ -440,3 +439,18 @@ target_link_libraries(${PROJECT_NAME} PRIVATE your_package::your_package)
 ## Summary
 
 This setup provides a clean, professional C++ development environment on Windows. The key is setting environment variables at the system level so all tools can find each other regardless of how they're launched. Once configured, everything "just works" with minimal complexity.
+
+## Related Concepts
+
+### Prerequisites
+- [[powershell]] - PowerShell used for Windows environment and build automation
+
+### Related Topics
+- [[cpp_spec]] - C++23 language features used in projects
+- [[windows_app_sdk_setup]] - Windows-specific SDK setup builds on this
+- [[windows_ml]] - Windows ML provides C++ APIs
+- [[onnx_runtime]] - ONNX Runtime available for C++
+- [[powershell]] - PowerShell used for C++ build automation on Windows
+
+### Extended By
+- [[windows_app_sdk_setup]] - Specialized Windows-specific C++ project setup

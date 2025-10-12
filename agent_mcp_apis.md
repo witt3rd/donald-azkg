@@ -1,7 +1,6 @@
 ---
 tags: [mcp, api, agents, integration, reference, tools]
 ---
-
 # Agents, MCP Server Tools, and Raw APIs
 
 ## Definitions and Roles
@@ -71,18 +70,16 @@ While nothing technically prevents an MCP tool from using an LLM internally or a
 - MCP tools provide semantic abstraction, not simple API wrapping
 - Standardized protocol reduces integration complexity
 
-
 ## Related Concepts
 
 ### Prerequisites
-
-- [[mcp_overview]] - Foundation MCP protocol knowledge required
-- [[agents]] - Understanding of agent architecture required
+- [[agents]] - Need to understand agent architecture before MCP integration
 
 ### Related Topics
-
-- [[mcp_sdk]] - SDK provides implementation of these APIs
+- [[a2a]] - A2A and MCP are complementary protocols
+- [[alita]] - Alita uses MCP to dynamically create and manage tools
+- [[mcp_tools]] - Agents use MCP tools for task execution
+- [[filesystem]] - Agents use filesystem tools via MCP
 
 ### Extends
-
-- [[mcp_overview]] - Extends MCP protocol for agent-specific use cases
+- [[agents]] - Extends agents with MCP tool integration

@@ -1,7 +1,6 @@
 ---
 tags: [theory, reference]
 ---
-
 # Game Theory Cheat Sheet for Computer Scientists
 
 ## Introduction
@@ -162,3 +161,12 @@ Mechanism design, often called “reverse game theory,” involves creating game
 - [MIT OpenCourseWare: Game Theory with Engineering Applications](https://ocw.mit.edu/courses/6-254-game-theory-with-engineering-applications-spring-2010/): Lecture notes with computational focus.
 - [Game Theory - Wikipedia](https://en.wikipedia.org/wiki/Game_theory): General overview.
 - [Algorithmic Game Theory - Wikipedia](https://en.wikipedia.org/wiki/Algorithmic_game_theory): CS-specific insights.
+
+## Related Concepts
+
+### Related Topics
+- [[bayes_theory]] - Both provide mathematical frameworks for decision-making under uncertainty
+- [[agents]] - Game theory applies to multi-agent system design and strategic behavior
+- [[debate]] - Multi-agent debate can be modeled using game-theoretic concepts
+- [[sutton]] - RL can be viewed through game-theoretic lens for multi-agent scenarios
+- [[optimization]] - Both provide mathematical frameworks for decision-making

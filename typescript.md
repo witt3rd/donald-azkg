@@ -1516,20 +1516,25 @@ const ComponentWithProfiling: React.FC<Props> = (props) => {
 
 This comprehensive TypeScript coding standards guide ensures high-quality, maintainable, and performant React applications following modern best practices and integrating seamlessly with the latest web development tools and patterns.
 
-
 ## Related Concepts
 
 ### Related Topics
-
-- [[python]] - Alternative language with similar patterns
-- [[typescript_role]] - Role-specific guidance for TypeScript
-- [[node]] - TypeScript runs on Node.js runtime
+- [[typescript_role]] - Role-specific guidance applies TypeScript standards
+- [[react_framework]] - TypeScript used extensively with React 19 development
+- [[python_coding_standards]] - Alternative language with similar async patterns
+- [[ts]] - Shares TypeScript 5.8+ coding standards content
+- [[node]] - Node.js 24 provides native TypeScript support
+- [[type_theory]] - TypeScript implements practical type system based on type theory
 
 ### Extended By
-
-- [[react_framework]] - React commonly uses TypeScript
-- [[mcp_sdk]] - Uses TypeScript for MCP implementation
+- [[typescript_role]] - Role applies TypeScript standards to specific context
+- [[ts]] - Specific TypeScript 5.8 features and enhancements
+- [[react_framework]] - React development uses TypeScript for type safety
+- [[vite]] - Vite configured for TypeScript projects
+- [[openai_responses_typescript]] - Need TypeScript knowledge to use OpenAI TypeScript patterns
+- [[type_theory]] - TypeScript is practical application of type theory
+- [[motion_canvas_cheatsheet]] - Motion Canvas uses TypeScript
 
 ### Alternatives
-
-- [[python]] - Alternative language for similar use cases
+- [[python_coding_standards]] - Python alternative for similar use cases
+- [[dotnet]] - .NET/C# alternative for development

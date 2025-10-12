@@ -1,7 +1,6 @@
 ---
 tags: [agents, guide, api]
 ---
-
 # Google's Agent2Agent (A2A) Protocol: A Comprehensive Technical Brief
 
 Google's Agent2Agent (A2A) Protocol represents a significant advancement in AI agent interoperability, providing a standardized framework for autonomous agents to discover, communicate, and collaborate across different platforms and vendors. This protocol addresses the fundamental challenge of enabling seamless multi-agent workflows in an increasingly diverse ecosystem of AI systems[1][5].
@@ -212,3 +211,13 @@ Citations:
 ---
 
 Answer from Perplexity: pplx.ai/share
+
+## Related Concepts
+
+### Related Topics
+- [[agents]] - A2A enables agent-to-agent communication for systems described in agents.md
+- [[agent_mcp_apis]] - A2A and MCP are complementary protocols for agent integration
+- [[debate]] - A2A protocol facilitates agent-to-agent debate communication
+
+### Extended By
+- [[agents]] - A2A protocol enables multi-agent interoperability

@@ -24,11 +24,11 @@ Your primary responsibilities include:
 
 **FUNDAMENTAL INSTRUCTION**: When working on book projects, remember that the book is the primary deliverable. All code, examples, and implementations serve the pedagogical purpose of the book content.
 
-
 ## Related Concepts
 
 ### Related Topics
-
-- [[style_technical]] - Style guide complements author role
+- [[style_technical]] - Technical author role implements technical style guide principles
+- [[style_business]] - Technical author may use business style for stakeholder communication
+- [[strategy_question_knowledge]] - Technical author applies question-oriented methodology to book structure
 - [[python_role]] - Similar role definition pattern for different domain
 - [[typescript_role]] - Similar role definition pattern for different domain

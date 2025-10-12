@@ -1,7 +1,6 @@
 ---
 tags: [reference, guide, api]
 ---
-
 Firecrawl is a robust API service designed to transform web content into LLM-ready formats like markdown, HTML, and structured data. Its Python SDK (`firecrawl-py`) simplifies web scraping by handling technical complexities like JavaScript rendering, anti-bot mechanisms, and dynamic content. Here's a comprehensive breakdown:
 
 ---
@@ -118,3 +117,12 @@ For complex projects, consider Firecrawl's `/crawl` endpoint for site-wide scrap
 [18] <https://docs.firecrawl.dev/features/crawl>
 [19] <https://forum.cloudron.io/topic/12140/firecrawl-on-cloudron-turn-any-site-into-llm-data-by-web-scraping>
 [20] <https://www.scrapingbee.com/blog/web-scraping-101-with-python/>
+
+## Related Concepts
+
+### Related Topics
+- [[python_coding_standards]] - Firecrawl provides Python SDK
+- [[marker]] - Both tools convert content to markdown for LLMs
+
+### Alternatives
+- [[marker]] - Marker for PDF conversion instead of web scraping

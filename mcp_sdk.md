@@ -1,7 +1,6 @@
 ---
 tags: [mcp, guide, api, best-practices, patterns]
 ---
-
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
 # Comprehensive Guide to MCP Python SDKs
@@ -738,3 +737,20 @@ This comprehensive guide provides the foundation for building robust MCP applica
 [^10]: <https://www.reddit.com/r/mcp/comments/1k0v8n3/announcing_fastmcp_20/>
 [^11]: <https://brightdata.com/blog/ai/sse-vs-streamable-http>
 [^12]: <https://cdn.cdata.com/help/DJK/mcp/pg_connectionmcp.htm>
+
+## Related Concepts
+
+### Prerequisites
+- [[mcp_implementation]] - Need general implementation knowledge before Python-specific SDK
+
+### Related Topics
+- [[csharp_mcp_sdk_docs]] - Alternative language SDK for MCP
+
+### Extends
+- [[mcp_implementation]] - Python-specific implementation of MCP SDK
+
+### Extended By
+- [[fastmcp_shutdown]] - Specific FastMCP implementation issue
+
+### Alternatives
+- [[csharp_mcp_sdk_docs]] - Use C# instead of Python for MCP development

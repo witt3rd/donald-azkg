@@ -1,7 +1,6 @@
 ---
 tags: [moc, agents, ai, architecture, patterns]
 ---
-
 # Agents - Map of Content
 
 This MOC connects all notes related to AI agents, agentic workflows, and agent architecture patterns.

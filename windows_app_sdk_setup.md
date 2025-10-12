@@ -560,3 +560,22 @@ Setting up Windows App SDK with CMake for a self-contained build requires:
 6. **Understanding package dependencies** (Foundation contains bootstrap components)
 
 This setup enables access to the latest Windows APIs including experimental ML features, while maintaining a build system that works consistently across developer machines without pre-installed dependencies.
+
+## Related Concepts
+
+### Prerequisites
+- [[cpp_project]] - Need C++ project setup fundamentals first
+- [[powershell]] - PowerShell used for Windows environment configuration
+
+### Related Topics
+- [[windows_ml]] - Windows App SDK provides access to Windows ML APIs
+- [[dotnet]] - Windows App SDK also available for .NET projects
+- [[copilot_runtime]] - Windows App SDK provides access to Copilot Runtime APIs
+- [[cpp_project]] - Windows-specific SDK setup builds on this
+- [[powershell]] - PowerShell used for Windows environment configuration
+
+### Extends
+- [[cpp_project]] - Specialized Windows-specific C++ project setup
+
+### Extended By
+- [[windows_ai_stack_explained]] - Practical setup example using Windows App SDK

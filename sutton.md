@@ -185,3 +185,10 @@ Citations:
 ---
 
 Answer from Perplexity: pplx.ai/share
+
+## Related Concepts
+
+### Related Topics
+- [[agents]] - RL agents are a fundamental type of AI agent
+- [[llm_evolve]] - RL represents next evolution beyond current LLMs
+- [[game_theory]] - RL can be viewed through game-theoretic lens for multi-agent scenarios

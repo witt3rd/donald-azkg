@@ -205,3 +205,13 @@ These patterns form the foundation of idiomatic Rust:
 - **Explicit over implicit** makes code self-documenting
 
 >
+
+## Related Concepts
+
+### Related Topics
+- [[cli]] - Best practices demonstrate enum-based CLI argument handling
+- [[cargo]] - Cargo project structure follows Rust best practices
+
+### Examples
+- [[cli]] - CLI guide shows practical application of best practices
+- [[burn]] - Burn framework follows Rust best practices

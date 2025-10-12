@@ -365,13 +365,26 @@ This dual approach allows gradual migration from legacy to modern APIs while mai
 [30](https://www.machinelearningmastery.com/hardware-accelerated-ai-for-windows-apps-using-onnx-rt/)
 [31](https://stackoverflow.com/questions/53993236/what-is-difference-between-cntk-and-win-ml)
 
-
 ## Related Concepts
 
 ### Prerequisites
-
 - [[windows_ai_stack_explained]] - Need to understand overall architecture before diving into Windows ML specifics
 
-### Extends
+### Related Topics
+- [[onnx_runtime]] - Windows ML is powered by ONNX Runtime internally
+- [[dotnet]] - Windows ML provides .NET/C# APIs
+- [[cpp_project]] - Windows ML provides C++ APIs
+- [[copilot_runtime]] - Copilot Runtime sits above Windows ML layer
+- [[windows_ai_stack_explained]] - Windows ML is a key layer in the stack
+- [[windows_app_sdk_setup]] - Windows App SDK provides access to Windows ML APIs
+- [[foundry_local]] - Foundry Local uses Windows ML and ONNX Runtime underneath
+- [[cpu_vs_gpu_decision_guide]] - Windows ML supports CPU and GPU hardware acceleration
 
+### Extends
 - [[windows_ai_stack_explained]] - Detailed implementation of Windows ML layer from the stack
+
+### Extended By
+- [[windows_app_sdk_setup]] - Shows how to set up Windows ML via App SDK
+
+### Alternatives
+- [[onnx_runtime]] - Direct ONNX Runtime for cross-platform scenarios

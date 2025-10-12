@@ -114,3 +114,12 @@ For full documentation, see [Marker’s GitHub repository][https://github.com/Vi
 [8] <https://github.com/mustafaquraish/marker/blob/master/README.md>
 [9] <https://docs.llamaindex.ai/en/stable/api_reference/readers/arxiv/>
 [10] <https://arxiv.org/html/2409.05137v1>
+
+## Related Concepts
+
+### Related Topics
+- [[python_coding_standards]] - Marker provides Python SDK
+- [[firecrawl]] - Both tools convert content to markdown for LLMs
+
+### Alternatives
+- [[firecrawl]] - Firecrawl for web scraping instead of PDF conversion

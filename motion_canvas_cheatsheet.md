@@ -1,7 +1,6 @@
 ---
 tags: [reference, api, patterns]
 ---
-
 # Motion Canvas Comprehensive Cheatsheet
 
 ## Table of Contents
@@ -752,3 +751,13 @@ yield* tween(duration, progress => {
 - **Effects**: `shadowBlur`, `shadowColor`, `filters`
 
 This cheatsheet covers the essential aspects of Motion Canvas development. Refer to the official documentation at [motioncanvas.io](https://motioncanvas.io) for detailed API references and advanced features.
+
+## Related Concepts
+
+### Prerequisites
+- [[typescript]] - Motion Canvas uses TypeScript
+- [[node]] - Motion Canvas runs on Node.js runtime
+
+### Related Topics
+- [[react_framework]] - Motion Canvas uses React-like JSX component syntax
+- [[vite]] - Motion Canvas projects typically use Vite for bundling

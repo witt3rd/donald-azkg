@@ -1,7 +1,6 @@
 ---
 tags: [ai, agents, mcp, architecture, system-design]
 ---
-
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
 
 # Claude Code Agents: Complete Guide to Context Management and Parallelization
@@ -168,119 +167,25 @@ Claude Code subagents represent a significant advancement in AI-assisted develop
 ## Related Concepts
 
 ### Related Topics
-- [[semantic_routing]] - Technique used for intelligent task routing to appropriate agents
-- [[react_agent_pattern]] - Implementation pattern for agent-based architectures
+- [[semantic_routing]] - Routing enables intelligent agent task delegation
+- [[debate]] - Multi-agent debate is a collaboration pattern for agents
+- [[memory]] - Agents use memory systems for context persistence
+- [[a2a]] - A2A enables agent-to-agent communication for systems described in agents.md
+- [[llm_evolve]] - Modern LLMs exhibit agentic behaviors described in agents.md
+- [[mcp_overview]] - Claude Code agents use MCP for tool access and integration
+- [[micro_prompt]] - Micro-prompting is designed for agentic workflows described in agents.md
+- [[game_theory]] - Game theory applies to multi-agent system design and strategic behavior
+- [[dhcg]] - Proposes better representations for agent reasoning
+- [[sutton]] - RL agents are a fundamental type of AI agent
+- [[nvidia_small]] - SLMs designed specifically for agentic AI systems
+- [[adding_to_claude_code]] - MCP servers extend agent capabilities in Claude Code
 
 ### Extended By
-- [[agent_mcp_apis]] - APIs that enable agent functionality through MCP protocol
-- [[mcp_sdk]] - SDK used to build custom agents with MCP capabilities
+- [[agent_mcp_apis]] - MCP APIs enable agent functionality
+- [[react_agent_pattern]] - ReAct is a specific agent implementation pattern
+- [[alita]] - Need to understand agent fundamentals before exploring Alita's innovations
+- [[debate]] - Need to understand agent fundamentals before multi-agent patterns
 
-<span style="display:none">[^13][^14][^15][^16][^17][^18][^19][^20][^21][^22][^23][^24][^25][^26][^27][^28][^29][^30][^31][^32][^33][^34][^35][^36][^37][^38][^39][^40][^41][^42][^43][^44][^45][^46][^47][^48][^49][^50][^51][^52][^53]</span>
-
-<div align="center">⁂</div>
-
-[^1]: <https://docs.claude.com/en/docs/claude-code/sub-agents>
-
-[^2]: <https://aicrossroads.substack.com/p/claude-code-subagents>
-
-[^3]: <https://zachwills.net/how-to-use-claude-code-subagents-to-parallelize-development/>
-
-[^4]: <https://github.com/cccntu/forking-an-agent>
-
-[^5]: <https://www.richsnapp.com/article/2025/10-05-context-management-with-subagents-in-claude-code>
-
-[^6]: <https://www.linkedin.com/pulse/claude-code-sub-agents-unsung-heroes-context-sam-gaddis-ylcac>
-
-[^7]: <https://www.claudelog.com/faqs/what-is-claude-code-auto-compact/>
-
-[^8]: <https://dolthub.com/blog/2025-06-30-claude-code-gotchas/>
-
-[^9]: <https://www.reddit.com/r/Anthropic/comments/1ma4epq/full_manual_for_writing_your_first_claude_code/>
-
-[^10]: <https://www.superprompt.com/blog/best-claude-code-agents-and-use-cases>
-
-[^11]: <https://www.linkedin.com/pulse/understanding-claude-code-sub-agents-when-use-them-michael-hofer-rz9le>
-
-[^12]: <https://enting.org/mastering-claude-code-sub-agent/>
-
-[^13]: <https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk>
-
-[^14]: <https://www.cometapi.com/managing-claude-codes-context/>
-
-[^15]: <https://joshuaberkowitz.us/blog/news-1/anthropics-new-context-management-tools-for-ai-agents-1365>
-
-[^16]: <https://blog.promptlayer.com/building-agents-with-claude-codes-sdk/>
-
-[^17]: <https://www.reddit.com/r/ClaudeAI/comments/1mb95kp/claude_custom_sub_agents_are_amazing_feature_and/>
-
-[^18]: <https://www.anthropic.com/news/context-management>
-
-[^19]: <https://www.youtube.com/watch?v=HJ9VvIG3Rps>
-
-[^20]: <https://www.reddit.com/r/ClaudeAI/comments/1m8ik5l/claude_code_now_supports_custom_agents/>
-
-[^21]: <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents>
-
-[^22]: <https://www.youtube.com/watch?v=Z_iWe6dyGzs>
-
-[^23]: <https://www.claude.com/solutions/agents>
-
-[^24]: <https://www.anthropic.com/engineering/claude-code-best-practices>
-
-[^25]: <https://creatoreconomy.so/p/claude-code-tutorial-build-a-youtube-research-agent-in-15-min>
-
-[^26]: <https://www.youtube.com/watch?v=9i3ic1sVhlI>
-
-[^27]: <https://www.reddit.com/r/ClaudeAI/comments/1mezb57/claude_code_tips_on_managing_context/>
-
-[^28]: <https://blog.langchain.com/how-to-turn-claude-code-into-a-domain-specific-coding-agent/>
-
-[^29]: <https://anthropic.com/news/enabling-claude-code-to-work-more-autonomously>
-
-[^30]: <https://www.reddit.com/r/ClaudeAI/comments/1k5slll/anthropics_guide_to_claude_code_best_practices/>
-
-[^31]: <https://www.reddit.com/r/ClaudeAI/comments/1ln1kmc/cant_get_claude_code_to_use_subagents_in_parallel/>
-
-[^32]: <https://www.reddit.com/r/ClaudeAI/comments/1l9ja9h/psa_dont_forget_you_can_invoke_subagents_in/>
-
-[^33]: <https://blog.dailydoseofds.com/p/sub-agents-in-claude-code>
-
-[^34]: <https://github.com/zilliztech/claude-context>
-
-[^35]: <https://github.com/anthropics/claude-code/issues/7406>
-
-[^36]: <https://thwanisithole.co.za/posts/supercharging-claude-code-with-subagents/>
-
-[^37]: <https://builder.aws.com/content/2wsHNfq977mGGZcdsNjlfZ2Dx67/unleashing-claude-codes-hidden-power-a-guide-to-subagents>
-
-[^38]: <https://www.youtube.com/watch?v=Phr7vBx9yFQ>
-
-[^39]: <https://www.reddit.com/r/ClaudeCode/comments/1ml0ro1/did_anyone_try_this_trick_to_fork_converstions_in/>
-
-[^40]: <https://ainativedev.io/news/how-to-parallelize-ai-coding-agents>
-
-[^41]: <https://www.pubnub.com/blog/best-practices-for-claude-code-sub-agents/>
-
-[^42]: <https://www.reddit.com/r/ClaudeCode/comments/1lw5cjm/context_loss_on_claude_code_after_context/>
-
-[^43]: <https://www.reddit.com/r/ClaudeAI/comments/1jrvkfl/limitations_of_code_agents_external_knowledge_gaps/>
-
-[^44]: <https://northflank.com/blog/claude-rate-limits-claude-code-pricing-cost>
-
-[^45]: <https://mcpcat.io/guides/managing-claude-code-context/>
-
-[^46]: <https://www.reddit.com/r/ClaudeAI/comments/1mi59yk/we_prepared_a_collection_of_claude_code_subagents/>
-
-[^47]: <https://www.youtube.com/watch?v=SSbqXzRsC6s>
-
-[^48]: <https://milvus.io/ai-quick-reference/how-do-i-provide-context-for-claude-code-to-analyze>
-
-[^49]: <https://www.reddit.com/r/ClaudeCode/comments/1lvza98/what_unconventional_use_cases_do_you_have_for/>
-
-[^50]: <https://www.claudelog.com/claude-code-limits/>
-
-[^51]: <https://www.youtube.com/watch?v=wrX9GMJE0kU>
-
-[^52]: <https://github.com/danny-avila/LibreChat/discussions/7484>
-
-[^53]: <https://minusx.ai/blog/decoding-claude-code/>
+### Examples
+- [[alita]] - Alita is a concrete example of self-evolving agent
+- [[a2a]] - A2A protocol enables multi-agent interoperability

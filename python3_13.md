@@ -1,7 +1,6 @@
 ---
 tags: [python, guide, api, best-practices]
 ---
-
 **Key Points:**
 
 - Use built-in `list`, `dict` for type hints; `typing.List`, `typing.Dict` deprecated since Python 3.9.
@@ -304,3 +303,11 @@ if __name__ == "__main__":
 - [Loguru Logging Library Documentation](https://loguru.readthedocs.io/en/stable/)
 - [PEP 585: Type Hinting Generics](https://peps.python.org/pep-0585/)
 - [PEP 667: Consistent locals() Semantics](https://peps.python.org/pep-0667/)
+
+## Related Concepts
+
+### Related Topics
+- [[python_coding_standards]] - Shares Python 3.13 coding standards content
+
+### Extends
+- [[python_coding_standards]] - Specific Python 3.13 version features and practices

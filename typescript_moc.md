@@ -23,5 +23,5 @@ This MOC connects all notes related to TypeScript language, patterns, and develo
 
 ## Related Topics
 
-- [[python]] - Alternative language with similar patterns
+- [[python_coding_standards]] - Alternative language with similar patterns
 - [[tailwind]] - Styling framework for TypeScript/React projects

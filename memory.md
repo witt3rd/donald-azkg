@@ -1,7 +1,6 @@
 ---
 tags: [reference, api, memory]
 ---
-
 # Knowledge Graph Memory Server
 
 A basic implementation of persistent memory using a local knowledge graph. This lets Claude remember information about the user across chats.
@@ -299,3 +298,10 @@ docker build -t mcp/memory -f src/memory/Dockerfile .
 ## License
 
 This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.
+
+## Related Concepts
+
+### Related Topics
+- [[agents]] - Agents use memory systems for context persistence
+- [[llm_evolve]] - Memory augmentation is part of LLM evolution
+- [[chromadb]] - Vector databases enable persistent memory for agents

@@ -1,7 +1,6 @@
 ---
 tags: [mcp, protocol, resources, data-access, api]
 ---
-
 # MCP Resources
 
 Resources provide AI models with structured, read-only access to external data sources through a safe, discoverable interface.
@@ -366,16 +365,15 @@ Verify resource implementations:
 
 ## Related Concepts
 
-- [[mcp_overview]] - High-level introduction to MCP (prerequisite)
-- [[mcp_architecture]] - How resources operate within MCP architecture
-- [[mcp_tools]] - Comparison with tools (write operations vs read-only)
-- [[mcp_prompts]] - How prompts can utilize resources
-- [[mcp_security]] - Security considerations for resource access
-- [[mcp_implementation]] - Practical implementation of resource servers
+### Prerequisites
+- [[mcp_overview]] - Need to understand MCP fundamentals first
+- [[mcp_architecture]] - Need to understand how resources operate within MCP architecture
 
-## References
+### Related Topics
+- [[mcp_tools]] - Tools provide write capabilities while resources are read-only
+- [[mcp_prompts]] - Prompts can utilize resources for data access
+- [[mcp_security]] - Security considerations for resource access control
+- [[mcp_implementation]] - Implementation of resource servers
 
-[1] https://modelcontextprotocol.io/introduction
-[2] https://modelcontextprotocol.io/specification/2025-03-26
-[7] https://modelcontextprotocol.io/examples
-[13] https://www.philschmid.de/mcp-introduction
+### Extends
+- [[mcp_overview]] - Implements the resources capability of MCP

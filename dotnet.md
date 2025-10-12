@@ -1,7 +1,6 @@
 ---
 tags: [csharp, dotnet, reference, guide, api, best-practices]
 ---
-
 # Getting Started with .NET Development
 
 This guide provides essential .NET CLI commands and best practices for creating and managing .NET projects. Replace "ContosoAgent" with your actual project name.
@@ -310,3 +309,22 @@ dotnet list package --outdated --format json |
 - Test thoroughly after updates
 - Consider using version locking (-vl) to prevent breaking changes
 - Review update changes before applying in production
+
+## Related Concepts
+
+### Related Topics
+- [[csharp_mcp_sdk_docs]] - .NET is the foundation for C# MCP SDK
+- [[windows_ml]] - Windows ML provides .NET/C# APIs
+- [[copilot_runtime]] - Copilot Runtime provides .NET APIs
+- [[powershell]] - PowerShell often used alongside .NET development
+- [[onnx_runtime]] - ONNX Runtime available for .NET/C#
+- [[windows_app_sdk_setup]] - Windows App SDK also available for .NET projects
+
+### Extended By
+- [[csharp_mcp_sdk_docs]] - C# MCP SDK built on .NET foundation
+- [[copilot_runtime]] - .NET knowledge required for Copilot Runtime APIs
+- [[foundry_local]] - .NET knowledge required for Foundry Local C# integration
+
+### Alternatives
+- [[python_coding_standards]] - Python alternative for development
+- [[typescript]] - TypeScript alternative for development

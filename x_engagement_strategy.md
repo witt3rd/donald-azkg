@@ -490,3 +490,16 @@ What if you just... didn't add them?"
 ---
 
 **Remember:** Authenticity and consistency beat viral moments. Focus on providing genuine value to the cognitive AI community, and your audience will grow organically around your expertise. The goal is not to sound like an expert, but to sound like someone genuinely grappling with important problems.
+
+## Related Concepts
+
+### Related Topics
+- [[x_style_guide]] - Strategy provides overall approach while style guide defines specific voice patterns
+- [[x_style_research]] - Strategy built on research of successful X posting styles
+- [[li_engagement_strategy]] - Parallel engagement strategy for LinkedIn with professional adaptations
+
+### Extended By
+- [[x_posts]] - Posts implement the engagement strategy in practice
+
+### Alternatives
+- [[li_engagement_strategy]] - Different platform with different content approach and audience

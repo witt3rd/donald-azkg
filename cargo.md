@@ -1,7 +1,6 @@
 ---
 tags: [rust, cargo, build-tools, package-manager, reference, cheatsheet]
 ---
-
 # Comprehensive Cargo Cheatsheet & Reference Guide
 
 This comprehensive guide covers everything you need to know about using Cargo, Rust's package manager and build tool, from your Windows PowerShell command line to be maximally productive.
@@ -689,9 +688,14 @@ $env:CARGO_NET_OFFLINE = "true"  # For offline development
 
 This comprehensive guide should enable you to be highly productive with Cargo from your Windows PowerShell environment. Each section provides practical commands and configurations you'll use regularly in Rust development.
 
-
 ## Related Concepts
 
 ### Related Topics
+- [[powershell]] - Cargo used from PowerShell command line on Windows
+- [[uv]] - Similar workspace management concepts between Cargo and uv
+- [[best_practices]] - Cargo project structure follows Rust best practices
 
-- [[burn]] - Cargo manages Burn framework dependencies
+### Extended By
+- [[burn]] - Burn projects use Cargo for dependency and build management
+- [[cli]] - Cargo used to build and run Rust CLI applications
+- [[cubecl]] - Cargo needed to build CubeCL projects

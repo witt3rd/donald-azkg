@@ -1,7 +1,6 @@
 ---
 tags: [moc, ai, ml, development, architecture]
 ---
-
 # AI Development - Map of Content
 
 This MOC connects all notes related to AI and ML development across platforms and frameworks.

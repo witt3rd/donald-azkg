@@ -1,7 +1,6 @@
 ---
 tags: [api, patterns, development]
 ---
-
 # .NET Windows Copilot Runtime SDK Capabilities
 
 The **Windows Copilot Runtime** provides a comprehensive set of AI-powered APIs for .NET developers to integrate local, on-device AI capabilities into Windows applications. This system leverages Neural Processing Units (NPUs) on **Copilot+ PCs** to deliver high-performance AI features without requiring cloud connectivity.
@@ -124,10 +123,10 @@ The Windows Copilot Runtime APIs are available through the Windows App SDK exper
 ```xml
 
 
+
     net8.0-windows10.0.19041.0
     true
     win-arm64
-
 
 
 
@@ -213,3 +212,20 @@ The Windows Copilot Runtime can be integrated with the broader .NET AI ecosystem
 **Development Environment**: Requires Windows 11 Insider Preview builds for development and testing[6][4]
 
 The Windows Copilot Runtime represents Microsoft's vision for democratizing AI development on Windows by providing high-performance, privacy-focused, on-device AI capabilities. While currently in experimental stages, it offers .NET developers powerful tools for building next-generation intelligent Windows applications that leverage the full capabilities of modern AI-optimized hardware.
+
+## Related Concepts
+
+### Prerequisites
+- [[windows_ai_stack_explained]] - Need to understand where Copilot Runtime fits in the AI stack
+- [[dotnet]] - .NET knowledge required for Copilot Runtime APIs
+
+### Related Topics
+- [[windows_ml]] - Copilot Runtime sits above Windows ML layer
+- [[windows_app_sdk_setup]] - Accessed through Windows App SDK
+- [[onnx_runtime]] - Uses ONNX Runtime under the hood
+- [[dotnet]] - Copilot Runtime provides .NET APIs
+- [[windows_ai_stack_explained]] - Copilot Runtime sits above Windows ML for Copilot+ PCs
+- [[foundry_local]] - Both provide local AI capabilities on Windows
+
+### Extends
+- [[windows_ai_stack_explained]] - Higher-level AI runtime layer in the stack

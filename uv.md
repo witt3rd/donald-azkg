@@ -136,3 +136,9 @@ Citations:
 ---
 
 Answer from Perplexity: pplx.ai/share
+
+## Related Concepts
+
+### Related Topics
+- [[python_coding_standards]] - uv is used for Python workspace management
+- [[cargo]] - Similar workspace management concepts between Cargo and uv

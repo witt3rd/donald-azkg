@@ -1,7 +1,6 @@
 ---
 tags: [cli, reference, python]
 ---
-
 # click-repl
 
 [![Tests](https://github.com/click-contrib/click-repl/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/click-contrib/click-repl/actions/workflows/tests.yml)
@@ -92,3 +91,8 @@ will start a REPL which has its history stored in
 Any arguments that can be passed to the [`python-prompt-toolkit`](https://github.com/prompt-toolkit/python-prompt-toolkit) [Prompt](http://python-prompt-toolkit.readthedocs.io/en/stable/pages/reference.html?prompt_toolkit.shortcuts.Prompt#prompt_toolkit.shortcuts.Prompt) class
 can be passed in the `prompt_kwargs` argument and will be used when
 instantiating your `Prompt`.
+
+## Related Concepts
+
+### Related Topics
+- [[python_coding_standards]] - click-repl is a Python CLI library

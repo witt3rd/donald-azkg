@@ -588,10 +588,8 @@ module.exports = {
 
 This guide provides a comprehensive foundation for leveraging Tailwind CSS 4.0's modern capabilities while maintaining optimal performance and developer experience in TypeScript projects.
 
-
 ## Related Concepts
 
 ### Related Topics
-
-- [[react_framework]] - Commonly used together for UI development
-- [[vite]] - Vite provides Tailwind integration
+- [[react_framework]] - Tailwind commonly used for React styling
+- [[vite]] - Vite integrates with Tailwind CSS

@@ -360,3 +360,12 @@ The silver lining to all the "tech" company layoffs, that will be ongoing throug
 - [Jonathan Blow X post on LLM code excuses](https://x.com/Jonathan_Blow/status/1931131006993809803)
 - [John Carmack X post on hair color anecdote](https://x.com/ID_AA_Carmack/status/1928239003397984389)
 - [Andrej Karpathy X post on earplugs for sleep](https://x.com/karpathy/status/1931429940119146691)
+
+## Related Concepts
+
+### Related Topics
+- [[x_engagement_strategy]] - Research informs engagement strategy development
+- [[x_style_guide]] - Research synthesized into actionable style guide
+
+### Extended By
+- [[x_style_guide]] - Research patterns synthesized into comprehensive style framework

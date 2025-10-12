@@ -521,3 +521,11 @@ test('conditional type inference', () => {
 - **Better Node.js ecosystem** integration
 
 TypeScript 5.8 represents a significant advancement in type system sophistication while maintaining backward compatibility and improving performance. The enhanced conditional type inference and module system improvements make it an essential upgrade for modern TypeScript development in 2025.
+
+## Related Concepts
+
+### Related Topics
+- [[typescript]] - Shares TypeScript 5.8+ coding standards content
+
+### Extends
+- [[typescript]] - Specific TypeScript 5.8 version features and practices

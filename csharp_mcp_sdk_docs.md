@@ -1,7 +1,6 @@
 ---
 tags: [csharp, mcp, sdk, dotnet, api, reference]
 ---
-
 # Model Context Protocol C# SDK Documentation
 
 ## Overview
@@ -429,17 +428,15 @@ var transport = new HttpClientTransport(
 ## Related Concepts
 
 ### Prerequisites
-
-- [[mcp_overview]] - Need to understand MCP protocol
+- [[mcp_implementation]] - Need general implementation knowledge before C#-specific SDK
+- [[dotnet]] - .NET foundation required for C# MCP SDK
 
 ### Related Topics
-
-- [[mcp_sdk]] - General MCP SDK guide covering multiple languages
+- [[mcp_sdk]] - Alternative language SDK for MCP
+- [[dotnet]] - .NET is the foundation for C# MCP SDK
 
 ### Extends
-
-- [[mcp_overview]] - C# implementation of MCP protocol
+- [[mcp_implementation]] - C#-specific implementation of MCP SDK
 
 ### Alternatives
-
-- [[mcp_sdk]] - Python and TypeScript alternatives for MCP implementation
+- [[mcp_sdk]] - Use Python instead of C# for MCP development

@@ -239,3 +239,16 @@ Before posting, ask:
 ---
 
 _Remember: The goal isn't to sound like Karpathy, Blow, or Carmack, but to embody their best qualities: curiosity, craftsmanship, and conviction._
+
+## Related Concepts
+
+### Related Topics
+- [[x_engagement_strategy]] - Style guide defines voice patterns that support engagement strategy
+- [[x_style_research]] - Style guide built from research on successful X influencers
+- [[style_technical]] - Both define writing style but for different mediums and audiences
+
+### Extends
+- [[x_style_research]] - Synthesizes research into actionable style framework
+
+### Extended By
+- [[x_posts]] - Posts follow the Karpathy-Blow-Carmack style synthesis

@@ -283,3 +283,15 @@ Question decomposition is theory building. Treat it as such:
 5. **Document the evolution** to improve future decomposition efforts
 
 This approach transforms decomposition from an art into a science, providing reproducible methods for tackling complex questions while maintaining the flexibility to evolve as understanding deepens.
+
+## Related Concepts
+
+### Prerequisites
+- [[strategy_question_knowledge]] - Need to understand question-oriented approach before learning rigorous decomposition methodology
+
+### Related Topics
+- [[strategy_first_principles]] - Decomposition applies first principles thinking to breaking questions into fundamental components
+- [[strategy_critical_assessment]] - Critical assessment validates decomposition quality through MECE and synthesis tests
+
+### Extends
+- [[strategy_question_knowledge]] - Adds scientific rigor and hypothesis-driven validation to question decomposition process

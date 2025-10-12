@@ -1,7 +1,6 @@
 ---
 tags: [cpp, python]
 ---
-
 # C++ Specification
 
 ## C++23 Modern Output: std::format, std::print, and std::println
@@ -78,3 +77,9 @@ No `std::cout` needed, supports all std::format features directly. Output is typ
 - **std::print** and **std::println** offer direct, type-safe formatted outputremoving most use cases for `std::cout`, and supporting format strings natively
 - You can now write concise, performant, and maintainable output code using the core language tools
 - For advanced tasks (e.g., formatting ranges, custom delimiters), the fmt library remains richer until future C++ standards close the gap
+
+## Related Concepts
+
+### Related Topics
+- [[cpp_project]] - Modern C++ features used in projects
+- [[python_coding_standards]] - C++23 formatting inspired by Python f-strings

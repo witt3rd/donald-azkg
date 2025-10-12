@@ -1,7 +1,6 @@
 ---
 tags: [mcp, protocol, architecture, specification, technical]
 ---
-
 # MCP Architecture
 
 Client-server architecture enabling standardized communication between AI applications and external systems through JSON-RPC 2.0 protocol.
@@ -253,19 +252,16 @@ Common deployment strategies:
 
 ## Related Concepts
 
-- [[mcp_overview]] - High-level introduction to MCP (prerequisite)
-- [[mcp_resources]] - How resources operate within this architecture
-- [[mcp_tools]] - How tools execute within this architecture
-- [[mcp_prompts]] - How prompts are delivered through this architecture
-- [[mcp_security]] - Security model built on this architecture
-- [[mcp_implementation]] - Practical implementation using this architecture
+### Prerequisites
+- [[mcp_overview]] - Need to understand MCP fundamentals before diving into architecture
 
-## References
+### Extends
+- [[mcp_overview]] - Provides detailed technical architecture for MCP protocol
 
-[1] https://modelcontextprotocol.io/introduction
-[2] https://modelcontextprotocol.io/specification/2025-03-26
-[3] https://developers.cloudflare.com/agents/model-context-protocol/
-[4] https://www.k2view.com/model-context-protocol/
-[5] https://github.com/modelcontextprotocol
-[6] https://code.visualstudio.com/docs/copilot/chat/mcp-servers
-[7] https://modelcontextprotocol.io/examples
+### Extended By
+- [[mcp_security]] - Security model built on top of architecture
+- [[mcp_implementation]] - Implementation guide provides practical realization of architecture
+- [[mcp_resources]] - Need to understand how resources operate within MCP architecture
+- [[mcp_tools]] - Need to understand how tools operate within MCP architecture
+- [[mcp_prompts]] - Need to understand how prompts are delivered through architecture
+- [[adding_to_claude_code]] - Understanding MCP architecture helps with server configuration

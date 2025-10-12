@@ -1,7 +1,6 @@
 ---
 tags: [reference, guide, api, best-practices, patterns]
 ---
-
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
 
 # CubeCL: Comprehensive Guide \& Cheatsheet
@@ -40,11 +39,13 @@ CubeCL employs a unique **two-step compilation process** that distinguishes it f
 - No immediate IR generation
 
 
+
 ### 2. Expansion Phase
 
 - Generates new Rust functions (not direct IR)
 - These functions create the Intermediate Representation when called
 - Enables advanced features like comptime and automatic vectorization
+
 
 
 ### Supported Platforms
@@ -69,6 +70,7 @@ cubecl-wgpu = "0.6"  # For WebGPU/WGSL support
 ```
 
 
+
 ### Runtime Selection
 
 ```rust
@@ -84,6 +86,7 @@ type Runtime = cubecl::wgpu::WgpuRuntime;
 let device = Runtime::default_device();
 let client = Runtime::client(&device);
 ```
+
 
 
 ## Topology System
@@ -102,6 +105,7 @@ CubeCL uses a **cube-based topology** that provides a unified abstraction across
 The topology mapping shows how CubeCL variables correspond across different platforms:
 
 
+
 | CubeCL Variable | Description | CUDA Equivalent | WebGPU Equivalent |
 | :-- | :-- | :-- | :-- |
 | `CUBE_COUNT_X/Y/Z` | Number of cubes per dimension | `gridDim.x/y/z` | `num_workgroups.x/y/z` |
@@ -118,6 +122,7 @@ CubeCL provides axis-independent versions for convenience:
 
 - `CUBE_COUNT`, `CUBE_POS`, `CUBE_DIM`
 - `UNIT_POS`, `ABSOLUTE_POS`
+
 
 
 ## Core Concepts \& Data Types
@@ -142,6 +147,7 @@ trait Runtime {
 ```
 
 
+
 ### Data Types
 
 #### Primitive Types
@@ -160,6 +166,7 @@ f32, f64, i32, u32, i64, u64, etc.
 ```
 
 
+
 #### Container Types
 
 ```rust
@@ -176,6 +183,7 @@ ScalarArg<T>       // Scalar kernel argument
 ```
 
 
+
 ### Launch Configuration
 
 ```rust
@@ -188,6 +196,7 @@ CubeDim::new(x, y, z)          // 3D configuration
 CubeDim::new_1d(x)             // 1D configuration
 CubeDim::new_2d(x, y)          // 2D configuration
 ```
+
 
 
 ## Kernel Development
@@ -211,6 +220,7 @@ fn my_kernel<F: Float>(
 ```
 
 
+
 ### Kernel Attributes
 
 ```rust
@@ -218,6 +228,7 @@ fn my_kernel<F: Float>(
 #[cube(launch)]      // Auto-generates launch function
 #[cube(launch_unchecked)]  // Unsafe launch (no bounds checking)
 ```
+
 
 
 ### Memory Access Patterns
@@ -239,6 +250,7 @@ fn global_memory_access<F: Float>(
 ```
 
 
+
 #### Shared Memory Usage
 
 ```rust
@@ -258,6 +270,7 @@ fn shared_memory_example<F: Float>(
     output[ABSOLUTE_POS] = shared_data[tid] + shared_data[(tid + 1) % 256];
 }
 ```
+
 
 
 ### Control Flow
@@ -284,6 +297,7 @@ fn control_flow_example<F: Float>(
     }
 }
 ```
+
 
 
 ## Advanced Features
@@ -322,6 +336,7 @@ fn comptime_example<F: Float>(
 ```
 
 
+
 ### 2. Automatic Vectorization
 
 CubeCL automatically vectorizes operations using the `Line<T>` type:[^2][^4]
@@ -355,6 +370,7 @@ fn launch_vectorized<R: Runtime>(client: &R::Client) {
 ```
 
 
+
 ### 3. Autotuning
 
 Automatic kernel selection based on runtime benchmarking:[^5]
@@ -381,6 +397,7 @@ fn matmul_variants<F: Float>() -> AutotuneOperation {
         .register(matmul_tensor_core)
 }
 ```
+
 
 
 ### 4. Tensor Cores Support
@@ -414,6 +431,7 @@ fn double_buffered_matmul<F: Float>(...) {
 ```
 
 
+
 ## Performance Optimization
 
 ### Memory Access Optimization
@@ -439,6 +457,7 @@ fn coalesced_access<F: Float>(
     }
 }
 ```
+
 
 
 ### Tiling for Cache Efficiency
@@ -480,6 +499,7 @@ fn tiled_matmul<F: Float>(
 ```
 
 
+
 ### Occupancy Optimization
 
 ```rust
@@ -497,6 +517,7 @@ fn calculate_optimal_launch_config(
     )
 }
 ```
+
 
 
 ## Runtime \& Execution
@@ -531,6 +552,7 @@ fn launch_basic<R: Runtime>(device: &R::Device) {
 ```
 
 
+
 ### Memory Management
 
 ```rust
@@ -550,6 +572,7 @@ client.sync(); // Ensure operations complete
 let memory_usage = client.memory_usage();
 println!("Used: {} MB", memory_usage.used / 1024 / 1024);
 ```
+
 
 
 ### Asynchronous Execution
@@ -573,6 +596,7 @@ fn launch_async<R: Runtime>(client: &R::Client) {
 ```
 
 
+
 ## Debugging \& Profiling
 
 ### Environment Variables
@@ -592,6 +616,7 @@ CUBECL_WGPU_MAX_TASKS=64
 ```
 
 
+
 ### Debug Printing
 
 ```rust
@@ -609,6 +634,7 @@ fn debug_kernel<F: Float>(input: &Array<F>) {
     }
 }
 ```
+
 
 
 ### Performance Profiling
@@ -633,6 +659,7 @@ fn benchmark_kernel<R: Runtime>(device: &R::Device) {
 ```
 
 
+
 ### Error Handling
 
 ```rust
@@ -655,6 +682,7 @@ fn safe_kernel_launch<R: Runtime>(client: &R::Client) -> Result<(), CubeError> {
     }
 }
 ```
+
 
 
 ## Platform-Specific Notes
@@ -682,6 +710,7 @@ fn cuda_setup() {
 ```
 
 
+
 ### WebGPU Platform
 
 ```rust
@@ -701,6 +730,7 @@ fn wgpu_setup() {
 ```
 
 
+
 ### ROCm/HIP Platform
 
 ```rust  
@@ -717,6 +747,7 @@ fn rocm_setup() {
 ```
 
 
+
 ## Best Practices
 
 ### 1. Kernel Design
@@ -727,12 +758,14 @@ fn rocm_setup() {
 - **Consider memory hierarchy**: SharedMemory for frequently accessed data
 
 
+
 ### 2. Memory Management
 
 - **Prefer vectorized access**: Use `Line<T>` for better bandwidth utilization
 - **Coalesce memory access**: Ensure adjacent threads access adjacent memory
 - **Reuse buffers**: Configure memory management for buffer reuse
 - **Align data structures**: Use appropriate alignment for optimal access
+
 
 
 ### 3. Performance Optimization
@@ -743,12 +776,14 @@ fn rocm_setup() {
 - **Consider occupancy**: Balance threads per cube with resource usage
 
 
+
 ### 4. Cross-Platform Development
 
 - **Test on multiple platforms**: Ensure kernels work across CUDA/WebGPU/ROCm
 - **Use platform-agnostic features**: Prefer CubeCL abstractions over platform-specific code
 - **Handle feature differences**: Check platform capabilities before using advanced features
 - **Optimize for lowest common denominator**: Ensure good performance on all targets
+
 
 
 ## Troubleshooting
@@ -770,6 +805,7 @@ fn bad_kernel() {
     loop { } // ❌ - infinite loops not supported
 }
 ```
+
 
 
 #### Runtime Errors
@@ -798,6 +834,7 @@ fn handle_memory_error<R: Runtime>(client: &R::Client) {
 ```
 
 
+
 #### Performance Issues
 
 ```rust
@@ -816,6 +853,7 @@ fn good_pattern<F: Float>(input: &Array<F>, output: &mut Array<F>) {
     }
 }
 ```
+
 
 
 ### Debugging Tips
@@ -847,6 +885,7 @@ impl Runtime for MyRuntime {
     }
 }
 ```
+
 
 
 ### Kernel Fusion
@@ -1002,3 +1041,14 @@ This comprehensive guide covers the essential aspects of CubeCL development, fro
 
 [^65]: https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/8d229a8cb1e656494bada852da66cae7/3e732e47-bc44-4ad3-892b-66fa5bf11b00/eb93ef2d.csv
 
+## Related Concepts
+
+### Prerequisites
+- [[cargo]] - Cargo needed to build CubeCL projects
+
+### Related Topics
+- [[burn]] - CubeCL provides GPU compute backend for Burn framework
+- [[numpy_pytorch_rust_guide]] - CubeCL Array type is GPU equivalent to NumPy/PyTorch tensors
+- [[cpu_vs_gpu_decision_guide]] - CubeCL implements GPU computing for high-parallelism tasks
+- [[nvidia_small]] - CubeCL can target NVIDIA GPUs via CUDA backend
+- [[optimization]] - CubeCL includes optimization features like autotuning and kernel fusion

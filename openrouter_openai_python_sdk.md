@@ -1,7 +1,6 @@
 ---
 tags: [python, openai, ai, reference, guide, api]
 ---
-
 Yes—OpenRouter exposes an OpenAI-compatible /v1 endpoint, so the official Python OpenAI SDK works by pointing the client’s base_url to OpenRouter and providing an OpenRouter API key. This lets the same SDK code call hundreds of models routed through OpenRouter without changing calling patterns beyond configuration.[1][4][5]
 
 ### How to use
@@ -64,3 +63,22 @@ Community reports indicate the OpenAI Agents SDK can be wired to OpenRouter by c
 [12](https://www.reddit.com/r/LangChain/comments/1kcudql/using_langchain_chatopenai_with_openrouter_how_to/)
 [13](https://gist.github.com/rbiswasfc/f38ea50e1fa12058645e6077101d55bb)
 [14](https://langfuse.com/integrations/gateways/openrouter)
+
+## Related Concepts
+
+### Prerequisites
+- [[python_coding_standards]] - Need Python knowledge to use SDK
+- [[openai_responses_python]] - OpenRouter uses OpenAI SDK interface
+
+### Related Topics
+- [[openai_embeddings_python]] - Same SDK can be used for embeddings via OpenRouter
+- [[openai_responses_python]] - Same SDK patterns apply to OpenRouter
+- [[perplexity_mcp]] - Both provide OpenAI-compatible endpoints for alternative models
+
+### Extends
+- [[openai_responses_python]] - Uses OpenAI SDK with OpenRouter endpoint
+
+### Alternatives
+- [[openai_responses_python]] - Direct OpenAI instead of OpenRouter for model access
+- [[perplexity_mcp]] - OpenRouter for broader model access without built-in search
+- [[foundry_local]] - Cloud-based alternative to local model serving

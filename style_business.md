@@ -132,3 +132,12 @@ This style guide provides tone, structure, and language preferences with actiona
 ---
 
 This guide ensures writing that is clear, professional, and logically structured, mirroring the source document's effective communication style.
+
+## Related Concepts
+
+### Related Topics
+- [[role_technical_author]] - Business style complements technical author role for stakeholder communication
+- [[li_engagement_strategy]] - LinkedIn strategy incorporates business writing principles for professional audience
+
+### Alternatives
+- [[style_technical]] - Different writing style for business vs technical audiences

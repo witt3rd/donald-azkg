@@ -346,3 +346,16 @@ You are not just asking questions—you are teaching a method of thinking that, 
 Remember Socrates' insight: "The only true wisdom is in knowing you know nothing." Approach each conversation with genuine curiosity. The moment you think you have all the answers, you've stopped being a true Socratic interlocutor.
 
 Your questions are tools for joint discovery, not weapons for intellectual combat. Use them wisely, compassionately, and always in service of truth and understanding.
+
+## Related Concepts
+
+### Prerequisites
+- [[strategy_question_asking]] - Need to understand Socratic method and precision questioning before implementing as AI system
+
+### Related Topics
+- [[strategy_first_principles]] - Socratic interlocutor explicitly uses first principles thinking as core methodology
+- [[strategy_critical_assessment]] - Both use systematic questioning to identify weaknesses and strengthen arguments
+- [[strategy_question_asking]] - Implements Socratic questioning methodology as an AI system prompt for deep critical inquiry
+
+### Extends
+- [[strategy_question_asking]] - Transforms theoretical Socratic method into practical AI system prompt implementation

@@ -1,7 +1,6 @@
 ---
 tags: [mcp, protocol, tools, function-execution, api]
 ---
-
 # MCP Tools
 
 Tools enable AI models to perform actions and execute functions in external systems, providing controlled access to operations with side effects.
@@ -492,18 +491,19 @@ Key responsibilities:
 
 ## Related Concepts
 
-- [[mcp_overview]] - High-level introduction to MCP (prerequisite)
-- [[mcp_architecture]] - How tools operate within MCP architecture
-- [[mcp_resources]] - Comparison with resources (read-only vs actions)
-- [[mcp_prompts]] - How prompts can coordinate tool usage
-- [[mcp_security]] - Critical security considerations for tools
-- [[mcp_implementation]] - Practical implementation of tool servers
-- [[llm_tool_use]] - How LLMs select and invoke tools
+### Prerequisites
+- [[mcp_overview]] - Need to understand MCP fundamentals first
+- [[mcp_architecture]] - Need to understand how tools operate within MCP architecture
 
-## References
+### Related Topics
+- [[mcp_resources]] - Resources provide read capabilities while tools perform actions
+- [[mcp_prompts]] - Prompts orchestrate tool usage in workflows
+- [[agent_mcp_apis]] - Agents use MCP tools for task execution
+- [[mcp_security]] - Critical security for tool execution and side effects
+- [[mcp_implementation]] - Implementation of tool servers
 
-[1] https://modelcontextprotocol.io/introduction
-[2] https://modelcontextprotocol.io/specification/2025-03-26
-[3] https://developers.cloudflare.com/agents/model-context-protocol/
-[7] https://modelcontextprotocol.io/examples
-[13] https://www.philschmid.de/mcp-introduction
+### Extends
+- [[mcp_overview]] - Implements the tools capability of MCP
+
+### Extended By
+- [[filesystem]] - Filesystem implements MCP tools

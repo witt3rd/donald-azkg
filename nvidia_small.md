@@ -1,7 +1,6 @@
 ---
 tags: [gpu]
 ---
-
 # NVIDIA's Small Language Models: The Future of Agentic AI
 
 NVIDIA's groundbreaking research validates a fundamental shift in artificial intelligence: **small language models (SLMs) are not just adequate for agentic AI—they are superior**. This paradigm challenges the industry's obsession with larger models, demonstrating that specialized, efficient models under 10 billion parameters can match or exceed the performance of 70+ billion parameter giants while delivering dramatically better economics and operational characteristics.[1][2][3]
@@ -110,3 +109,12 @@ The future of agentic AI isn't about building bigger models—it's about buildin
 [39](https://www.forbes.com/sites/danielnewman/2024/10/26/small-language-models--more-effective-and-efficient-for-enterprise-ai/)
 [40](https://www.youtube.com/watch?v=gVlI_viYwAI)
 [41](https://mitsloan.mit.edu/ideas-made-to-matter/practical-ai-implementation-success-stories-mit-sloan-management-review)
+
+## Related Concepts
+
+### Related Topics
+- [[agents]] - SLMs designed specifically for agentic AI systems
+- [[llm_evolve]] - SLMs represent evolution toward efficient, specialized models
+- [[micro_prompt]] - Micro-prompting with SLMs for decomposed task execution
+- [[cpu_vs_gpu_decision_guide]] - SLMs enable edge deployment with consumer-grade hardware
+- [[cubecl]] - CubeCL can accelerate SLM inference on multiple GPU platforms

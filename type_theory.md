@@ -192,4 +192,19 @@ In essence, category theory offers the mathematical scaffolding for HoTT’s sem
   - nLab: [Type Theory](https://ncatlab.org/nlab/show/type+theory), [Homotopy Type Theory](https://ncatlab.org/nlab/show/homotopy+type+theory).
   - Wikipedia: [Type Theory](https://en.wikipedia.org/wiki/Type_theory), [Homotopy Type Theory](https://en.wikipedia.org/wiki/Homotopy_type_theory).
 
+## Related Concepts
 
+### Related Topics
+- [[category_theory]] - Category theory provides semantics for type theory, especially HoTT
+- [[typescript]] - TypeScript implements practical type system based on type theory
+- [[python_coding_standards]] - Python 3.13+ uses type hints based on type theory principles
+
+### Extends
+- [[category_theory]] - Type theory builds on categorical foundations for HoTT
+
+### Extended By
+- [[dhcg]] - Builds on homotopy type theory foundations
+
+### Examples
+- [[typescript]] - TypeScript is practical application of type theory
+- [[python_coding_standards]] - Python type hints are practical application of type theory

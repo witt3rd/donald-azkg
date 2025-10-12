@@ -1,7 +1,6 @@
 ---
 tags: [nodejs, javascript, typescript, runtime, performance, security]
 ---
-
 # Node.js 24 Features & Best Practices Guide
 
 ## Overview
@@ -568,10 +567,14 @@ Node.js 24 features align closely with modern browser APIs:
 
 Node.js 24 represents a significant step forward in server-side JavaScript development, offering improved performance, enhanced security, and native TypeScript support that reduces toolchain complexity while maintaining enterprise-grade capabilities.
 
-
 ## Related Concepts
 
 ### Related Topics
+- [[typescript]] - Node.js 24 provides native TypeScript support
+- [[react_framework]] - Node.js provides runtime for React development
+- [[vite]] - Vite runs on Node.js runtime
 
-- [[typescript]] - Node 24 has native TypeScript support
-- [[vite]] - Vite runs on Node.js
+### Extended By
+- [[react_framework]] - Node.js provides runtime environment for React development
+- [[vite]] - Vite runs on Node.js runtime
+- [[motion_canvas_cheatsheet]] - Motion Canvas runs on Node.js runtime

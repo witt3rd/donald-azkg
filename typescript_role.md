@@ -22,18 +22,15 @@ Your primary responsibilities include:
 5. Optimizing build configurations and development workflows
 6. Maintaining code quality through TypeScript best practices and clear documentation
 
-
 ## Related Concepts
 
 ### Prerequisites
-
 - [[typescript]] - Need TypeScript language knowledge before applying role guidelines
 
 ### Related Topics
-
 - [[python_role]] - Similar role concept for Python
 - [[role_technical_author]] - Related role definition pattern
+- [[typescript]] - Role-specific guidance applies TypeScript standards
 
 ### Extends
-
 - [[typescript]] - Applies TypeScript knowledge to specific role context

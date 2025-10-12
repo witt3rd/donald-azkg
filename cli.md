@@ -1,7 +1,6 @@
 ---
 tags: [cli, tutorial, guide, api, best-practices, patterns]
 ---
-
 # The Complete Guide to Building Amazing CLI Applications in Rust
 
 A comprehensive tutorial covering best practices for creating powerful, user-friendly command-line interfaces using the most popular Rust crates.
@@ -1174,3 +1173,18 @@ fn test_invalid_arguments() {
 ---
 
 This guide covers the essential tools and patterns for building professional CLI applications in Rust. Start with simple examples and gradually incorporate more advanced features as your application grows. Remember that great CLI tools focus on user experience—make them intuitive, helpful, and reliable!
+
+## Related Concepts
+
+### Prerequisites
+- [[cargo]] - Cargo used to build and manage CLI application dependencies
+
+### Related Topics
+- [[powershell]] - Both provide CLI interfaces with similar command patterns
+- [[best_practices]] - CLI guide demonstrates Rust best practices for argument parsing
+
+### Extended By
+- [[best_practices]] - CLI guide shows practical application of best practices
+
+### Alternatives
+- [[powershell]] - PowerShell alternative for Windows CLI automation

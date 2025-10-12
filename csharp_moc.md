@@ -1,7 +1,6 @@
 ---
 tags: [moc, csharp, dotnet, programming, development]
 ---
-
 # C# - Map of Content
 
 This MOC connects all notes related to C# and .NET development, APIs, and implementations.

@@ -328,3 +328,12 @@ How are you balancing framework control with model capability in your organizati
 ---
 
 **Remember:** LinkedIn authenticity means professional credibility without corporate speak. You're building a reputation as someone who solves real problems, not someone who talks about solving problems.
+
+## Related Concepts
+
+### Related Topics
+- [[x_engagement_strategy]] - Parallel engagement strategy with professional adaptations for LinkedIn platform
+- [[style_business]] - LinkedIn strategy incorporates business writing principles for professional audience
+
+### Alternatives
+- [[x_engagement_strategy]] - Different platform requiring longer-form professional content vs X's concise technical insights

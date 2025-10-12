@@ -1,7 +1,7 @@
 ---
 tags: [mcp, protocol, security, authentication, authorization, privacy]
+last_refresh: 2025-10-11
 ---
-
 # MCP Security
 
 Comprehensive security framework for MCP emphasizing user consent, least privilege, and transparent data handling.
@@ -68,6 +68,8 @@ MCP supports multiple authentication methods to accommodate different deployment
 
 **Use case:** Third-party service integration with delegated access
 
+**MCP servers are classified as OAuth Resource Servers** (2025 update), enabling robust authorization discovery where each server advertises its own authorization server[2].
+
 **Supported flows:**
 - Authorization Code flow (most secure)
 - Client Credentials flow (service-to-service)
@@ -79,11 +81,17 @@ MCP supports multiple authentication methods to accommodate different deployment
 - Revocable access
 - Standard protocol
 
+**Critical 2025 Requirements:**
+- **Resource Indicators (RFC 8707):** MCP clients MUST use Resource Indicators to specify the intended server ("audience") during token requests. This prevents token mis-redemption and limits token scope to specific servers[2].
+- **Audience-scoped tokens:** Generic bearer tokens across multiple servers are now deprecated and considered insecure. Each token must be tightly bound to its destination server[2].
+
 **Implementation considerations:**
 - Handle token refresh
 - Store tokens securely
 - Clear tokens on logout
 - Validate token scopes
+- Implement Resource Indicators in all token requests
+- Never reuse tokens across different MCP servers
 
 ### Environment Variable Credentials
 
@@ -115,10 +123,13 @@ MCP supports multiple authentication methods to accommodate different deployment
 
 **Use case:** Enterprise deployments with existing identity infrastructure
 
+**Critical Note:** MCP has no native authentication or authorization guardrails by default. Authentication, authorization, audit logging, and sandboxing must be implemented by deployers[1][4][6].
+
 **Supported methods:**
 - SAML integration
 - Active Directory/LDAP
 - SSO providers
+- OAuth Resource Server integration (required 2025 standard)[2]
 - Custom authentication connectors[15]
 
 **Integration points:**
@@ -126,6 +137,11 @@ MCP supports multiple authentication methods to accommodate different deployment
 - Custom authentication handlers
 - Identity provider integration
 - Role-based access control
+
+**2025 Enterprise Requirements:**
+- **Mandatory authentication:** Unauthenticated MCP server access now considered critical misconfiguration[1][2]
+- **Policy controls:** Endpoint agents with allow/block policies to monitor and vet MCP servers[4]
+- **Runtime enforcement:** Automated policy checks before allowing model→MCP access[4]
 
 ## Authorization Model
 
@@ -350,12 +366,15 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
 
 ### Audit and Compliance
 
-**Comprehensive logging:**
+**Comprehensive logging (2025 Enhanced Requirements):**
 - All authentication attempts
 - Resource access patterns
 - Tool executions and parameters
 - User consent decisions
 - Errors and security events
+- **Full model→MCP→tool interaction chains** for end-to-end auditability[4]
+- **MCP server inventory** with continuous tracking[4]
+- **Policy violation alerts** and automated remediation playbooks[4]
 
 **Log data:**
 ```json
@@ -370,7 +389,9 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
     "subject": "Re: Support request"
   },
   "result": "success",
-  "consent": "granted"
+  "consent": "granted",
+  "token_audience": "email-server.example.com",
+  "policy_check": "passed"
 }
 ```
 
@@ -379,16 +400,21 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
 - SOC 2 requirements (audit trails, access controls)
 - HIPAA compliance (PHI protection)
 - Industry-specific regulations
+- **Explicit data scoping mandates** for sensitive data access[6]
+- **User consent requirements** when bridging models to datasets[6]
 
 ## Security Best Practices
 
 ### For Server Developers
 
-**1. Input Validation**
-- Validate all parameters
-- Sanitize user inputs
-- Prevent injection attacks
-- Use parameterized queries
+**1. Input Validation (CRITICAL - 2025 Priority)**
+- Validate all parameters rigorously - command injection and RCE vulnerabilities are actively exploited[1][3]
+- Sanitize user inputs and model-generated inputs
+- Prevent injection attacks through strict allowlisting
+- Use parameterized queries and commands
+- Never execute unsanitized commands from LLM outputs
+- Implement sandboxing for all command execution
+- Regular security audits for command handling code
 
 **2. Error Handling**
 - Don't leak sensitive information in errors
@@ -410,11 +436,14 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
 
 ### For Client/Host Developers
 
-**1. User Consent**
+**1. User Consent (Enhanced 2025 Requirements)**
 - Always obtain explicit consent
 - Show clear, understandable consent dialogs
 - Allow granular approval decisions
 - Support consent revocation
+- **Implement guardrails and runtime controls** - MCP provides no default protections[1][4][6]
+- **Deploy endpoint policy agents** to monitor and vet server access[4]
+- **Require authentication by default** - no unauthenticated server access[1][2]
 
 **2. Server Verification**
 - Verify server identity
@@ -428,11 +457,14 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
 - Validate certificates
 - Implement certificate pinning for high-security scenarios
 
-**4. Audit Trails**
+**4. Audit Trails (Enhanced Observability - 2025)**
 - Log all significant events
 - Include context for audit review
 - Protect logs from tampering
 - Implement log retention policies
+- **Track full model→MCP→tool chains** for end-to-end visibility[4]
+- **Maintain continuous MCP server inventory**[4]
+- **Implement automated risk assessment** of server configurations[4]
 
 ### For End Users
 
@@ -458,25 +490,40 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
 
 ### Common Threats
 
-**1. Malicious Server**
+**1. Command Injection and RCE (Critical - 2025 Trend)**
+- Risk: Command injection and remote code execution vulnerabilities discovered in modern MCP servers, especially developer-created integrations with unsafe command handling[1][3]
+- Mitigation: Rigorous input validation, parameterized commands, sandboxing, security audits
+- Impact: Can lead to complete server compromise and lateral movement
+
+**2. Prompt Injection (Emerging Threat)**
+- Risk: LLMs manipulated through MCP interface to invoke uncontrolled actions[7]
+- Mitigation: Strict prompt validation, action allowlisting, user confirmation for sensitive operations
+- Impact: Unauthorized tool execution, data access, privilege escalation
+
+**3. Malicious Server**
 - Risk: Server requests excessive permissions
-- Mitigation: Least privilege, user review, scoped permissions
+- Mitigation: Least privilege, user review, scoped permissions, endpoint policy controls
 
-**2. Data Exfiltration**
+**4. Data Exfiltration**
 - Risk: Server transmits data without consent
-- Mitigation: Consent requirements, DLP, audit logging
+- Mitigation: Consent requirements, DLP, audit logging, explicit data scoping
 
-**3. Credential Theft**
+**5. Credential Theft**
 - Risk: Server credentials compromised
-- Mitigation: Secure storage, rotation, environment variables
+- Mitigation: Secure storage, rotation, environment variables, audience-scoped tokens
 
-**4. Injection Attacks**
-- Risk: Malicious input exploits server
-- Mitigation: Input validation, parameterized queries, sanitization
+**6. Token Mis-Redemption (Mitigated in 2025)**
+- Risk: Generic tokens used across multiple servers enabling unauthorized access
+- Mitigation: Resource Indicators (RFC 8707), audience-scoped tokens[2]
+- Status: Token reuse now deprecated
 
-**5. Privilege Escalation**
-- Risk: Server accesses unauthorized resources
-- Mitigation: Strict scoping, permission checks, sandboxing
+**7. Privilege Escalation**
+- Risk: Server accesses unauthorized resources, poor privilege boundaries enable lateral movement[3][4]
+- Mitigation: Strict scoping, permission checks, sandboxing, runtime policy enforcement
+
+**8. Unsafe Model Actions**
+- Risk: Lack of default controls allows unsafe agent actions and privilege escalation[3][4]
+- Mitigation: Guardrails, action approval workflows, runtime monitoring
 
 ### Security Testing
 
@@ -487,20 +534,58 @@ User Data → DLP Scanner → Policy Check → [Allow/Block] → MCP Server
 4. Test authentication bypass attempts
 5. Verify audit logging completeness
 6. Check for information disclosure in errors
+7. **Command injection testing** - test for unsafe command handling[1][3]
+8. **Prompt injection vectors** - attempt to manipulate LLM actions via MCP[7]
+9. **Token mis-redemption** - verify audience-scoped token enforcement[2]
+10. **Privilege escalation paths** - test for lateral movement opportunities[3][4]
+11. **Policy control bypass** - attempt to circumvent runtime enforcement[4]
 
-## Related Concepts
+## 2025 Security Status Summary
 
-- [[mcp_overview]] - High-level introduction to MCP (prerequisite)
-- [[mcp_architecture]] - Understanding trust boundaries in architecture
-- [[mcp_resources]] - Security for read-only resource access
-- [[mcp_tools]] - Critical security for tool executions
-- [[mcp_implementation]] - Implementing security controls
-- [[security_best_practices]] - General security principles
+**Critical Updates:**
+- OAuth Resource Server classification with mandatory Resource Indicators (RFC 8707)[2]
+- Command injection and RCE vulnerabilities actively exploited in MCP servers[1][3]
+- Prompt injection emerging as significant threat vector[7]
+- Token reuse across servers now deprecated - audience-scoped tokens required[2]
+- Unauthenticated server access considered critical misconfiguration[1][2]
+- No native guardrails - authentication, authorization, and sandboxing must be implemented[1][4][6]
+
+**Enterprise Requirements:**
+- Mandatory OAuth integration with proper token scoping[2]
+- Endpoint policy controls and runtime enforcement[4]
+- End-to-end observability with full interaction chain logging[4]
+- Continuous server inventory and automated risk assessment[4]
+- Explicit data scoping and user consent for sensitive data access[6]
+
+**Deprecated Practices:**
+- Generic bearer tokens across multiple servers
+- Optional authentication in production environments
+- Implicit trust assumptions for data privacy
+- Ad hoc observability without full chain tracking
 
 ## References
 
-[1] https://modelcontextprotocol.io/introduction
-[2] https://modelcontextprotocol.io/specification/2025-03-26
-[3] https://developers.cloudflare.com/agents/model-context-protocol/
-[6] https://code.visualstudio.com/docs/copilot/chat/mcp-servers
-[15] https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/introducing-model-context-protocol-mcp-in-copilot-studio-simplified-integration-with-ai-apps-and-agents/
+[1] https://equixly.com/blog/2025/03/29/mcp-server-new-security-nightmare/
+[2] https://auth0.com/blog/mcp-specs-update-all-about-auth/
+[3] https://www.akto.io/blog/mcp-security-risks
+[4] https://zenity.io/blog/security/securing-the-model-context-protocol-mcp
+[6] https://businessinsights.bitdefender.com/security-risks-agentic-ai-model-context-protocol-mcp-introduction
+[7] https://www.pomerium.com/blog/june-2025-mcp-content-round-up
+[15] Previous enterprise integration references
+
+## Related Concepts
+
+### Prerequisites
+- [[mcp_overview]] - Need to understand MCP fundamentals before security model
+- [[mcp_architecture]] - Security model built on top of MCP architecture
+
+### Related Topics
+- [[mcp_resources]] - Security considerations for resource access control
+- [[mcp_tools]] - Critical security for tool execution and side effects
+- [[filesystem]] - Filesystem access requires careful security considerations
+
+### Extends
+- [[mcp_architecture]] - Adds comprehensive security layer to architecture
+
+### Extended By
+- [[mcp_implementation]] - Need to understand security requirements for implementation

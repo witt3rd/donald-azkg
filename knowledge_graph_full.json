@@ -1,11 +1,12 @@
 {
   "metadata": {
     "created": "2025-10-11",
-    "version": "15.0",
+    "version": "16.0",
     "total_notes": 93,
     "forward_pass_batches_complete": 12,
-    "backward_pass_complete": false,
-    "description": "Complete knowledge graph for LLM context repository - Batches 1-7, 8, 9, 10, 11, and 5 complete (92 notes analyzed)"
+    "backward_pass_complete": true,
+    "description": "Backward pass complete - bidirectional relationships established",
+    "last_updated": "2025-10-11"
   },
   "batches": [
     {
@@ -211,6 +212,18 @@
           {
             "note": "onnx_runtime.md",
             "why": "Uses ONNX Runtime under the hood"
+          },
+          {
+            "note": "dotnet.md",
+            "why": "Copilot Runtime provides .NET APIs"
+          },
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Copilot Runtime sits above Windows ML for Copilot+ PCs"
+          },
+          {
+            "note": "foundry_local.md",
+            "why": "Both provide local AI capabilities on Windows"
           }
         ],
         "extends": [
@@ -224,7 +237,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "cpp_project.md",
@@ -254,6 +267,14 @@
           {
             "note": "windows_ml.md",
             "why": "Windows ML provides C++ APIs"
+          },
+          {
+            "note": "onnx_runtime.md",
+            "why": "ONNX Runtime available for C++"
+          },
+          {
+            "note": "powershell.md",
+            "why": "PowerShell used for C++ build automation on Windows"
           }
         ],
         "extends": [],
@@ -267,7 +288,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "cpp_spec.md",
@@ -295,7 +316,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "dotnet.md",
@@ -327,6 +348,14 @@
           {
             "note": "powershell.md",
             "why": "PowerShell often used alongside .NET development"
+          },
+          {
+            "note": "onnx_runtime.md",
+            "why": "ONNX Runtime available for .NET/C#"
+          },
+          {
+            "note": "windows_app_sdk_setup.md",
+            "why": "Windows App SDK also available for .NET projects"
           }
         ],
         "extends": [],
@@ -334,6 +363,14 @@
           {
             "note": "csharp_mcp_sdk_docs.md",
             "why": "C# MCP SDK built on .NET foundation"
+          },
+          {
+            "note": "copilot_runtime.md",
+            "why": ".NET knowledge required for Copilot Runtime APIs"
+          },
+          {
+            "note": "foundry_local.md",
+            "why": ".NET knowledge required for Foundry Local C# integration"
           }
         ],
         "alternatives": [
@@ -349,7 +386,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "onnx_runtime.md",
@@ -386,6 +423,22 @@
           {
             "note": "cpp_project.md",
             "why": "ONNX Runtime available for C++"
+          },
+          {
+            "note": "copilot_runtime.md",
+            "why": "Uses ONNX Runtime under the hood"
+          },
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "ONNX Runtime is the core inference engine"
+          },
+          {
+            "note": "foundry_local.md",
+            "why": "Foundry Local leverages ONNX Runtime for model serving"
+          },
+          {
+            "note": "cpu_vs_gpu_decision_guide.md",
+            "why": "ONNX Runtime supports both CPU and GPU execution"
           }
         ],
         "extends": [
@@ -404,7 +457,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "powershell.md",
@@ -434,10 +487,23 @@
           {
             "note": "cli.md",
             "why": "Similar CLI patterns in different languages"
+          },
+          {
+            "note": "cargo.md",
+            "why": "Cargo used from PowerShell command line on Windows"
           }
         ],
         "extends": [],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "cpp_project.md",
+            "why": "PowerShell used for Windows environment and build automation"
+          },
+          {
+            "note": "windows_app_sdk_setup.md",
+            "why": "PowerShell used for Windows environment configuration"
+          }
+        ],
         "alternatives": [
           {
             "note": "cli.md",
@@ -447,7 +513,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "windows_ai_stack_explained.md",
@@ -490,6 +556,10 @@
           {
             "note": "copilot_runtime.md",
             "why": "Higher-level AI runtime layer"
+          },
+          {
+            "note": "foundry_local.md",
+            "why": "Foundry Local sits as model management layer in Windows AI stack"
           }
         ],
         "alternatives": [],
@@ -501,7 +571,7 @@
         ]
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "windows_app_sdk_setup.md",
@@ -538,6 +608,14 @@
           {
             "note": "copilot_runtime.md",
             "why": "Windows App SDK provides access to Copilot Runtime APIs"
+          },
+          {
+            "note": "cpp_project.md",
+            "why": "Windows-specific SDK setup builds on this"
+          },
+          {
+            "note": "powershell.md",
+            "why": "PowerShell used for Windows environment configuration"
           }
         ],
         "extends": [
@@ -546,12 +624,17 @@
             "why": "Specialized Windows-specific C++ project setup"
           }
         ],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Practical setup example using Windows App SDK"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "windows_ml.md",
@@ -584,6 +667,26 @@
           {
             "note": "cpp_project.md",
             "why": "Windows ML provides C++ APIs"
+          },
+          {
+            "note": "copilot_runtime.md",
+            "why": "Copilot Runtime sits above Windows ML layer"
+          },
+          {
+            "note": "windows_ai_stack_explained.md",
+            "why": "Windows ML is a key layer in the stack"
+          },
+          {
+            "note": "windows_app_sdk_setup.md",
+            "why": "Windows App SDK provides access to Windows ML APIs"
+          },
+          {
+            "note": "foundry_local.md",
+            "why": "Foundry Local uses Windows ML and ONNX Runtime underneath"
+          },
+          {
+            "note": "cpu_vs_gpu_decision_guide.md",
+            "why": "Windows ML supports CPU and GPU hardware acceleration"
           }
         ],
         "extends": [
@@ -607,7 +710,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "a2a.md",
@@ -628,15 +731,24 @@
           {
             "note": "agent_mcp_apis.md",
             "why": "A2A and MCP are complementary protocols for agent integration"
+          },
+          {
+            "note": "debate.md",
+            "why": "A2A protocol facilitates agent-to-agent debate communication"
           }
         ],
         "extends": [],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "agents.md",
+            "why": "A2A protocol enables multi-agent interoperability"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "alita.md",
@@ -660,12 +772,17 @@
           }
         ],
         "extends": [],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "agents.md",
+            "why": "Alita is a concrete example of self-evolving agent"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "agents.md",
@@ -692,6 +809,42 @@
           {
             "note": "memory.md",
             "why": "Agents use memory systems for context persistence"
+          },
+          {
+            "note": "a2a.md",
+            "why": "A2A enables agent-to-agent communication for systems described in agents.md"
+          },
+          {
+            "note": "llm_evolve.md",
+            "why": "Modern LLMs exhibit agentic behaviors described in agents.md"
+          },
+          {
+            "note": "mcp_overview.md",
+            "why": "Claude Code agents use MCP for tool access and integration"
+          },
+          {
+            "note": "micro_prompt.md",
+            "why": "Micro-prompting is designed for agentic workflows described in agents.md"
+          },
+          {
+            "note": "game_theory.md",
+            "why": "Game theory applies to multi-agent system design and strategic behavior"
+          },
+          {
+            "note": "dhcg.md",
+            "why": "Proposes better representations for agent reasoning"
+          },
+          {
+            "note": "sutton.md",
+            "why": "RL agents are a fundamental type of AI agent"
+          },
+          {
+            "note": "nvidia_small.md",
+            "why": "SLMs designed specifically for agentic AI systems"
+          },
+          {
+            "note": "adding_to_claude_code.md",
+            "why": "MCP servers extend agent capabilities in Claude Code"
           }
         ],
         "extends": [],
@@ -703,6 +856,14 @@
           {
             "note": "react_agent_pattern.md",
             "why": "ReAct is a specific agent implementation pattern"
+          },
+          {
+            "note": "alita.md",
+            "why": "Need to understand agent fundamentals before exploring Alita's innovations"
+          },
+          {
+            "note": "debate.md",
+            "why": "Need to understand agent fundamentals before multi-agent patterns"
           }
         ],
         "alternatives": [],
@@ -718,7 +879,7 @@
         ]
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "debate.md",
@@ -739,6 +900,14 @@
           {
             "note": "a2a.md",
             "why": "A2A protocol facilitates agent-to-agent debate communication"
+          },
+          {
+            "note": "agents.md",
+            "why": "Multi-agent debate is a collaboration pattern for agents"
+          },
+          {
+            "note": "game_theory.md",
+            "why": "Multi-agent debate can be modeled using game-theoretic concepts"
           }
         ],
         "extends": [
@@ -752,7 +921,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "semantic_routing.md",
@@ -779,7 +948,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "agent_mcp_apis.md",
@@ -804,6 +973,18 @@
           {
             "note": "a2a.md",
             "why": "A2A and MCP are complementary protocols"
+          },
+          {
+            "note": "alita.md",
+            "why": "Alita uses MCP to dynamically create and manage tools"
+          },
+          {
+            "note": "mcp_tools.md",
+            "why": "Agents use MCP tools for task execution"
+          },
+          {
+            "note": "filesystem.md",
+            "why": "Agents use filesystem tools via MCP"
           }
         ],
         "extends": [
@@ -817,7 +998,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "react_agent_pattern.md",
@@ -838,7 +1019,12 @@
             "why": "Need agent fundamentals before specific patterns"
           }
         ],
-        "related_concepts": [],
+        "related_concepts": [
+          {
+            "note": "micro_prompt.md",
+            "why": "ReAct agents can use micro-prompting for decomposed reasoning steps"
+          }
+        ],
         "extends": [
           {
             "note": "agents.md",
@@ -850,7 +1036,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "llm_evolve.md",
@@ -874,6 +1060,22 @@
           {
             "note": "memory.md",
             "why": "LLM evolution includes memory augmentation systems"
+          },
+          {
+            "note": "spr.md",
+            "why": "SPR leverages understanding of LLM latent space and architecture"
+          },
+          {
+            "note": "dhcg.md",
+            "why": "Addresses limitations in current LLM embeddings"
+          },
+          {
+            "note": "sutton.md",
+            "why": "RL represents next evolution beyond current LLMs"
+          },
+          {
+            "note": "nvidia_small.md",
+            "why": "SLMs represent evolution toward efficient, specialized models"
           }
         ],
         "extends": [],
@@ -882,7 +1084,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "memory.md",
@@ -903,6 +1105,10 @@
           {
             "note": "llm_evolve.md",
             "why": "Memory augmentation is part of LLM evolution"
+          },
+          {
+            "note": "chromadb.md",
+            "why": "Vector databases enable persistent memory for agents"
           }
         ],
         "extends": [],
@@ -911,7 +1117,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "verify_claims.md",
@@ -930,7 +1136,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "mcp_overview.md",
@@ -967,13 +1173,29 @@
           {
             "note": "mcp_prompts.md",
             "why": "Prompts implement one of three core MCP capabilities"
+          },
+          {
+            "note": "mcp_security.md",
+            "why": "Need to understand MCP fundamentals before security model"
+          },
+          {
+            "note": "mcp_implementation.md",
+            "why": "Need to understand MCP fundamentals before implementation"
+          },
+          {
+            "note": "filesystem.md",
+            "why": "Need to understand MCP protocol"
+          },
+          {
+            "note": "adding_to_claude_code.md",
+            "why": "Need to understand MCP fundamentals before configuring servers"
           }
         ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "mcp_architecture.md",
@@ -1008,13 +1230,29 @@
           {
             "note": "mcp_implementation.md",
             "why": "Implementation guide provides practical realization of architecture"
+          },
+          {
+            "note": "mcp_resources.md",
+            "why": "Need to understand how resources operate within MCP architecture"
+          },
+          {
+            "note": "mcp_tools.md",
+            "why": "Need to understand how tools operate within MCP architecture"
+          },
+          {
+            "note": "mcp_prompts.md",
+            "why": "Need to understand how prompts are delivered through architecture"
+          },
+          {
+            "note": "adding_to_claude_code.md",
+            "why": "Understanding MCP architecture helps with server configuration"
           }
         ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "mcp_resources.md",
@@ -1046,6 +1284,14 @@
           {
             "note": "mcp_prompts.md",
             "why": "Prompts can utilize resources for data access"
+          },
+          {
+            "note": "mcp_security.md",
+            "why": "Security considerations for resource access control"
+          },
+          {
+            "note": "mcp_implementation.md",
+            "why": "Implementation of resource servers"
           }
         ],
         "extends": [
@@ -1059,7 +1305,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "mcp_tools.md",
@@ -1095,6 +1341,14 @@
           {
             "note": "agent_mcp_apis.md",
             "why": "Agents use MCP tools for task execution"
+          },
+          {
+            "note": "mcp_security.md",
+            "why": "Critical security for tool execution and side effects"
+          },
+          {
+            "note": "mcp_implementation.md",
+            "why": "Implementation of tool servers"
           }
         ],
         "extends": [
@@ -1103,12 +1357,17 @@
             "why": "Implements the tools capability of MCP"
           }
         ],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "filesystem.md",
+            "why": "Filesystem implements MCP tools"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "mcp_prompts.md",
@@ -1140,6 +1399,14 @@
           {
             "note": "mcp_tools.md",
             "why": "Prompts orchestrate tool execution in workflows"
+          },
+          {
+            "note": "mcp_implementation.md",
+            "why": "Implementation of prompt servers"
+          },
+          {
+            "note": "json_prompting.md",
+            "why": "MCP prompts use structured formats similar to JSON prompting"
           }
         ],
         "extends": [
@@ -1153,7 +1420,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "mcp_security.md",
@@ -1186,6 +1453,10 @@
           {
             "note": "mcp_tools.md",
             "why": "Critical security for tool execution and side effects"
+          },
+          {
+            "note": "filesystem.md",
+            "why": "Filesystem access requires careful security considerations"
           }
         ],
         "extends": [
@@ -1194,12 +1465,17 @@
             "why": "Adds comprehensive security layer to architecture"
           }
         ],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "mcp_implementation.md",
+            "why": "Need to understand security requirements for implementation"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "mcp_implementation.md",
@@ -1240,6 +1516,10 @@
           {
             "note": "mcp_prompts.md",
             "why": "Implementation of prompt servers"
+          },
+          {
+            "note": "adding_to_claude_code.md",
+            "why": "Related to implementing MCP in practice"
           }
         ],
         "extends": [
@@ -1262,7 +1542,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "mcp_sdk.md",
@@ -1309,7 +1589,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "csharp_mcp_sdk_docs.md",
@@ -1360,7 +1640,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "fastmcp_shutdown.md",
@@ -1393,7 +1673,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "python.md",
@@ -1417,6 +1697,54 @@
           {
             "note": "typescript.md",
             "why": "Alternative language with similar async patterns"
+          },
+          {
+            "note": "cpp_spec.md",
+            "why": "C++23 formatting inspired by Python f-strings"
+          },
+          {
+            "note": "onnx_runtime.md",
+            "why": "ONNX Runtime available for Python"
+          },
+          {
+            "note": "python3_13.md",
+            "why": "Shares Python 3.13 coding standards content"
+          },
+          {
+            "note": "uv.md",
+            "why": "uv is used for Python workspace management"
+          },
+          {
+            "note": "tenacity.md",
+            "why": "Tenacity is a Python library following Python best practices"
+          },
+          {
+            "note": "click_repl.md",
+            "why": "click-repl is a Python CLI library"
+          },
+          {
+            "note": "bayes_theory.md",
+            "why": "Python tools (PyMC, Stan) used for Bayesian inference"
+          },
+          {
+            "note": "type_theory.md",
+            "why": "Python 3.13+ uses type hints based on type theory principles"
+          },
+          {
+            "note": "chromadb.md",
+            "why": "ChromaDB provides Python SDK"
+          },
+          {
+            "note": "firecrawl.md",
+            "why": "Firecrawl provides Python SDK"
+          },
+          {
+            "note": "marker.md",
+            "why": "Marker provides Python SDK"
+          },
+          {
+            "note": "numpy_pytorch_rust_guide.md",
+            "why": "NumPy and PyTorch are Python libraries"
           }
         ],
         "extends": [],
@@ -1432,6 +1760,30 @@
           {
             "note": "mcp_sdk.md",
             "why": "MCP SDK uses Python for implementation"
+          },
+          {
+            "note": "openai_embeddings_python.md",
+            "why": "Need Python knowledge to use OpenAI Python SDK"
+          },
+          {
+            "note": "openai_responses_python.md",
+            "why": "Need Python knowledge to use OpenAI Python SDK"
+          },
+          {
+            "note": "openrouter_openai_python_sdk.md",
+            "why": "Need Python knowledge to use SDK"
+          },
+          {
+            "note": "youtube_transcript_api.md",
+            "why": "Need Python knowledge to use YouTube Transcript API"
+          },
+          {
+            "note": "type_theory.md",
+            "why": "Python type hints are practical application of type theory"
+          },
+          {
+            "note": "numpy_pytorch_rust_guide.md",
+            "why": "Need Python knowledge for NumPy/PyTorch sections"
           }
         ],
         "alternatives": [
@@ -1447,7 +1799,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "python_role.md",
@@ -1476,6 +1828,10 @@
           {
             "note": "role_technical_author.md",
             "why": "Related role definition pattern"
+          },
+          {
+            "note": "python.md",
+            "why": "Role-specific guidance applies Python standards"
           }
         ],
         "extends": [
@@ -1489,7 +1845,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "python3_13.md",
@@ -1520,7 +1876,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "uv.md",
@@ -1537,6 +1893,10 @@
           {
             "note": "python.md",
             "why": "uv is used for Python workspace management"
+          },
+          {
+            "note": "cargo.md",
+            "why": "Similar workspace management concepts between Cargo and uv"
           }
         ],
         "extends": [],
@@ -1545,7 +1905,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "tenacity.md",
@@ -1570,7 +1930,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "click_repl.md",
@@ -1595,7 +1955,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "openai_embeddings_python.md",
@@ -1627,12 +1987,17 @@
           }
         ],
         "extends": [],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "chromadb.md",
+            "why": "Need embeddings to store in vector database"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "openai_responses_python.md",
@@ -1661,6 +2026,18 @@
           {
             "note": "openrouter_openai_python_sdk.md",
             "why": "Alternative provider using OpenAI-compatible SDK"
+          },
+          {
+            "note": "openai_responses_typescript.md",
+            "why": "Same OpenAI API with Python implementation for comparison"
+          },
+          {
+            "note": "perplexity.md",
+            "why": "Perplexity uses OpenAI-compatible API format"
+          },
+          {
+            "note": "foundry_local.md",
+            "why": "Foundry Local provides OpenAI-compatible API"
           }
         ],
         "extends": [],
@@ -1670,11 +2047,20 @@
             "why": "OpenRouter uses OpenAI SDK with different endpoint"
           }
         ],
-        "alternatives": [],
+        "alternatives": [
+          {
+            "note": "openrouter_openai_python_sdk.md",
+            "why": "Direct OpenAI instead of OpenRouter for model access"
+          },
+          {
+            "note": "openai_responses_typescript.md",
+            "why": "Python alternative for OpenAI SDK"
+          }
+        ],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "openrouter_openai_python_sdk.md",
@@ -1707,6 +2093,10 @@
           {
             "note": "openai_responses_python.md",
             "why": "Same SDK patterns apply to OpenRouter"
+          },
+          {
+            "note": "perplexity.md",
+            "why": "Both provide OpenAI-compatible endpoints for alternative models"
           }
         ],
         "extends": [
@@ -1720,12 +2110,20 @@
           {
             "note": "openai_responses_python.md",
             "why": "Direct OpenAI instead of OpenRouter for model access"
+          },
+          {
+            "note": "perplexity.md",
+            "why": "OpenRouter for broader model access without built-in search"
+          },
+          {
+            "note": "foundry_local.md",
+            "why": "Cloud-based alternative to local model serving"
           }
         ],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "youtube_transcript_api.md",
@@ -1750,7 +2148,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "typescript.md",
@@ -1778,6 +2176,18 @@
           {
             "note": "python.md",
             "why": "Alternative language with similar async patterns"
+          },
+          {
+            "note": "ts.md",
+            "why": "Shares TypeScript 5.8+ coding standards content"
+          },
+          {
+            "note": "node.md",
+            "why": "Node.js 24 provides native TypeScript support"
+          },
+          {
+            "note": "type_theory.md",
+            "why": "TypeScript implements practical type system based on type theory"
           }
         ],
         "extends": [],
@@ -1789,6 +2199,26 @@
           {
             "note": "ts.md",
             "why": "Specific TypeScript 5.8 features and enhancements"
+          },
+          {
+            "note": "react_framework.md",
+            "why": "React development uses TypeScript for type safety"
+          },
+          {
+            "note": "vite.md",
+            "why": "Vite configured for TypeScript projects"
+          },
+          {
+            "note": "openai_responses_typescript.md",
+            "why": "Need TypeScript knowledge to use OpenAI TypeScript patterns"
+          },
+          {
+            "note": "type_theory.md",
+            "why": "TypeScript is practical application of type theory"
+          },
+          {
+            "note": "motion_canvas_cheatsheet.md",
+            "why": "Motion Canvas uses TypeScript"
           }
         ],
         "alternatives": [
@@ -1804,7 +2234,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "typescript_role.md",
@@ -1833,6 +2263,10 @@
           {
             "note": "role_technical_author.md",
             "why": "Related role definition pattern"
+          },
+          {
+            "note": "typescript.md",
+            "why": "Role-specific guidance applies TypeScript standards"
           }
         ],
         "extends": [
@@ -1846,7 +2280,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "ts.md",
@@ -1878,7 +2312,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "react_framework.md",
@@ -1910,6 +2344,22 @@
           {
             "note": "tailwind.md",
             "why": "Tailwind CSS commonly used for React styling"
+          },
+          {
+            "note": "typescript.md",
+            "why": "TypeScript used extensively with React 19 development"
+          },
+          {
+            "note": "node.md",
+            "why": "Node.js provides runtime for React development"
+          },
+          {
+            "note": "category_theory.md",
+            "why": "Monads from category theory used in functional programming patterns"
+          },
+          {
+            "note": "motion_canvas_cheatsheet.md",
+            "why": "Motion Canvas uses React-like JSX component syntax"
           }
         ],
         "extends": [],
@@ -1923,7 +2373,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "vite.md",
@@ -1956,6 +2406,14 @@
           {
             "note": "tailwind.md",
             "why": "Vite integrates with Tailwind CSS"
+          },
+          {
+            "note": "node.md",
+            "why": "Vite runs on Node.js runtime"
+          },
+          {
+            "note": "motion_canvas_cheatsheet.md",
+            "why": "Motion Canvas projects typically use Vite for bundling"
           }
         ],
         "extends": [],
@@ -1964,7 +2422,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "tailwind.md",
@@ -1995,7 +2453,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "node.md",
@@ -2025,12 +2483,25 @@
           }
         ],
         "extends": [],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "react_framework.md",
+            "why": "Node.js provides runtime environment for React development"
+          },
+          {
+            "note": "vite.md",
+            "why": "Vite runs on Node.js runtime"
+          },
+          {
+            "note": "motion_canvas_cheatsheet.md",
+            "why": "Motion Canvas runs on Node.js runtime"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "openai_responses_typescript.md",
@@ -2068,7 +2539,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "micro_prompt.md",
@@ -2094,6 +2565,14 @@
           {
             "note": "react_agent_pattern.md",
             "why": "ReAct agents can use micro-prompting for decomposed reasoning steps"
+          },
+          {
+            "note": "spr.md",
+            "why": "Both focus on efficiency in prompting - SPR via compression, micro-prompting via decomposition"
+          },
+          {
+            "note": "nvidia_small.md",
+            "why": "Micro-prompting with SLMs for decomposed task execution"
           }
         ],
         "extends": [],
@@ -2107,7 +2586,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "json_prompting.md",
@@ -2149,7 +2628,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "spr.md",
@@ -2189,7 +2668,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "bayes_theory.md",
@@ -2209,6 +2688,10 @@
           {
             "note": "python.md",
             "why": "Python tools (PyMC, Stan) used for Bayesian inference"
+          },
+          {
+            "note": "optimization.md",
+            "why": "Optimization used in Bayesian inference algorithms"
           }
         ],
         "extends": [],
@@ -2217,7 +2700,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "category_theory.md",
@@ -2244,13 +2727,17 @@
           {
             "note": "type_theory.md",
             "why": "Type theory builds on categorical foundations, especially HoTT"
+          },
+          {
+            "note": "dhcg.md",
+            "why": "Uses categorical concepts like functors and morphisms"
           }
         ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "game_theory.md",
@@ -2274,6 +2761,14 @@
           {
             "note": "debate.md",
             "why": "Multi-agent debate can be modeled using game-theoretic concepts"
+          },
+          {
+            "note": "sutton.md",
+            "why": "RL can be viewed through game-theoretic lens for multi-agent scenarios"
+          },
+          {
+            "note": "optimization.md",
+            "why": "Both provide mathematical frameworks for decision-making"
           }
         ],
         "extends": [],
@@ -2282,7 +2777,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "type_theory.md",
@@ -2314,7 +2809,12 @@
             "why": "Type theory builds on categorical foundations for HoTT"
           }
         ],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "dhcg.md",
+            "why": "Builds on homotopy type theory foundations"
+          }
+        ],
         "alternatives": [],
         "examples": [
           {
@@ -2328,7 +2828,7 @@
         ]
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "dhcg.md",
@@ -2373,7 +2873,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "sutton.md",
@@ -2406,7 +2906,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "eponymous_laws.md",
@@ -2427,7 +2927,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "strategy_first_principles.md",
@@ -2451,6 +2951,14 @@
           {
             "note": "strategy_critical_assessment.md",
             "why": "Critical assessment tests whether work properly applies first principles reasoning by evaluating assumption examination and evidence quality"
+          },
+          {
+            "note": "strategy_question_decomposition.md",
+            "why": "Decomposition applies first principles thinking to breaking questions into fundamental components"
+          },
+          {
+            "note": "socratic_interlocutor_prompt.md",
+            "why": "Socratic interlocutor explicitly uses first principles thinking as core methodology"
           }
         ],
         "extends": [],
@@ -2460,11 +2968,16 @@
             "why": "Question decomposition applies first principles approach to breaking down complex questions into fundamental components"
           }
         ],
-        "alternatives": [],
+        "alternatives": [
+          {
+            "note": "strategy_systems_thinking.md",
+            "why": "Different approaches to complex problems: systems thinking for interconnected wholes vs first principles for fundamental components"
+          }
+        ],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "strategy_critical_assessment.md",
@@ -2491,6 +3004,22 @@
           {
             "note": "socratic_interlocutor_prompt.md",
             "why": "Both use systematic questioning to identify weaknesses and strengthen arguments"
+          },
+          {
+            "note": "strategy_question_decomposition.md",
+            "why": "Critical assessment validates decomposition quality through MECE and synthesis tests"
+          },
+          {
+            "note": "strategy_reverse_questions.md",
+            "why": "Both analyze existing work structure, though reverse questions extracts implicit architecture while critical assessment evaluates quality"
+          },
+          {
+            "note": "strategy_systems_thinking.md",
+            "why": "Critical assessment can validate systems thinking application by checking for overlooked interdependencies and feedback loops"
+          },
+          {
+            "note": "verify_references.md",
+            "why": "Reference verification is part of evidence quality assessment dimension in critical framework"
           }
         ],
         "extends": [
@@ -2504,7 +3033,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "strategy_question_asking.md",
@@ -2538,7 +3067,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "strategy_question_decomposition.md",
@@ -2579,7 +3108,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "strategy_question_knowledge.md",
@@ -2602,6 +3131,18 @@
           {
             "note": "strategy_reverse_questions.md",
             "why": "Reverse engineering extracts implicit question structures from existing content using same principles"
+          },
+          {
+            "note": "strategy_question_asking.md",
+            "why": "Both focus on strategic questioning as a methodology for understanding"
+          },
+          {
+            "note": "style_technical.md",
+            "why": "Style guide implements question-oriented methodology through implicit question structure"
+          },
+          {
+            "note": "role_technical_author.md",
+            "why": "Technical author applies question-oriented methodology to book structure"
           }
         ],
         "extends": [],
@@ -2627,7 +3168,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "strategy_reverse_questions.md",
@@ -2650,6 +3191,10 @@
           {
             "note": "strategy_critical_assessment.md",
             "why": "Both analyze existing work structure, though reverse questions extracts implicit architecture while critical assessment evaluates quality"
+          },
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Reverse engineering extracts implicit question structures from existing content using same principles"
           }
         ],
         "extends": [
@@ -2663,7 +3208,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "strategy_systems_thinking.md",
@@ -2697,7 +3242,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "strategy_technical_chapter_plan.md",
@@ -2722,6 +3267,10 @@
           {
             "note": "style_technical.md",
             "why": "Both guide technical writing; chapter plan focuses on structure while style guide addresses clarity and tone"
+          },
+          {
+            "note": "strategy_question_knowledge.md",
+            "why": "Chapter planning applies question-oriented methodology to technical writing with pedagogical flow"
           }
         ],
         "extends": [
@@ -2735,7 +3284,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "socratic_interlocutor_prompt.md",
@@ -2763,6 +3312,10 @@
           {
             "note": "strategy_critical_assessment.md",
             "why": "Both use systematic questioning to identify weaknesses and strengthen arguments"
+          },
+          {
+            "note": "strategy_question_asking.md",
+            "why": "Implements Socratic questioning methodology as an AI system prompt for deep critical inquiry"
           }
         ],
         "extends": [
@@ -2776,7 +3329,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "verify_references.md",
@@ -2800,7 +3353,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "chromadb.md",
@@ -2836,7 +3389,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "firecrawl.md",
@@ -2871,7 +3424,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "marker.md",
@@ -2907,7 +3460,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "perplexity.md",
@@ -2942,7 +3495,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "filesystem.md",
@@ -2986,7 +3539,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "foundry_local.md",
@@ -3043,7 +3596,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "motion_canvas_cheatsheet.md",
@@ -3081,7 +3634,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "cargo.md",
@@ -3105,6 +3658,10 @@
           {
             "note": "uv.md",
             "why": "Similar workspace management concepts between Cargo and uv"
+          },
+          {
+            "note": "best_practices.md",
+            "why": "Cargo project structure follows Rust best practices"
           }
         ],
         "extends": [],
@@ -3116,13 +3673,17 @@
           {
             "note": "cli.md",
             "why": "Cargo used to build and run Rust CLI applications"
+          },
+          {
+            "note": "cubecl.md",
+            "why": "Cargo needed to build CubeCL projects"
           }
         ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "burn.md",
@@ -3162,12 +3723,17 @@
           }
         ],
         "extends": [],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "best_practices.md",
+            "why": "Burn framework follows Rust best practices"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "cubecl.md",
@@ -3215,7 +3781,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "cli.md",
@@ -3247,7 +3813,12 @@
           }
         ],
         "extends": [],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "best_practices.md",
+            "why": "CLI guide shows practical application of best practices"
+          }
+        ],
         "alternatives": [
           {
             "note": "powershell.md",
@@ -3257,7 +3828,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "best_practices.md",
@@ -3297,7 +3868,7 @@
         ]
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "numpy_pytorch_rust_guide.md",
@@ -3337,7 +3908,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "optimization.md",
@@ -3362,6 +3933,10 @@
           {
             "note": "burn.md",
             "why": "Burn includes optimization algorithms for deep learning"
+          },
+          {
+            "note": "cubecl.md",
+            "why": "CubeCL includes optimization features like autotuning and kernel fusion"
           }
         ],
         "extends": [],
@@ -3370,7 +3945,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "cpu_vs_gpu_decision_guide.md",
@@ -3412,7 +3987,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "nvidia_small.md",
@@ -3451,7 +4026,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "style_technical.md",
@@ -3479,6 +4054,10 @@
           {
             "note": "strategy_question_knowledge.md",
             "why": "Style guide implements question-oriented methodology through implicit question structure"
+          },
+          {
+            "note": "x_style_guide.md",
+            "why": "Both define writing style but for different mediums and audiences"
           }
         ],
         "extends": [],
@@ -3492,7 +4071,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "style_business.md",
@@ -3510,6 +4089,10 @@
           {
             "note": "role_technical_author.md",
             "why": "Business style complements technical author role for stakeholder communication"
+          },
+          {
+            "note": "li_engagement_strategy.md",
+            "why": "LinkedIn strategy incorporates business writing principles for professional audience"
           }
         ],
         "extends": [],
@@ -3523,7 +4106,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "role_technical_author.md",
@@ -3567,7 +4150,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "x_engagement_strategy.md",
@@ -3613,7 +4196,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "x_posts.md",
@@ -3645,7 +4228,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "x_style_guide.md",
@@ -3679,12 +4262,17 @@
             "why": "Synthesizes research into actionable style framework"
           }
         ],
-        "extended_by": [],
+        "extended_by": [
+          {
+            "note": "x_posts.md",
+            "why": "Posts follow the Karpathy-Blow-Carmack style synthesis"
+          }
+        ],
         "alternatives": [],
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "x_style_research.md",
@@ -3719,7 +4307,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "li_engagement_strategy.md",
@@ -3755,7 +4343,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     },
     {
       "filename": "adding_to_claude_code.md",
@@ -3796,7 +4384,7 @@
         "examples": []
       },
       "forward_pass_complete": true,
-      "backward_pass_complete": false
+      "backward_pass_complete": true
     }
   ]
 }

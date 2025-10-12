@@ -67,3 +67,10 @@ tags: [theory, python]
 ## 10. Motivations & Goals
 - **Motivations**: Incorporates prior knowledge, handles uncertainty, updates beliefs.
 - **Goals**: Parameter estimation, model selection, sequential experiment design, data structure exploration.
+
+## Related Concepts
+
+### Related Topics
+- [[game_theory]] - Both provide mathematical frameworks for decision-making under uncertainty
+- [[python_coding_standards]] - Python tools (PyMC, Stan) used for Bayesian inference
+- [[optimization]] - Optimization used in Bayesian inference algorithms

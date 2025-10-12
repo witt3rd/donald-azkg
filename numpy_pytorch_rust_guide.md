@@ -1,7 +1,6 @@
 ---
 tags: [rust, reference, guide, api, patterns]
 ---
-
 # NumPy to PyTorch to Rust (Burn & CubeCL) Tensor Translation Guide
 
 This comprehensive guide provides solid tutorials on translating between NumPy arrays, PyTorch tensors, and their Rust equivalents in Burn and CubeCL.
@@ -534,3 +533,13 @@ let result = a + b;  // Automatic broadcasting
 ## Conclusion
 
 This guide provides a comprehensive foundation for translating between NumPy arrays, PyTorch tensors, and their Rust equivalents in Burn and CubeCL. The key to successful translation lies in understanding the fundamental differences in memory management, type systems, and computational models between these frameworks while leveraging their respective strengths for optimal performance and safety.
+
+## Related Concepts
+
+### Prerequisites
+- [[python_coding_standards]] - Need Python knowledge for NumPy/PyTorch sections
+
+### Related Topics
+- [[burn]] - Guide covers Burn tensor API as Rust equivalent to PyTorch
+- [[cubecl]] - Guide covers CubeCL Array API for GPU computing
+- [[python_coding_standards]] - NumPy and PyTorch are Python libraries

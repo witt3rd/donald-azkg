@@ -470,3 +470,15 @@ For chapters where 8-phase doesn't emerge naturally:
 **Future-Proof Process**: Focuses on fundamental learning principles that transcend specific content.
 
 This transforms chapter development from ad-hoc writing into **systematic knowledge construction with built-in quality assurance and pedagogical optimization**.
+
+## Related Concepts
+
+### Prerequisites
+- [[strategy_question_knowledge]] - Chapter planning builds on question-oriented methodology for technical writing
+
+### Related Topics
+- [[style_technical]] - Both guide technical writing; chapter plan focuses on structure while style guide addresses clarity and tone
+- [[strategy_question_knowledge]] - Chapter planning applies question-oriented methodology to technical writing with pedagogical flow
+
+### Extends
+- [[strategy_question_knowledge]] - Specializes question-oriented approach for technical chapter writing with pedagogical optimization patterns

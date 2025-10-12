@@ -1,8 +1,6 @@
 ---
 tags: [rust, ml, deep-learning, framework, burn, tensors]
 ---
-
-
 # Burn Rust Deep Learning Framework - Comprehensive Cheatsheet
 
 ## Overview
@@ -887,9 +885,16 @@ trunk serve
 
 *This cheatsheet covers Burn v0.14+ (latest stable). Always refer to official documentation for the most up-to-date information.*
 
-
 ## Related Concepts
 
-### Related Topics
+### Prerequisites
+- [[cargo]] - Cargo required to build and manage Burn dependencies
 
-- [[cargo]] - Cargo is used to manage Burn dependencies
+### Related Topics
+- [[cubecl]] - CubeCL provides GPU compute backend for Burn
+- [[numpy_pytorch_rust_guide]] - Burn tensors are Rust equivalent to NumPy/PyTorch tensors
+- [[optimization]] - Burn includes optimization algorithms for training
+- [[cpu_vs_gpu_decision_guide]] - Burn supports both CPU and GPU backends with different characteristics
+
+### Extended By
+- [[best_practices]] - Burn framework follows Rust best practices

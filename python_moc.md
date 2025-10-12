@@ -1,14 +1,13 @@
 ---
 tags: [moc, python, programming, development]
 ---
-
 # Python - Map of Content
 
 This MOC connects all notes related to Python language, tools, libraries, and development practices.
 
 ## Language & Patterns
 
-- [[python]] - Comprehensive Python guide covering modern best practices, async patterns, and type hints
+- [[python_coding_standards]] - Comprehensive Python guide covering modern best practices, async patterns, and type hints
 - [[python_role]] - Role definition and coding standards for Python development
 
 ## MCP Integration

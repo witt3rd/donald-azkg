@@ -150,9 +150,16 @@ We solve complex problems through first principles thinking by systematically de
 
 [10] QuoteSocrates (@QuoteSocratess), "First Principles Thinking known since antiquity," X (formerly Twitter), May 30, 2025. [Online]. Available: <https://x.com/QuoteSocratess/status/1928662839620993202>
 
-
 ## Related Concepts
 
 ### Related Topics
+- [[strategy_systems_thinking]] - Both are foundational problem-solving methodologies that examine complex systems, though first principles focuses on deconstruction while systems thinking emphasizes interconnections
+- [[strategy_critical_assessment]] - Critical assessment tests whether work properly applies first principles reasoning by evaluating assumption examination and evidence quality
+- [[strategy_question_decomposition]] - Decomposition applies first principles thinking to breaking questions into fundamental components
+- [[socratic_interlocutor_prompt]] - Socratic interlocutor explicitly uses first principles thinking as core methodology
 
-- [[style_technical]] - Both emphasize clarity and reasoning from fundamentals
+### Extended By
+- [[strategy_question_decomposition]] - Question decomposition applies first principles approach to breaking down complex questions into fundamental components
+
+### Alternatives
+- [[strategy_systems_thinking]] - Different approaches to complex problems: systems thinking for interconnected wholes vs first principles for fundamental components

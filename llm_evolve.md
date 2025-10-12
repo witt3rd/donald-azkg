@@ -265,3 +265,13 @@ Citations:
 ---
 
 Answer from Perplexity: pplx.ai/share
+
+## Related Concepts
+
+### Related Topics
+- [[agents]] - Modern LLMs exhibit agentic behaviors described in agents.md
+- [[memory]] - LLM evolution includes memory augmentation systems
+- [[spr]] - SPR leverages understanding of LLM latent space and architecture
+- [[dhcg]] - Addresses limitations in current LLM embeddings
+- [[sutton]] - RL represents next evolution beyond current LLMs
+- [[nvidia_small]] - SLMs represent evolution toward efficient, specialized models

@@ -274,3 +274,8 @@ The cookies.txt file should follow the Netscape format:
 ```
 
 This comprehensive documentation covers all major features of the YouTube Transcript API including basic usage, advanced configuration, authentication, proxy support, formatting options, and CLI usage.
+
+## Related Concepts
+
+### Prerequisites
+- [[python_coding_standards]] - Need Python knowledge to use YouTube Transcript API

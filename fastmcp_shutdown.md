@@ -1,7 +1,6 @@
 ---
 tags: [mcp, python, fastmcp, implementation, patterns, best-practices]
 ---
-
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
 # Diagnosing FastMCP STDIO Shutdown Hangs
@@ -18,14 +17,17 @@ Below is a deep dive into why the hang occurs, who has confirmed it, and the saf
 * The CLI wrapper (`fastmcp client …`) hard-codes that default today; the official JSON config schema still lacks a `keep_alive` property[^2].
 
 
+
 ### 1.2 Missing automatic teardown
 
 * When the parent process exits, the transport does _not_ send a JSON-RPC `shutdown` and EOF before closing its pipes. The orphaned server survives in an event-loop “select” call and continues to wait for input. Multiple GitHub tickets track the issue, e.g. “STDIO hangs forever when using multiprocessing” \#817[^3] and “MCP server instances not cleaned up in STDIO transport mode” \#9064[^4].
 
 
+
 ### 1.3 Why your `cancel all tasks` patch works
 
 * By enumerating `asyncio.all_tasks()` and cancelling everything except the current coroutine, you unblock the selector, forcing `FastMCP.run()` to finish and return control to your script. Your patch is effectively imitating the missing graceful shutdown. It is correct—but it should be unnecessary.
+
 
 
 ## 2. Evidence this is a real bug
@@ -71,6 +73,7 @@ async with client:
     …  # your calls
 await client.close()  # forces shutdown, even with keep_alive=True
 ```
+
 
 
 ### 3.3 Switch to streamable-HTTP/SSE transport
@@ -262,15 +265,10 @@ Yes—your manual task-cancellation section is compensating for a documented Fas
 
 [^68]: https://stackoverflow.com/questions/63782892/using-asyncio-to-wait-for-results-from-subprocess
 
-
-
 ## Related Concepts
 
 ### Prerequisites
-
-- [[mcp_sdk]] - Need to understand FastMCP SDK before implementing shutdown
-- [[python]] - Need Python knowledge for implementation
+- [[mcp_sdk]] - Need to understand FastMCP SDK before diagnosing shutdown issues
 
 ### Extends
-
-- [[mcp_sdk]] - Specific implementation detail of FastMCP
+- [[mcp_sdk]] - Specific implementation detail and bug in FastMCP

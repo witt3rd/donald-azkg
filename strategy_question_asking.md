@@ -173,3 +173,12 @@ Without a topic, I’d pose it as is, trusting it to reveal what matters most in
 ### Final Answer
 
 So, to decide what question to ask if limited to one, I’d choose **"What is the one thing that, if understood, would make everything else clearer?"** because it’s a powerful, adaptable tool for uncovering the heart of any subject, ensuring I get the most clarity and value from your response. What do you think—does that resonate with what you had in mind?
+
+## Related Concepts
+
+### Related Topics
+- [[socratic_interlocutor_prompt]] - Implements Socratic questioning methodology as an AI system prompt for deep critical inquiry
+- [[strategy_question_knowledge]] - Both focus on strategic questioning as a methodology for understanding
+
+### Extended By
+- [[socratic_interlocutor_prompt]] - Transforms theoretical Socratic method into practical AI implementation

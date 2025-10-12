@@ -1,7 +1,6 @@
 ---
 tags: [claude, agents, configuration, deployment, tutorial, guide]
 ---
-
 # Adding MCP Servers to Claude Code
 
 ## Overview
@@ -221,9 +220,12 @@ claude mcp get <server-name>
 
 3. Test with minimal configuration first, then add complexity
 
-
 ## Related Concepts
 
 ### Prerequisites
+- [[mcp_overview]] - Need to understand MCP fundamentals before configuring servers
+- [[mcp_architecture]] - Understanding MCP architecture helps with server configuration
 
-- [[agents]] - Need to understand agent architecture before adding to Claude Code
+### Related Topics
+- [[agents]] - MCP servers extend agent capabilities in Claude Code
+- [[mcp_implementation]] - Related to implementing MCP in practice

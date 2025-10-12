@@ -1,7 +1,6 @@
 ---
 tags: [reference, guide, api, best-practices]
 ---
-
 # Windows Foundry Local with C#/.NET: Local AI Model Integration Guide
 
 ## Overview
@@ -1517,3 +1516,21 @@ var post = await GetStructuredOutput<BlogPost>(
 ## Conclusion
 
 Windows Foundry Local provides a powerful solution for running AI models locally in C#/.NET applications. By leveraging the native structured output support in the OpenAI .NET SDK, developers can build robust, privacy-preserving AI applications with predictable, strongly-typed outputs while maintaining full control over their data and infrastructure.
+
+## Related Concepts
+
+### Prerequisites
+- [[dotnet]] - .NET knowledge required for Foundry Local C# integration
+- [[windows_ai_stack_explained]] - Foundry Local sits as model management layer in Windows AI stack
+
+### Related Topics
+- [[windows_ml]] - Foundry Local uses Windows ML and ONNX Runtime underneath
+- [[onnx_runtime]] - Foundry Local leverages ONNX Runtime for model serving
+- [[copilot_runtime]] - Both provide local AI capabilities on Windows
+- [[openai_responses_python]] - Foundry Local provides OpenAI-compatible API
+
+### Extends
+- [[windows_ai_stack_explained]] - Adds local model serving layer to Windows AI stack
+
+### Alternatives
+- [[openrouter_openai_python_sdk]] - Cloud-based alternative to local model serving

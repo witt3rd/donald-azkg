@@ -208,10 +208,13 @@ For technical books, add:
 
 **Meta-Learning**: This process scales from chapter level to section level to paragraph level. The question-oriented approach provides consistent structure at every granularity, ensuring focused, useful content throughout.
 
-
 ## Related Concepts
 
 ### Related Topics
+- [[strategy_technical_chapter_plan]] - Style guide complements strategic chapter planning by providing voice and citation standards
+- [[role_technical_author]] - Style guide defines how technical authors should write
+- [[strategy_question_knowledge]] - Style guide implements question-oriented methodology through implicit question structure
+- [[x_style_guide]] - Both define writing style but for different mediums and audiences
 
-- [[role_technical_author]] - Style guide supports technical author role
-- [[strategy_first_principles]] - Both emphasize reasoning from fundamentals
+### Alternatives
+- [[style_business]] - Different writing style for business vs technical audiences

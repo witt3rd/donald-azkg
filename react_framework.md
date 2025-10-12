@@ -1,7 +1,6 @@
 ---
 tags: [react, javascript, typescript, ui, framework, patterns]
 ---
-
 # React 19 Best Practices & TypeScript Guide
 
 ## Overview
@@ -526,19 +525,19 @@ React 19 requires modern browser features:
 
 This guide provides a foundation for adopting React 19's modern patterns while maintaining type safety and performance in TypeScript applications.
 
-
 ## Related Concepts
 
 ### Prerequisites
-
-- [[typescript]] - React commonly uses TypeScript for type safety
-- [[node]] - React development uses Node.js tooling
+- [[typescript]] - React development uses TypeScript for type safety
+- [[node]] - Node.js provides runtime environment for React development
 
 ### Related Topics
-
-- [[vite]] - Vite is common build tool for React
-- [[tailwind]] - Tailwind commonly used for styling React apps
+- [[vite]] - Vite is the recommended build tool for React
+- [[tailwind]] - Tailwind CSS commonly used for React styling
+- [[typescript]] - TypeScript used extensively with React 19 development
+- [[node]] - Node.js provides runtime for React development
+- [[category_theory]] - Monads from category theory used in functional programming patterns
+- [[motion_canvas_cheatsheet]] - Motion Canvas uses React-like JSX component syntax
 
 ### Extended By
-
-- [[react_agent_pattern]] - Specific pattern for React-based agents
+- [[react_agent_pattern]] - ReAct agent pattern uses React concepts

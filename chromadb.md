@@ -1,7 +1,6 @@
 ---
 tags: [chromadb, reference, tutorial, guide, api, best-practices]
 ---
-
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
 # ChromaDB Python SDK: Comprehensive Guide for Text Embeddings
@@ -1424,3 +1423,12 @@ The adoption of Python 3.13 best practices throughout ChromaDB implementations e
 [^26]: https://github.com/chroma-core/chroma/blob/main/chromadb/utils/embedding_functions/chroma_langchain_embedding_function.py
 
 [^27]: https://cookbook.chromadb.dev/core/api/
+
+## Related Concepts
+
+### Prerequisites
+- [[openai_embeddings_python]] - Need embeddings to store in vector database
+
+### Related Topics
+- [[python_coding_standards]] - ChromaDB provides Python SDK
+- [[memory]] - Vector databases enable persistent memory for agents

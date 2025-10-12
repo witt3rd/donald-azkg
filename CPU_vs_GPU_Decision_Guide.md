@@ -1,7 +1,6 @@
 ---
 tags: [gpu, guide, api, patterns]
 ---
-
 # CPU vs. GPU for High-Intensity Computing: A Decision Guide for Software Systems
 
 When designing software systems for high-intensity computing tasks, selecting the appropriate processor—CPU or GPU—is essential for achieving optimal performance. CPUs and GPUs have distinct architectural strengths, making them suited to different types of workloads. This guide outlines the key differences, provides a decision-making framework, and offers examples of tasks best suited for each processor type to help developers make informed choices for future software systems.
@@ -120,3 +119,12 @@ Some tasks benefit from combining CPU and GPU:
 
 ## Conclusion
 Selecting between CPU and GPU for high-intensity computing tasks requires analyzing the workload’s computational nature, parallelizability, memory needs, and performance goals. CPUs excel in sequential, logic-heavy tasks, while GPUs dominate in parallel, compute-intensive scenarios. By applying this framework, developers can optimize performance and resource use in future software systems.
+
+## Related Concepts
+
+### Related Topics
+- [[burn]] - Burn supports both CPU and GPU backends
+- [[cubecl]] - CubeCL provides GPU computing capabilities
+- [[nvidia_small]] - GPU considerations for running AI models
+- [[onnx_runtime]] - ONNX Runtime supports both CPU and GPU execution
+- [[windows_ml]] - Windows ML supports CPU and GPU hardware acceleration

@@ -119,3 +119,14 @@ Choose your method based on the desired outcome. **JSON for structure, freeform 
 The trend toward JSON prompting reflects the professionalization of prompt engineering. It’s a move from an art form to a systematic, engineering-driven discipline. As LLMs become more integrated into production systems, the need for deterministic, scalable, and maintainable prompting is critical.
 
 Stop asking the AI for things. Start specifying exactly what you want. Think like an engineer sharing a plan, not a poet sharing feelings. The future of building with AI isn’t just natural—it’s structured. And it speaks JSON.
+
+## Related Concepts
+
+### Related Topics
+- [[micro_prompt]] - Both are structured approaches to prompt engineering with different focuses
+- [[spr]] - Both are advanced prompting techniques for LLM optimization
+- [[mcp_prompts]] - MCP prompts use structured formats similar to JSON prompting
+
+### Alternatives
+- [[micro_prompt]] - Micro-prompting focuses on task decomposition while JSON focuses on structure
+- [[spr]] - SPR uses compressed natural language while JSON uses structured format

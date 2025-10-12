@@ -1,7 +1,6 @@
 ---
 tags: [react, agents, patterns, ui, architecture, design-patterns]
 ---
-
 **Key Points**
 
 - ReAct (Reason + Act) integrates reasoning and action for complex AI tasks.
@@ -158,15 +157,13 @@ The ReAct AI agent approach, though partially overtaken by newer techniques like
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/pdf/2210.03629)
 - [X: Search for ReAct AI Agents and Advanced LLMs](https://x.com/search?q=ReAct%20AI%20agents%20advanced%20LLMs)
 
-
 ## Related Concepts
 
 ### Prerequisites
+- [[agents]] - Need agent fundamentals before specific patterns
 
-- [[react_framework]] - Need React knowledge before implementing agent pattern
-- [[agents]] - Need agent architecture knowledge
+### Related Topics
+- [[micro_prompt]] - ReAct agents can use micro-prompting for decomposed reasoning steps
 
 ### Extends
-
-- [[react_framework]] - Applies React patterns to agent development
-- [[agents]] - Specific implementation of agent architecture
+- [[agents]] - ReAct is a specific implementation pattern for agents

@@ -1,7 +1,6 @@
 ---
 tags: [mcp, protocol, implementation, sdk, deployment, guide]
 ---
-
 # MCP Implementation Guide
 
 Practical guide to implementing MCP servers and clients using official SDKs, with configuration and deployment strategies.
@@ -638,20 +637,20 @@ signal.signal(signal.SIGTERM, lambda: shutdown(server))
 
 ## Related Concepts
 
-- [[mcp_overview]] - High-level introduction to MCP (prerequisite)
-- [[mcp_architecture]] - Understanding the architecture before implementing
-- [[mcp_resources]] - Implementing resource servers
-- [[mcp_tools]] - Implementing tool servers
-- [[mcp_prompts]] - Implementing prompt servers
-- [[mcp_security]] - Security implementation requirements
-- [[python_api_development]] - Python API best practices
-- [[typescript_node_development]] - TypeScript/Node.js best practices
+### Prerequisites
+- [[mcp_overview]] - Need to understand MCP fundamentals before implementation
+- [[mcp_architecture]] - Need to understand architecture before implementing
+- [[mcp_security]] - Need to understand security requirements for implementation
 
-## References
+### Related Topics
+- [[mcp_resources]] - Implementation of resource servers
+- [[mcp_tools]] - Implementation of tool servers
+- [[mcp_prompts]] - Implementation of prompt servers
+- [[adding_to_claude_code]] - Related to implementing MCP in practice
 
-[5] https://github.com/modelcontextprotocol
-[6] https://code.visualstudio.com/docs/copilot/chat/mcp-servers
-[7] https://modelcontextprotocol.io/examples
-[8] https://www.anthropic.com/news/model-context-protocol
-[15] https://www.microsoft.com/en-us/microsoft-copilot/blog/copilot-studio/introducing-model-context-protocol-mcp-in-copilot-studio-simplified-integration-with-ai-apps-and-agents/
-[17] https://github.com/modelcontextprotocol/servers
+### Extends
+- [[mcp_architecture]] - Practical implementation of the architecture
+
+### Extended By
+- [[mcp_sdk]] - Python-specific SDK implementation details
+- [[csharp_mcp_sdk_docs]] - C#-specific SDK implementation details

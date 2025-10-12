@@ -16,5 +16,5 @@ This MOC connects all notes related to Rust language, tools, and frameworks.
 
 ## Related Topics
 
-- [[python]] - Alternative language for ML development
+- [[python_coding_standards]] - Alternative language for ML development
 - [[typescript]] - Alternative systems programming considerations

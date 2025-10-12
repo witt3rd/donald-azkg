@@ -18,3 +18,12 @@ Every framework adds layers that seem smart but break as models improve. That's 
 What if you just ... didn't add them?
 
 ---
+
+## Related Concepts
+
+### Prerequisites
+- [[x_engagement_strategy]] - Posts implement the strategy defined in engagement guide
+- [[x_style_guide]] - Posts follow the Karpathy-Blow-Carmack style synthesis
+
+### Extends
+- [[x_engagement_strategy]] - Provides concrete examples of strategy implementation

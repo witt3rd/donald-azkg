@@ -1,7 +1,6 @@
 ---
 tags: [moc, frontend, ui, web, development]
 ---
-
 # Frontend Development - Map of Content
 
 This MOC connects all notes related to frontend development, UI frameworks, and build tools.

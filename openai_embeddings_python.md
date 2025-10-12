@@ -1,7 +1,6 @@
 ---
 tags: [python, openai, ai, reference, tutorial, guide]
 ---
-
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
 # Comprehensive Guide to OpenAI Python SDK for Text Embeddings
@@ -764,3 +763,15 @@ The OpenAI Python SDK provides a powerful and accessible interface for generatin
 [^36]: https://stackoverflow.com/questions/74907244/how-can-i-use-batch-embeddings-using-openais-api
 
 [^37]: https://www.pinecone.io/learn/openai-embeddings-v3/
+
+## Related Concepts
+
+### Prerequisites
+- [[python_coding_standards]] - Need Python knowledge to use OpenAI Python SDK
+
+### Related Topics
+- [[openai_responses_python]] - Same OpenAI SDK for different capabilities
+- [[openrouter_openai_python_sdk]] - Alternative provider using OpenAI-compatible SDK
+
+### Extended By
+- [[chromadb]] - Need embeddings to store in vector database

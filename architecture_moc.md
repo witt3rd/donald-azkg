@@ -1,7 +1,6 @@
 ---
 tags: [moc, architecture, patterns, design, systems]
 ---
-
 # Architecture - Map of Content
 
 This MOC connects all notes related to system architecture, patterns, and design principles.

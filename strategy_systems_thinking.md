@@ -224,3 +224,12 @@ Systems thinking has evolved from a niche analytical tool to an essential litera
 [55] <https://creately.com/guides/stock-and-flow-diagram/>
 [56] <https://thesystemsthinking.com/jay-forrester-and-system-dynamics-understanding-complex-systems/>
 [57] <https://qut.pressbooks.pub/systemcraft-systems-thinking/chapter/a-brief-history-of-systems-thinking/>
+
+## Related Concepts
+
+### Related Topics
+- [[strategy_first_principles]] - Both are fundamental problem-solving methodologies; first principles deconstructs to basics while systems thinking emphasizes interconnections
+- [[strategy_critical_assessment]] - Critical assessment can validate systems thinking application by checking for overlooked interdependencies and feedback loops
+
+### Alternatives
+- [[strategy_first_principles]] - Different approaches to complex problems: systems thinking for interconnected wholes vs first principles for fundamental components

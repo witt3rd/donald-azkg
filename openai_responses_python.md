@@ -1,7 +1,6 @@
 ---
 tags: [python, openai, ai, reference, tutorial, guide]
 ---
-
 # **OpenAI Python SDK: Responses API vs Chat Completions API**
 
 ## **The Current Recommendation: Responses API**
@@ -819,3 +818,22 @@ As the AI development landscape continues evolving, the Responses API provides a
 [^18]: <https://datascience.fm/creating-dynamic-prompts-with-jinja2-for-llm-queries/>
 [^19]: <https://github.com/gbaeke/openai_responses>
 [^20]: <https://blog.finxter.com/openai-python-api-a-helpful-illustrated-guide-in-5-steps/>
+
+## Related Concepts
+
+### Prerequisites
+- [[python_coding_standards]] - Need Python knowledge to use OpenAI Python SDK
+
+### Related Topics
+- [[openai_embeddings_python]] - Same OpenAI SDK for different capabilities
+- [[openrouter_openai_python_sdk]] - Alternative provider using OpenAI-compatible SDK
+- [[openai_responses_typescript]] - Same OpenAI API with Python implementation for comparison
+- [[perplexity_mcp]] - Perplexity uses OpenAI-compatible API format
+- [[foundry_local]] - Foundry Local provides OpenAI-compatible API
+
+### Extended By
+- [[openrouter_openai_python_sdk]] - OpenRouter uses OpenAI SDK with different endpoint
+
+### Alternatives
+- [[openrouter_openai_python_sdk]] - Direct OpenAI instead of OpenRouter for model access
+- [[openai_responses_typescript]] - Python alternative for OpenAI SDK

@@ -1,7 +1,6 @@
 ---
 tags: [powershell, guide, api, patterns]
 ---
-
 <img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
 
 # Master PowerShell Cheat Sheet \& Productivity Guide
@@ -457,3 +456,19 @@ PowerShell’s object pipeline, rich module ecosystem, and tight integration wit
 [^59]: https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/set-psdebug?view=powershell-7.4\&viewFallbackFrom=powershell-7
 
 [^60]: https://theniceweb.com/archives/471
+
+## Related Concepts
+
+### Related Topics
+- [[dotnet]] - PowerShell often used alongside .NET development
+- [[cpp_project]] - PowerShell used for C++ build automation on Windows
+- [[windows_app_sdk_setup]] - PowerShell used for Windows environment configuration
+- [[cli]] - Similar CLI patterns in different languages
+- [[cargo]] - Cargo used from PowerShell command line on Windows
+
+### Extended By
+- [[cpp_project]] - PowerShell used for Windows environment and build automation
+- [[windows_app_sdk_setup]] - PowerShell used for Windows environment configuration
+
+### Alternatives
+- [[cli]] - Rust CLI alternative for cross-platform tools

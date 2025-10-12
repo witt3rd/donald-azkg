@@ -1,7 +1,6 @@
 ---
 tags: [onnx, reference, guide, api, best-practices, patterns]
 ---
-
 # ONNX Runtime Comprehensive Brief and Cheatsheet for Windows 11
 
 ## Overview
@@ -489,3 +488,24 @@ target_link_libraries(your_app onnxruntime::onnxruntime)
 ```
 
 This comprehensive guide provides the foundation for using ONNX Runtime effectively on Windows 11 across multiple programming languages, with practical examples and optimization techniques for production deployment.
+
+## Related Concepts
+
+### Prerequisites
+- [[windows_ai_stack_explained]] - Need to understand ONNX Runtime role in the stack
+
+### Related Topics
+- [[windows_ml]] - Windows ML uses ONNX Runtime as core engine
+- [[python_coding_standards]] - ONNX Runtime available for Python
+- [[dotnet]] - ONNX Runtime available for .NET/C#
+- [[cpp_project]] - ONNX Runtime available for C++
+- [[copilot_runtime]] - Uses ONNX Runtime under the hood
+- [[windows_ai_stack_explained]] - ONNX Runtime is the core inference engine
+- [[foundry_local]] - Foundry Local leverages ONNX Runtime for model serving
+- [[cpu_vs_gpu_decision_guide]] - ONNX Runtime supports both CPU and GPU execution
+
+### Extends
+- [[windows_ai_stack_explained]] - Detailed implementation of inference engine layer
+
+### Alternatives
+- [[windows_ml]] - Windows ML for simplified Windows-only development

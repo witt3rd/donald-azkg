@@ -25,3 +25,8 @@ tags: [reference, verification]
 
 5. **Report Issues**  
    - Compile a list of failures: missing citations, inaccessible sources, or sources that don’t support claims.
+
+## Related Concepts
+
+### Related Topics
+- [[strategy_critical_assessment]] - Reference verification is part of evidence quality assessment dimension in critical framework
