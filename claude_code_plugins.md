@@ -80,6 +80,117 @@ my-plugin/
 }
 ```
 
+## Plugin Marketplace Schema
+
+### Official marketplace.json Format
+
+Claude Code uses a decentralized marketplace model where developers create Git repositories containing a `marketplace.json` manifest. This file must follow the official Anthropic schema:
+
+**Required top-level fields:**
+- `name` (string): Marketplace identifier, kebab-case, no spaces
+- `owner` (object): Must have `"name"` (string), optionally `"email"` (string)
+- `plugins` (array): List of plugin objects
+
+**Per-plugin required fields:**
+- `name` (string): Plugin identifier
+- `source` (string or object): Plugin location
+- `description` (string): Short description
+- `author` (object): Must have `"name"` (string), optionally `"email"` (string)
+- `version` (string): Version number (recommended)
+
+**Critical schema rules:**
+1. **source field**: For monorepo plugins, use simple string path `"./plugins/pluginname"`. For remote plugins, use object with `"source": "github"` and `"repo": "owner/repo"` fields.
+2. **author/owner fields**: Must be objects with `name` property, NOT strings. Do not include `url` field.
+3. **No extraneous fields**: Schema validation is strict - only use documented fields.
+
+### Complete marketplace.json Example
+
+```json
+{
+  "name": "company-tools",
+  "owner": {
+    "name": "DevTools Team",
+    "email": "devtools-team@company.com"
+  },
+  "plugins": [
+    {
+      "name": "code-formatter",
+      "source": "./plugins/formatter",
+      "description": "Automatic code formatting on save",
+      "version": "2.1.0",
+      "author": {
+        "name": "DevTools Team",
+        "email": "devtools-team@company.com"
+      }
+    },
+    {
+      "name": "deployment-tools",
+      "source": {
+        "source": "github",
+        "repo": "company/deploy-plugin"
+      },
+      "description": "Deployment automation tools",
+      "version": "1.0.0",
+      "author": {
+        "name": "DevOps Team"
+      }
+    }
+  ],
+  "metadata": {
+    "description": "Tooling plugins for company development teams",
+    "version": "1.3.0"
+  }
+}
+```
+
+### Plugin Manifest (plugin.json)
+
+Individual plugins contain a `.claude-plugin/plugin.json` file declaring their extension points. **CRITICAL**: All paths must be relative with `./` prefix and proper extensions.
+
+```json
+{
+  "name": "azkg",
+  "version": "0.1.0",
+  "displayName": "Agentic-ZKG",
+  "description": "Agent-maintained Zettelkasten knowledge graph",
+  "author": {
+    "name": "Donald Thompson",
+    "email": "dthompson@witt3rd.com"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/witt3rd/claude-plugins",
+  "commands": [
+    "./commands/create-note.md",
+    "./commands/search-notes.md",
+    "./commands/expand-graph.md"
+  ],
+  "agents": "./agents/",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./mcp-config.json"
+}
+```
+
+**Field Requirements (from official Anthropic docs):**
+- **commands**: Array of file paths to markdown files (e.g., `"./commands/name.md"`)
+- **agents**: String path to directory (e.g., `"./agents/"`) OR array of file paths
+- **hooks**: String path to JSON config file (e.g., `"./hooks/hooks.json"`)
+- **author**: Object with `name` (required), `email` (optional), `url` (optional)
+- **mcpServers**: String path to MCP configuration JSON file
+
+### Common Schema Errors
+
+**Error: "plugins.0.source: Invalid input"**
+- Cause: Using object format `{"type": "git", "url": "...", "path": "..."}` instead of simple string
+- Fix: Use `"source": "./plugins/pluginname"` for monorepo plugins
+
+**Error: "plugins.0.author: Expected object, received string"**
+- Cause: Using `"author": "Name"` instead of object
+- Fix: Use `"author": {"name": "Name", "email": "email@domain.com"}`
+
+**Error: "owner: Required"**
+- Cause: Missing top-level `owner` field
+- Fix: Add `"owner": {"name": "Your Name"}` at marketplace root
+
 ## Installation and Management
 
 ### Installation Methods
@@ -233,5 +344,7 @@ Claude Code plugins represent the platform's extensibility layer, enabling teams
 
 ## References
 
-[1] https://www.anthropic.com/news/claude-code-plugins
-[2] https://www.anthropic.com/engineering/desktop-extensions
+[1] https://docs.claude.com/en/docs/claude-code/plugin-marketplaces - Official marketplace.json schema documentation
+[2] https://docs.claude.com/en/docs/claude-code/plugins - Official plugin development guide
+[3] https://www.anthropic.com/news/claude-code-plugins - Plugin announcement
+[4] https://www.anthropic.com/engineering/desktop-extensions - Desktop extensions engineering blog
