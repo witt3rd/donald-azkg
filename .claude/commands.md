@@ -1,3 +1,79 @@
+# AZKG Command Rationalization
+
+## Current State (2025-10-12)
+
+**13 Commands Implemented:**
+1. ✅ /create-note - Research + create with auto-linking
+2. ✅ /search-notes - Find notes by keyword/semantic search
+3. ✅ /expand-graph - Multi-strategy relationship discovery
+4. ✅ /learning-path - Generate prerequisite learning sequence
+5. ✅ /conform-note - Restructure to standard format
+6. ✅ /rename-note - Rename + update all wikilinks
+7. ✅ /refresh-topic - Update note with latest Perplexity info
+8. ✅ /graph-validate - Check integrity (wikilinks, bidirectionality)
+9. ✅ /graph-stats - Count notes, relationships, tags
+10. ✅ /graph-note - View note's relationships & metadata
+11. ✅ /graph-moc - View MOC navigation hub (renamed from /graph-batch)
+12. ✅ /graph-add-relationship - Manually add typed relationships
+13. ✅ /update-note - Update YAML frontmatter metadata
+
+## Rationalization Assessment
+
+### Tier 1: Core Workflows (Essential - Use Daily)
+- **Keep:** `/create-note`, `/search-notes`, `/expand-graph`, `/learning-path`, `/graph-note`, `/refresh-topic`
+- **Why:** These provide agent-differentiated value - automation you can't easily do manually
+- **Usage:** Creating knowledge, finding context, discovering connections, generating learning paths, staying current
+
+### Tier 2: Maintenance (Important - Use Weekly)
+- **Keep:** `/conform-note`, `/rename-note`, `/graph-validate`
+- **Why:** Essential for quality, but periodic rather than daily
+- **Usage:** Cleanup, refactoring, integrity checks
+
+### Tier 3: Analysis (Useful - Use Monthly)
+- **Keep:** `/graph-stats`
+- **Reconsider:** `/graph-moc` - Do you just `Read` MOC files directly instead?
+- **Why:** Informational rather than operational
+- **Usage:** Understanding growth, finding patterns
+
+### Tier 4: Granular Operations (Low Value - Rarely Used?)
+- **Reconsider:** `/graph-add-relationship` - Isn't `/expand-graph` better for this?
+- **Reconsider:** `/update-note` - Why not just use Edit tool directly on YAML?
+- **Why:** Too manual, overlaps with better commands
+- **Recommendation:** Consider removing if unused
+
+## Missing High-Value Commands
+
+Based on vision docs (agentic_zkg.md, claude_plugin_azkg.md), this is mentioned but NOT implemented:
+
+1. **`/find-gaps`** - Identify missing knowledge areas
+   - Would need: Broken wikilink detection + domain coverage analysis
+   - Value: Medium - helps identify missing knowledge areas
+   - Priority: Lower than maintaining/improving existing commands
+
+## Recommendations
+
+### Immediate Actions:
+1. **Update documentation** - `/refresh-topic`, `/search-notes`, `/learning-path` are implemented but not listed in README.md
+2. **Remove or justify Tier 4** - Test if you actually use `/graph-add-relationship` and `/update-note`
+3. **Command naming is consistent** - All graph commands use `graph-` prefix, core operations don't (good distinction)
+4. **✅ Renamed** - `/graph-batch` → `/graph-moc` to match MOC terminology
+
+### Focus on Quality:
+- All 13 core commands are implemented
+- Focus should be on making these excellent rather than adding more
+- Consider removing rarely-used commands to reduce maintenance
+
+### Commands to Consider Removing:
+- `/update-note` - Too granular, overlaps with Edit tool
+- `/graph-add-relationship` - Overlaps with `/expand-graph` interactive mode
+- `/graph-moc` - May overlap with just reading MOC files directly
+
+### Advanced Commands (Defer):
+- `/generate-moc`, `/merge-notes`, `/split-note`, `/visualize-graph` are interesting but not essential
+- Focus on making the core 11 commands excellent first
+
+---
+
 Your Zettelkasten system has rich potential for automation. Here are high-value commands to consider:
 
   Core Creation & Expansion
@@ -70,14 +146,16 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 - Show backlinks (Grep for wikilinks to this note)
 - Uses built-in tools (Read, Grep) - no Python scripts
 
-  /graph-batch [name] - REFACTORED to /graph-moc
+  /graph-moc [name] - ✅ IMPLEMENTED - View MOC (Map of Content) navigation hub
 
-**Note:** "Batches" are now MOC (Map of Content) files
+**Note:** Replaces old "batches" concept - MOCs are thematic navigation hubs
 
-- Read MOC file (e.g., agents_moc.md)
-- Display all wikilinks and their context
-- Count notes in MOC
-- Uses Read tool - no Python scripts
+- Read MOC file (e.g., agents_moc.md, mcp_moc.md, python_moc.md)
+- Display all sections and wikilinks with descriptions
+- Count notes per section and total
+- Show MOC organization and coverage
+- Suggest gaps or improvements
+- Uses Read and Glob tools - no Python scripts
 
   /graph-add-relationship [source] [target] [type] [why] - ✅ IMPLEMENTED - Add relationships
 
@@ -157,25 +235,38 @@ Markdown files ARE the graph. No synchronization needed.
 - Update wikilinks in other notes
 - Update knowledge graph
 
-  Implemented Commands Summary (Markdown-First Architecture)
+## Implemented Commands Summary (Markdown-First Architecture)
 
-  ✅ /create-note - Create atomic notes with research and relationship discovery (Write, Edit tools)
-  ✅ /expand-graph - Auto-discover missing relationships with multi-strategy analysis (Edit, Grep, Read tools)
+### Core Operations (6 commands)
+  ✅ /create-note - Create atomic notes with Perplexity research and auto-linking (Write, Edit, mcp__perplexity-ask)
+  ✅ /search-notes - Find notes by keyword/semantic search (Grep, Read tools)
+  ✅ /expand-graph - Auto-discover missing relationships with multi-strategy analysis (Edit, Grep, Read, mcp__perplexity-ask)
+  ✅ /learning-path - Generate prerequisite learning sequence (Read, Grep tools)
+  ✅ /graph-note - Inspect note details and relationships (Read, Grep tools)
+  ✅ /refresh-topic - Update note with latest Perplexity info (mcp__perplexity-ask, Edit tools)
+
+### Maintenance Operations (3 commands)
   ✅ /conform-note - Restructure note to standard format (Edit tool)
   ✅ /rename-note - Rename note and update all references throughout knowledge base (Grep, Edit, Bash)
   ✅ /graph-validate - Check graph integrity (Grep, Glob, Read tools)
+
+### Analysis Operations (2 commands)
   ✅ /graph-stats - View graph statistics (Grep, Glob tools)
-  ✅ /graph-note - Inspect note details and relationships (Read, Grep tools)
-  ✅ /graph-moc - View MOC (Map of Content) files (Read tool)
-  ✅ /graph-add-relationship - Manually add relationships (Edit, Read tools)
-  ✅ /update-note - Update note metadata (Edit tool)
+  ✅ /graph-moc - View MOC (Map of Content) navigation hubs (Read, Glob tools)
+
+### Granular Operations (2 commands - consider removing)
+  ✅ /graph-add-relationship - Manually add typed relationships (Edit, Read tools)
+  ✅ /update-note - Update note metadata in YAML frontmatter (Edit tool)
 
   **All commands use Claude's built-in tools - NO Python scripts required**
+  **Total: 13 commands implemented**
 
-  High-Value Next Implementations
+## Potential Future Commands (Lower Priority)
 
   1. /find-gaps - Identify missing knowledge areas (Grep for broken wikilinks, analyze tags)
-  2. /learning-path - Generate prerequisite learning sequences (Read + parse "Prerequisites" sections)
-  3. /generate-moc - Auto-generate Maps of Content by tag/domain (Grep, Read, Write tools)
-  4. /search-notes - Semantic search with context across all notes (Grep, Read tools)
-  5. /visualize-graph - Generate graph visualization from markdown (Grep relationships, output DOT/Mermaid)
+  2. /generate-moc - Auto-generate Maps of Content by tag/domain (Grep, Read, Write tools)
+  3. /visualize-graph - Generate graph visualization from markdown (Grep relationships, output DOT/Mermaid)
+  4. /merge-notes - Combine duplicate concepts into atomic notes
+  5. /split-note - Break non-atomic notes into focused concepts
+
+**Recommendation:** Focus on improving existing 13 commands rather than adding more

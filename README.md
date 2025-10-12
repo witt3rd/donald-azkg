@@ -1,6 +1,6 @@
 # Donald's Agentic-ZKG
 
-**Welcome to my personal knowledge base** - an instance of an [[agentic_zkg]] powered by [[claude_plugin_zkg|Claude Code]].
+**Welcome to my personal knowledge base** - an instance of an [[agentic_zkg]] powered by [[claude_plugin_azkg|Claude Code]].
 
 This is not traditional documentation. This is a **living, agent-maintained knowledge network** that grows through conversation with Claude. Think of it as my second brain, but one that maintains itself.
 
@@ -18,7 +18,7 @@ This is not traditional documentation. This is a **living, agent-maintained know
 
 ## How This Works
 
-This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_plugin_zkg]] implementation:
+This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_plugin_azkg]] implementation:
 
 **I (human) provide direction:**
 - "Create a note about X"
@@ -168,7 +168,7 @@ All relationships are **bidirectional** - if A extends B, then B has "extended_b
 
 Claude parses markdown on-demand during sessions, builds an in-memory graph, and operates directly on markdown files using built-in tools (Read, Edit, Grep, Glob).
 
-See [[claude_plugin_zkg]] for the full architecture.
+See [[claude_plugin_azkg]] for the full architecture.
 
 ### Relationship Types
 
@@ -422,4 +422,4 @@ The agent provides 10+ automated slash commands for knowledge management:
 
 **The innovation:** This isn't documentation *about* AI. It's a knowledge base *for* AI - designed to be consumed by language models as context, maintained by an agent through conversation, and navigable by both humans and AI.
 
-Want to understand how this works? See [[agentic_zkg]] (the concept) and [[claude_plugin_zkg]] (the implementation).
+Want to understand how this works? See [[agentic_zkg]] (the concept) and [[claude_plugin_azkg]] (the implementation).

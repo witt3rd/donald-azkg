@@ -253,7 +253,7 @@ This is knowledge management **with the agent, not just for the agent**.
 - [[agents]] - AI agents and autonomous systems
 
 ### Extended By
-- [[claude_plugin_zkg]] - Claude Code implementation of this paradigm
+- [[claude_plugin_azkg]] - Claude Code implementation of this paradigm
 - (Future implementations with other agents/platforms)
 
 ### Related Topics

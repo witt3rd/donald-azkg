@@ -453,67 +453,241 @@ zettelkasten-plugin/
 
 ## Marketplace Strategy
 
-### Repository Setup
+### Official Anthropic Pattern: Marketplace Repository
 
-**GitHub Repository Structure**:
+**Claude Code uses a decentralized plugin distribution model.** There is no centralized Anthropic-operated marketplace. Instead, plugin developers create **marketplace repositories** - Git repos containing multiple plugins and a marketplace manifest that Claude Code reads directly[1].
+
+### Multi-Plugin Marketplace Repository
+
+**Recommended structure for hosting multiple plugins (including AZKG):**
+
 ```
-github.com/your-org/claude-code-zettelkasten/
-├── README.md                    # Hero section with screenshots
-├── INSTALLATION.md              # Step-by-step setup
-├── CONTRIBUTING.md              # Contribution guidelines
-├── LICENSE                      # Open source license (MIT?)
-├── docs/                        # Detailed documentation
+witt3rd-claude-plugins/              # GitHub repository
+├── .claude-plugin/
+│   └── marketplace.json             # Marketplace manifest (lists all plugins)
+├── plugins/
+│   ├── azkg/                        # AZKG plugin
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json          # Plugin metadata
+│   │   ├── commands/
+│   │   │   ├── create-note.md
+│   │   │   ├── search-notes.md
+│   │   │   ├── expand-graph.md
+│   │   │   ├── learning-path.md
+│   │   │   └── ... (all 13 commands)
+│   │   ├── agents/
+│   │   │   ├── research-agent.md
+│   │   │   └── relationship-discovery.md
+│   │   ├── mcp-server/
+│   │   │   ├── server.py
+│   │   │   ├── resources.py
+│   │   │   ├── tools.py
+│   │   │   └── requirements.txt
+│   │   ├── hooks/
+│   │   │   └── post-commit.sh
+│   │   ├── README.md                # AZKG plugin docs
+│   │   └── docs/
+│   ├── plugin-2/                    # Future plugin
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   └── ...
+│   └── plugin-3/                    # Future plugin
+├── shared/                          # Optional: shared utilities
+│   └── utils.py
+├── docs/
 │   ├── getting-started.md
-│   ├── slash-commands.md
-│   ├── agents.md
-│   ├── mcp-api.md
-│   └── hooks.md
-├── examples/                    # Example knowledge graphs
-│   ├── software-engineering/
-│   ├── machine-learning/
-│   └── systems-design/
-└── plugin/                      # Actual plugin code
-    └── (structure from above)
+│   └── plugin-development.md
+├── README.md                        # Marketplace hero page
+├── CONTRIBUTING.md
+└── LICENSE
 ```
 
-**README Hero Section**:
+### Marketplace Manifest
+
+**`.claude-plugin/marketplace.json`** - Catalog of all plugins in this repository:
+
+```json
+{
+  "version": "1.0.0",
+  "name": "witt3rd-claude-plugins",
+  "description": "Professional-grade Claude Code plugins for knowledge management and development workflows",
+  "author": "Donald Thompson",
+  "repository": "https://github.com/witt3rd/claude-plugins",
+  "plugins": [
+    {
+      "name": "azkg",
+      "displayName": "Agentic Zettelkasten Knowledge Graph",
+      "description": "Agent-maintained knowledge management with MCP server, specialized agents, and workflow hooks",
+      "version": "1.0.0",
+      "path": "./plugins/azkg",
+      "tags": ["knowledge-management", "zettelkasten", "mcp", "research"],
+      "author": "Donald Thompson",
+      "homepage": "https://github.com/witt3rd/claude-plugins/tree/main/plugins/azkg"
+    }
+    // Additional plugins added here as developed
+  ]
+}
+```
+
+### Plugin Metadata
+
+**`plugins/azkg/.claude-plugin/plugin.json`** - Individual plugin manifest:
+
+```json
+{
+  "name": "azkg",
+  "version": "1.0.0",
+  "displayName": "Agentic-ZKG",
+  "description": "Agent-maintained Zettelkasten knowledge graph",
+  "author": "Donald Thompson",
+  "license": "MIT",
+  "repository": "https://github.com/witt3rd/claude-plugins",
+  "commands": [
+    "create-note",
+    "search-notes",
+    "expand-graph",
+    "learning-path",
+    "graph-note",
+    "conform-note",
+    "rename-note",
+    "refresh-topic",
+    "graph-validate",
+    "graph-stats",
+    "graph-moc"
+  ],
+  "agents": [
+    "research-agent",
+    "relationship-discovery"
+  ],
+  "hooks": [
+    "post-commit"
+  ],
+  "mcp": {
+    "enabled": true,
+    "server": "./mcp-server/server.py"
+  }
+}
+```
+
+### Installation Flow
+
+**Users install via native Claude Code commands:**
+
+```bash
+# 1. Add the marketplace repository
+/plugin marketplace add witt3rd/claude-plugins
+
+# 2. Browse available plugins in the marketplace
+/plugin
+
+# 3. Install the AZKG plugin
+/plugin install azkg@witt3rd
+
+# 4. Use the plugin commands
+/create-note "neural networks"
+/search-notes "MCP protocol"
+/learning-path "react_agent_pattern.md"
+```
+
+### Marketplace README
+
+**Repository hero page showcasing all plugins:**
+
 ```markdown
-# Zettelkasten Knowledge Graph for Claude Code
+# witt3rd Claude Code Plugins
 
-> Transform Claude Code into a knowledge management powerhouse with Obsidian-compatible Zettelkasten note-taking, automatic relationship discovery, and AI-powered research agents.
+> Professional-grade plugins for Claude Code: knowledge management, development workflows, and AI-powered productivity
 
-[🚀 Install Plugin] [📚 Documentation] [💬 Community]
+## 🚀 Quick Start
 
-## Features
+```bash
+# Add this marketplace to Claude Code
+/plugin marketplace add witt3rd/claude-plugins
+
+# Install any plugin
+/plugin install azkg@witt3rd
+```
+
+## 📦 Available Plugins
+
+### 🧠 Agentic-ZKG
+**Agent-maintained Zettelkasten knowledge management**
+
+Transform Claude Code into a knowledge management powerhouse with:
 - 🧠 Create atomic notes with automatic relationship discovery
 - 🔍 Semantic search across your knowledge base
 - 🤖 Specialized agents for research and documentation
-- 🔗 Visual knowledge graph navigation
-- ⚡ Lightning-fast MCP server architecture
+- 🔗 MCP server exposing knowledge to all agents
 - 📊 Learning path generation from prerequisites
 
-[Demo GIF showing plugin in action]
+**Install:** `/plugin install azkg@witt3rd`
+**Version:** 1.0.0
+**Docs:** [AZKG Plugin Guide](./plugins/azkg/README.md)
+
+---
+
+### 🔧 [Future Plugin 2]
+Brief description...
+
+**Install:** `/plugin install plugin2@witt3rd`
+**Version:** 0.5.0
+
+---
+
+## 📚 Documentation
+
+- [Getting Started](./docs/getting-started.md)
+- [Plugin Development Guide](./docs/plugin-development.md)
+- [Contributing](./CONTRIBUTING.md)
+
+## 🤝 Contributing
+
+Want to contribute? See our [Contributing Guide](./CONTRIBUTING.md)
+
+## 📄 License
+
+MIT License - See [LICENSE](./LICENSE)
 ```
 
-### Distribution Channels
+### Distribution Model
 
-**Official Plugin Registry**:
-- Submit to Anthropic's plugin marketplace (if available)
-- Maintain compatibility with registry standards
-- Regular updates and version management
+**Decentralized, Git-based distribution:**
 
-**Community Platforms**:
-- GitHub repository with issues and discussions
-- Discord server for users and contributors
-- Tutorial videos on YouTube
-- Blog posts about knowledge management in development
+✅ **How it works:**
+- Plugin marketplace is a Git repository (public or private)
+- Users add marketplace URL to Claude Code
+- Claude Code reads `marketplace.json` to discover plugins
+- Plugins install directly from Git repository
+- No centralized registry or approval process
 
-**Documentation Site**:
-- Hosted on GitHub Pages or Vercel
-- Interactive examples
-- API reference
-- Video tutorials
-- Community showcase
+✅ **Benefits:**
+- **Full control** - You own the marketplace and distribution
+- **No gatekeepers** - No approval process or waiting
+- **Private or public** - Works with GitHub, GitLab, internal Git
+- **Version control** - Git provides built-in versioning
+- **Team-friendly** - Can host private marketplaces for internal teams
+
+✅ **Community Discovery:**
+- No official central directory (similar to pre-npm era)
+- Community-curated lists like "awesome-claude-code"[2]
+- Social sharing via GitHub, blogs, documentation
+- Word-of-mouth and developer networks
+
+### Scaling Strategy
+
+**Start with monorepo marketplace (2-5 plugins):**
+- Single repository
+- Shared tooling and CI/CD
+- Easy to add new plugins
+- Clean organization with subdirectories
+
+**Scale to multi-repo if needed (10+ plugins):**
+- Split each plugin to separate repository
+- Use Git submodules or meta-repository
+- Marketplace repo contains only manifest + docs
+- Better for community contributions
+
+**This AZKG plugin is the first in the witt3rd-claude-plugins marketplace.**
 
 ## Technical Challenges and Solutions
 
@@ -597,23 +771,25 @@ github.com/your-org/claude-code-zettelkasten/
 ## Next Steps
 
 ### Immediate Actions (Week 1)
-1. Set up GitHub repository with marketplace structure
-2. Implement JSON-RPC 2.0 MCP server with resource and tool handlers
-3. Implement core slash commands (`/create-note`, `/search-notes`)
-4. Create plugin manifest and basic documentation
+1. **Create marketplace repository:** `witt3rd/claude-plugins` on GitHub
+2. **Set up directory structure:** `.claude-plugin/`, `plugins/azkg/`, `shared/`, `docs/`
+3. **Create marketplace manifest:** `.claude-plugin/marketplace.json` with AZKG entry
+4. **Create plugin manifest:** `plugins/azkg/.claude-plugin/plugin.json`
+5. **Write marketplace README:** Hero page with installation instructions
 
 ### Short Term (Month 1)
-1. Complete Phase 1 and 2 implementation
-2. Alpha testing with small user group
-3. Create demo videos and documentation
-4. Prepare marketplace submission
+1. **Migrate AZKG commands:** Move 13 command implementations to `plugins/azkg/commands/`
+2. **Implement MCP server:** JSON-RPC 2.0 server with resource and tool handlers
+3. **Add agent definitions:** Research and relationship discovery agents
+4. **Create plugin documentation:** `plugins/azkg/README.md` with usage guide
+5. **Test installation flow:** `/plugin marketplace add witt3rd/claude-plugins`
 
 ### Medium Term (Quarter 1)
 1. Complete all five implementation phases
-2. Public beta release
-3. Build community channels
-4. Gather feedback and iterate
-5. Submit to official plugin registry
+2. Alpha testing with small user group
+3. Create demo videos and documentation
+4. Add to community-curated lists (e.g., awesome-claude-code)
+5. Gather feedback and iterate
 
 ### Long Term (Year 1)
 1. Grow user base to 1000+ active users
@@ -655,3 +831,9 @@ This plugin makes the agentic-ZKG paradigm practical and accessible, enabling de
 ### Related Topics
 - [[claude_code]] - Platform that hosts this plugin
 - [[claude_code_agents]] - Subagent system used by knowledge worker agents
+
+## References
+
+[1] Anthropic. "Claude Code Plugins Documentation." https://docs.claude.com/en/docs/claude-code/plugins
+
+[2] hesreallyhim. "Awesome Claude Code - Curated list of Claude Code resources." https://github.com/hesreallyhim/awesome-claude-code

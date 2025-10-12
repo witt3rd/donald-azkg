@@ -202,7 +202,7 @@ MOCs contain links and brief context, not content itself.
 
 - **`README.md`** - Philosophy and usage guide (comprehensive)
 - **`agentic_zkg.md`** - The paradigm definition (concept level)
-- **`claude_plugin_zkg.md`** - Claude Code implementation (implementation level)
+- **`claude_plugin_azkg.md`** - Claude Code implementation (implementation level)
 - **`tag_system.md`** - Complete tag catalog and guidelines
 - **`*_moc.md`** - Navigation hub notes for topic areas (MOCs replace "batches")
 
