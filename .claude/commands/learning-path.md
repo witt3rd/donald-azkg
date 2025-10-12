@@ -1,6 +1,6 @@
 # Learning Path
 
-You are tasked with generating an optimal learning sequence for a target note by tracing prerequisite chains through the knowledge graph.
+Generate an optimal learning sequence for a target note by tracing prerequisite chains through the knowledge graph.
 
 ## 1. Parse Input
 
@@ -10,27 +10,26 @@ You are tasked with generating an optimal learning sequence for a target note by
 
 **Normalize input:**
 - Add `.md` extension if missing
-- Verify the target note exists
+- Use Glob to verify the target note exists
 - If not found, suggest similar notes using Glob
 
-## 2. Load Knowledge Graph
+## 2. Load Target Note
 
-**Read `knowledge_graph_full.json`**
+**Read the target note:**
+- Use Read tool to get full content
+- Extract YAML tags and title
+- Parse "Related Concepts" section to get prerequisites
 
-**Extract the target note's data:**
-```json
-{
-  "notes": {
-    "target_note.md": {
-      "relationships": {
-        "prerequisites": [...],
-        "related_concepts": [...],
-        "extends": [...],
-        ...
-      }
-    }
-  }
-}
+**Example:**
+```markdown
+## Related Concepts
+
+### Prerequisites
+- [[mcp_overview]] - Must understand MCP basics first
+- [[oauth_fundamentals]] - OAuth is primary auth mechanism
+
+### Related Topics
+- [[api_security]] - General API security principles
 ```
 
 ## 3. Trace Prerequisite Chains
@@ -46,7 +45,8 @@ function buildPrerequisiteTree(note, visited = new Set()):
 
   visited.add(note)
 
-  prerequisites = graph[note].relationships.prerequisites
+  // Read the note and parse "Related Concepts" → "Prerequisites"
+  prerequisites = readNote(note).prerequisites
 
   if prerequisites is empty:
     return [note]  // Foundation reached
@@ -59,6 +59,12 @@ function buildPrerequisiteTree(note, visited = new Set()):
   tree.append(note)
   return tree
 ```
+
+**Implementation with tools:**
+1. **Read** target note to get prerequisites
+2. For each prerequisite, **Read** that note to get its prerequisites
+3. Recursively traverse until reaching foundation notes (no prerequisites)
+4. Track visited nodes to detect cycles
 
 **Key features:**
 - **Cycle detection:** Track visited nodes to prevent infinite loops
@@ -128,19 +134,23 @@ Level 3 (Target):
 
 **Enrich the path with optional content:**
 
-**Parallel reading (related_concepts):**
+**Parallel reading (Related Topics):**
+- Read "Related Topics" sections from notes in path
 - Notes at same level that provide additional context
 - Not strictly required but enhance understanding
 
-**Deeper dives (extended_by):**
+**Deeper dives (Extended By):**
+- Read "Extended By" sections from notes in path
 - Advanced topics that build on concepts in the path
 - "After mastering this path, explore..."
 
-**Alternative approaches (alternatives):**
+**Alternative approaches (Alternatives):**
+- Read "Alternatives" sections from notes in path
 - Different ways to achieve similar understanding
 - "For a different perspective, consider..."
 
-**Practical examples (examples):**
+**Practical examples (Examples):**
+- Read "Examples" sections from notes in path
 - Concrete implementations to solidify understanding
 - "Apply these concepts with..."
 
@@ -193,7 +203,7 @@ Combining concepts from previous levels.
    *Why it's needed:* Synthesizes [concepts] for [purpose]
 
 ### Level 3: Target Concept
-Your destination! 🎉
+Your destination!
 
 6. **[[target_note]]** (15 min read)
    Brief description from note.
@@ -250,9 +260,9 @@ note_b ──────────┴──> note_d ────────�
 
 1. **Start with Level 0** if concepts are new
 2. **Skip familiar sections** if you have background knowledge
-3. **Use `/search-notes`** to find related content
+3. **Use `/graph-note`** to inspect relationships for each note
 4. **Use `/expand-graph`** to discover more connections
-5. **Create a MOC** for this path using `/generate-moc` (future command)
+5. **Review in Obsidian** for visual graph navigation
 
 **Pro tip:** Open multiple notes in tabs and read through the sequence in order!
 ```
@@ -293,6 +303,7 @@ Read these notes together as an interconnected group:
 4. Re-read all three for full understanding
 
 **Action needed:** Consider refactoring these notes to break the cycle.
+Use `/graph-validate` to check for more circular dependencies.
 ```
 
 **Very long path (>15 notes):**
@@ -336,6 +347,13 @@ Learning Path Summary
 🔗 Critical Concept: [Note that appears most frequently as prerequisite]
 ```
 
+## Tools Used
+
+- **Read** - Get note content, parse "Related Concepts" sections, extract summaries
+- **Glob** - Verify notes exist, find similar notes if target not found
+- **Parse logic** - Traverse prerequisite chains, topological sort, depth calculation
+- **Graph traversal** - Depth-first search with cycle detection
+
 ## Important Notes
 
 **Quality guidelines:**
@@ -357,5 +375,6 @@ Learning Path Summary
 - Report any issues found (cycles, broken links)
 - Suggest graph improvements
 - Validate prerequisite chains make semantic sense
+- Use `/graph-validate` to check bidirectionality
 
 Execute the learning path generation for the note provided by the user.

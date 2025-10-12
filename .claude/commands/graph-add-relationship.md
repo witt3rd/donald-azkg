@@ -1,100 +1,142 @@
-# Add Relationship
+# Graph Add Relationship
 
-Manually add a relationship between two existing notes in the knowledge graph.
-
-## Task
-
-Execute the `add_relationship.py` script to establish a typed relationship between two notes with explanation.
+Manually add a typed relationship between two notes with bidirectional update.
 
 ## Input
 
 User provides:
-1. **Source note filename** (e.g., "note_a.md")
-2. **Target note filename** (e.g., "note_b.md")
-3. **Relationship type** (one of: prerequisites, related_concepts, extends, extended_by, alternatives, examples)
-4. **Why explanation** (clear reason for the relationship)
-5. **Optional: Bidirectional flag** (automatically create inverse relationship)
+- Source note: `agents.md`
+- Target note: `semantic_routing.md`
+- Relationship type: `related_topics` (or `prerequisites`, `extends`, `alternatives`, `examples`)
+- Why: "Semantic routing enables intelligent model selection for agent tasks"
 
-## Relationship Types
+Example: `/graph-add-relationship agents semantic_routing related_topics "Enables model selection"`
 
-- **prerequisites** - Target must be understood before source
-- **related_concepts** - Connected ideas at same level
-- **extends** - Source builds upon target concept
-- **extended_by** - Target builds upon source (inverse of extends)
-- **alternatives** - Different approaches to same problem
-- **examples** - Target is concrete implementation of source
+## Valid Relationship Types
 
-## Execution
+- `prerequisites` - Target must be understood first
+- `related_topics` - Connected ideas at same level
+- `extends` - Source builds upon target
+- `alternatives` - Different approaches to same problem
+- `examples` - Target is concrete implementation of source
 
-**Simple relationship:**
+## Execution Steps
+
+### 1. Normalize Filenames
+
+Ensure both filenames have `.md` extension.
+
+### 2. Verify Both Notes Exist
+
+Use Glob to verify both files exist:
 ```bash
-python .claude/scripts/add_relationship.py \
-  "source.md" \
-  "target.md" \
-  "extends" \
-  "Builds upon the base concept"
+Glob "agents.md"
+Glob "semantic_routing.md"
 ```
 
-**Bidirectional relationship:**
-```bash
-python .claude/scripts/add_relationship.py \
-  "source.md" \
-  "target.md" \
-  "extends" \
-  "Builds upon the base concept" \
-  --bidirectional \
-  --inverse-type "extended_by"
+### 3. Read Source Note
+
+Use Read tool to get source note content, including current "Related Concepts" section.
+
+### 4. Update Source Note
+
+Use Edit tool to add relationship to appropriate section in source note:
+
+```markdown
+## Related Concepts
+
+### Related Topics
+- [[existing_note]] - Existing relationship
+- [[semantic_routing]] - Enables intelligent model selection for agent tasks
 ```
 
-## Common Bidirectional Patterns
+### 5. Read Target Note
 
-**Extends/Extended By:**
-- Source extends target → Target automatically gets extended_by source
-```bash
---bidirectional --inverse-type "extended_by"
+Use Read tool to get target note content, including current "Related Concepts" section.
+
+### 6. Add Inverse Relationship
+
+Determine inverse relationship type:
+- `prerequisites` in A → add A to `related_topics` or `extended_by` in B (depending on context)
+- `related_topics` in A → add A to `related_topics` in B
+- `extends` in A → add A to `extended_by` in B
+- `alternatives` in A → add A to `alternatives` in B
+- `examples` in A → add A to `extended_by` or `related_topics` in B
+
+Use Edit tool to add inverse relationship to target note.
+
+### 7. Report Success
+
+Show what was added to both files.
+
+## Output Format
+
 ```
+Added Relationship
+============================================================
 
-**Examples:**
-- Source has example target → Target automatically gets extended_by source
-```bash
---bidirectional --inverse-type "extended_by"
+✓ Forward relationship:
+  agents.md → semantic_routing.md
+  Type: related_topics
+  Why: Enables intelligent model selection for agent tasks
+
+✓ Inverse relationship:
+  semantic_routing.md → agents.md
+  Type: related_topics
+  Why: Agents use semantic routing for task delegation
+
+============================================================
+✅ Relationship Added!
+============================================================
+
+Updated files:
+• agents.md - Added to "Related Topics" section
+• semantic_routing.md - Added to "Related Topics" section
+
+💡 Next steps:
+• Review both notes to verify relationships make sense
+• Use `/graph-note agents.md` to see all relationships
+• Use `/graph-validate` to check bidirectionality
 ```
 
 ## Validation
 
-Before adding, verify:
-1. Both notes exist in the knowledge graph
-2. Relationship type is valid
-3. "Why" explanation is clear and specific
-4. Relationship makes semantic sense
-5. Not creating duplicate relationship
+Before adding:
+- Both notes must exist
+- Relationship type must be valid
+- "Why" explanation should be provided (required for quality)
 
 After adding:
-- Run `/graph-validate` to ensure graph integrity
-- Consider viewing both notes with `/graph-note` to verify
+- Both notes should have matching inverse relationships
+- No duplicate relationships in either file
 
-## Output
+## Inverse Relationship Rules
 
-Success:
-```
-Successfully added relationship:
-  source.md
-    --extends--> target.md
-  target.md
-    --extended_by--> source.md
-```
+| Forward Type | Inverse Type | Notes |
+|--------------|--------------|-------|
+| prerequisites | related_topics or extended_by | Context dependent |
+| related_topics | related_topics | Symmetric |
+| extends | extended_by | Clear inverse |
+| alternatives | alternatives | Symmetric |
+| examples | extended_by | Examples extend the concept |
 
 ## Use Cases
 
-- Manually correct missing relationships discovered during review
-- Add relationships after creating new note
-- Establish connections identified during research
-- Fix bidirectional inconsistencies
-- Add alternative relationships between competing approaches
+- **Fill gaps**: Add relationships discovered through usage
+- **Manual correction**: Fix missing inverse relationships
+- **Connect new notes**: Link newly created note to existing ones
+- **Cross-domain links**: Connect concepts from different areas
 
-## Notes
+## Tools Used
 
-- Script automatically updates metadata timestamp
-- Does NOT increment version (minor change)
-- Relationship is immediately reflected in graph
-- If relationship exists, script reports and exits without error
+- **Glob** - Verify notes exist
+- **Read** - Get current note content
+- **Edit** - Update "Related Concepts" sections in both notes
+- **Logic** - Determine inverse relationship type
+
+## Important Notes
+
+- Always provide meaningful "why" explanation
+- Use consistent relationship types (follow conventions)
+- Check both notes after adding to verify correctness
+- Run `/graph-validate` if unsure about bidirectionality

@@ -10,6 +10,7 @@ This MOC connects all notes related to system architecture, patterns, and design
 - [[agents]] - Claude Code agent architecture patterns
 - [[semantic_routing]] - Intelligent routing architecture for LLM systems
 - [[react_agent_pattern]] - React-based agent design pattern
+- [[claude_code_internals]] - Internal architecture of Claude Code's REPL-based agent loop, tool system, and memory layers
 
 ## Protocol Architecture
 

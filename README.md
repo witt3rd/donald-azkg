@@ -1,154 +1,178 @@
-# LLM Context Repository
+# Donald's Agentic-ZKG
 
-**If you're reading this for the first time:** This is not traditional documentation. This is a **knowledge network** designed to give AI agents flexible, composable memory - like giving an LLM a Zettelkasten system for "online learning" beyond its training data.
+**Welcome to my personal knowledge base** - an instance of an [[agentic_zkg]] powered by [[claude_plugin_zkg|Claude Code]].
 
-## What You're Looking At
+This is not traditional documentation. This is a **living, agent-maintained knowledge network** that grows through conversation with Claude. Think of it as my second brain, but one that maintains itself.
 
-A curated library of **notes** (not docs) designed to be fed to Large Language Models as context for specific tasks. Each note is carefully crafted to be:
-- Self-contained yet interconnected
-- Focused on a single concept or complete usable idea
-- Linkable and composable with other notes
-- Tagged for cross-cutting discovery
+## What's In This Knowledge Base
 
-## The Core Philosophy: Zettelkasten for AI
+**98+ interconnected notes** covering:
+- **AI & Agents** (23 notes) - LLMs, agentic systems, Claude Code, semantic routing
+- **MCP Protocol** (10 notes) - Model Context Protocol implementation across languages
+- **Python Stack** (12 notes) - Python development, async patterns, best practices
+- **Rust** (8 notes) - Rust programming, ownership, async, tooling
+- **TypeScript & React** (9 notes) - Full-stack development, frameworks, patterns
+- **Writing & Communication** (7 notes) - Technical writing, prompting, storytelling
+- **Systems & Tools** (15 notes) - Obsidian, git workflows, Windows dev, architecture
+- **Meta** (14 notes) - This system itself, workflows, tag catalogs
 
-This repository applies the **Zettelkasten note-taking method** - specifically through **Obsidian** - to organize knowledge for LLMs. Zettelkasten was designed for human thinking and knowledge work. We're innovating by adapting it for AI agents.
+## How This Works
 
-### What is Zettelkasten?
+This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_plugin_zkg]] implementation:
 
-Zettelkasten (German: "slip box") is a note-taking method where:
-- Each note contains **one atomic idea** - a single, self-contained concept
-- Notes connect through **links** instead of living in folder hierarchies
-- **Structure emerges** from connections, not predetermined categories
-- Knowledge forms a **network**, enabling unexpected insights through novel connections
+**I (human) provide direction:**
+- "Create a note about X"
+- "Find relationships between Y and Z"
+- "What should I learn before studying A?"
 
-### Why This Matters for LLMs
+**Claude (agent) maintains everything:**
+- Researches topics via Perplexity
+- Discovers relationships automatically
+- Validates graph integrity
+- Handles bulk operations (renames, migrations, conformance)
+- Suggests improvements
 
-Traditional documentation:
+**The result:** A knowledge base that grows and evolves through conversation, not manual curation.
+
+## Key Statistics
+
+- **Total notes**: 98
+- **Relationship types**: 6 (prerequisites, extends, related_concepts, alternatives, examples, extended_by)
+- **Tags**: 60+ across 6 dimensions
+- **MOCs** (navigation hubs): 8
+- **Bidirectional links**: All relationships work both ways
+- **Automated operations**: 10+ slash commands
+
+## What Makes This Different
+
+**Not Obsidian alone:**
+- Obsidian is my GUI for visual exploration
+- Claude is my agent for automated maintenance
+- Best of both: Human intuition + AI automation
+
+**Not a wiki or documentation:**
+- Notes are atomic - one complete idea each
+- Structure emerges from links, not folders
+- Knowledge forms a network, not a hierarchy
+- Designed for AI agent consumption (LLM context)
+
+**Not manually maintained:**
+- Agent discovers relationships
+- Agent validates integrity
+- Agent handles migrations
+- Agent suggests connections I'd miss
+
+## Navigating This Knowledge Base
+
+**Start with MOCs (Maps of Content):**
+- `agents_moc.md` - AI agents and agentic systems
+- `mcp_moc.md` - Model Context Protocol
+- `python_moc.md` - Python development
+- `rust_moc.md` - Rust programming
+- `typescript_moc.md` - TypeScript and React
+- `windows_moc.md` - Windows development
+- `writing_moc.md` - Writing and communication
+- `csharp_moc.md` - C# development
+
+**Or search by tag:**
+- `#agents` - AI agent architectures and patterns
+- `#mcp` - Model Context Protocol across all languages
+- `#python` + `#llm` - Python LLM integration
+- `#pattern` - Design patterns across domains
+- `#guide` - Step-by-step implementation guides
+
+**Or ask Claude:**
+- `/graph-note [filename]` - See all relationships for a note
+- `/search-notes [query]` - Semantic search
+- `/learning-path [target]` - Generate prerequisite chain
+
+## Note Organization Principles
+
+My notes follow three patterns (see [[agentic_zkg]] for the theory):
+
+**1. Reference Notes** - Complete documentation
+- `python_mcp_sdk.md` - Full guide to Python MCP SDK and FastMCP
+- `rust_best_practices.md` - Comprehensive Rust coding standards
+- `agent_mcp_apis.md` - Complete MCP API reference for agents
+
+**2. Concept Notes** - Single focused ideas
+- `semantic_routing.md` - Model selection based on query semantics
+- `llm_self_talk_optimization.md` - Token-efficient agent communication
+- `react_agent_pattern.md` - Design pattern for agent UIs
+
+**3. MOC Notes** - Navigation hubs
+- `agents_moc.md` - Links all AI agent concepts
+- `mcp_moc.md` - Links all MCP protocol notes
+- `writing_moc.md` - Links writing strategies
+
+All notes are **atomic for LLM context** - they provide complete, usable knowledge when attached to an AI prompt independently.
+
+## Why Everything Is Flat
+
+All 98 notes live in the repository root. No folders, no hierarchy.
+
+**Why?**
+- A note can connect to ANY other note (folders create silos)
+- Tags provide multi-dimensional organization (better than folders)
+- MOC notes create structure without boundaries
+- "Is MCP a Python topic or an agents topic?" → BOTH (tags: `#python #mcp #agents`)
+
+**Organization through:**
+- **Links** - Wikilinks to related concepts
+- **Tags** - Multi-dimensional classification (`#python #mcp #agents #guide`)
+- **MOCs** - Navigation hubs for domains
+- **Relationships** - Typed connections (prerequisites, extends, related, etc.)
+
+This lets me find notes by:
+- Domain (via MOCs)
+- Technology (via tags)
+- Relationship type (via Related Concepts sections)
+- Content (via search)
+
+## How Relationships Work
+
+Relationships between notes are maintained in markdown "Related Concepts" sections using typed links:
+
+```markdown
+## Related Concepts
+
+### Prerequisites
+- [[mcp_overview]] - Need to understand protocol first
+
+### Extends
+- [[mcp_implementation]] - Python-specific implementation
+
+### Related Topics
+- [[agents]] - Agents use MCP for tool integration
 ```
-API_Reference/
-  Python/
-    MCP/
-      server.md (everything about MCP servers)
-```
 
-Zettelkasten approach:
-```
-mcp_server_lifecycle.md         (one concept)
-mcp_tool_definition.md          (one concept)
-mcp_resource_pattern.md         (one concept)
-python_mcp_implementation.md    (one complete guide)
-MCP_MOC.md                      (hub linking related concepts)
-```
+Six relationship types:
+- **Prerequisites** - Must understand first
+- **Extends** - Builds upon this concept
+- **Extended By** - Others build upon this (inverse of extends)
+- **Related Concepts** - Connected ideas at same level
+- **Alternatives** - Different approaches
+- **Examples** - Concrete implementations
 
-## Critical Insight: What Is "Atomic" for LLM Context?
+All relationships are **bidirectional** - if A extends B, then B has "extended_by: A".
 
-Traditional Zettelkasten uses **atomic notes** - one complete idea per note. But for LLM context, we adapt this:
+### Markdown-First Architecture
 
-### Three Note Types We Use
+**The graph lives entirely in markdown files** - no separate JSON, no Python scripts, no hidden state.
 
-**1. Reference Notes** (Literature Notes in Zettelkasten)
-- Complete, usable documentation on a topic
-- Example: `python_mcp_sdk.md` - full API reference for building MCP servers
-- Purpose: Give the LLM comprehensive context for performing a task
-- Atomic unit: "Everything needed to accomplish X"
+**How it works:**
+- **Wikilinks** in content → implicit relationships
+- **YAML frontmatter** → metadata (tags, title)
+- **"Related Concepts" sections** → explicit typed relationships with "why" explanations
+- **MOC files** → thematic organization
 
-**2. Concept Notes** (Permanent Notes in Zettelkasten)
-- Single focused concept or pattern
-- Example: `mcp_server_lifecycle.md` - just the lifecycle concept
-- Purpose: Building blocks that compose into understanding
-- Atomic unit: "One complete idea"
+Claude parses markdown on-demand during sessions, builds an in-memory graph, and operates directly on markdown files using built-in tools (Read, Edit, Grep, Glob).
 
-**3. Synthesis Notes** (Structure Notes / MOCs in Zettelkasten)
-- Hub notes linking related concepts
-- Example: `Python_MOC.md` - navigation hub for Python contexts
-- Purpose: Create structure without hierarchies
-- Contains: Links and brief context, not content itself
-### Our Hybrid Approach
-
-For LLM context, we use a pragmatic hybrid:
-- **Reference Notes** for complete usable knowledge (APIs, guides, specifications)
-- **Concept Notes** when ideas should be separable and reusable
-- **Synthesis Notes** (MOCs) to create navigable structure
-- Everything interconnected through **links** and **tags**
-
-**The Rule:** A note is atomic if it can be **attached to an LLM prompt independently** and provide value. It might be:
-- A complete API reference (one tool)
-- A single concept (one pattern)
-- A focused guide (one workflow)
-
-But NOT:
-- Multiple unrelated topics in one file
-- Content that must be split to be useful
-- Information that should link to another note but duplicates it instead
-
-### The Complete Usable Concept Test
-
-**"Atomic" for LLM Context = Complete Usable Concept**
-
-Traditional Zettelkasten: *"What is a promise in JavaScript?"* (one idea)
-**Our innovation:** *"How to handle async operations with JavaScript promises"* (one complete, usable concept)
-
-**The test:** Can an LLM use this note alone to accomplish something meaningful?
-
-✅ **Good examples:**
-- `python_mcp_sdk.md` - Complete guide to building MCP servers in Python (one usable concept)
-- `youtube_transcript_api.md` - How to work with YouTube transcripts (one usable domain)
-- `cpu_vs_gpu_decision_guide.md` - Framework for hardware selection (one decision process)
-
-❌ **Too fragmented:**
-- `what_is_a_promise.md` - Isolated fact, not actionable alone
-
-❌ **Too broad:**
-- `everything_about_python.md` - Too broad, covers unrelated concepts
-- `python_notes_scratch.md` - Not a complete concept
-
-### Four Principles for Atomic LLM Notes
-
-1. **One usable concept per note** - Not one fact, but one complete, actionable piece of knowledge
-2. **Self-contained utility** - Could you hand this note to an LLM and have it complete a task?
-3. **Meaningful connections** - Link to related concepts that extend or depend on this one
-4. **Clear scope** - Title and content make the boundary obvious
-
-## Why Flat Organization?
-
-**The Problem with Folders:**
-- A note can only live in one place (but knowledge connects everywhere)
-- Creates artificial boundaries that silo related information
-- Forces premature categorization ("Is MCP a Python topic or an agents topic?")
-- Breaks down for cross-domain concepts
-
-**The Zettelkasten Solution:**
-- Notes live in a **flat or minimally nested** structure
-- Organization through **links**, **backlinks**, and **tags**
-- **MOC notes** act as navigation hubs
-- Knowledge forms a **flexible network**, not a rigid tree
-- Any context can connect to any other context
-
-### Benefits for LLM Context
-
-1. **Composability**: Mix and match contexts for any task
-2. **Discoverability**: Related contexts surface through backlinks
-3. **Flexibility**: Add new contexts without restructuring
-4. **Cross-domain**: `python_mcp_sdk.md` links to `mcp_protocol.md` and `python_best_practices.md` naturally
-5. **Evolution**: The knowledge graph adapts as connections emerge
-
-## The Knowledge Graph System
-
-Beyond Obsidian's manual wikilinks, this repository maintains an **automated knowledge graph** that discovers and tracks typed relationships between all notes.
-
-### Structure: knowledge_graph_full.json
-
-The knowledge graph is stored in `knowledge_graph_full.json` and contains:
-
-- **Metadata**: Version tracking, completion status, total note count
-- **Typed relationships** for each note across six categories
-- **Bidirectional mappings**: If A extends B, then B is extended_by A
-- **Relationship context**: Each relationship includes a "why" explanation
+See [[claude_plugin_zkg]] for the full architecture.
 
 ### Relationship Types
 
-The graph tracks six types of semantic relationships:
+Six types of semantic relationships in "Related Concepts" sections:
 
 1. **Prerequisites** - Concepts you must understand first
    - Example: `[[type_theory]]` is a prerequisite for `[[dhcg]]`
@@ -168,15 +192,9 @@ The graph tracks six types of semantic relationships:
 6. **Examples** - Concrete implementations of abstract concepts
    - Example: `[[alita]]` is an example implementation of `[[agents]]`
 
-### How It Works
+### How Relationships Are Maintained
 
-**Graph Construction**:
-1. **Forward pass**: Discovers outbound relationships from each note
-2. **Backward pass**: Establishes inverse relationships (e.g., extends → extended_by)
-3. **Synchronization**: Writes "Related Concepts" sections to all markdown files
-
-**In Markdown Files**:
-Every note has a "Related Concepts" section at the end:
+**Direct markdown editing** - All relationships live in "Related Concepts" sections:
 
 ```markdown
 ## Related Concepts
@@ -191,55 +209,40 @@ Every note has a "Related Concepts" section at the end:
 - [[category_theory]] - Uses categorical structures for semantic meaning
 ```
 
-**Why This Matters**:
-- **Automated discovery**: Relationships emerge from content analysis, not manual curation
-- **Consistency**: Bidirectional relationships guaranteed (no orphaned links)
-- **Context-aware**: Each relationship explains WHY concepts connect
-- **LLM-friendly**: Structured JSON enables programmatic traversal
-- **Human-readable**: Markdown sections provide navigable links in Obsidian
+**Bidirectional consistency** - When Claude adds a relationship, it updates both notes:
+- If A extends B → Claude adds A to "Related Concepts" in A, AND adds A to "Extended By" in B
+- No sync needed - the edits ARE the graph
 
-### Relationship Discovery Process
+**How Claude discovers relationships:**
+1. **Content analysis** - Semantic analysis of note content
+2. **Tag analysis** - Notes with similar tags are often related
+3. **Wikilink analysis** - Existing links suggest relationship types
+4. **Perplexity research** - Query for domain connections
+5. **Confidence scoring** - High/medium/low evidence for each suggestion
 
-The graph is built through a two-pass algorithm:
+**Benefits of markdown-first:**
+- ✅ **Single source of truth** - Markdown only, no JSON duplication
+- ✅ **No sync overhead** - Relationships ARE the markdown edits
+- ✅ **Obsidian-native** - Perfect compatibility, no hidden state
+- ✅ **Git-friendly** - Better merge handling with separate files
+- ✅ **Transparent** - See exactly what changed in git diff
+- ✅ **Parallel updates** - Claude can edit multiple files simultaneously
+- ✅ **LLM-friendly** - Claude parses markdown directly (Read/Grep tools)
 
-**Forward Pass** (Batched):
-- Analyzes each note's content and existing links
-- Identifies natural relationships based on semantic content
-- Records outbound relationships in the graph
-
-**Backward Pass**:
-- Processes all forward relationships
-- Creates inverse mappings (extends → extended_by, examples → examples_of)
-- Ensures graph bidirectionality
-
-**Synchronization**:
-- Writes all relationships back to markdown "Related Concepts" sections
-- Maintains wikilink format `[[note]]` for Obsidian compatibility
-- Places sections before citations/references
-
-### Knowledge Graph Benefits
-
-1. **Traversability**: LLMs can explore concept dependencies programmatically
-2. **Discovery**: Find related concepts through typed relationships, not just text search
-3. **Consistency**: Bidirectional relationships prevent broken connections
-4. **Evolution**: Graph updates as notes are added or modified
-5. **Multi-dimensional**: Six relationship types capture different semantic connections
-6. **Explainability**: Every relationship includes context explaining the connection
-
-The knowledge graph transforms this from a static note collection into a **living, queryable knowledge network** that both humans and AI agents can navigate semantically.
+The knowledge graph is a **living network** that both humans (via Obsidian) and AI agents (via Claude Code) can navigate and maintain.
 
 ## How to Work With This Repository
 
 ### Finding Context for a Task
 
-**Method 1: Navigate via knowledge graph**
-- Check `knowledge_graph_full.json` for typed relationships
-- Look for "Related Concepts" sections at the end of markdown files
+**Method 1: Read "Related Concepts" sections**
+- Open any note and scroll to "Related Concepts" section
 - Follow prerequisite chains to understand dependencies
-- Explore "extended_by" relationships to find advanced topics
+- Explore "Extended By" to find advanced topics
+- Check "Related Topics" for connected ideas
 
 **Method 2: Start with MOC notes**
-- Look for `Topic_MOC.md` files (e.g., `Python_MOC.md`)
+- Look for `*_moc.md` files (e.g., `agents_moc.md`, `mcp_moc.md`)
 - Follow links to relevant notes
 - Compose the contexts you need
 
@@ -252,6 +255,11 @@ The knowledge graph transforms this from a static note collection into a **livin
 - Every note has tags like `#python #mcp #agents`
 - Search by tag combinations to find cross-cutting concepts
 - See [[tag_system]] for the complete tag catalog and strategy
+
+**Method 5: Ask Claude**
+- `/graph-note [filename]` - Show all relationships for a note
+- `/search-notes [query]` - Semantic search across all notes
+- `/learning-path [target]` - Generate prerequisite learning sequence
 
 ### Creating New Notes
 
@@ -350,18 +358,68 @@ The power of multi-dimensional tagging:
 
 See [[tag_system]] for the complete, maintained catalog of tags with descriptions and usage guidelines.
 
+## The Agentic Advantage
+
+This system is **Obsidian-compatible** but **agent-enhanced**:
+
+**You can use Obsidian** for:
+- Visual graph exploration
+- Manual note browsing
+- Quick edits and reading
+- Human-friendly navigation
+
+**The agent handles** for you:
+- Automated note creation with research (Write, Edit tools)
+- Relationship discovery across the entire graph (Grep, Read, Edit tools)
+- Maintaining graph integrity and bidirectionality (Read, Edit tools)
+- Bulk operations (renames, conformance, validation) (Grep, Edit, Bash tools)
+- Research and updates via Perplexity integration (mcp__perplexity-ask)
+- Direct markdown editing - no Python scripts, no JSON synchronization
+
+**Best of both worlds:** Human intuition + visual exploration (Obsidian) meets automated maintenance + intelligent operations (Agent).
+
+## Agentic Operations
+
+The agent provides 10+ automated slash commands for knowledge management:
+
+**Creation & Discovery:**
+- `/create-note [topic]` - Research via Perplexity, create note, discover relationships (Write, Edit, Grep)
+- `/expand-graph [note]` - Multi-strategy relationship discovery with confidence scoring (Read, Grep, Edit)
+
+**Maintenance & Quality:**
+- `/conform-note [file]` - Restructure notes to standard format (Edit tool)
+- `/rename-note [old] [new]` - Rename file + update all wikilinks (Grep, Edit, Bash)
+- `/update-note [file]` - Update YAML frontmatter metadata (Edit tool)
+
+**Graph Operations:**
+- `/graph-validate` - Check wikilinks, bidirectionality, YAML frontmatter (Grep, Glob, Read)
+- `/graph-stats` - Count notes, relationships, tags (Grep, Glob)
+- `/graph-note [file]` - Show relationships and backlinks (Read, Grep)
+- `/graph-moc [name]` - View MOC (Map of Content) files (Read)
+- `/graph-add-relationship` - Add typed relationship to both notes (Edit)
+
+**Research & Updates:**
+- `/refresh-topic [file]` - Query Perplexity, update note with latest info (mcp__perplexity-ask, Edit)
+
+**All operations use Claude's built-in tools** - no Python scripts, no JSON files. Markdown is the graph.
+
 ## What This Is NOT
 
 - ❌ Traditional hierarchical documentation
 - ❌ A dump of external docs
-- ❌ A folder-organized library
+- ❌ A GUI-based note-taking app (that's Obsidian)
 - ❌ Static reference material
+- ❌ Manually maintained
 
-## What This IS
+## What THIS Knowledge Base IS
 
-- ✅ A knowledge network for AI agents
-- ✅ Composable, atomic contexts
-- ✅ An evolving memory system
-- ✅ A living Zettelkasten for LLMs
+- ✅ My **second brain** that maintains itself
+- ✅ An implementation of the [[agentic_zkg]] paradigm
+- ✅ 98+ atomic notes optimized for AI agent consumption
+- ✅ A **living system** that evolves through conversation with Claude
+- ✅ Obsidian-compatible but agent-enhanced
+- ✅ Knowledge that explains itself through typed relationships
 
-**Remember:** This is not documentation *about* LLMs. This is a knowledge base *for* LLMs - a living memory system that enables contextual intelligence through networked, composable knowledge.
+**The innovation:** This isn't documentation *about* AI. It's a knowledge base *for* AI - designed to be consumed by language models as context, maintained by an agent through conversation, and navigable by both humans and AI.
+
+Want to understand how this works? See [[agentic_zkg]] (the concept) and [[claude_plugin_zkg]] (the implementation).

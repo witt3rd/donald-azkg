@@ -4,14 +4,14 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 
   /create-note [topic] - ✅ IMPLEMENTED - Guided atomic note creation
 
-- Check for duplicate concepts in existing notes
+- Check for duplicate concepts in existing notes (Grep/Glob)
 - Research topic via Perplexity
 - Generate initial structured content
 - Discover relationships to existing notes (auto-expansion!)
-- Add to appropriate batch via `.claude/scripts/add_note.py`
+- Create markdown file with YAML frontmatter (Write tool)
 - Auto-generate 3-6 tags using tag_system.md catalog
-- Update relevant MOC files
-- Auto-validates graph integrity after creation using `/graph-validate`
+- Update relevant MOC files (Edit tool)
+- No JSON graph - markdown is the source of truth
 
   /expand-graph [note.md] - ✅ IMPLEMENTED - Discover missing relationships
 
@@ -19,8 +19,8 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 - Confidence scoring (high/medium/low with evidence)
 - Classify relationships by type (prerequisites, related, extends, examples, alternatives)
 - Interactive review mode with approval workflow
-- Update knowledge_graph_full.json bidirectionally
-- Sync to "Related Concepts" sections
+- Update "Related Concepts" sections directly in markdown (Edit tool)
+- Ensure bidirectionality (if A extends B, update B's "Extended By" section)
 - Comprehensive completion report with statistics
 
   Note Maintenance
@@ -37,66 +37,68 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 
   /rename-note [old_filename] [new_filename] - ✅ IMPLEMENTED - Rename note and update references
 
-- Renames physical markdown file
-- Updates all references in knowledge_graph_full.json
-- Updates all wikilinks `[[old]]` → `[[new]]` in markdown files
-- Creates backup before making changes
-- Validates graph integrity after completion
-- Uses `.claude/scripts/rename_note.py`
-- Reverts on failure
+- Renames physical markdown file (Bash mv)
+- Finds all files with wikilinks to old name (Grep)
+- Updates all wikilinks `[[old]]` → `[[new]]` in markdown files (Edit tool)
+- Updates MOC files if needed (Edit tool)
+- No JSON graph to update - markdown is the source of truth
+- Uses built-in tools (Grep, Edit, Bash) - no Python scripts
 
   Graph Operations
 
   /graph-validate - ✅ IMPLEMENTED - Run integrity checks
 
-- Verify metadata counts match actual counts
-- Check all batch references point to existing notes
-- Validate all relationship targets exist
-- Check bidirectionality consistency (extends ↔ extended_by)
-- Uses `.claude/scripts/validate_graph.py`
-- Exit code 0 (valid) or 1 (errors)
+- Find all wikilinks and verify target files exist (Grep + Glob)
+- Check "Related Concepts" bidirectionality (Read + parse)
+- Verify YAML frontmatter well-formed (Read + parse)
+- Validate relationship consistency (if A extends B, B has "Extended By: A")
+- Uses built-in tools (Grep, Glob, Read) - no Python scripts
+- Report errors or confirm validity
 
   /graph-stats - ✅ IMPLEMENTED - Display graph statistics
 
-- Total notes and batches
-- Relationship counts by type
-- Unique tag count and top 10 tags
-- Uses `.claude/scripts/query_graph.py stats`
+- Total notes (Glob *.md | count)
+- Relationship counts by type (Grep in "Related Concepts" sections)
+- Unique tag count and top 10 tags (Grep in YAML frontmatter)
+- MOC count (Glob *_moc.md)
+- Uses built-in tools (Grep, Glob) - no Python scripts
 
   /graph-note [filename] - ✅ IMPLEMENTED - Show note details
 
-- Display title, tags, summary
-- Complete relationship breakdown with "why" explanations
-- Uses `.claude/scripts/query_graph.py note`
+- Display title, tags, summary from YAML frontmatter (Read tool)
+- Complete relationship breakdown from "Related Concepts" section (Read + parse)
+- Show backlinks (Grep for wikilinks to this note)
+- Uses built-in tools (Read, Grep) - no Python scripts
 
-  /graph-batch [name] - ✅ IMPLEMENTED - Show batch contents
+  /graph-batch [name] - REFACTORED to /graph-moc
 
-- Display batch number, name, note count
-- List all notes in batch with titles
-- Uses `.claude/scripts/query_graph.py batch`
+**Note:** "Batches" are now MOC (Map of Content) files
+
+- Read MOC file (e.g., agents_moc.md)
+- Display all wikilinks and their context
+- Count notes in MOC
+- Uses Read tool - no Python scripts
 
   /graph-add-relationship [source] [target] [type] [why] - ✅ IMPLEMENTED - Add relationships
 
 - Establish typed relationship with explanation
-- Optional bidirectional link (e.g., extends ↔ extended_by)
-- Uses `.claude/scripts/add_relationship.py`
-- Validates both notes exist and type is valid
-- Updates metadata timestamp
+- Update source note's "Related Concepts" section (Edit tool)
+- Add bidirectional link in target note (Edit tool)
+- Validates both notes exist (Glob)
+- Uses built-in tools (Edit, Glob, Read) - no Python scripts
 
   /update-note [filename] --title|--tags|--summary - ✅ IMPLEMENTED - Update note metadata
 
-- Update note's title, tags, or summary in knowledge graph
+- Update note's title, tags, or summary in YAML frontmatter
 - Can update one or multiple fields in a single command
-- Uses `.claude/scripts/update_note.py`
-- Increments version (minor bump: 18.0 → 18.1)
-- Does NOT modify markdown file (use /conform-note to sync)
+- Updates markdown file directly (Edit tool)
+- No version tracking needed - markdown is source of truth
+- Uses built-in Edit tool - no Python scripts
 
-  /sync-graph - Force synchronization
+  /sync-graph - ELIMINATED (not needed)
 
-- Rebuild all "Related Concepts" sections from JSON
-- Ensure markdown matches knowledge_graph_full.json
-- Fix any bidirectionality issues
-- Update metadata (version, note count)
+**Note:** With markdown-first architecture, there is no JSON to sync.
+Markdown files ARE the graph. No synchronization needed.
 
   Discovery & Analysis
 
@@ -155,23 +157,25 @@ Your Zettelkasten system has rich potential for automation. Here are high-value 
 - Update wikilinks in other notes
 - Update knowledge graph
 
-  Implemented Commands Summary
+  Implemented Commands Summary (Markdown-First Architecture)
 
-  ✅ /create-note - Create atomic notes with research and relationship discovery
-  ✅ /expand-graph - Auto-discover missing relationships with multi-strategy analysis
-  ✅ /conform-note - Restructure note to standard format
-  ✅ /rename-note - Rename note and update all references throughout knowledge base
-  ✅ /graph-validate - Check graph integrity
-  ✅ /graph-stats - View graph statistics
-  ✅ /graph-note - Inspect note details and relationships
-  ✅ /graph-batch - View batch contents
-  ✅ /graph-add-relationship - Manually add relationships
-  ✅ /update-note - Update note metadata (title, tags, summary)
+  ✅ /create-note - Create atomic notes with research and relationship discovery (Write, Edit tools)
+  ✅ /expand-graph - Auto-discover missing relationships with multi-strategy analysis (Edit, Grep, Read tools)
+  ✅ /conform-note - Restructure note to standard format (Edit tool)
+  ✅ /rename-note - Rename note and update all references throughout knowledge base (Grep, Edit, Bash)
+  ✅ /graph-validate - Check graph integrity (Grep, Glob, Read tools)
+  ✅ /graph-stats - View graph statistics (Grep, Glob tools)
+  ✅ /graph-note - Inspect note details and relationships (Read, Grep tools)
+  ✅ /graph-moc - View MOC (Map of Content) files (Read tool)
+  ✅ /graph-add-relationship - Manually add relationships (Edit, Read tools)
+  ✅ /update-note - Update note metadata (Edit tool)
+
+  **All commands use Claude's built-in tools - NO Python scripts required**
 
   High-Value Next Implementations
 
-  1. /sync-graph - Rebuild "Related Concepts" sections from JSON
-  2. /find-gaps - Identify missing knowledge areas
-  3. /learning-path - Generate prerequisite learning sequences
-  4. /generate-moc - Auto-generate Maps of Content by tag/domain
-  5. /search-notes - Search with context across all notes
+  1. /find-gaps - Identify missing knowledge areas (Grep for broken wikilinks, analyze tags)
+  2. /learning-path - Generate prerequisite learning sequences (Read + parse "Prerequisites" sections)
+  3. /generate-moc - Auto-generate Maps of Content by tag/domain (Grep, Read, Write tools)
+  4. /search-notes - Semantic search with context across all notes (Grep, Read tools)
+  5. /visualize-graph - Generate graph visualization from markdown (Grep relationships, output DOT/Mermaid)

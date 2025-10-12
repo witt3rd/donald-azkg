@@ -1,6 +1,6 @@
 # Expand Graph
 
-You are tasked with discovering missing relationships between a note and the rest of the knowledge graph through multi-strategy analysis.
+Discover missing relationships between a note and the rest of the knowledge graph through multi-strategy analysis.
 
 ## 1. Parse Input and Load Note
 
@@ -10,14 +10,14 @@ You are tasked with discovering missing relationships between a note and the res
 
 **Normalize and validate:**
 - Add `.md` extension if missing
-- Verify the target note exists
+- Use Glob to verify the target note exists
 - If not found, suggest similar notes using Glob
 
 **Read the target note:**
 - Use Read tool to get full content
 - Extract YAML tags
 - Extract main concepts and topics
-- Note current relationships from knowledge_graph_full.json
+- Parse current "Related Concepts" section to see existing relationships
 
 ## 2. Extract Key Concepts
 
@@ -35,7 +35,7 @@ You are tasked with discovering missing relationships between a note and the res
 
 **Wikilinks:**
 - Existing wikilinks in content `[[note]]`
-- Are these also in relationships? If not, why?
+- Are these also in "Related Concepts"? If not, they're candidates to add
 
 **Tags:**
 - YAML frontmatter tags provide high-level domains
@@ -53,7 +53,7 @@ You are tasked with discovering missing relationships between a note and the res
 
 📊 Current relationships:
    ✅ Prerequisites: 2 (mcp_overview, mcp_architecture)
-   ✅ Related concepts: 3
+   ✅ Related Topics: 3
    ✅ Extends: 1
    ✅ Examples: 0
    ✅ Alternatives: 0
@@ -80,15 +80,18 @@ Found in:
 
 **Filter out:**
 - The target note itself
-- Notes already in relationships
+- Notes already in "Related Concepts" section
 - Low-relevance matches (1-2 mentions)
 
 **Strategy 2: Tag-Based Discovery**
 
+Use Grep to find notes with overlapping tags:
 ```
 Target has tags: #mcp #security #authentication
 
 Finding notes with overlapping tags...
+Use Grep to search for "tags: [" in YAML frontmatter
+Parse out tags and find overlaps:
 - #mcp + #security: mcp_implementation.md, mcp_tools.md
 - #security + #authentication: api_security.md, zero_trust.md
 - #mcp (any): 12 other MCP-related notes
@@ -96,14 +99,16 @@ Finding notes with overlapping tags...
 
 **Strategy 3: Wikilink Analysis**
 
+Use Grep to find wikilinks in target note content:
 ```
-Checking wikilinks in content vs relationships...
+Checking wikilinks in content vs "Related Concepts" section...
 
-Found in content but NOT in relationships:
+Found in content but NOT in "Related Concepts":
 - [[mcp_overview]] - mentioned in text but not in prerequisites
 - [[oauth_fundamentals]] - referenced but not linked formally
 
-Found in other notes' relationships pointing here:
+Use Grep to find backlinks (other notes linking to this note):
+Found in other notes' "Related Concepts" sections pointing here:
 - fastmcp_auth.md lists this as "related" (we should reciprocate)
 ```
 
@@ -135,7 +140,7 @@ Use Perplexity responses to:
 - Complexity: This note is simpler/more basic
 - Example: mcp_overview → mcp_security
 
-**Related concepts:** Parallel/complementary topics?
+**Related Topics:** Parallel/complementary topics?
 - Same level of complexity
 - Different but connected domain
 - Solve similar problems differently
@@ -215,7 +220,7 @@ Found **12 potential relationships** across 8 notes
 **Reasoning:** Can't understand MCP security without knowing what MCP is.
 The security model builds directly on protocol concepts.
 
-**Current status:** Referenced in content but missing from relationships
+**Current status:** Referenced in content but missing from "Related Concepts"
 
 ---
 
@@ -235,7 +240,7 @@ needed before tackling MCP-specific OAuth implementation.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-## 🔗 Suggested Related Concepts (4)
+## 🔗 Suggested Related Topics (4)
 
 ### 3. [[enterprise_architecture]] → related
 **Confidence:** ★★★☆☆ Medium
@@ -400,69 +405,64 @@ Choice: █
 - Rejected relationships (with reasons)
 - Modified relationships (type changes)
 
-## 7. Update Knowledge Graph
+## 7. Update Markdown Files
 
 **For each accepted relationship:**
 
-### Update JSON Structure
+### Update Target Note
+
+Use Edit tool to update target note's "Related Concepts" section:
+
+**Read the target note:**
+```
+Use Read tool to get full content
+Parse "Related Concepts" section
+```
 
 **Add forward relationship:**
-```json
-{
-  "notes": {
-    "mcp_security.md": {
-      "relationships": {
-        "prerequisites": [
-          {"note": "mcp_overview.md", "why": "Must understand MCP basics first"},
-          {"note": "oauth_fundamentals.md", "why": "OAuth is primary auth mechanism"}
-        ]
-      }
-    }
-  }
-}
+```markdown
+## Related Concepts
+
+### Prerequisites
+- [[mcp_overview]] - Must understand MCP basics first
+- [[oauth_fundamentals]] - OAuth is primary auth mechanism
+```
+
+**Use Edit tool** to surgically insert new relationships in appropriate subsections.
+
+### Update Related Notes
+
+**For each note mentioned, add inverse relationship:**
+
+**Read the related note:**
+```
+Use Read tool to get its "Related Concepts" section
 ```
 
 **Add bidirectional inverse:**
-```json
-{
-  "notes": {
-    "mcp_overview.md": {
-      "relationships": {
-        "extended_by": [
-          {"note": "mcp_security.md", "why": "Security layer on MCP protocol"}
-        ]
-      }
-    }
-  }
-}
-```
 
-**Update metadata:**
-```json
-{
-  "metadata": {
-    "version": "17.0",  // Increment
-    "total_notes": 93,   // Same
-    "last_expansion": "2025-10-11",
-    "last_expansion_note": "mcp_security.md"
-  }
-}
-```
+If target has "Prerequisites: [[mcp_overview]]"
+Then mcp_overview gets "Extended By: [[target]]"
 
-### Sync to Markdown Files
+If target has "Related Topics: [[api_security]]"
+Then api_security gets "Related Topics: [[target]]"
 
-**Update target note's "Related Concepts" section:**
-- Read current section
-- Add new relationships in proper subsections
-- Maintain existing relationships
-- Sort alphabetically within each subsection
+If target has "Extends: [[mcp_architecture]]"
+Then mcp_architecture gets "Extended By: [[target]]"
 
-**Update related notes' "Related Concepts" sections:**
-- Add inverse relationships
-- Maintain bidirectionality
-- Don't duplicate existing entries
+**Use Edit tool** to add inverse relationships to each related note.
 
-**Use Edit tool for surgical updates**
+### Maintain Bidirectionality
+
+**Ensure every relationship has an inverse:**
+
+| Forward Type | Inverse Type |
+|--------------|--------------|
+| Prerequisites | Extended By or Related Topics |
+| Related Topics | Related Topics (symmetric) |
+| Extends | Extended By |
+| Examples | Extended By |
+| Alternatives | Alternatives (symmetric) |
 
 ## 8. Provide Completion Report
 
@@ -480,7 +480,7 @@ Choice: █
    - [[mcp_overview]] - Must understand MCP basics first
    - [[oauth_fundamentals]] - OAuth is primary auth mechanism
 
-✅ Related concepts: 3
+✅ Related Topics: 3
    - [[enterprise_architecture]] - Parallel enterprise concerns
    - [[api_security_best_practices]] - General API security principles
    - [[fastmcp_authentication]] - Moved from suggested examples
@@ -500,26 +500,24 @@ Choice: █
 ## Bidirectional Updates
 
 Updated 9 additional notes with inverse relationships:
-- mcp_overview.md → added to extended_by
-- oauth_fundamentals.md → added to extended_by
-- enterprise_architecture.md → added to related_concepts
-- api_security_best_practices.md → added to related_concepts
-- mcp_architecture.md → moved to extended_by (from prerequisite inverse)
-- fastmcp_authentication.md → added to extended_by
-- csharp_mcp_auth.md → added to extended_by
+- mcp_overview.md → added to Extended By
+- oauth_fundamentals.md → added to Extended By
+- enterprise_architecture.md → added to Related Topics
+- api_security_best_practices.md → added to Related Topics
+- mcp_architecture.md → moved to Extended By (from prerequisite inverse)
+- fastmcp_authentication.md → added to Extended By
+- csharp_mcp_auth.md → added to Extended By
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ## Knowledge Graph Stats
 
 **Before expansion:**
-- Version: 16.0
-- Total relationships: 247
+- Total relationships in mcp_security.md: 6
 
 **After expansion:**
-- Version: 17.0
-- Total relationships: 263 (+16)
-- Files modified: 10
+- Total relationships in mcp_security.md: 12 (+6)
+- Files modified: 10 (target + 9 related notes)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -533,7 +531,7 @@ Updated 9 additional notes with inverse relationships:
 📈 **Coverage increase:**
    - Prerequisites: 2 → 4 (+100%)
    - Examples: 0 → 2 (new coverage)
-   - Related: 3 → 6 (+100%)
+   - Related Topics: 3 → 6 (+100%)
 
 🔗 **Network density:**
    - mcp_security.md now has 12 total relationships (was 6)
@@ -546,7 +544,7 @@ Updated 9 additional notes with inverse relationships:
 💡 **Suggestions:**
 1. Run `/learning-path mcp_security` to see updated prerequisite chain
 2. Run `/expand-graph oauth_fundamentals` to enrich that critical note
-3. Run `/validate-graph` to verify all bidirectional links
+3. Run `/graph-validate` to verify all bidirectional links
 
 🔄 **Consider expanding:**
 - fastmcp_authentication.md (added as example, may need more connections)
@@ -568,7 +566,7 @@ No new high-confidence relationships discovered for mcp_security.md
 
 **Current coverage:**
 - Prerequisites: 3 (comprehensive)
-- Related concepts: 5 (well-connected)
+- Related Topics: 5 (well-connected)
 - Extends: 1 (appropriate)
 - Examples: 2 (good coverage)
 - Alternatives: 1 (adequate)
@@ -623,7 +621,16 @@ Recommended: Option 2 (related instead)
 Choice: █
 ```
 
-## 10. Important Notes
+## 10. Tools Used
+
+- **Read** - Get full note content, parse "Related Concepts" sections
+- **Edit** - Update "Related Concepts" sections in target and related notes
+- **Grep** - Search for concepts across notes, find tag overlaps, find wikilinks
+- **Glob** - Verify notes exist, find candidates by file patterns
+- **mcp__perplexity-ask** - Research relationships using LLM reasoning
+- **Parse logic** - Extract concepts, classify relationships, score confidence
+
+## 11. Important Notes
 
 **Quality principles:**
 - Evidence over guessing

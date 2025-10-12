@@ -76,9 +76,10 @@ Brief summary paragraph (1-3 sentences describing what this note contains).
 - Ensure References section comes AFTER Related Concepts
 
 ### 6. Preserve Related Concepts
-- NEVER modify the "## Related Concepts" section
-- This section is auto-generated from knowledge_graph_full.json
+- The "## Related Concepts" section contains typed relationships - be careful when editing
+- This section IS the knowledge graph - relationships live directly in markdown files
 - Ensure it appears before References section
+- When conforming structure, preserve all existing relationships exactly as they are
 
 ### 7. Final Structure Check
 
@@ -87,7 +88,7 @@ The final order should be:
 2. Title (H1)
 3. Brief summary paragraph
 4. Main content sections (H2)
-5. ## Related Concepts (H2) - auto-generated, don't modify
+5. ## Related Concepts (H2) - preserve existing relationships
 6. ## References (H2)
 
 ## Execution
@@ -100,7 +101,7 @@ The final order should be:
 ## Important Rules
 
 - **Preserve content**: Only reorganize, don't delete valuable information
-- **Don't modify Related Concepts**: This section is auto-generated
+- **Preserve Related Concepts**: Keep all existing relationships exactly as written
 - **Maintain wikilinks**: Use `[[note]]` format
 - **Keep citations**: Transform format but preserve all references
 - **Clean formatting**: Remove extraneous separators and attribution lines

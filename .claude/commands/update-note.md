@@ -1,77 +1,132 @@
+# Update Note
+
+Update a note's metadata (title, tags, or summary) in the YAML frontmatter.
+
+## Input
+
+User provides filename and fields to update:
+- `/update-note agents.md --title "AI Agents: Autonomous Intelligence Systems"`
+- `/update-note agents.md --tags "ai,agents,llm,autonomous"`
+- `/update-note agents.md --summary "Brief new summary"`
+
+Can update multiple fields in one command:
+- `/update-note agents.md --title "New Title" --tags "new,tags"`
+
+## Execution Steps
+
+### 1. Normalize Filename
+
+Ensure filename has `.md` extension.
+
+### 2. Verify Note Exists
+
+Use Glob to check note exists:
+```bash
+Glob "agents.md"
+```
+
+### 3. Read Current Note
+
+Use Read tool to get full note content, including current YAML frontmatter.
+
+### 4. Update YAML Frontmatter
+
+Use Edit tool to update the specific fields:
+
+**For title update:**
+- No YAML field for title (title is the first `#` heading)
+- Update the first `# Heading` line after YAML frontmatter
+
+**For tags update:**
+```yaml
 ---
-description: Update a note's metadata in the knowledge graph
+tags: [old, tags]
 ---
-
-# Update Note Metadata
-
-Update the metadata (title, tags, summary) for an existing note in the knowledge graph.
-
-## Usage
-
-Use the `update_note.py` script to modify note metadata:
-
-```bash
-python .claude/scripts/update_note.py <filename> [options]
+```
+becomes:
+```yaml
+---
+tags: [new, tags, here]
+---
 ```
 
-## Options
+**For summary update:**
+- Summary is the first paragraph after title (not in YAML)
+- Replace first paragraph after title heading
 
-- `--title TITLE` - Update the note's title
-- `--tags TAG1,TAG2,...` - Update the note's tags (comma-separated)
-- `--summary SUMMARY` - Update the note's summary
+### 5. Report Changes
 
-You can specify one or more options in a single command.
+Show old vs new values for updated fields.
 
-## Examples
+## Output Format
 
-**Update title only:**
-```bash
-python .claude/scripts/update_note.py "agents.md" \
-    --title "AI Agents: Autonomous Intelligence Systems"
+```
+Updated Note: agents.md
+============================================================
+
+Title:
+  Old: AI Agents
+  New: AI Agents: Autonomous Intelligence Systems
+
+Tags:
+  Old: [agents, ai, llm]
+  New: [ai, agents, llm, autonomous, architecture]
+
+Summary:
+  Old: AI agents are autonomous systems...
+  New: AI agents are autonomous, goal-directed systems...
+
+============================================================
+✅ Metadata Updated!
+============================================================
+
+💡 Next steps:
+• Review the updated note at agents.md
+• Ensure title matches filename semantically
+• Verify tags span multiple dimensions (see tag_system.md)
+• Consider if related notes need similar updates
 ```
 
-**Update tags only:**
-```bash
-python .claude/scripts/update_note.py "agents.md" \
-    --tags "ai,agents,llm,architecture,autonomous-systems"
-```
+## Validation
 
-**Update summary only:**
-```bash
-python .claude/scripts/update_note.py "agents.md" \
-    --summary "Autonomous AI entities capable of goal-directed action"
-```
+Before updating:
+- Note must exist
+- At least one field (title, tags, or summary) must be specified
 
-**Update multiple fields:**
-```bash
-python .claude/scripts/update_note.py "my_note.md" \
-    --title "New Title" \
-    --tags "tag1,tag2,tag3" \
-    --summary "New summary"
-```
+After updating:
+- YAML frontmatter remains well-formed
+- Tags follow naming convention (lowercase-with-hyphens)
+- Title and summary are non-empty
 
-## What It Does
+## Tag Guidelines
 
-1. Loads the knowledge graph
-2. Finds the specified note
-3. Updates the requested metadata fields
-4. Increments the version number (minor version bump: 18.0 → 18.1)
-5. Updates the graph's last_updated timestamp
-6. Saves the updated graph
-7. Displays before/after values for changed fields
+When updating tags, follow best practices:
+- **3-6 tags** per note (enough for discovery, not too many)
+- **Mix dimensions**: technology + domain + content type
+- **Lowercase with hyphens**: `first-principles` not `FirstPrinciples`
+- **Specific over generic**: `mcp` better than `protocol`
 
-## Notes
+See `tag_system.md` for complete tag catalog.
 
-- This command only updates metadata in the knowledge graph JSON file
-- It does NOT modify the markdown file itself
-- Use this when you need to correct or update note metadata without changing relationships
-- For relationship changes, use `/graph-add-relationship` command
-- Always run `/graph-validate` after making changes to ensure integrity
+## Use Cases
 
-## Related Commands
+- **Clarify title**: Make note title more specific or descriptive
+- **Add tags**: Add missing tags to improve discoverability
+- **Refine summary**: Update summary to better reflect current content
+- **Standardize**: Ensure tags follow consistent naming conventions
+- **Tag migration**: Update tags when tag system evolves
 
-- `/create-note` - Create a new note
-- `/graph-note` - View note information
-- `/graph-add-relationship` - Add/modify relationships
-- `/graph-validate` - Validate graph integrity
-- `/conform-note` - Sync markdown file with graph data
+## Tools Used
+
+- **Glob** - Verify note exists
+- **Read** - Get current note content
+- **Edit** - Update YAML frontmatter and note content
+- **Parse logic** - Extract and modify YAML fields
+
+## Important Notes
+
+- Changes affect only metadata, not main content
+- "Related Concepts" section is never modified by this command
+- Title should semantically match filename (e.g., `agents.md` → "AI Agents")
+- Tags should be comma-separated when provided
+- Use `/conform-note` for structural changes beyond metadata

@@ -11,6 +11,7 @@ This MOC connects all notes related to AI and ML development across platforms an
 - [[agentic_development_context]] - Version-controlled development ecosystems for AI-augmented teams
 - [[semantic_routing]] - Intelligent model selection for LLM orchestration
 - [[llm_self_talk_optimization]] - Dense, terse prompting for efficient LLM internal reasoning and inter-agent communication
+- [[claude_code_efficiency_optimization]] - Performance optimization strategies for Claude Code workflows including search, routing, and token management
 
 ## Platform-Specific
 

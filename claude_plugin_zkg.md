@@ -1,10 +1,24 @@
 ---
-tags: [claude-code, plugins, zettelkasten, knowledge-graph, project]
+tags: [claude-code, plugins, zettelkasten, knowledge-graph, implementation, agentic-zkg]
 ---
 
-# Zettelkasten Claude Code Plugin: Implementation Guide
+# Claude Code Plugin for Agentic-ZKG
 
-**A Claude Code plugin** that brings the Obsidian-based Zettelkasten knowledge graph system into Claude Code as a first-class development tool. This plugin would provide agents, slash commands, hooks, and MCP servers for intelligent knowledge management during software development.
+**A Claude Code plugin implementing the [[agentic_zkg]] paradigm** - providing conversational, agent-maintained knowledge management through slash commands, MCP servers, specialized subagents, and workflow hooks.
+
+## Overview
+
+This plugin is a **specific implementation** of the agentic-ZKG paradigm using Claude Code as the agent. It transforms the theoretical concept of agent-maintained knowledge graphs into a practical, installable tool.
+
+**What it provides:**
+- Slash commands for conversational knowledge operations
+- MCP server exposing knowledge graph to ALL agents (not just this plugin)
+- Specialized subagents for research, relationship discovery, documentation
+- Workflow hooks for automatic knowledge capture
+- Obsidian-compatible markdown format
+
+**What it enables:**
+Anyone can install this plugin and create their own agentic-ZKG instance - a personal knowledge base maintained through conversation with Claude.
 
 ## Vision
 
@@ -45,6 +59,81 @@ Transform the standalone knowledge graph management system into an integrated Cl
 - **Research capture hook**: Auto-create notes from investigation sessions
 
 ## Technical Implementation
+
+### Architectural Decision: Markdown-First, No JSON Graph
+
+**Critical Design Choice:** The MCP server does NOT maintain a separate JSON knowledge graph file. Instead, **markdown files are the single source of truth**.
+
+#### Why Eliminate the JSON Graph?
+
+The original prototype used `knowledge_graph_full.json` to track relationships, but this creates redundancy and overhead:
+
+**The Problem with Dual Storage:**
+- **Duplication**: Relationships exist in BOTH JSON and markdown "Related Concepts" sections
+- **Sync overhead**: Every change must propagate JSON → markdown
+- **Drift potential**: JSON and markdown can desynchronize
+- **Coordination bottleneck**: JSON is a single file requiring atomic updates and locking
+- **Information already exists**: The graph IS the markdown files
+
+**What's Already in Markdown:**
+1. **Wikilinks** in content body → implicit edges
+2. **Tags** in YAML frontmatter → clustering/grouping
+3. **Related Concepts sections** → explicit typed relationships WITH "why" explanations
+
+Example:
+```markdown
+## Related Concepts
+
+### Prerequisites
+- [[mcp_overview]] - Need to understand protocol first
+
+### Extends
+- [[mcp_implementation]] - Python-specific implementation
+```
+
+**The graph exists in the markdown.** The JSON was just an index/cache.
+
+#### Markdown-First Architecture
+
+**MCP Server Implementation:**
+
+1. **Parse on demand** - Read markdown files when needed (extremely fast with grep)
+2. **Build in-memory graph** - Construct graph representation from markdown during session
+3. **Cache during session** - Keep parsed graph in memory for fast queries
+4. **Direct markdown updates** - Write changes directly to markdown files
+5. **No JSON to maintain** - Eliminate sync overhead entirely
+
+**Benefits:**
+- ✅ **Single source of truth** - Markdown only
+- ✅ **No sync overhead** - Changes go directly to markdown
+- ✅ **Parallel updates** - Individual files can be processed independently (no global lock)
+- ✅ **More transparent** - Everything visible in markdown
+- ✅ **Obsidian-native** - True compatibility, no hidden state
+- ✅ **Git-friendly** - Better merge handling with separate files
+- ✅ **Simpler** - Eliminate entire JSON maintenance layer
+
+**Performance:**
+- Parsing 98 markdown files: **milliseconds**
+- Grep for targeted searches: **instant**
+- Semantic search if needed: ChromaDB/vector index (optional)
+- Cache in-memory during agent session: **negligible overhead**
+
+**Where Batches Live:**
+MOC notes serve as batch/theme organizers:
+- `Core_AI_MOC.md` - Links to all Core AI/Agents notes
+- `MCP_MOC.md` - Links to all MCP Protocol notes
+- `Python_Stack_MOC.md` - Links to all Python notes
+
+This is **more Zettelkasten-aligned** than artificial JSON batches.
+
+**No Python Scripts for Operations:**
+Claude Code's slash commands use built-in tools (Read, Write, Edit, Grep, Glob, Bash) directly:
+- `/create-note` → Write + Edit markdown files
+- `/rename-note` → Grep for wikilinks + Edit each file
+- `/graph-validate` → Grep + Glob to verify wikilinks exist
+- `/graph-stats` → Grep + Glob to count notes/relationships
+
+No need for intermediate Python scripts to manipulate a JSON graph - Claude operates directly on markdown.
 
 ### MCP Resources and Tools
 
@@ -266,9 +355,10 @@ zettelkasten-plugin/
 │   ├── server.py                # JSON-RPC 2.0 server
 │   ├── resources.py             # Resource handlers (kg:// URIs)
 │   ├── tools.py                 # Tool implementations
+│   ├── markdown_parser.py       # Parse markdown files to build graph
+│   ├── graph_builder.py         # In-memory graph construction
 │   ├── requirements.txt
-│   ├── graph_lib.py             # Reused from existing scripts
-│   └── knowledge_graph_full.json # Graph data (or path config)
+│   └── config.json              # Path to markdown vault, cache settings
 ├── hooks/                        # Lifecycle hooks
 │   ├── post-commit.ts
 │   ├── documentation-update.ts
@@ -286,16 +376,25 @@ zettelkasten-plugin/
 **Goal**: Expose knowledge graph operations as MCP resources and tools
 
 **Tasks**:
-1. Implement JSON-RPC 2.0 server with MCP protocol
-2. Create resource handlers for kg:// URIs
-3. Implement tool handlers (search, find_related, get_learning_path)
-4. Add authentication and rate limiting
-5. Deploy locally and test with Claude Code
+1. Implement markdown parser that extracts:
+   - YAML frontmatter (tags, title, summary)
+   - Wikilinks in content body
+   - Related Concepts sections with typed relationships
+2. Build in-memory graph representation from parsed markdown
+3. Implement JSON-RPC 2.0 server with MCP protocol
+4. Create resource handlers for kg:// URIs (query in-memory graph)
+5. Implement tool handlers (search, find_related, get_learning_path)
+6. Add caching layer for session performance
+7. Deploy locally and test with Claude Code
 
 **Deliverables**:
-- Working MCP server with resources and tools
+- Markdown parser library
+- In-memory graph builder
+- Working MCP server with resources and tools (no JSON file needed)
 - API documentation with examples
 - Integration tests
+
+**Key principle**: Markdown is the single source of truth. JSON is never written, only derived in-memory.
 
 ### Phase 2: Essential Slash Commands
 **Goal**: Basic knowledge operations from Claude Code interface
@@ -441,9 +540,10 @@ github.com/your-org/claude-code-zettelkasten/
 
 **Solutions**:
 - Maintain identical markdown format
-- Support Obsidian wikilink syntax
-- Watch for file system changes from Obsidian
-- Sync graph JSON with markdown files bidirectionally
+- Support Obsidian wikilink syntax `[[note]]` (not `[[note.md]]`)
+- Watch for file system changes from Obsidian (inotify/file watching)
+- Refresh in-memory graph cache when markdown files change
+- No hidden state - everything visible in markdown
 
 ### Challenge 4: Agent Context Management
 **Problem**: Agents need access to relevant notes without context overflow
@@ -522,17 +622,36 @@ github.com/your-org/claude-code-zettelkasten/
 4. Explore premium/enterprise offerings
 5. Create ecosystem of compatible tools
 
-This Zettelkasten Claude Code plugin represents the convergence of knowledge management and AI-assisted development, enabling developers to build personal knowledge graphs that grow alongside their codebases and accelerate learning through intelligent automation.
+## Summary
+
+This Claude Code plugin provides a complete implementation of the [[agentic_zkg]] paradigm, enabling anyone to create and maintain their own agent-powered knowledge base.
+
+**Key Architectural Principles:**
+
+1. **Markdown-First** - No separate JSON graph. Markdown files are the single source of truth.
+2. **In-Memory Graph** - Parse markdown on-demand, cache in-memory during session.
+3. **MCP Protocol** - Expose knowledge graph as resources and tools for any agent.
+4. **Obsidian-Compatible** - Full compatibility with Obsidian, no hidden state.
+5. **Automated Maintenance** - Claude handles relationship discovery, validation, and evolution.
+
+**Installation enables:**
+- Create your own agentic-ZKG instance
+- Conversational knowledge management through slash commands
+- Automated relationship discovery and graph maintenance
+- MCP server providing knowledge access to all Claude Code agents
+- Obsidian compatibility for visual exploration
+
+This plugin makes the agentic-ZKG paradigm practical and accessible, enabling developers to build personal knowledge graphs that grow alongside their codebases through intelligent, conversational interaction with Claude.
 
 ## Related Concepts
+
+### Extends
+- [[agentic_zkg]] - This plugin implements the agentic-ZKG paradigm using Claude Code
 
 ### Prerequisites
 - [[claude_code_plugins]] - Understanding plugin architecture is essential for implementation
 - [[mcp_overview]] - MCP protocol is the foundation for the knowledge graph server
 
 ### Related Topics
-- [[claude_code]] - Platform that will host the plugin
+- [[claude_code]] - Platform that hosts this plugin
 - [[claude_code_agents]] - Subagent system used by knowledge worker agents
-
-### Examples
-- This note describes a concrete example of building a Claude Code plugin

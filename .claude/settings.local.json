@@ -1,12 +1,15 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(pwsh:*)",
-      "Bash(python3:*)",
-      "Bash(python -c \"import json, sys; data = json.load(open(''''C:/Users/dothompson/OneDrive/src/witt3rd/llm-docs/knowledge_graph_full.json'''')); print(''''JSON validated'''')\")",
-      "Read(//c/Users/dothompson/.claude/**)"
-    ],
-    "deny": [],
-    "ask": []
-  }
+    "permissions": {
+        "allow": [
+            "Bash(pwsh:*)",
+            "Bash(python3:*)",
+            "Read(//c/Users/dothompson/.claude/**)",
+            "mcp__firecrawl__firecrawl_scrape",
+            "Bash(gh repo view:*)",
+            "Bash(gh repo rename:*)",
+            "Read(//c/Users/dothompson/OneDrive/src/witt3rd/**)"
+        ],
+        "deny": [],
+        "ask": []
+    }
 }

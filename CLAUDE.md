@@ -10,28 +10,25 @@ This is a **knowledge graph repository** designed for LLM context management, no
 
 ## Repository Architecture
 
-### Knowledge Graph System
+### Markdown-First Knowledge Graph
 
-The repository maintains an automated, bidirectional knowledge graph in `knowledge_graph_full.json`:
+The repository implements a **markdown-first** knowledge graph - the graph lives entirely in markdown files:
 
-**Structure**:
-- **Metadata**: Version (16.0), total notes (93), completion status
-- **Batches**: Notes organized into 12 thematic batches (Core AI/Agents, MCP Protocol, Python Stack, etc.)
-- **Typed relationships**: Six relationship types for each note
-- **Bidirectional mappings**: All relationships are inverse-mapped
+**Graph Elements**:
+- **Wikilinks** in content → implicit relationships
+- **YAML frontmatter** → metadata (tags, title, last_refresh)
+- **"Related Concepts" sections** → explicit typed relationships with "why" explanations
+- **MOC files** → thematic organization (Core AI/Agents, MCP Protocol, Python Stack, etc.)
 
-**Relationship Types**:
-1. **prerequisites** - Must understand first
-2. **related_concepts** - Connected ideas at same level
-3. **extends** - Builds upon another concept
-4. **extended_by** - Others build upon this (inverse)
-5. **alternatives** - Different approaches to same problem
-6. **examples** - Concrete implementations
+**Relationship Types** (in "Related Concepts" sections):
+1. **Prerequisites** - Must understand first
+2. **Related Topics** - Connected ideas at same level
+3. **Extends** - Builds upon another concept
+4. **Extended By** - Others build upon this (inverse)
+5. **Alternatives** - Different approaches to same problem
+6. **Examples** - Concrete implementations
 
-**Graph Construction Algorithm**:
-- **Forward pass** (batched): Discovers outbound relationships from each note
-- **Backward pass**: Establishes inverse relationships (extends → extended_by)
-- **Synchronization**: Writes "Related Concepts" sections to all markdown files
+**All relationships are bidirectional** - if A extends B, then B's "Extended By" section includes A
 
 ### Note Structure
 
@@ -72,9 +69,10 @@ External citations if applicable.
 
 **Critical rules**:
 - Wikilinks use format `[[note]]` NOT `[[note.md]]`
-- "Related Concepts" section is auto-generated from knowledge graph
+- "Related Concepts" sections are the source of truth for relationships
 - Tags use lowercase with hyphens: `#first-principles`
 - 3-6 tags per note mixing dimensions (technology + domain + content-type)
+- No JSON graph file - markdown is the graph
 
 ### Organization Philosophy
 
@@ -108,62 +106,51 @@ External citations if applicable.
 
 **`/rename-note`** - Rename a note and update all references
 - Location: `.claude/commands/rename-note.md`
-- Script: `.claude/scripts/rename_note.py`
 - Usage: `/rename-note old_filename new_filename`
 - Process:
-  1. Renames physical markdown file
-  2. Updates all references in `knowledge_graph_full.json`
-  3. Updates all wikilinks `[[old]]` → `[[new]]` in markdown files
-  4. Creates timestamped backup before changes
-  5. Validates graph integrity after completion
-- Safety: Reverts file rename if knowledge graph update fails
+  1. Renames physical markdown file (Bash mv)
+  2. Finds all wikilinks to old name (Grep)
+  3. Updates all wikilinks `[[old]]` → `[[new]]` in markdown files (Edit tool)
+  4. Updates MOC files if needed (Edit tool)
+- Uses: Built-in tools (Grep, Edit, Bash) - no Python scripts
 - Use cases: Clarify naming (mcp_sdk → python_mcp_sdk), fix typos, reorganize
 
 ### Knowledge Graph Operations
 
-**Reading the graph**:
-```python
-# Load via Read tool
-knowledge_graph_full.json
+**Reading note relationships**:
+```bash
+# Read a note's relationships (Read tool)
+Read agents.md
+
+# The "Related Concepts" section contains all relationships:
+## Related Concepts
+
+### Prerequisites
+- [[prerequisite_note]] - Why needed first
+
+### Related Topics
+- [[related_note]] - Connection explanation
+
+### Extends
+- [[base_note]] - What this builds upon
 ```
 
-**Graph structure** (JSON):
-```json
-{
-  "metadata": {
-    "version": "16.0",
-    "total_notes": 93,
-    "forward_pass_batches_complete": 12,
-    "backward_pass_complete": true
-  },
-  "batches": [
-    {
-      "batch_number": 1,
-      "name": "Core AI/Agents",
-      "notes": ["agents.md", "alita.md", ...]
-    }
-  ],
-  "notes": {
-    "agents.md": {
-      "relationships": {
-        "prerequisites": [],
-        "related_concepts": [
-          {"note": "semantic_routing.md", "why": "..."}
-        ],
-        "extends": [],
-        "extended_by": [...],
-        "alternatives": [],
-        "examples": [...]
-      }
-    }
-  }
-}
+**Finding all notes with a specific tag**:
+```bash
+# Grep for tags in YAML frontmatter
+Grep "tags:.*agents" --glob="*.md"
+```
+
+**Finding all wikilinks to a note**:
+```bash
+# Find backlinks
+Grep "\[\[note_name\]\]" --glob="*.md"
 ```
 
 **Updating relationships**:
-1. Modify relationships in `knowledge_graph_full.json`
-2. Ensure bidirectionality (if A extends B, B must have extended_by A)
-3. Sync to markdown files (update "Related Concepts" sections)
+1. Edit source note's "Related Concepts" section (Edit tool)
+2. Ensure bidirectionality (if A extends B, update B's "Extended By" section)
+3. No JSON to sync - markdown is the source of truth
 
 ### Creating New Notes
 
@@ -178,11 +165,11 @@ knowledge_graph_full.json
 - No folder prefixes in names
 
 **After creating**:
-1. Add YAML frontmatter with 3-6 tags
-2. Add to appropriate batch in `knowledge_graph_full.json`
-3. Run forward pass to discover relationships
-4. Add to relevant MOC notes
-5. Increment version in metadata
+1. Add YAML frontmatter with 3-6 tags (Write tool includes this)
+2. Add "Related Concepts" section with initial relationships (Edit tool)
+3. Add to relevant MOC notes (Edit tool)
+4. Ensure bidirectional relationships in connected notes (Edit tool)
+5. No JSON to update - markdown is the source of truth
 
 ### Tag System
 
@@ -213,35 +200,35 @@ MOCs contain links and brief context, not content itself.
 
 ## Key Files
 
-- **`knowledge_graph_full.json`** - Central graph data structure (source of truth)
 - **`README.md`** - Philosophy and usage guide (comprehensive)
+- **`agentic_zkg.md`** - The paradigm definition (concept level)
+- **`claude_plugin_zkg.md`** - Claude Code implementation (implementation level)
 - **`tag_system.md`** - Complete tag catalog and guidelines
-- **`*_moc.md`** - Navigation hub notes for topic areas
+- **`*_moc.md`** - Navigation hub notes for topic areas (MOCs replace "batches")
 
 ## Critical Constraints
 
 **When working with notes**:
-- NEVER modify "Related Concepts" sections manually - they're auto-generated from graph
 - ALWAYS use wikilink format `[[note]]` not `[[note.md]]`
 - PRESERVE existing content when updating - only add/enhance, rarely remove
-- MAINTAIN bidirectionality in knowledge graph relationships
+- MAINTAIN bidirectionality when adding relationships (update both notes)
 - NO hyperbolic language or marketing claims - demonstrate value, don't claim it
+- "Related Concepts" sections can be edited - they ARE the graph
 
-**When updating the knowledge graph**:
-- Update metadata version when making structural changes
-- Ensure forward and backward passes maintain consistency
-- Sync changes to both JSON and markdown files
-- Document relationship "why" explanations clearly
+**When updating relationships**:
+- Edit "Related Concepts" sections directly in markdown (Edit tool)
+- Ensure bidirectionality (if A extends B, update B's "Extended By" section)
+- Always include "why" explanations for each relationship
+- No JSON to maintain - markdown is the source of truth
 
 ## Common Workflows
 
 **Add new topic**:
-1. Create `new_topic.md` with proper structure
-2. Add to batch in `knowledge_graph_full.json`
-3. Discover relationships (forward pass logic)
-4. Establish inverse relationships (backward pass)
-5. Sync to markdown "Related Concepts" section
-6. Update relevant MOC notes
+1. Create `new_topic.md` with proper structure (Write tool)
+2. Add "Related Concepts" section with initial relationships (Edit tool)
+3. Update bidirectional relationships in connected notes (Edit tool)
+4. Add to relevant MOC notes (Edit tool)
+5. No JSON to update - markdown is the source of truth
 
 **Refresh existing topic**:
 1. Use `/refresh-topic topic_name.md`
@@ -250,21 +237,22 @@ MOCs contain links and brief context, not content itself.
 
 **Rename a note**:
 1. Use `/rename-note old_name new_name`
-2. Script automatically handles file, graph, and wikilink updates
+2. Command uses Grep + Edit to update all wikilinks
 3. Review changes with git diff
 4. Update note title/tags if needed to match new filename
 
 **Explore concept relationships**:
-1. Check `knowledge_graph_full.json` for typed relationships
+1. Read note's "Related Concepts" section (Read tool)
 2. Follow prerequisite chains for learning paths
-3. Explore extended_by for advanced topics
+3. Explore "Extended By" for advanced topics
 4. Use alternatives for different approaches
+5. Use Grep to find backlinks
 
 **Find related content**:
-1. Check "Related Concepts" section in markdown
-2. Query `knowledge_graph_full.json` by relationship type
-3. Search by tag combinations
-4. Navigate via MOC notes
+1. Check "Related Concepts" section in markdown (Read tool)
+2. Grep for wikilinks and tags (Grep tool)
+3. Search by tag combinations (Grep in YAML frontmatter)
+4. Navigate via MOC notes (Read MOC files)
 5. Use Obsidian graph view
 
 ## Obsidian Integration
@@ -276,4 +264,4 @@ This repository is designed for use with Obsidian:
 - Backlinks show inverse relationships
 - Daily notes and MOCs provide navigation
 
-The knowledge graph JSON provides LLM-friendly structure, while markdown + Obsidian provides human-friendly navigation.
+**Markdown-first architecture** means perfect Obsidian compatibility - no hidden state, no JSON files, everything is visible and editable in Obsidian.
