@@ -1,15 +1,17 @@
 {
-    "permissions": {
-        "allow": [
-            "Bash(pwsh:*)",
-            "Bash(python3:*)",
-            "Read(//c/Users/dothompson/.claude/**)",
-            "mcp__firecrawl__firecrawl_scrape",
-            "Bash(gh repo view:*)",
-            "Bash(gh repo rename:*)",
-            "Read(//c/Users/dothompson/OneDrive/src/witt3rd/**)"
-        ],
-        "deny": [],
-        "ask": []
-    }
+  "permissions": {
+    "allow": [
+      "Bash(pwsh:*)",
+      "Bash(python3:*)",
+      "Read(//c/Users/dothompson/.claude/**)",
+      "mcp__firecrawl__firecrawl_scrape",
+      "Bash(gh repo view:*)",
+      "Bash(gh repo rename:*)",
+      "Read(//c/Users/dothompson/OneDrive/src/witt3rd/**)",
+      "Read(//c/Users/dothompson/src/witt3rd/claude-plugins/plugins/azkg/commands/**)",
+      "Bash(cat:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
 }

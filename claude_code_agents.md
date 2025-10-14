@@ -170,6 +170,9 @@ Claude Code subagents represent a significant advancement in AI-assisted develop
 
 ### Related Topics
 - [[mcp_overview]] - Claude Code agents use MCP for tool access and integration
+- [[claude_code_plugins]] - Subagent plugins are a type of agent extension in Claude Code
+- [[claude_code_slash_commands]] - Slash commands can invoke or delegate to specialized agents
+- [[claude_code_hooks]] - Hooks can trigger agent workflows at lifecycle points
 
 ### Extends
 - [[agents]] - Claude Code subagents are a specific implementation of the general agent pattern with isolated contexts and parallel execution

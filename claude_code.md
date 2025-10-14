@@ -117,3 +117,5 @@ Claude Code represents an evolution from code completion to autonomous coding ag
 ### Extended By
 - [[claude_code_agents]] - Claude Code subagents are a specific feature within the broader Claude Code platform
 - [[claude_code_plugins]] - Plugins extend Claude Code's capabilities through modular extensions
+- [[claude_code_slash_commands]] - Slash commands provide lightweight, user-defined workflow automation
+- [[claude_code_hooks]] - Hooks enable event-driven customization at lifecycle points
