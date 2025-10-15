@@ -278,3 +278,6 @@ This comprehensive documentation covers all major features of the YouTube Transc
 
 ### Prerequisites
 - [[python_coding_standards]] - Need Python knowledge to use YouTube Transcript API
+
+### Related Topics
+- [[telegram_bot_python]] - Another Python API integration example

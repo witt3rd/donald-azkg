@@ -9,7 +9,8 @@
       "Bash(gh repo rename:*)",
       "Read(//c/Users/dothompson/OneDrive/src/witt3rd/**)",
       "Read(//c/Users/dothompson/src/witt3rd/claude-plugins/plugins/azkg/commands/**)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Read(//c/Users/dothompson/src/witt3rd/claude-plugins/**)"
     ],
     "deny": [],
     "ask": []

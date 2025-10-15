@@ -1,0 +1,22 @@
+[project]
+name = "telegram-reader"
+version = "0.1.0"
+description = "CLI tool to list Telegram channels and read messages by date"
+readme = "README.md"
+authors = [
+    { name = "Donald Thompson", email = "witt3rd@witt3rd.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "telethon>=1.36.0",
+    "python-dotenv>=1.0.0",
+    "loguru>=0.7.0",
+    "click>=8.1.0",
+]
+
+[project.scripts]
+telegram-reader = "telegram_reader.cli:cli"
+
+[build-system]
+requires = ["uv_build>=0.8.2,<0.9.0"]
+build-backend = "uv_build"

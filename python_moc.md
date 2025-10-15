@@ -15,6 +15,12 @@ This MOC connects all notes related to Python language, tools, libraries, and de
 - [[python_mcp_sdk]] - Building MCP servers using FastMCP Python SDK
 - [[fastmcp_shutdown]] - Implementing graceful shutdown in FastMCP servers
 
+## API Integration & SDKs
+
+- [[telegram_bot_python]] - Telegram Bot API key setup and Python SDK usage (python-telegram-bot, aiogram, telethon, pyrogram)
+- [[youtube_transcript_api]] - YouTube transcript extraction API and Python SDK
+- [[openrouter_openai_python_sdk]] - OpenRouter API access using OpenAI Python SDK
+
 ## Related Topics
 
 - [[typescript]] - Alternative language with similar async patterns

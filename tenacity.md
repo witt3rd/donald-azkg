@@ -215,3 +215,4 @@ def robust_request(url):
 
 ### Related Topics
 - [[python_coding_standards]] - Tenacity is a Python library following Python best practices
+- [[telegram_bot_python]] - Retry logic for handling Telegram API rate limits and network errors

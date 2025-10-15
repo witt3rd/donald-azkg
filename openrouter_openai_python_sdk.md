@@ -74,6 +74,7 @@ Community reports indicate the OpenAI Agents SDK can be wired to OpenRouter by c
 - [[openai_embeddings_python]] - Same SDK can be used for embeddings via OpenRouter
 - [[openai_responses_python]] - Same SDK patterns apply to OpenRouter
 - [[perplexity_mcp]] - Both provide OpenAI-compatible endpoints for alternative models
+- [[telegram_bot_python]] - Similar SDK configuration and API key management pattern
 
 ### Extends
 - [[openai_responses_python]] - Uses OpenAI SDK with OpenRouter endpoint

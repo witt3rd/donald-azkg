@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "claude_code_plugins.md",
+                "file": "telegram_bot_python.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "claude_code_plugins"
+              "title": "telegram_bot_python"
             }
           }
         ]
@@ -168,19 +168,24 @@
   },
   "active": "cc0e2ef41058fdd8",
   "lastOpenFiles": [
-    "architecture_moc.md.tmp.7292.1760285429852",
-    "agents_moc.md.tmp.7292.1760285412502",
+    "telegram-reader/telegram_mcp_troubleshooting.md",
+    "telegram-reader/telegram_mcp_troubleshooting.md.tmp.20308.1760564067410",
+    "telegram-reader/telegram_session.session-journal",
+    "telegram-reader/src/telegram_reader/cli.py.tmp.41176.1760476228441",
+    "telegram-reader/src/telegram_reader/cli.py.tmp.41176.1760474565976",
+    "telegram-reader/src/telegram_reader/cli.py.tmp.41176.1760473955505",
+    "telegram-reader/telegram_session.session",
+    "telegram-reader/src/telegram_reader/__pycache__/__init__.cpython-313.pyc",
+    "telegram-reader/src/telegram_reader/__pycache__/cli.cpython-313.pyc",
+    "telegram-reader/src/telegram_reader/__pycache__",
+    "telegram-reader/uv.lock",
+    "telegram-reader/telegram_setup_guide.md",
+    "telegram-reader/README.md",
+    "telegram_setup_guide.md",
+    "claude_code_plugins.md",
+    "telegram_bot_python.md",
     "claude_code_internals.md",
-    "claude_code_internals.md.tmp.7292.1760285389622",
-    "ai_development_moc.md.tmp.7292.1760284054849",
-    "agents_moc.md.tmp.7292.1760284053514",
     "claude_code_efficiency_optimization.md",
-    "claude_code_efficiency_optimization.md.tmp.7292.1760283969743",
-    "agentic_zkg.md.tmp.20644.1760283470947",
-    "README.md.tmp.20644.1760283448149",
-    "README.md.tmp.20644.1760283444961",
-    "README.md.tmp.20644.1760283441697",
-    "README.md.tmp.20644.1760283438196",
     "claude_plugin_zkg.md",
     "agentic_zkg.md",
     "claude_code_hooks.md",
@@ -188,7 +193,6 @@
     "agentic_development_context.md",
     "zettelkasten_claude_plugin.md",
     "claude_code_agents.md",
-    "claude_code_plugins.md",
     "claude_code.md",
     "agents.md",
     "alita.md",
@@ -199,10 +203,6 @@
     "CLAUDE.md",
     "llm_self_talk_optimization.md",
     "scripts/README.md",
-    "agents_moc.md",
-    "semantic_routing.md",
-    "openai_embeddings_python.md",
-    "optimization.md",
-    "python3_13.md"
+    "agents_moc.md"
   ]
 }

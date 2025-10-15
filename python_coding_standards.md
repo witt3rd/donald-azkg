@@ -621,6 +621,7 @@ This comprehensive guide ensures high-quality, maintainable Python code that fol
 - [[openai_responses_python]] - Need Python knowledge to use OpenAI Python SDK
 - [[openrouter_openai_python_sdk]] - Need Python knowledge to use SDK
 - [[youtube_transcript_api]] - Need Python knowledge to use YouTube Transcript API
+- [[telegram_bot_python]] - Telegram bot development follows Python best practices
 - [[type_theory]] - Python type hints are practical application of type theory
 - [[numpy_pytorch_rust_guide]] - Need Python knowledge for NumPy/PyTorch sections
 
