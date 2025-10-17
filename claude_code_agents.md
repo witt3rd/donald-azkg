@@ -174,6 +174,8 @@ Claude Code subagents represent a significant advancement in AI-assisted develop
 - [[claude_code_plugins]] - Subagent plugins are a type of agent extension in Claude Code
 - [[claude_code_slash_commands]] - Slash commands can invoke or delegate to specialized agents
 - [[claude_code_hooks]] - Hooks can trigger agent workflows at lifecycle points
+- [[claude_code_skills]] - Skills provide deterministic execution within agent workflows for specialized tasks
+- [[claude_agent_sdk]] - Agent SDK builds production agents while Claude Code agents provide interactive multi-agent workflows
 
 ### Extends
 

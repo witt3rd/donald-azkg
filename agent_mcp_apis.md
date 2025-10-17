@@ -86,6 +86,7 @@ While nothing technically prevents an MCP tool from using an LLM internally or a
 - [[alita]] - Alita uses MCP to dynamically create and manage tools
 - [[mcp_tools]] - Agents use MCP tools for task execution
 - [[filesystem]] - Agents use filesystem tools via MCP
+- [[claude_agent_sdk]] - Agent SDK demonstrates production use of MCP for tool integration
 
 ### Extends
 

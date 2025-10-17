@@ -106,3 +106,5 @@ With growing adoption across major technology companies and a robust ecosystem o
 - [[mcp_implementation]] - Need to understand MCP fundamentals before implementation
 - [[filesystem]] - Need to understand MCP protocol
 - [[adding_mcp_to_claude_code]] - Need to understand MCP fundamentals before configuring servers
+- [[claude_agent_sdk]] - Production implementation using MCP for tool integration
+- [[claude_agent_sdk_production]] - Production patterns demonstrating MCP server integration

@@ -573,6 +573,7 @@ Claude Code hooks provide precision automation within AI-augmented workflows, en
 - [[claude_code_plugins]] - Hooks are a plugin component for event-driven automation
 - [[claude_code_slash_commands]] - Slash commands provide complementary manual workflow triggers
 - [[claude_code_agents]] - Agents handle complex workflows beyond simple hook automation
+- [[claude_code_skills]] - Skills provide context-aware task execution while hooks provide event-driven automation
 
 ## References
 

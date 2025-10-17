@@ -528,6 +528,8 @@ Managing processing demands:
 
 ### Examples
 
+- [[arcadian_summers]] - First agentic TV series demonstrating full crew coordination across 12 episodes
+- [[arcadian_summers_cast_and_crew]] - Individual personalities and creative approaches of Arcadian Summers production agents
 - [[director_dp_collaboration]] - (future note) Specific collaboration pattern example
 - [[writer_character_dialogue]] - (future note) How writer and character agents iterate on dialogue
 

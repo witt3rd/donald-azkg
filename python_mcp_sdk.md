@@ -821,6 +821,8 @@ This comprehensive guide provides the foundation for building robust MCP applica
 ### Related Topics
 
 - [[csharp_mcp_sdk_docs]] - Alternative language SDK for MCP
+- [[claude_agent_sdk]] - Agent SDK uses MCP SDK for custom tool development and integration
+- [[claude_agent_sdk_production]] - Production examples of MCP server integration with Agent SDK
 
 ### Extends
 

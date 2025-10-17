@@ -494,6 +494,7 @@ Defining interaction style with autonomous agents:
 
 ### Examples
 
+- [[arcadian_summers]] - First agentic TV series demonstrating Orchestrator coordinating 12-episode production
 - [[orchestrator_intervention_patterns]] - (future note) Specific intervention scenarios
 - [[vision_setting_workflow]] - (future note) How Orchestrator establishes production direction
 

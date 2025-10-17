@@ -14,6 +14,20 @@ This MOC connects all notes related to AI and ML development across platforms an
 - [[claude_code_efficiency_optimization]] - Performance optimization strategies for Claude Code workflows including search, routing, and token management
 - [[ai_filmmaking]] - Application of AI systems to film production workflows including generation, synthesis, and automation
 
+## Claude Code Extension Mechanisms
+
+- [[claude_code]] - Agentic AI coding assistant platform overview
+- [[claude_code_agents]] - Subagent architecture for parallel workflows and context isolation
+- [[claude_code_skills]] - Modular, context-aware capability extensions with bundled scripts and templates
+- [[claude_code_plugins]] - Comprehensive plugin system for extensibility
+- [[claude_code_slash_commands]] - User-defined shortcuts for workflow automation
+- [[claude_code_hooks]] - Lifecycle event system for deterministic automation
+
+## Agent Development SDKs
+
+- [[claude_agent_sdk]] - Production SDK for building autonomous AI agents with Claude models
+- [[claude_agent_sdk_production]] - Production deployment patterns, observability, and monitoring for Agent SDK
+
 ## Platform-Specific
 
 - [[windows_ai_stack_explained]] - Windows AI ecosystem architecture

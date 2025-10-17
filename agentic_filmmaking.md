@@ -310,6 +310,7 @@ Are agentic performances "authentic" emotional expression or computational simul
 
 - [[agentic_character]] - Character agent implementation with cross-production persistence
 - [[agentic_crew]] - Specialized crew agents for production roles
+- [[arcadian_summers]] - First fully agentic TV series demonstrating paradigm at scale
 - [[agentic_production_workflow]] - (future note) Concrete multi-agent coordination example
 
 ### Alternatives

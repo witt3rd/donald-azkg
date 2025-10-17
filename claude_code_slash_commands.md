@@ -465,6 +465,7 @@ Slash commands represent the most accessible entry point to Claude Code customiz
 - [[claude_code_plugins]] - Slash commands are one component of the plugin system
 - [[claude_code_hooks]] - Hooks provide event-driven automation complementary to commands
 - [[claude_code_agents]] - Agents handle complex workflows beyond simple commands
+- [[claude_code_skills]] - Skills provide more structured, script-driven automation than slash commands
 
 ### Extends
 - [[claude_code]] - Slash commands extend Claude Code's base functionality through custom workflows

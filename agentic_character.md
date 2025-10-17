@@ -406,6 +406,7 @@ Maintaining continuity across productions:
 
 ### Examples
 
+- [[arcadian_summers]] - First agentic TV series with persistent character agents across 12 episodes
 - [[persistent_character_implementation]] - (future note) Technical implementation of cross-production character
 - [[character_interaction_protocol]] - (future note) How character agents communicate
 

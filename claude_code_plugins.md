@@ -385,6 +385,7 @@ Claude Code plugins represent the platform's extensibility layer, enabling teams
 - [[claude_code_agents]] - Subagent plugins are a type of agent extension in Claude Code
 - [[claude_code_slash_commands]] - Slash commands are a plugin component bundled in command directories
 - [[claude_code_hooks]] - Hooks are a plugin component for event-driven automation
+- [[claude_code_skills]] - Skills are a plugin component providing modular, context-aware capabilities
 
 ### Extends
 - [[claude_code]] - Plugins extend Claude Code's capabilities through modular extensions

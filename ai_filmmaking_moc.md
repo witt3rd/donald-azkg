@@ -118,6 +118,15 @@ This MOC organizes concepts related to AI-assisted and autonomous filmmaking, sp
 
 ## Implementation Examples
 
+### Agentic Productions
+**[[arcadian_summers]]** - First fully autonomous AI agentic TV series. 12-episode production set in year 2339 demonstrating complete agentic cast, crew, and leadership coordination under human Orchestrator. Proof of concept for television-scale agentic filmmaking.
+
+**[[arcadian_summers_cast_and_crew]]** - Individual personalities, creative approaches, and specializations of Arcadian Summers production agents. Detailed profiles of showrunner (Aria Chen), producer (Jasper Okafor), director (Marcus Delacroix), writer (Kai Nakamura), DP (Yuki Tanaka), and all crew and character agents—each designed as unique artist perfectly suited for their role.
+
+**[[arcadian_summers_narrative_questions]]** - Story hooks and worldbuilding mysteries to explore across 12-episode arc. Organized questions about Correctional Officer system, temporal mechanics, governance, and character mysteries that agentic writer uses as creative springboard.
+
+**[[arcadian_summers_related_works]]** - Comparative analysis of existing science fiction works sharing thematic elements with Arcadian Summers. Demonstrates series' uniqueness: no existing work combines correctional time travel, genetic Ethereal World access, soul-consuming mechanics, and dual protagonist structure.
+
 ### Tool Platforms (Traditional)
 - [[runway_gen4]] - Video generation platform
 - [[elevenlabs_voice]] - Voice synthesis system

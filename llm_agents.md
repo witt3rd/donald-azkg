@@ -225,3 +225,4 @@ The field is evolving from "can we build agents?" to "how do we build reliable, 
 - [[a2a]] - A2A protocol enables multi-agent interoperability
 - [[ai_filmmaking]] - AI filmmaking workflows use agent orchestration to coordinate multiple generation systems
 - [[agentic_filmmaking]] - Multi-agent production system for autonomous filmmaking
+- [[claude_agent_sdk]] - Production SDK for building autonomous Claude-powered agents

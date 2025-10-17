@@ -128,6 +128,8 @@ Claude Code represents an evolution from code completion to autonomous coding ag
 ### Related Topics
 
 - [[mcp_overview]] - Claude Code uses MCP for deep tool integration
+- [[claude_agent_sdk]] - Agent SDK provides programmatic agent building while Claude Code provides interactive IDE assistance
+- [[claude_agent_sdk_production]] - Production deployment patterns show Agent SDK integration with various platforms
 
 ### Extended By
 
@@ -135,3 +137,4 @@ Claude Code represents an evolution from code completion to autonomous coding ag
 - [[claude_code_plugins]] - Plugins extend Claude Code's capabilities through modular extensions
 - [[claude_code_slash_commands]] - Slash commands provide lightweight, user-defined workflow automation
 - [[claude_code_hooks]] - Hooks enable event-driven customization at lifecycle points
+- [[claude_code_skills]] - Skills provide modular, context-aware capability extensions with bundled scripts and templates
