@@ -234,12 +234,14 @@ Automated composition of original musical scores tailored to content needs.
 AI filmmaking exists on a spectrum from tool augmentation to autonomous collaboration:
 
 **Tool Augmentation** (this note's focus):
+
 - AI accelerates human execution of filmmaking tasks
 - Human retains all creative decision-making authority
 - AI as instrument for faster iteration and lower production barriers
 - Examples: Video generation, voice synthesis, automated VFX
 
 **Agentic Filmmaking** (see [[agentic_filmmaking]]):
+
 - Autonomous agents embody all cast and crew roles
 - Agents debate creative decisions and propose alternatives
 - Human Orchestrator coordinates agent collaboration at meta-level

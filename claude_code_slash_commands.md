@@ -10,6 +10,7 @@ Custom slash commands in Claude Code are user-defined shortcuts stored as markdo
 Slash commands are chat shortcuts beginning with `/` that execute static or parameterized prompts. Instead of re-typing instructions, a command file defines the task and can accept arguments for flexibility. Claude Code's agentic environment parses the command, interpolates any arguments, and sends the resulting directive to the Claude model for execution.
 
 **Key characteristics:**
+
 - Simplest Claude Code extensibility mechanism
 - Single markdown file per command
 - Invoked directly via `/` in chat or terminal
@@ -21,6 +22,7 @@ Slash commands are chat shortcuts beginning with `/` that execute static or para
 ### Directory Organization
 
 **Project commands (shared/versioned):**
+
 ```
 .claude/
   commands/
@@ -32,6 +34,7 @@ Slash commands are chat shortcuts beginning with `/` that execute static or para
 ```
 
 **Personal commands (private):**
+
 ```
 ~/.claude/
   commands/
@@ -60,10 +63,12 @@ Optional: Add examples, constraints, or guidance for Claude.
 ### Argument Interpolation
 
 **Positional arguments:**
+
 - `$ARGUMENTS` - All arguments as single string
 - `$1`, `$2`, `$3`, ... - Individual positional arguments
 
 **Example command file** (`.claude/commands/fix-issue.md`):
+
 ```markdown
 ---
 description: Fix bug described in GitHub issue
@@ -82,6 +87,7 @@ Invoked as: `/fix-issue 123` (substitutes `$1` with `123`)
 ### Namespace Support
 
 Subdirectories create command namespaces:
+
 - `.claude/commands/posts/new.md` → `/posts:new`
 - `.claude/commands/deploy/staging.md` → `/deploy:staging`
 
@@ -164,17 +170,20 @@ Perform code review on $ARGUMENTS:
 ### Command Design Principles
 
 **Naming:**
+
 - Clear and descriptive: `/security-review` not `/check`
 - Verb-first when possible: `/fix-issue`, `/generate-docs`
 - Use namespaces for organization: `/project:command`, `/category:action`
 - Consistent with team conventions
 
 **Scope:**
+
 - One command, one responsibility (atomicity)
 - Keep prompts focused and specific
 - Avoid "god commands" that bundle unrelated actions
 
 **Documentation:**
+
 - Include `description:` in frontmatter for discoverability
 - Add usage examples in command file
 - Document expected arguments and their formats
@@ -182,6 +191,7 @@ Perform code review on $ARGUMENTS:
 ### Argument Handling
 
 **Validation patterns:**
+
 ```markdown
 Expected arguments: <issue-number> <severity: low|medium|high>
 
@@ -193,6 +203,7 @@ If invalid, explain correct usage and exit.
 ```
 
 **Context injection:**
+
 ```markdown
 Before analyzing $ARGUMENTS, gather context:
 1. Run: git status
@@ -203,6 +214,7 @@ Before analyzing $ARGUMENTS, gather context:
 ### When to Use Slash Commands
 
 **Use slash commands when:**
+
 - Task requires AI reasoning or judgment
 - Prompt is reused frequently
 - Arguments make prompt flexible
@@ -210,6 +222,7 @@ Before analyzing $ARGUMENTS, gather context:
 - Team needs standardized process
 
 **Use alternatives when:**
+
 - Task is deterministic/scriptable → Use hooks or bash scripts
 - Workflow is complex/stateful → Use agents
 - Multiple extension points needed → Use plugins
@@ -218,6 +231,7 @@ Before analyzing $ARGUMENTS, gather context:
 ### Security Considerations
 
 **Least privilege:**
+
 ```markdown
 ---
 description: Deploy to staging (requires git and npm access)
@@ -226,6 +240,7 @@ allowed-tools: [git, npm, bash]
 ```
 
 **Argument sanitization:**
+
 ```markdown
 # Never do this:
 Run: bash -c "deploy.sh $ARGUMENTS"
@@ -236,6 +251,7 @@ Then run: bash -c "deploy.sh --env $1"
 ```
 
 **Permission boundaries:**
+
 - Restrict commands that modify production systems
 - Audit commands that access secrets or credentials
 - Use environment-specific commands (staging vs production)
@@ -243,17 +259,20 @@ Then run: bash -c "deploy.sh --env $1"
 ### Team Collaboration
 
 **Shared commands:**
+
 - Store in `.claude/commands/` (versioned)
 - Peer review command additions/changes
 - Document in `CLAUDE.md` or `README.md`
 - Establish naming conventions
 
 **Personal commands:**
+
 - Store in `~/.claude/commands/` (not versioned)
 - Useful for experimenting before proposing to team
 - Customize workflows without impacting others
 
 **Version control:**
+
 - Commit all project command files
 - Treat as code artifacts (review, test, refactor)
 - Track changes for rollback capability
@@ -261,6 +280,7 @@ Then run: bash -c "deploy.sh --env $1"
 ### Performance and Efficiency
 
 **Keep prompts focused:**
+
 ```markdown
 # Too verbose:
 Analyze the file provided in the arguments. Look at each function carefully.
@@ -273,6 +293,7 @@ Report issues with severity and suggested fixes.
 ```
 
 **Reusable patterns:**
+
 ```markdown
 # .claude/commands/analyze.md
 Analyze $1 focusing on $2:
@@ -284,16 +305,19 @@ Analyze $1 focusing on $2:
 ### Maintenance Strategies
 
 **Testing:**
+
 - Document expected behavior in comments
 - Test with sample inputs periodically
 - Update when tools or workflows change
 
 **Refactoring:**
+
 - Split complex commands into smaller ones
 - Deprecate superseded versions
 - Update documentation on changes
 
 **Hygiene:**
+
 - Remove obsolete commands
 - Consolidate duplicates
 - Keep command files short and focused
@@ -310,6 +334,7 @@ Analyze $1 focusing on $2:
 | **Best for** | Repeatable prompts | Automation | Complex workflows | Comprehensive tools |
 
 **Decision guide:**
+
 - **Simple, repeatable AI task** → Slash command
 - **Deterministic automation** → Hook
 - **Complex, stateful workflow** → Agent
@@ -320,6 +345,7 @@ Analyze $1 focusing on $2:
 ### With Hooks
 
 Commands can trigger or be triggered by hooks:
+
 ```markdown
 # .claude/commands/pre-commit-review.md
 Run before commit (invoked by pre-commit hook):
@@ -331,6 +357,7 @@ Run before commit (invoked by pre-commit hook):
 ### With Agents
 
 Commands can delegate to specialized agents:
+
 ```markdown
 # .claude/commands/refactor.md
 Delegate large-scale refactoring to refactor-agent:
@@ -342,6 +369,7 @@ Delegate large-scale refactoring to refactor-agent:
 ### With MCP Tools
 
 Commands leverage MCP servers for external integrations:
+
 ```markdown
 # .claude/commands/jira-sync.md
 Sync code changes with Jira issue $1:
@@ -353,6 +381,7 @@ Sync code changes with Jira issue $1:
 ### With Plugins
 
 Commands are a plugin component (bundled in plugin packages):
+
 ```
 my-plugin/
   .claude-plugin/
@@ -367,26 +396,31 @@ my-plugin/
 ## Common Pitfalls and Anti-Patterns
 
 **Over-engineering:**
+
 - Creating commands for one-off tasks
 - Building complex logic better suited for agents
 - Duplicating functionality of existing tools
 
 **Poor argument handling:**
+
 - No validation or constraints
 - Blindly interpolating into shell commands (injection risk)
 - Unclear expected argument formats
 
 **Monolithic commands:**
+
 - Combining unrelated tasks
 - Verbose, unfocused prompts
 - Hard to maintain and understand
 
 **Lack of version control:**
+
 - Not committing project commands
 - No peer review process
 - Lost customizations when switching machines
 
 **Documentation gaps:**
+
 - Missing descriptions or examples
 - Unclear usage patterns
 - No team communication about new commands
@@ -459,21 +493,24 @@ Slash commands represent the most accessible entry point to Claude Code customiz
 ## Related Concepts
 
 ### Prerequisites
+
 - [[claude_code]] - Understanding Claude Code platform is essential for using slash commands
 
 ### Related Topics
+
 - [[claude_code_plugins]] - Slash commands are one component of the plugin system
 - [[claude_code_hooks]] - Hooks provide event-driven automation complementary to commands
 - [[claude_code_agents]] - Agents handle complex workflows beyond simple commands
 - [[claude_code_skills]] - Skills provide more structured, script-driven automation than slash commands
 
 ### Extends
+
 - [[claude_code]] - Slash commands extend Claude Code's base functionality through custom workflows
 
 ## References
 
-[1] https://docs.claude.com/en/docs/claude-code/slash-commands - Official slash commands documentation
-[2] https://www.anthropic.com/engineering/claude-code-best-practices - Best practices guide
-[3] https://www.eesel.ai/blog/slash-commands-claude-code - Practical slash command guide
-[4] https://cloudartisan.com/posts/2025-04-14-claude-code-tips-slash-commands/ - Advanced tips and patterns
-[5] https://shipyard.build/blog/claude-code-cheat-sheet/ - Quick reference and examples
+[1] <https://docs.claude.com/en/docs/claude-code/slash-commands> - Official slash commands documentation
+[2] <https://www.anthropic.com/engineering/claude-code-best-practices> - Best practices guide
+[3] <https://www.eesel.ai/blog/slash-commands-claude-code> - Practical slash command guide
+[4] <https://cloudartisan.com/posts/2025-04-14-claude-code-tips-slash-commands/> - Advanced tips and patterns
+[5] <https://shipyard.build/blog/claude-code-cheat-sheet/> - Quick reference and examples

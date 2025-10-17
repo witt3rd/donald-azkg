@@ -12,6 +12,7 @@ Skills are folder-based extensions that combine AI instructions with determinist
 ### Core Architecture
 
 **Folder Structure**:
+
 ```
 my-skill/
 ├── SKILL.md              # YAML frontmatter + instructions
@@ -23,6 +24,7 @@ my-skill/
 ```
 
 **SKILL.md Format**:
+
 ```markdown
 ---
 name: Image Editor
@@ -70,6 +72,7 @@ Use scripts/edit.py for processing.
 ### Discovery and Invocation
 
 Skills are automatically discovered from designated directories:
+
 - **Project Skills**: `.claude/skills/` (versioned, shared with team)
 - **User Skills**: `~/.claude/skills/` (personal, not versioned)
 
@@ -86,6 +89,7 @@ Skills are automatically discovered from designated directories:
 **1. Initiate Skill creation**: Request from Claude chat: "Create an image editor Skill" or manually create folder structure.
 
 **2. Define SKILL.md**: Write clear YAML metadata with specific, actionable descriptions:
+
 ```yaml
 ---
 name: Report Generator
@@ -95,6 +99,7 @@ allowed-tools: [Read, Write, Bash, GitPython]
 ```
 
 **3. Add supporting scripts**: Place executable code in `/scripts`:
+
 ```python
 # scripts/report.py
 import git
@@ -116,6 +121,7 @@ def generate_report(repo_path, days=7):
 ```
 
 **4. Create templates**: Add reusable output formats in `/templates`:
+
 ```markdown
 # templates/summary.md
 # Project Report: {{period}}
@@ -165,6 +171,7 @@ def generate_report(repo_path, days=7):
 ### Decision Guide
 
 **Use Skills when:**
+
 - Extending project-limited workflows
 - Require deterministic script execution with AI orchestration
 - Need context-aware triggering, not explicit commands
@@ -172,6 +179,7 @@ def generate_report(repo_path, days=7):
 - Want to bundle related scripts, templates, and instructions together
 
 **Use alternatives when:**
+
 - **Simple prompts** → Slash commands (lighter weight)
 - **Lifecycle automation** → Hooks (event-driven)
 - **Complex stateful workflows** → Agents (multi-step reasoning)
@@ -183,12 +191,14 @@ def generate_report(repo_path, days=7):
 ### Code Analysis and Reporting
 
 **Automated code reviews**:
+
 - Skill parses recent diffs
 - Checks style against project guidelines
 - Outputs annotated reports with suggestions
 - Uses templates for consistent formatting
 
 **Project report generation**:
+
 - Summarizes repo structure, dependencies, progress
 - Pulls data from git, issue trackers, code metrics
 - Outputs in Markdown or docx
@@ -197,12 +207,14 @@ def generate_report(repo_path, days=7):
 ### File Processing
 
 **PDF extraction**:
+
 - Python script using PyPDF2 or pdfplumber
 - Extracts tables, forms, text
 - Structures output for downstream processing
 - Template-based formatting
 
 **Image processing**:
+
 - On-demand crop/rotate/filter of images
 - Pillow for transformations
 - Batch processing support
@@ -211,12 +223,14 @@ def generate_report(repo_path, days=7):
 ### Workflow Automation
 
 **Test suite automation**:
+
 - Scripted test runners
 - Output parsing and result templating
 - Coverage analysis
 - Integration with CI/CD
 
 **Documentation generation**:
+
 - Creates custom READMEs, changelogs, onboarding guides
 - Tailored to project changes via git analysis
 - Template-based consistency
@@ -227,6 +241,7 @@ def generate_report(repo_path, days=7):
 ### With Plugins
 
 Skills can be bundled as components within plugin packages:
+
 ```
 my-plugin/
 ├── .claude-plugin/
@@ -244,6 +259,7 @@ Plugin manifest references Skills in the `skills` field.
 ### With Slash Commands
 
 Slash commands can explicitly invoke Skills:
+
 ```markdown
 # .claude/commands/generate-report.md
 Use the report-generator Skill to create a project summary for the last $1 days.
@@ -252,6 +268,7 @@ Use the report-generator Skill to create a project summary for the last $1 days.
 ### With Hooks
 
 Hooks can trigger Skills at lifecycle events:
+
 ```json
 {
   "hooks": {
@@ -267,6 +284,7 @@ Skills provide deterministic execution within agent workflows. Agents can invoke
 ### With MCP
 
 Skills can leverage MCP servers for external data:
+
 ```markdown
 # In SKILL.md
 Use MCP Jira server to fetch active issues, then generate report combining git changes and issue status.
@@ -277,6 +295,7 @@ Use MCP Jira server to fetch active issues, then generate report combining git c
 ### Context and Token Management
 
 Skills enable efficient context usage:
+
 - Only Skill metadata loaded initially
 - Scripts and templates referenced on demand
 - Prevents bloating main conversation context
@@ -339,6 +358,7 @@ Skills using platform-specific scripts (PowerShell on Windows, Bash on Linux) ma
 ## Summary
 
 Claude Code Skills represent a powerful middle ground in the extensibility spectrum:
+
 - **Lighter than plugins** (no full package manifest, simpler distribution)
 - **More structured than slash commands** (bundled scripts, templates, resources)
 - **More deterministic than agents** (explicit script execution, predictable outputs)
@@ -347,6 +367,7 @@ Claude Code Skills represent a powerful middle ground in the extensibility spect
 Skills enable developers to create context-aware, reusable, project-scoped capabilities that combine AI orchestration with deterministic code execution. By packaging instructions, scripts, and templates together, Skills provide the right abstraction for repeatable automation tasks that benefit from Claude's intelligent coordination but require predictable, script-driven implementation.
 
 When deciding whether to create a Skill, ask:
+
 1. Is this task repeatable and well-defined?
 2. Does it benefit from AI judgment in coordination or parameter extraction?
 3. Does it require deterministic script execution (file processing, external API calls)?
@@ -357,9 +378,11 @@ If yes to most of these, Skills are likely the right tool for the job.
 ## Related Concepts
 
 ### Prerequisites
+
 - [[claude_code]] - Understanding Claude Code platform is essential before learning about Skills
 
 ### Related Topics
+
 - [[claude_code_plugins]] - Skills can be bundled within plugin packages as one extension type
 - [[claude_code_slash_commands]] - Slash commands are lighter-weight for simple prompts; Skills add scripts and templates
 - [[claude_code_hooks]] - Hooks provide event-driven automation; Skills provide context-aware task execution
@@ -367,14 +390,15 @@ If yes to most of these, Skills are likely the right tool for the job.
 - [[claude_agent_sdk]] - Agent SDK builds production agents while Skills extend Claude Code interactively
 
 ### Extends
+
 - [[claude_code]] - Skills extend Claude Code's capabilities through modular, context-aware automation
 
 ## References
 
-[1] https://apidog.com/blog/claude-skills/ - Practical guide to Claude Skills
-[2] https://skywork.ai/blog/how-to-use-skills-in-claude-code-install-path-project-scoping-testing/ - Project scoping and testing Skills
-[3] https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills - Agent Skills architecture
-[4] https://docs.claude.com/en/docs/claude-code/skills - Official Skills documentation
-[5] https://www.anthropic.com/news/skills - Skills announcement
-[6] https://docs.claude.com/en/api/skills-guide - Skills API guide
-[7] https://simonwillison.net/2025/Oct/16/claude-skills/ - Simon Willison's analysis
+[1] <https://apidog.com/blog/claude-skills/> - Practical guide to Claude Skills
+[2] <https://skywork.ai/blog/how-to-use-skills-in-claude-code-install-path-project-scoping-testing/> - Project scoping and testing Skills
+[3] <https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills> - Agent Skills architecture
+[4] <https://docs.claude.com/en/docs/claude-code/skills> - Official Skills documentation
+[5] <https://www.anthropic.com/news/skills> - Skills announcement
+[6] <https://docs.claude.com/en/api/skills-guide> - Skills API guide
+[7] <https://simonwillison.net/2025/Oct/16/claude-skills/> - Simon Willison's analysis

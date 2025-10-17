@@ -10,21 +10,25 @@ tags: [claude-code, plugins, extensibility, mcp, tools]
 ### Four Extension Types
 
 **Slash Commands**: User-defined shortcuts for recurring tasks registered as command handlers
+
 - Custom workflow triggers (e.g., `/review`, `/document`, `/deploy`)
 - Execute complex multi-step operations with single command
 - Can invoke agents, run scripts, or trigger external integrations
 
 **Subagents**: Specialized agent modules focused on specific development tasks
+
 - Run in isolated sandboxes with dedicated context
 - Receive prompts and project context from main agent
 - Handle domain-specific operations (testing, documentation, optimization)
 
 **MCP Servers**: Bridges to external data and services using Model Context Protocol
+
 - Standardized integration with third-party tools (Jira, GitHub, databases)
 - RESTful endpoints with JSON schema validation
 - Permission controls and authentication management
 
 **Hooks**: Custom logic injected at specific workflow lifecycle events
+
 - Pre-commit validation and formatting
 - Post-generation testing and quality checks
 - Event-driven automation triggers
@@ -32,6 +36,7 @@ tags: [claude-code, plugins, extensibility, mcp, tools]
 ## How Plugins Work
 
 ### Plugin Package Structure
+
 ```
 my-plugin/
 ├── manifest.json          # Extension point declarations
@@ -42,6 +47,7 @@ my-plugin/
 ```
 
 ### Execution Model
+
 - **Isolation**: Plugins run in sandboxed environments for security
 - **API Interface**: Defined APIs for each extension point
 - **Context Passing**: Claude Code provides project context and state
@@ -60,6 +66,7 @@ my-plugin/
 ### API/SDK Support
 
 **Anthropic provides official SDKs** for plugin development:
+
 - Slash command handler registration API
 - Subagent definition interfaces with sandbox execution
 - MCP server scaffolding tools
@@ -87,11 +94,13 @@ my-plugin/
 Claude Code uses a decentralized marketplace model where developers create Git repositories containing a `marketplace.json` manifest. This file must follow the official Anthropic schema:
 
 **Required top-level fields:**
+
 - `name` (string): Marketplace identifier, kebab-case, no spaces
 - `owner` (object): Must have `"name"` (string), optionally `"email"` (string)
 - `plugins` (array): List of plugin objects
 
 **Per-plugin required fields:**
+
 - `name` (string): Plugin identifier
 - `source` (string or object): Plugin location
 - `description` (string): Short description
@@ -99,6 +108,7 @@ Claude Code uses a decentralized marketplace model where developers create Git r
 - `version` (string): Version number (recommended)
 
 **Critical schema rules:**
+
 1. **source field**: For monorepo plugins, use simple string path `"./plugins/pluginname"`. For remote plugins, use object with `"source": "github"` and `"repo": "owner/repo"` fields.
 2. **author/owner fields**: Must be objects with `name` property, NOT strings. Do not include `url` field.
 3. **No extraneous fields**: Schema validation is strict - only use documented fields.
@@ -170,6 +180,7 @@ Individual plugins contain a `.claude-plugin/plugin.json` file declaring their e
 ```
 
 **Field Requirements:**
+
 - **commands**: Array of file paths to markdown files (e.g., `"./commands/name.md"`)
 - **agents**: String path to directory (e.g., `"./agents/"`) OR array of file paths
 - **hooks**: String path to JSON config file (e.g., `"./hooks/hooks.json"`)
@@ -193,6 +204,7 @@ my-plugin/
 ```
 
 **Example .mcp.json:**
+
 ```json
 {
   "mcpServers": {
@@ -213,6 +225,7 @@ my-plugin/
 ```
 
 **Key points:**
+
 - Use `${CLAUDE_PLUGIN_ROOT}` variable to reference plugin directory
 - Put actual credentials in `env` object (MCP doesn't auto-load `.env` files)
 - The `.mcp.json` at plugin root is automatically loaded when plugin is installed
@@ -221,18 +234,22 @@ my-plugin/
 ### Common Schema Errors
 
 **Error: "plugins.0.source: Invalid input"**
+
 - Cause: Using object format `{"type": "git", "url": "...", "path": "..."}` instead of simple string
 - Fix: Use `"source": "./plugins/pluginname"` for monorepo plugins
 
 **Error: "plugins.0.author: Expected object, received string"**
+
 - Cause: Using `"author": "Name"` instead of object
 - Fix: Use `"author": {"name": "Name", "email": "email@domain.com"}`
 
 **Error: "owner: Required"**
+
 - Cause: Missing top-level `owner` field
 - Fix: Add `"owner": {"name": "Your Name"}` at marketplace root
 
 **Error: "mcpServers: Invalid input: must start with './'"**
+
 - Cause: Using `"mcpServers"` field in `plugin.json` (this field doesn't work)
 - Fix: Remove `mcpServers` from `plugin.json`, create `.mcp.json` at plugin root instead
 
@@ -241,11 +258,13 @@ my-plugin/
 ### Installation Methods
 
 **Command-Line Installation**:
+
 ```bash
 /plugin install review-assistant
 ```
 
 **Project-Level Configuration**:
+
 ```json
 // .claude/settings.json
 {
@@ -258,6 +277,7 @@ my-plugin/
 ```
 
 ### Plugin Management
+
 - Enable/disable on demand for focused environments
 - Centralized team management via configuration
 - Automatic updates from trusted repositories
@@ -266,13 +286,16 @@ my-plugin/
 ## MCP Integration
 
 ### Model Context Protocol Role
+
 MCP serves as the primary protocol for external service integration in plugins:
+
 - **Standardized Communication**: REST/JSON endpoints with schema validation
 - **Authentication**: OAuth, API keys, or service tokens
 - **Context Exchange**: Bidirectional data flow between Claude Code and external tools
 - **Reliability**: Error handling, retries, and connection management
 
 ### MCP Server Plugin Pattern
+
 ```typescript
 // MCP server endpoint
 POST /mcp/jira/create-issue
@@ -286,21 +309,25 @@ POST /mcp/jira/create-issue
 ## Common Use Cases
 
 **Development Workflow Automation**:
+
 - Custom code review with quality checks
 - Automated test generation and execution
 - Documentation generation and synchronization
 
 **External Tool Integration**:
+
 - Project management (Jira, Linear, Asana)
 - Version control operations (GitHub, GitLab)
 - Cloud services (AWS, GCP, Azure APIs)
 
 **Quality Enforcement**:
+
 - Pre-commit linting and formatting
 - Security scanning and vulnerability checks
 - Style guide enforcement
 
 **Team Collaboration**:
+
 - Shared workflow templates
 - Standardized code generation patterns
 - Custom deployment pipelines
@@ -308,21 +335,25 @@ POST /mcp/jira/create-issue
 ## Plugin Examples
 
 **Review Assistant**:
+
 - `/review` slash command for code critique
 - Specialized review agent with best practices knowledge
 - Pre-commit hook ensuring tests pass
 
 **Jira Integration**:
+
 - MCP server synchronizing issue updates
 - `/ticket` command for creating and linking issues
 - Automatic status updates on branch merges
 
 **AutoDoc Generator**:
+
 - Subagent analyzing code for documentation
 - `/document` command generating markdown docs
 - Hook updating docs on code changes
 
 **LintEnforcer**:
+
 - Hook running linters after code edits
 - Auto-fix common issues
 - Report remaining violations to user
@@ -330,18 +361,21 @@ POST /mcp/jira/create-issue
 ## Technical Implementation
 
 ### Security Model
+
 - Sandboxed execution prevents plugin interference
 - Permission system controls file and network access
 - Code signing for trusted plugin sources
 - Audit logging for plugin actions
 
 ### Performance Considerations
+
 - Lazy loading of plugins on demand
 - Caching for MCP server responses
 - Async execution for non-blocking operations
 - Resource limits per plugin
 
 ### Extension API
+
 ```typescript
 // Slash command handler
 export function registerCommand(name: string, handler: CommandHandler) {
@@ -378,9 +412,11 @@ Claude Code plugins represent the platform's extensibility layer, enabling teams
 ## Related Concepts
 
 ### Prerequisites
+
 - [[claude_code]] - Understanding Claude Code platform is essential before learning about its plugin system
 
 ### Related Topics
+
 - [[mcp_overview]] - Plugins use MCP for external tool integration
 - [[claude_code_agents]] - Subagent plugins are a type of agent extension in Claude Code
 - [[claude_code_slash_commands]] - Slash commands are a plugin component bundled in command directories
@@ -388,11 +424,12 @@ Claude Code plugins represent the platform's extensibility layer, enabling teams
 - [[claude_code_skills]] - Skills are a plugin component providing modular, context-aware capabilities
 
 ### Extends
+
 - [[claude_code]] - Plugins extend Claude Code's capabilities through modular extensions
 
 ## References
 
-[1] https://docs.claude.com/en/docs/claude-code/plugin-marketplaces - Official marketplace.json schema documentation
-[2] https://docs.claude.com/en/docs/claude-code/plugins - Official plugin development guide
-[3] https://www.anthropic.com/news/claude-code-plugins - Plugin announcement
-[4] https://www.anthropic.com/engineering/desktop-extensions - Desktop extensions engineering blog
+[1] <https://docs.claude.com/en/docs/claude-code/plugin-marketplaces> - Official marketplace.json schema documentation
+[2] <https://docs.claude.com/en/docs/claude-code/plugins> - Official plugin development guide
+[3] <https://www.anthropic.com/news/claude-code-plugins> - Plugin announcement
+[4] <https://www.anthropic.com/engineering/desktop-extensions> - Desktop extensions engineering blog

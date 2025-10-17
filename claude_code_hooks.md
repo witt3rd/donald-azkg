@@ -24,31 +24,37 @@ Claude Code supports multiple lifecycle events where hooks can be attached:
 ### Core Hook Events
 
 **PreToolUse**:
+
 - Triggers before Claude Code executes any tool (file operations, shell commands, etc.)
 - Use cases: Argument validation, blocking risky operations, configuration checks
 - Example: Prevent destructive commands like `rm -rf` in production directories
 
 **PostToolUse**:
+
 - Triggers after a tool successfully completes execution
 - Use cases: Auto-formatting, running tests, action logging, side effects
 - Example: Run `prettier` after code generation, execute test suite after changes
 
 **UserPromptSubmit**:
+
 - Triggers when user submits a prompt, before AI processes the request
 - Use cases: Inject additional context, validate input, pre-process requests
 - Example: Append recent git changes to user's prompt for better context
 
 **SessionStart**:
+
 - Triggers at the beginning of each Claude Code session
 - Use cases: Environment setup, loading project state, initialization
 - Example: Pull latest git changes, fetch active Jira tickets, load secrets
 
 **Notification**:
+
 - Triggers when Claude Code sends a notification (permission requests, alerts)
 - Use cases: Custom desktop notifications, team alerts, logging
 - Example: Send Slack message when Claude requests sensitive operation approval
 
 **Stop**:
+
 - Triggers after Claude Code completes its overall response
 - Use cases: Summarization, completion signals, cleanup
 - Example: Generate change summary, update project dashboard
@@ -65,6 +71,7 @@ Some integrations (like GitButler) provide additional hooks:
 ### Installation
 
 1. **Install Claude Code CLI**:
+
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
@@ -72,6 +79,7 @@ npm install -g @anthropic-ai/claude-code
 2. **Authenticate** Claude Code to your environment
 
 3. **Enable hooks module** in Claude Code configuration:
+
 ```json
 {
   "features": ["hooks"]
@@ -115,16 +123,19 @@ project-root/
 Hooks can be managed via CLI commands:
 
 **Register a hook**:
+
 ```bash
 claude-code hook register PostToolUse scripts/format.sh
 ```
 
 **List configured hooks**:
+
 ```bash
 claude-code hook list
 ```
 
 **Unregister a hook**:
+
 ```bash
 claude-code hook unregister <hook-id>
 ```
@@ -144,6 +155,7 @@ claude-code hook unregister <hook-id>
 Hooks receive structured event data they can inspect and use for logic:
 
 **PreToolUse event**:
+
 ```json
 {
   "tool": "shell",
@@ -154,6 +166,7 @@ Hooks receive structured event data they can inspect and use for logic:
 ```
 
 **PostToolUse event**:
+
 ```json
 {
   "tool": "edit",
@@ -168,6 +181,7 @@ Hooks receive structured event data they can inspect and use for logic:
 Hooks can be implemented in any language that can be executed as a shell command:
 
 **Python example** (`scripts/validate.py`):
+
 ```python
 #!/usr/bin/env python3
 import sys
@@ -186,6 +200,7 @@ if __name__ == "__main__":
 ```
 
 **TypeScript/Node example** (`scripts/format.js`):
+
 ```javascript
 #!/usr/bin/env node
 const { execSync } = require('child_process');
@@ -212,6 +227,7 @@ postToolUse(event).then(() => process.exit(0)).catch(err => {
 Hooks can be registered programmatically using Claude Code SDKs:
 
 **Python SDK**:
+
 ```python
 from anthropic.claude_code import ClaudeCode
 
@@ -236,6 +252,7 @@ client = ClaudeCode(
 ```
 
 **TypeScript SDK**:
+
 ```typescript
 import { ClaudeCode, HookEvent } from "@anthropic-ai/claude-code";
 
@@ -270,6 +287,7 @@ const client = new ClaudeCode({
 ### Ideal Use Cases for Hooks
 
 **Use hooks when you need**:
+
 - Guaranteed execution at specific workflow moments
 - Background automation without user intervention
 - Integration with existing CLI tools and scripts
@@ -277,6 +295,7 @@ const client = new ClaudeCode({
 - Side effects after AI actions
 
 **Avoid hooks for**:
+
 - Complex multi-step reasoning (use subagents)
 - User-facing interactive features (use slash commands)
 - Stateful external service integration (use MCP servers)
@@ -286,6 +305,7 @@ const client = new ClaudeCode({
 ### Code Quality Enforcement
 
 **Auto-formatting after edits** (PostToolUse):
+
 ```bash
 #!/bin/bash
 # scripts/format.sh
@@ -294,6 +314,7 @@ eslint --fix "**/*.{ts,js}"
 ```
 
 **Prevent risky operations** (PreToolUse):
+
 ```python
 #!/usr/bin/env python3
 import sys, json
@@ -308,6 +329,7 @@ if event["tool"] == "shell":
 ### Testing and Validation
 
 **Run tests after code changes** (PostToolUse):
+
 ```bash
 #!/bin/bash
 # scripts/test.sh
@@ -323,6 +345,7 @@ fi
 ### Environment and Context Management
 
 **Load project context at session start** (SessionStart):
+
 ```bash
 #!/bin/bash
 # scripts/init.sh
@@ -335,6 +358,7 @@ curl -u $JIRA_USER:$JIRA_TOKEN "$JIRA_API/search?jql=assignee=$USER+AND+status=I
 ```
 
 **Inject context into prompts** (UserPromptSubmit):
+
 ```python
 #!/usr/bin/env python3
 import sys, json, subprocess
@@ -346,6 +370,7 @@ print(f"\n[Recent commits: {git_log}]", file=sys.stderr)
 ### Notifications and Integration
 
 **Send team notifications** (Notification):
+
 ```bash
 #!/bin/bash
 # scripts/notify.sh
@@ -356,6 +381,7 @@ curl -X POST https://hooks.slack.com/services/YOUR/WEBHOOK/URL \
 ```
 
 **Generate completion summary** (Stop):
+
 ```bash
 #!/bin/bash
 # scripts/summarize.sh
@@ -366,6 +392,7 @@ git diff --stat >> .claude/session_log.txt
 ### Security and Compliance
 
 **Audit logging** (PreToolUse & PostToolUse):
+
 ```python
 #!/usr/bin/env python3
 import sys, json, datetime
@@ -385,21 +412,25 @@ with open(".claude/audit.log", "a") as f:
 ### Technical Limitations
 
 **Shell-based execution**:
+
 - Hooks are primarily terminal/CLI-focused
 - Limited support for GUI interactions
 - Must be executable in user's shell environment
 
 **Synchronous blocking**:
+
 - Hooks block workflow until completion
 - Long-running hooks degrade user experience
 - No built-in timeout mechanism (must implement in script)
 
 **Error handling**:
+
 - Failed hooks (non-zero exit code) can block workflow
 - Debugging hook failures can be challenging
 - Limited error reporting to user
 
 **Platform dependencies**:
+
 - Hooks must be cross-platform or environment-specific
 - Path differences between Windows/Unix
 - Shell availability (bash, zsh, PowerShell)
@@ -407,11 +438,13 @@ with open(".claude/audit.log", "a") as f:
 ### Security Considerations
 
 **Arbitrary code execution**:
+
 - Hooks execute with full user permissions
 - Can access local resources and network
 - Shared configurations may introduce malicious hooks
 
 **Best practices**:
+
 - Always review hook scripts before use
 - Restrict hook execution context where possible
 - Audit and version control all hooks
@@ -420,11 +453,13 @@ with open(".claude/audit.log", "a") as f:
 ### Configuration Complexity
 
 **Setup overhead**:
+
 - Requires technical expertise to configure properly
 - Maintaining multiple hooks increases complexity
 - Hook interactions can be difficult to reason about
 
 **No visual management UI**:
+
 - CLI and file-based configuration only
 - No graphical hook manager (as of 2025)
 - Difficult to discover what hooks are active
@@ -436,6 +471,7 @@ with open(".claude/audit.log", "a") as f:
 Chain hooks to create sophisticated workflows:
 
 **PostToolUse → dependency audit → vulnerability scan → changelog update**:
+
 ```bash
 #!/bin/bash
 npm audit --audit-level=moderate
@@ -446,6 +482,7 @@ conventional-changelog -p angular -i CHANGELOG.md -s
 ### External System Integration
 
 **Trigger CI/CD pipelines**:
+
 ```bash
 #!/bin/bash
 # Hook into GitHub Actions via webhook
@@ -455,6 +492,7 @@ curl -X POST https://api.github.com/repos/owner/repo/actions/workflows/build.yml
 ```
 
 **Sync with project management**:
+
 ```python
 #!/usr/bin/env python3
 # Update Jira ticket status based on code changes
@@ -467,6 +505,7 @@ issue.update(fields={'status': {'name': 'In Review'}})
 ### Context-Aware Automation
 
 **Dynamic test selection based on changed files**:
+
 ```bash
 #!/bin/bash
 CHANGED_FILES=$(git diff --name-only HEAD~1)
@@ -478,6 +517,7 @@ fi
 ```
 
 **Adaptive documentation generation**:
+
 ```bash
 #!/bin/bash
 # Generate docs only for modified modules
@@ -493,21 +533,25 @@ done
 ### Hook Development
 
 **Keep hooks simple and focused**:
+
 - Each hook should do one thing well
 - Avoid complex logic in shell scripts
 - Extract reusable functions to libraries
 
 **Fast execution**:
+
 - Hooks should complete in seconds, not minutes
 - Use background processes for long-running tasks
 - Implement timeouts to prevent hangs
 
 **Defensive programming**:
+
 - Validate all inputs and environment variables
 - Handle errors gracefully with meaningful messages
 - Use exit codes correctly (0 = success, non-zero = failure)
 
 **Logging and debugging**:
+
 - Log hook execution for troubleshooting
 - Include timestamps and context in logs
 - Use `set -x` in bash for debug tracing
@@ -515,16 +559,19 @@ done
 ### Organization and Maintenance
 
 **Version control hooks**:
+
 - Keep all hooks in project repository
 - Document hook purpose and usage
 - Review hook changes through code review
 
 **Isolate hook scripts**:
+
 - Place in dedicated `scripts/` or `hooks/` directory
 - Use clear, descriptive filenames
 - Include README documenting each hook
 
 **Testing hooks**:
+
 - Test hooks independently of Claude Code
 - Create test fixtures for various scenarios
 - Validate cross-platform compatibility
@@ -532,16 +579,19 @@ done
 ### Security and Permissions
 
 **Principle of least privilege**:
+
 - Limit hook permissions to minimum necessary
 - Avoid running hooks as root/admin
 - Use service accounts for external integrations
 
 **Audit regularly**:
+
 - Review active hooks periodically
 - Remove unused or obsolete hooks
 - Monitor hook execution logs for anomalies
 
 **Validate external inputs**:
+
 - Never trust event data blindly
 - Sanitize file paths and shell arguments
 - Prevent injection attacks
@@ -557,6 +607,7 @@ done
 **Documentation**: Comprehensive official docs with examples. Active discussion in community forums and GitHub.
 
 **Future directions**:
+
 - Async/non-blocking hook execution
 - Richer event payloads with more context
 - Hook marketplace for sharing common hooks
@@ -567,9 +618,11 @@ Claude Code hooks provide precision automation within AI-augmented workflows, en
 ## Related Concepts
 
 ### Prerequisites
+
 - [[claude_code]] - Understanding Claude Code platform is essential for using hooks
 
 ### Related Topics
+
 - [[claude_code_plugins]] - Hooks are a plugin component for event-driven automation
 - [[claude_code_slash_commands]] - Slash commands provide complementary manual workflow triggers
 - [[claude_code_agents]] - Agents handle complex workflows beyond simple hook automation
@@ -577,12 +630,12 @@ Claude Code hooks provide precision automation within AI-augmented workflows, en
 
 ## References
 
-[1] https://www.eesel.ai/blog/hooks-in-claude-code
-[2] https://www.cometapi.com/claude-code-hooks-what-is-and-how-to-use-it/
-[3] https://www.anthropic.com/news/claude-code-plugins
-[4] https://anthropic.com/news/enabling-claude-code-to-work-more-autonomously
-[5] https://www.siddharthbharath.com/claude-code-the-complete-guide/
-[6] https://docs.gitbutler.com/features/ai-integration/claude-code-hooks
-[7] https://www.anthropic.com/engineering/claude-code-best-practices
-[8] https://www.builder.io/blog/claude-code
-[9] https://docs.claude.com/en/docs/claude-code/hooks-guide
+[1] <https://www.eesel.ai/blog/hooks-in-claude-code>
+[2] <https://www.cometapi.com/claude-code-hooks-what-is-and-how-to-use-it/>
+[3] <https://www.anthropic.com/news/claude-code-plugins>
+[4] <https://anthropic.com/news/enabling-claude-code-to-work-more-autonomously>
+[5] <https://www.siddharthbharath.com/claude-code-the-complete-guide/>
+[6] <https://docs.gitbutler.com/features/ai-integration/claude-code-hooks>
+[7] <https://www.anthropic.com/engineering/claude-code-best-practices>
+[8] <https://www.builder.io/blog/claude-code>
+[9] <https://docs.claude.com/en/docs/claude-code/hooks-guide>

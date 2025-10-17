@@ -10,6 +10,7 @@ This note contains real, production-tested code examples from the ottomator-agen
 **Source**: [coleam00/ottomator-agents](https://github.com/coleam00/ottomator-agents/tree/main/claude-agent-sdk-demos)
 
 **Key implementations**:
+
 - `quickstart/` - Basic examples for learning
 - `telegram_integration/` - Full Telegram bot with session management
 - `obsidian_integration/` - OpenAI-compatible API for Obsidian
@@ -21,6 +22,7 @@ This note contains real, production-tested code examples from the ottomator-agen
 A clean, minimal CLI demonstrating core Agent SDK patterns.
 
 **Key features**:
+
 - Session persistence (resume conversations)
 - Streaming response display
 - Tool usage indicators
@@ -142,6 +144,7 @@ if __name__ == "__main__":
 ```
 
 **Usage**:
+
 ```bash
 # Start new conversation
 python simple_cli.py
@@ -151,6 +154,7 @@ python simple_cli.py --continue
 ```
 
 **Key patterns demonstrated**:
+
 - `ClaudeSDKClient` context manager for connection handling
 - `receive_response()` for streaming complete responses
 - Session persistence across runs
@@ -163,6 +167,7 @@ python simple_cli.py --continue
 Production Telegram bot with advanced session management.
 
 **Architecture**:
+
 - Per-user session isolation
 - Per-user working directory configuration
 - Persistent conversation context
@@ -637,11 +642,13 @@ async def convert_sdk_to_openai_stream(messages, model_name: str):
 ### 1. Session Management Pattern
 
 **File-based session storage**:
+
 - One JSON file per user/conversation
 - Preserve metadata (created_at, last_updated)
 - Separate session ID from configuration (cwd)
 
 **Benefits**:
+
 - Simple, no database required
 - Easy to inspect and debug
 - Survives bot restarts
@@ -659,6 +666,7 @@ async with ClaudeSDKClient(options=options) as client:
 ```
 
 **Why**:
+
 - Ensures proper connection cleanup
 - Handles errors gracefully
 - Resource management
@@ -680,11 +688,13 @@ async for message in client.receive_messages():
 ```
 
 **Use `receive_response()` for**:
+
 - Turn-based chat interfaces
 - When you need the complete response
 - Simpler code
 
 **Use `receive_messages()` for**:
+
 - Real-time streaming UIs
 - Custom flow control
 - Advanced use cases
@@ -778,11 +788,13 @@ WORKING_DIRECTORY=/path/to/workspace   # Default working directory
 **Two options**:
 
 1. **CLI OAuth** (Recommended for development):
+
 ```bash
 claude auth login
 ```
 
 2. **API Key** (For production):
+
 ```python
 # SDK automatically uses ANTHROPIC_API_KEY environment variable
 ```
@@ -865,17 +877,20 @@ async def test_agent_query():
 ## Related Concepts
 
 ### Prerequisites
+
 - [[claude_agent_sdk]] - Understanding SDK fundamentals before implementation examples
 
 ### Related Topics
+
 - [[claude_agent_sdk_production]] - Production patterns and observability
 - [[python_mcp_sdk]] - MCP server integration examples
 - [[mcp_overview]] - MCP protocol used in examples
 
 ### Extends
+
 - [[claude_agent_sdk]] - Real code examples extend conceptual understanding
 
 ## References
 
-[1] https://github.com/coleam00/ottomator-agents/tree/main/claude-agent-sdk-demos - Source repository
-[2] https://docs.claude.com/en/api/agent-sdk/python - Official Python SDK documentation
+[1] <https://github.com/coleam00/ottomator-agents/tree/main/claude-agent-sdk-demos> - Source repository
+[2] <https://docs.claude.com/en/api/agent-sdk/python> - Official Python SDK documentation

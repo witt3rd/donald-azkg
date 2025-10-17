@@ -12,6 +12,7 @@ Production deployment of Claude Agent SDK requires careful consideration of arch
 Wrap the Agent SDK with a standard API interface (OpenAI-compatible or custom) to enable integration with existing tools and services.
 
 **Why this pattern:**
+
 - Existing tools expect OpenAI-compatible endpoints
 - Enables drop-in replacement for other LLM APIs
 - Provides abstraction layer for future SDK changes
@@ -94,6 +95,7 @@ def convert_message_to_openai(claude_message) -> dict:
 Integrate Agent SDK with messaging platforms (Telegram, Slack, Discord) for remote agent control.
 
 **Why this pattern:**
+
 - Enables mobile access to agents
 - Asynchronous communication model
 - Built-in user authentication
@@ -196,6 +198,7 @@ if __name__ == "__main__":
 ```
 
 **Key features from video:**
+
 - Dynamic working directory changes via `/setdir` command
 - Agent can modify its own configuration files
 - Tool usage displayed in chat
@@ -206,6 +209,7 @@ if __name__ == "__main__":
 Integrate Agent SDK with knowledge management tools (Obsidian, Notion, Roam) for intelligent note-taking and content management.
 
 **Why this pattern:**
+
 - Leverage agent's file manipulation capabilities
 - Context-aware note creation and linking
 - Automated knowledge graph maintenance
@@ -288,6 +292,7 @@ def format_sse_chunk(message):
 ```
 
 **Real-world usage from video:**
+
 - "Add bullet points to my script" - Agent finds file, edits it
 - "Make my list shorter" - Agent reads, condenses, updates
 - Operates on markdown files with wikilinks
@@ -298,6 +303,7 @@ def format_sse_chunk(message):
 ### 1. Sentry Integration for Agent Tracing
 
 **Why Sentry:**
+
 - Distributed tracing for agent workflows
 - Tool call visibility
 - Token usage tracking
@@ -372,6 +378,7 @@ responses = query_with_tracing("Refactor main.py for readability", options)
 ```
 
 **What you get in Sentry dashboard:**
+
 - Every agent interaction as a trace
 - Tool execution timeline
 - Token usage per query
@@ -381,6 +388,7 @@ responses = query_with_tracing("Refactor main.py for readability", options)
 
 **Example from video:**
 The presenter showed Sentry traces for:
+
 - Sequential thinking MCP calls (multiple thinking steps)
 - File edit operations (showing exact file paths)
 - Token usage metrics per request
@@ -1081,12 +1089,14 @@ class BatchAgent:
 ## Summary: Production Deployment Checklist
 
 ### Architecture
+
 - [ ] Choose integration pattern (API wrapper, messaging, knowledge management)
 - [ ] Implement OpenAI-compatible endpoints if needed
 - [ ] Design configuration management strategy
 - [ ] Plan for multi-tenancy if applicable
 
 ### Observability
+
 - [ ] Integrate Sentry for distributed tracing
 - [ ] Implement structured logging
 - [ ] Set up Prometheus metrics
@@ -1094,12 +1104,14 @@ class BatchAgent:
 - [ ] Configure alerting thresholds
 
 ### Resilience
+
 - [ ] Implement retry with exponential backoff
 - [ ] Add circuit breaker pattern
 - [ ] Design graceful degradation strategy
 - [ ] Handle partial failures
 
 ### Security
+
 - [ ] Secure API key management (environment variables, secret manager)
 - [ ] Implement permission isolation by trust level
 - [ ] Restrict working directory boundaries
@@ -1107,12 +1119,14 @@ class BatchAgent:
 - [ ] Encrypt sensitive configuration
 
 ### Performance
+
 - [ ] Cache repeated queries
 - [ ] Implement batch processing for bulk operations
 - [ ] Optimize context loading
 - [ ] Monitor token usage and costs
 
 ### Operations
+
 - [ ] Document deployment procedures
 - [ ] Create runbooks for common issues
 - [ ] Set up health checks and readiness probes
@@ -1122,20 +1136,23 @@ class BatchAgent:
 ## Related Concepts
 
 ### Prerequisites
+
 - [[claude_agent_sdk]] - Understanding Agent SDK fundamentals is essential before production deployment
 
 ### Related Topics
+
 - [[mcp_overview]] - MCP servers are critical for extending agent capabilities
 - [[python_mcp_sdk]] - Building custom MCP servers for production agents
 - [[claude_code]] - Understanding Claude Code architecture informs Agent SDK patterns
 
 ### Extends
+
 - [[claude_agent_sdk]] - Production deployment patterns extend basic Agent SDK usage
 
 ## References
 
 [1] YouTube video demonstration: Telegram and Obsidian integrations with Claude Agent SDK
-[2] https://docs.sentry.io/platforms/python/integrations/anthropic/ - Sentry Anthropic integration
-[3] https://prometheus.io/docs/introduction/overview/ - Prometheus monitoring
-[4] https://grafana.com/docs/ - Grafana dashboards
-[5] https://docs.anthropic.com/en/api/agent-sdk/observability - Agent SDK observability guide
+[2] <https://docs.sentry.io/platforms/python/integrations/anthropic/> - Sentry Anthropic integration
+[3] <https://prometheus.io/docs/introduction/overview/> - Prometheus monitoring
+[4] <https://grafana.com/docs/> - Grafana dashboards
+[5] <https://docs.anthropic.com/en/api/agent-sdk/observability> - Agent SDK observability guide

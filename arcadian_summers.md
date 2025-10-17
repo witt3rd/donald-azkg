@@ -611,12 +611,14 @@ Arcadian Summers establishes precedent for:
 ## Source Materials
 
 **Original Series Bible:**
+
 - Creator: Tony Haynes
 - 12-episode structure with character arcs and world-building
 - Year 2339 temporal correction narrative
 - Adapted for first fully agentic television production, October 2025
 
 **Presentation Deck:**
+
 - Visual concept art and aesthetic direction
 - Character casting references
 - Detailed episode springboards
@@ -624,9 +626,10 @@ Arcadian Summers establishes precedent for:
 - Located: `attachments/Arcadian Summers/1) Arcadian Summers Presentation Deck.pdf`
 
 **Contact:**
+
 - The Tony Haynes Company
-- Website: www.iamtonyhaynes.com
-- Email: tonyhaynesbaby@aol.com
+- Website: <www.iamtonyhaynes.com>
+- Email: <tonyhaynesbaby@aol.com>
 
 ## References
 
