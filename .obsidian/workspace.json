@@ -168,17 +168,19 @@
   },
   "active": "cc0e2ef41058fdd8",
   "lastOpenFiles": [
+    "claude_code_plugins.md.tmp.11756.1760615971443",
+    "claude_code_plugins.md.tmp.11756.1760615942724",
+    "telegram-reader/telegram_mcp_troubleshooting.md.tmp.9692.1760590622241",
+    "telegram-reader/telegram_mcp_troubleshooting.md.tmp.9692.1760590543516",
+    "telegram-reader/telegram_mcp_troubleshooting.md.tmp.9692.1760590510588",
+    "telegram-reader/telegram_mcp_troubleshooting.md.tmp.9692.1760590504929",
+    "telegram-reader/telegram_setup_guide.md.tmp.40792.1760569853455",
+    "telegram-reader/mcp_plugin_setup.md",
     "telegram-reader/telegram_mcp_troubleshooting.md",
     "telegram-reader/telegram_mcp_troubleshooting.md.tmp.20308.1760564067410",
     "telegram-reader/telegram_session.session-journal",
     "telegram-reader/src/telegram_reader/cli.py.tmp.41176.1760476228441",
     "telegram-reader/src/telegram_reader/cli.py.tmp.41176.1760474565976",
-    "telegram-reader/src/telegram_reader/cli.py.tmp.41176.1760473955505",
-    "telegram-reader/telegram_session.session",
-    "telegram-reader/src/telegram_reader/__pycache__/__init__.cpython-313.pyc",
-    "telegram-reader/src/telegram_reader/__pycache__/cli.cpython-313.pyc",
-    "telegram-reader/src/telegram_reader/__pycache__",
-    "telegram-reader/uv.lock",
     "telegram-reader/telegram_setup_guide.md",
     "telegram-reader/README.md",
     "telegram_setup_guide.md",
@@ -201,8 +203,6 @@
     "debate.md",
     "a2a.md",
     "CLAUDE.md",
-    "llm_self_talk_optimization.md",
-    "scripts/README.md",
-    "agents_moc.md"
+    "llm_self_talk_optimization.md"
   ]
 }

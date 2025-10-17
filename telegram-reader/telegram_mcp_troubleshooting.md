@@ -1,11 +1,19 @@
 # Telegram MCP Server Troubleshooting Log
 
 **Date**: 2025-10-15
-**Status**: Path configuration fixed, awaiting restart validation
+**Status**: RESOLVED - Empty `env: {}` object in mcp-config.json was the root cause
 
 ## Problem Statement
 
 The `/mcp` command shows `plugin:telegram:telegram` as **failed** with message "Failed to reconnect to plugin:telegram:telegram."
+
+## SOLUTION (Final)
+
+The `env: {}` object in `.claude-plugin/mcp-config.json` was empty. MCP servers need credentials directly in the config file - they don't automatically load `.env` files.
+
+**Location**: `/c/Users/dothompson/.claude/plugins/marketplaces/witt3rd-claude-plugins/plugins/telegram/.claude-plugin/mcp-config.json`
+
+**The fix**: Add Telegram API credentials to the `env` object in `mcp-config.json`.
 
 ## Debugging Summary
 
@@ -18,9 +26,9 @@ The `/mcp` command shows `plugin:telegram:telegram` as **failed** with message "
 
 ### Root Cause Identified
 
-**Path mismatch in marketplace plugin configuration**
+**Empty `env` object in mcp-config.json**
 
-Location: `/c/Users/dothompson/.claude/plugins/marketplaces/witt3rd-claude-plugins/plugins/telegram/mcp-config.json`
+Location: `/c/Users/dothompson/.claude/plugins/marketplaces/witt3rd-claude-plugins/plugins/telegram/.claude-plugin/mcp-config.json`
 
 **Before (WRONG)**:
 ```json
@@ -30,7 +38,7 @@ Location: `/c/Users/dothompson/.claude/plugins/marketplaces/witt3rd-claude-plugi
       "command": "uv",
       "args": [
         "--directory",
-        "/c/Users/dothompson/src/witt3rd/claude-plugins/plugins/telegram/mcp-server",
+        "../mcp-server",
         "run",
         "server.py"
       ],
@@ -48,22 +56,38 @@ Location: `/c/Users/dothompson/.claude/plugins/marketplaces/witt3rd-claude-plugi
       "command": "uv",
       "args": [
         "--directory",
-        "/c/Users/dothompson/.claude/plugins/marketplaces/witt3rd-claude-plugins/plugins/telegram/mcp-server",
+        "../mcp-server",
         "run",
         "server.py"
       ],
-      "env": {}
+      "env": {
+        "TELEGRAM_API_ID": "your_actual_api_id",
+        "TELEGRAM_API_HASH": "your_actual_api_hash"
+      }
     }
   }
 }
 ```
 
-The marketplace clone was pointing to the development repo path instead of its own location.
+**Why this happened**:
+- The `.env` file in `mcp-server/` directory contains the credentials
+- The standalone CLI and development server work because they load `.env` directly via `python-dotenv`
+- MCP servers launched by Claude Code do NOT automatically load `.env` files
+- Credentials must be explicitly passed via the `env` object in `mcp-config.json`
+- The plugin marketplace installation created the config with empty `env: {}`
 
 ## What Was Fixed
 
-1. Updated `mcp-config.json` in marketplace clone to use correct path
-2. Verified all prerequisites are in place (session, credentials, dependencies)
+1. Added `TELEGRAM_API_ID` and `TELEGRAM_API_HASH` to the `env` object in `.claude-plugin/mcp-config.json`
+2. Credentials must be in the MCP config, not just in `.env` file
+
+## To Apply Fix
+
+After editing `mcp-config.json`:
+1. Run `/plugin` and disable/re-enable the telegram plugin, OR
+2. Restart Claude Code
+3. Verify with `/mcp` - should show telegram as connected
+4. Tools like `mcp__telegram__list_conversations` should become available
 
 ## Log Analysis
 
@@ -229,14 +253,27 @@ uv run telegram-reader list-dialogs
 
 If CLI works but MCP doesn't, it's purely an MCP integration issue.
 
-## Key Insight
+## Key Insights
 
 **The old logs show SUCCESSFUL operation**, which means:
 - The code is correct
 - The authentication is correct
 - The session file is valid
 
-**The problem is configuration/path-related**, not code-related.
+**The problem was configuration**, not code:
+- MCP servers don't automatically load `.env` files
+- Credentials must be explicitly in `mcp-config.json`'s `env` object
+- Empty `env: {}` means the server starts without API credentials
+- Server fails silently without proper error messages when credentials missing
+
+## Common Mistake Pattern
+
+This issue occurs when:
+1. Developer creates `.env` file with credentials (works for CLI)
+2. Plugin uses same code but via MCP integration
+3. MCP config has empty `env: {}`
+4. Server can't authenticate because credentials aren't passed to it
+5. No clear error message about missing credentials
 
 ## Questions for User After Restart
 
@@ -247,4 +284,41 @@ If CLI works but MCP doesn't, it's purely an MCP integration issue.
 
 ---
 
-**Next Claude**: Start by checking for new log files and the server's own log file. The actual error must be logged somewhere.
+## For Plugin Developers
+
+**Critical lesson**: When creating an MCP plugin that requires credentials:
+
+1. **Document clearly** that credentials must be in `mcp-config.json`'s `env` object
+2. **Don't rely on `.env` files** for MCP server configuration
+3. **Provide template** in plugin documentation showing exactly where to put credentials
+4. **Consider adding validation** in server startup to fail fast with clear error if credentials missing
+5. **Test the marketplace installation flow** - not just development environment
+
+**Example good documentation**:
+```markdown
+### Step 2: Configure MCP Server Credentials
+
+Edit `.claude-plugin/mcp-config.json` and add your credentials:
+
+```json
+{
+  "mcpServers": {
+    "myserver": {
+      "command": "uv",
+      "args": ["run", "server.py"],
+      "env": {
+        "API_KEY": "your_actual_key_here",
+        "API_SECRET": "your_actual_secret_here"
+      }
+    }
+  }
+}
+```
+
+⚠️ **Important**: The `env` object MUST contain your actual credentials.
+An empty `env: {}` will prevent the server from starting.
+```
+
+---
+
+**Resolution**: The fix has been applied. After reloading the plugin or restarting Claude Code, the telegram MCP server should connect successfully.

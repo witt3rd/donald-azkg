@@ -165,17 +165,58 @@ Individual plugins contain a `.claude-plugin/plugin.json` file declaring their e
     "./commands/expand-graph.md"
   ],
   "agents": "./agents/",
-  "hooks": "./hooks/hooks.json",
-  "mcpServers": "./mcp-config.json"
+  "hooks": "./hooks/hooks.json"
 }
 ```
 
-**Field Requirements (from official Anthropic docs):**
+**Field Requirements:**
 - **commands**: Array of file paths to markdown files (e.g., `"./commands/name.md"`)
 - **agents**: String path to directory (e.g., `"./agents/"`) OR array of file paths
 - **hooks**: String path to JSON config file (e.g., `"./hooks/hooks.json"`)
 - **author**: Object with `name` (required), `email` (optional), `url` (optional)
-- **mcpServers**: String path to MCP configuration JSON file
+
+### MCP Server Configuration (.mcp.json)
+
+**CRITICAL**: MCP servers are NOT configured via `mcpServers` field in `plugin.json`. That field causes validation errors and doesn't work.
+
+Instead, create a `.mcp.json` file at the **plugin root** (not in `.claude-plugin/`):
+
+```
+my-plugin/
+├── .claude-plugin/
+│   └── plugin.json         # NO mcpServers field
+├── .mcp.json              # MCP config HERE at plugin root
+├── mcp-server/            # Server implementation
+│   └── server.py
+├── commands/
+└── agents/
+```
+
+**Example .mcp.json:**
+```json
+{
+  "mcpServers": {
+    "my-server": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "${CLAUDE_PLUGIN_ROOT}/mcp-server",
+        "run",
+        "server.py"
+      ],
+      "env": {
+        "API_KEY": "your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+**Key points:**
+- Use `${CLAUDE_PLUGIN_ROOT}` variable to reference plugin directory
+- Put actual credentials in `env` object (MCP doesn't auto-load `.env` files)
+- The `.mcp.json` at plugin root is automatically loaded when plugin is installed
+- This is a **standalone MCP server** distributed with the plugin, not a "plugin-bundled" server
 
 ### Common Schema Errors
 
@@ -190,6 +231,10 @@ Individual plugins contain a `.claude-plugin/plugin.json` file declaring their e
 **Error: "owner: Required"**
 - Cause: Missing top-level `owner` field
 - Fix: Add `"owner": {"name": "Your Name"}` at marketplace root
+
+**Error: "mcpServers: Invalid input: must start with './'"**
+- Cause: Using `"mcpServers"` field in `plugin.json` (this field doesn't work)
+- Fix: Remove `mcpServers` from `plugin.json`, create `.mcp.json` at plugin root instead
 
 ## Installation and Management
 

@@ -10,7 +10,8 @@
       "Read(//c/Users/dothompson/OneDrive/src/witt3rd/**)",
       "Read(//c/Users/dothompson/src/witt3rd/claude-plugins/plugins/azkg/commands/**)",
       "Bash(cat:*)",
-      "Read(//c/Users/dothompson/src/witt3rd/claude-plugins/**)"
+      "Read(//c/Users/dothompson/src/witt3rd/claude-plugins/**)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
