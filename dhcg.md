@@ -131,13 +131,16 @@ Mapping from vector embeddings to conceptual spaces and onward to homotopy-type 
 ## Related Concepts
 
 ### Prerequisites
+
 - [[category_theory]] - Uses categorical concepts like functors and morphisms
 - [[type_theory]] - Builds on homotopy type theory foundations
 
 ### Related Topics
-- [[agents]] - Proposes better representations for agent reasoning
+
+- [[llm_agents]] - Proposes better representations for agent reasoning
 - [[llm_evolve]] - Addresses limitations in current LLM embeddings
 
 ### Extends
+
 - [[type_theory]] - Applies HoTT concepts to neural network representations
 - [[category_theory]] - Uses categorical structures for semantic meaning

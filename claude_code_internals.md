@@ -77,6 +77,7 @@ async function mainLoop(userInput: string, context: Message[]) {
 ### Environment Context Injection
 
 At loop start, inject static snapshot:
+
 - Working directory tree (respecting .gitignore)
 - Git status and recent commits
 - Platform info (OS, Node version, etc.)
@@ -137,12 +138,14 @@ class ToolRegistry {
 ### Security and Permissions
 
 **Permission system**:
+
 - Gated via user prompts for destructive/external operations
 - Bash commands scanned for injection patterns
 - File operations restricted to project scope by default
 - WebFetch limited to user-mentioned URLs
 
 **Sandboxing approach**:
+
 - No VM isolation—runs under user's native permissions
 - macOS Seatbelt or Docker optional for additional containment
 - Prefix detection catches simple injection attempts
@@ -204,6 +207,7 @@ Security:
 ### Prompt Reinforcement Strategy
 
 **Repetition for reliability**:
+
 - Critical rules repeated 2-3 times in different sections
 - Examples provided for each major guideline
 - XML tags structure complex instructions
@@ -214,6 +218,7 @@ Security:
 ### Example Prompts from Reverse-Engineering
 
 **Topic detection prompt**:
+
 ```json
 {
   "role": "user",
@@ -222,6 +227,7 @@ Security:
 ```
 
 **Compaction prompt** (triggered at ~92% context):
+
 ```
 Summarize the conversation into 8 structured sections:
 1. Key decisions made
@@ -237,6 +243,7 @@ Preserve technical details. Omit pleasantries and intermediate debugging.
 ```
 
 **Bash injection detection**:
+
 ```
 Analyze this command for injection attempts: "${command}"
 
@@ -256,18 +263,21 @@ Otherwise, respond: "safe"
 ### Three-Layer Memory Architecture
 
 **Short-term memory** (volatile):
+
 - Message history: Full conversation context
 - Tool results: Appended as system messages
 - Todo JSON: Loaded from ~/.claude/todos/ via reminders
 - Current state: Working directory snapshot, git status
 
 **Mid-term memory** (compressed):
+
 - Context compaction at ~92% token limit
 - LLM summarizes into structured sections
 - Discards intermediate debugging and tool outputs
 - Preserves decisions, code changes, blockers
 
 **Long-term memory** (persistent):
+
 - CLAUDE.md: Project guidelines generated via /init
 - Memory directory: Persistent notes via MemoryRead/Write tools
 - Project files: README, docs, configuration
@@ -328,22 +338,27 @@ npm run lint
 ```
 
 ## Architecture
+
 - Frontend: React + TypeScript
 - Backend: Node.js + Express
 - Database: PostgreSQL
 
 ## Coding Standards
+
 - Use TypeScript strict mode
 - Prefer functional components
 - Write tests for all features
 
 ## Known Issues
+
 - [Issue 1]
 - [Issue 2]
 
 ## Next Steps
+
 - [ ] Task 1
 - [ ] Task 2
+
 ```
 
 ### Sub-Agent Context Isolation
@@ -419,6 +434,7 @@ function analyzeDependencies(invocations: BatchInvocation[]): { independent: Bat
 ### Sub-Agent Parallelism
 
 Sub-agents enable pseudo-parallelism while main loop remains sequential:
+
 - Background tasks (tests, searches) while main agent plans
 - Multiple sub-agents for different codebases/modules
 - Coordination via task scheduler
@@ -450,17 +466,20 @@ await parallelWorkflow([
 ### Technology Choices
 
 **Language**: Node.js with TypeScript
+
 - Type safety for tool interfaces
 - Async/await for streaming responses
 - Native child_process for Bash tool
 - Rich ecosystem for file operations
 
 **API Integration**: Anthropic SDK
+
 - beta.messages.create for streaming
 - Tool definitions via JSON schemas
 - Model selection (Sonnet for main, Haiku for lightweight)
 
 **Security**: User-permission gates
+
 - No VM—native user permissions
 - Optional sandboxing (Seatbelt, Docker)
 - Prefix detection for injection
@@ -516,6 +535,7 @@ claude-code/
 ### Minimal Viable Implementation
 
 **Phase 1: Core loop** (1-2 days)
+
 1. Set up Node.js/TypeScript project
 2. Implement basic REPL with Anthropic API
 3. Add Read/Write tools
@@ -541,17 +561,20 @@ claude-code/
 ### Testing Strategy
 
 **Unit tests**:
+
 - Tool handlers (mock file system)
 - Prompt construction
 - Token estimation
 - Dependency analysis
 
 **Integration tests**:
+
 - Full agent loops on sample projects
 - Sub-agent coordination
 - Context compaction accuracy
 
 **Evaluation benchmarks**:
+
 - SWE-bench (code generation)
 - Aider polyglot benchmark
 - Custom task suites (refactoring, documentation)
@@ -559,22 +582,27 @@ claude-code/
 ### Common Pitfalls
 
 **"Forgetting" in long contexts**:
+
 - Solution: Repeat critical rules in prompts
 - Use reminder prompts after tool execution
 
 **Context explosion**:
+
 - Solution: Aggressive compaction at 92% threshold
 - Sub-agent isolation for "dirty" tasks
 
 **Over-parallelism causing conflicts**:
+
 - Solution: Dependency analysis in BatchTool
 - Sequential fallback for writes
 
 **Permission fatigue**:
+
 - Solution: Batch permission requests
 - Remember choices within session
 
 **Injection vulnerabilities**:
+
 - Solution: Prefix detection + regex scanning
 - Allowlist for safe command patterns
 
@@ -583,18 +611,21 @@ claude-code/
 ### Measured Metrics
 
 **Latency**:
+
 - Simple queries: 200-500ms (Sonnet)
 - Complex refactoring: 2-5s (Opus)
 - Sub-agent dispatch: +500ms overhead
 - Context compaction: 1-2s
 
 **Token consumption**:
+
 - System prompts: 1800-2500 tokens
 - Tool definitions: ~1000 tokens
 - Typical conversation: 10k-50k tokens
 - Post-compaction: 3k-8k tokens
 
 **Reliability**:
+
 - Task completion: 85-90% (SWE-bench subset)
 - Security: 95%+ injection detection
 - Context coherence: Degrades after 50+ turns without compaction
@@ -610,32 +641,35 @@ claude-code/
 ## Related Concepts
 
 ### Prerequisites
-- [[agents]] - Understanding AI agent fundamentals is essential
+
+- [[llm_agents]] - Understanding AI agent fundamentals is essential
 - [[claude_code]] - Knowledge of Claude Code features and capabilities
 
 ### Related Topics
+
 - [[claude_code_agents]] - Sub-agent architecture extends this implementation pattern
 - [[claude_code_efficiency_optimization]] - Performance optimization builds on these internals
 - [[mcp_overview]] - MCP provides standardized tool integration that could replace custom tools
 - [[llm_self_talk_optimization]] - Prompt compression techniques applicable to system prompts
 
 ### Extends
+
 - [[claude_code]] - These internals explain how Claude Code implements its features
 
 ## References
 
 **Reverse-engineering sources**:
-[1] GitHub - Yuyz0112/claude-code-reverse - https://github.com/Yuyz0112/claude-code-reverse
-[2] Reverse engineering Claude Code - Kir Shatrov - https://kirshatrov.com/posts/claude-code-internals
-[3] Reverse-Engineering Claude Code Using Sub Agents - https://www.sabrina.dev/p/reverse-engineering-claude-code-using
-[4] Claude Code Feels Like a Senior Dev - Medium - https://medium.com/@sampan090611/claude-code-feels-like-a-senior-dev-heres-what-actually-makes-it-different-and-what-the-49c02b456d9c
-[5] Inside Claude Code: Prompt Engineering Masterpiece - https://beyondthehype.dev/p/inside-claude-code-prompt-engineering-masterpiece
-[6] Reverse engineering Claude Code - Reid Barber - https://reidbarber.com/blog/reverse-engineering-claude-code
-[7] I Reverse-Engineered Claude Code (YouTube) - https://www.youtube.com/watch?v=i0P56Pm1Q3U
+[1] GitHub - Yuyz0112/claude-code-reverse - <https://github.com/Yuyz0112/claude-code-reverse>
+[2] Reverse engineering Claude Code - Kir Shatrov - <https://kirshatrov.com/posts/claude-code-internals>
+[3] Reverse-Engineering Claude Code Using Sub Agents - <https://www.sabrina.dev/p/reverse-engineering-claude-code-using>
+[4] Claude Code Feels Like a Senior Dev - Medium - <https://medium.com/@sampan090611/claude-code-feels-like-a-senior-dev-heres-what-actually-makes-it-different-and-what-the-49c02b456d9c>
+[5] Inside Claude Code: Prompt Engineering Masterpiece - <https://beyondthehype.dev/p/inside-claude-code-prompt-engineering-masterpiece>
+[6] Reverse engineering Claude Code - Reid Barber - <https://reidbarber.com/blog/reverse-engineering-claude-code>
+[7] I Reverse-Engineered Claude Code (YouTube) - <https://www.youtube.com/watch?v=i0P56Pm1Q3U>
 
 **Official documentation**:
-[8] Understanding Claude Code Plan Mode - https://lord.technology/2025/07/03/understanding-claude-code-plan-mode-and-the-architecture-of-intent.html
-[9] Claude Sonnet 4.5 Release - https://www.anthropic.com/news/claude-sonnet-4-5
-[10] How Claude Code is Built - Pragmatic Engineer - https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built
-[11] Claude Code Best Practices - Anthropic Engineering - https://anthropic.com/engineering/claude-code-best-practices
-[12] Getting Good Results from Claude Code - https://www.dzombak.com/blog/2025/08/getting-good-results-from-claude-code/
+[8] Understanding Claude Code Plan Mode - <https://lord.technology/2025/07/03/understanding-claude-code-plan-mode-and-the-architecture-of-intent.html>
+[9] Claude Sonnet 4.5 Release - <https://www.anthropic.com/news/claude-sonnet-4-5>
+[10] How Claude Code is Built - Pragmatic Engineer - <https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built>
+[11] Claude Code Best Practices - Anthropic Engineering - <https://anthropic.com/engineering/claude-code-best-practices>
+[12] Getting Good Results from Claude Code - <https://www.dzombak.com/blog/2025/08/getting-good-results-from-claude-code/>

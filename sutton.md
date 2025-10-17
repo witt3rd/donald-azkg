@@ -80,7 +80,7 @@ Richard Sutton and David Silver’s vision for the next generation of AI centers
 - **Learning Through Interaction**: Future agents will acquire superhuman capabilities by generating data through trial-and-error interactions, rather than relying on static datasets. For example, AlphaProof mastered Olympiad-level math problems by generating 100 million proofs through RL, far surpassing its initial training on human-created proofs[1][5].
 - **Long-Term Adaptation**: Agents will operate in continuous "streams of experience," enabling lifelong learning and adaptation. A health agent, for instance, could monitor a user’s vitals over months to refine personalized recommendations[1][5].
 - **Grounded Rewards**: Instead of human-prejudged rewards, agents will optimize signals from the environment (e.g., health metrics, profit margins, or CO₂ levels). This reduces bias and allows discovery of strategies beyond human expertise[1][3][5].
-- **Autonomous Action**: Agents will interact with the world via APIs, robotics, and digital interfaces, blending "human-friendly" actions (e.g., UI navigation) with "machine-friendly" ones [e.g., code execution](1)[5].
+- **Autonomous Action**: Agents will interact with the world via APIs, robotics, and digital interfaces, blending "human-friendly" actions (e.g., UI navigation) with "machine-friendly" ones [e.g., code execution][1](5).
 
 ---
 
@@ -188,6 +188,7 @@ Answer from Perplexity: pplx.ai/share
 ## Related Concepts
 
 ### Related Topics
-- [[agents]] - RL agents are a fundamental type of AI agent
+
+- [[llm_agents]] - RL agents are a fundamental type of AI agent
 - [[llm_evolve]] - RL represents next evolution beyond current LLMs
 - [[game_theory]] - RL can be viewed through game-theoretic lens for multi-agent scenarios

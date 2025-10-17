@@ -223,9 +223,11 @@ claude mcp get <server-name>
 ## Related Concepts
 
 ### Prerequisites
+
 - [[mcp_overview]] - Need to understand MCP fundamentals before configuring servers
 - [[mcp_architecture]] - Understanding MCP architecture helps with server configuration
 
 ### Related Topics
-- [[agents]] - MCP servers extend agent capabilities in Claude Code
+
+- [[llm_agents]] - MCP servers extend agent capabilities in Claude Code
 - [[mcp_implementation]] - Related to implementing MCP in practice

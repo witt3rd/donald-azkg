@@ -160,10 +160,13 @@ The ReAct AI agent approach, though partially overtaken by newer techniques like
 ## Related Concepts
 
 ### Prerequisites
-- [[agents]] - Need agent fundamentals before specific patterns
+
+- [[llm_agents]] - Need agent fundamentals before specific patterns
 
 ### Related Topics
+
 - [[micro_prompt]] - ReAct agents can use micro-prompting for decomposed reasoning steps
 
 ### Extends
-- [[agents]] - ReAct is a specific implementation pattern for agents
+
+- [[llm_agents]] - ReAct is a specific implementation pattern for agents

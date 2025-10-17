@@ -60,6 +60,7 @@ Semantic routing models in LLM inference serving systems use lightweight neural 
 ## Configuration and Extensibility
 
 Routing is **configurable and extensible**:
+
 - Fine-tuned classifiers can be adapted for **custom domains**:
   - Legal
   - Medical
@@ -100,11 +101,13 @@ For the Windows Agent, semantic routing is critical for:
 ## Implementation Considerations
 
 ### Classifier Training
+
 - Train on representative set of user requests across complexity spectrum
 - Label data with appropriate model tier (SLM, SRM, LLM, LRM)
 - Fine-tune BERT-based classifier on this dataset
 
 ### Routing Decision Factors
+
 1. **Complexity**: Token length, reasoning depth required
 2. **Domain**: Math, creative, technical, domain-specific
 3. **Privacy**: Sensitive data → local constraint
@@ -112,6 +115,7 @@ For the Windows Agent, semantic routing is critical for:
 5. **Cost**: User/IT budget constraints
 
 ### Fallback Strategy
+
 - If routed model fails or unavailable → fallback to next tier
 - Track routing accuracy and model performance
 - Continuous learning: Update routing based on success/failure patterns
@@ -126,4 +130,5 @@ For the Windows Agent, semantic routing is critical for:
 ## Related Concepts
 
 ### Related Topics
-- [[agents]] - Agents use semantic routing for intelligent task delegation
+
+- [[llm_agents]] - Agents use semantic routing for intelligent task delegation

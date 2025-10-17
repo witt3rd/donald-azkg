@@ -302,6 +302,7 @@ This MCP server is licensed under the MIT License. This means you are free to us
 ## Related Concepts
 
 ### Related Topics
-- [[agents]] - Agents use memory systems for context persistence
+
+- [[llm_agents]] - Agents use memory systems for context persistence
 - [[llm_evolve]] - Memory augmentation is part of LLM evolution
 - [[chromadb]] - Vector databases enable persistent memory for agents

@@ -7,7 +7,7 @@ This MOC connects all notes related to AI and ML development across platforms an
 
 ## Agents & Architecture
 
-- [[agents]] - Claude Code agents architecture and implementation
+- [[llm_agents]] - Claude Code agents architecture and implementation
 - [[agentic_development_context]] - Version-controlled development ecosystems for AI-augmented teams
 - [[semantic_routing]] - Intelligent model selection for LLM orchestration
 - [[llm_self_talk_optimization]] - Dense, terse prompting for efficient LLM internal reasoning and inter-agent communication

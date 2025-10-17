@@ -14,12 +14,14 @@ The protocol essentially functions as "a USB-C port for AI applications," provid
 ## Why MCP Matters
 
 **Before MCP:** Each AI application needed custom integrations with every data source and tool:
+
 - Duplicated effort across applications
 - Inconsistent security models
 - Difficult to maintain and audit
 - Limited interoperability
 
 **With MCP:** Universal protocol enables:
+
 - Write once, use everywhere integrations
 - Standardized security and privacy controls
 - Composable, modular architecture
@@ -40,30 +42,36 @@ Each capability is exposed through lightweight MCP servers that connect to AI ap
 This note serves as the entry point to understanding MCP. For detailed information, see:
 
 ### Architecture & Technical Details
+
 - [[mcp_architecture]] - Client-server design, transport mechanisms, connection lifecycle, and communication patterns
 
 ### Core Capabilities
+
 - [[mcp_resources]] - Read-only data access layer, dynamic discovery, and resource patterns
 - [[mcp_tools]] - Function execution framework, parameter design, and side effects
 - [[mcp_prompts]] - Template system, workflow design, and parameterization
 
 ### Implementation & Security
+
 - [[mcp_security]] - Authentication, authorization, user consent, privacy controls, and access management
 - [[mcp_implementation]] - SDK ecosystem, language support, configuration, deployment, and reference implementations
 
 ## Key Adoption Points
 
 **Major Integrations:**
+
 - Microsoft Copilot Studio - Enterprise agent platform with MCP support[15]
 - GitHub - Official MCP server for repository interaction[10]
 - Claude Desktop - Native MCP client for local integrations[1]
 - VS Code - Integrated MCP server management[6]
 
 **Enterprise Adopters:**
+
 - Block - Internal knowledge base integration[8][11]
 - Apollo - CRM and document access[8][11]
 
 **Development Tools:**
+
 - Zed, Replit, Sourcegraph - Code intelligence with MCP[11]
 - AI2SQL - Natural language database queries[11]
 
@@ -85,9 +93,11 @@ With growing adoption across major technology companies and a robust ecosystem o
 ## Related Concepts
 
 ### Related Topics
-- [[agents]] - Claude Code agents use MCP for tool access and integration
+
+- [[llm_agents]] - Claude Code agents use MCP for tool access and integration
 
 ### Extended By
+
 - [[mcp_architecture]] - Architecture provides technical foundation for MCP
 - [[mcp_resources]] - Resources implement one of three core MCP capabilities
 - [[mcp_tools]] - Tools implement one of three core MCP capabilities

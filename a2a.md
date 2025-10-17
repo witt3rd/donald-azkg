@@ -193,12 +193,14 @@ For system designers, A2A offers a mature, standards-based approach to implement
 ## Related Concepts
 
 ### Related Topics
-- [[agents]] - A2A enables agent-to-agent communication for systems described in agents.md
+
+- [[llm_agents]] - A2A enables agent-to-agent communication for systems described in agents.md
 - [[agent_mcp_apis]] - A2A and MCP are complementary protocols for agent integration
 - [[debate]] - A2A protocol facilitates agent-to-agent debate communication
 
 ### Extended By
-- [[agents]] - A2A protocol enables multi-agent interoperability
+
+- [[llm_agents]] - A2A protocol enables multi-agent interoperability
 
 ## References
 

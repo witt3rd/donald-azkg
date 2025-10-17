@@ -60,10 +60,13 @@ Alita's innovative design, characterized by minimal predefinition and maximal se
 ## Related Concepts
 
 ### Prerequisites
-- [[agents]] - Need to understand agent fundamentals before exploring Alita's innovations
+
+- [[llm_agents]] - Need to understand agent fundamentals before exploring Alita's innovations
 
 ### Related Topics
+
 - [[agent_mcp_apis]] - Alita uses MCP to dynamically create and manage tools
 
 ### Extended By
-- [[agents]] - Alita is a concrete example of self-evolving agent
+
+- [[llm_agents]] - Alita is a concrete example of self-evolving agent

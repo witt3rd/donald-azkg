@@ -119,12 +119,15 @@ Multi-agent debate frameworks offer a robust approach to enhancing generative AI
 ## Related Concepts
 
 ### Prerequisites
-- [[agents]] - Need to understand agent fundamentals before multi-agent patterns
+
+- [[llm_agents]] - Need to understand agent fundamentals before multi-agent patterns
 
 ### Related Topics
+
 - [[a2a]] - A2A protocol facilitates agent-to-agent debate communication
-- [[agents]] - Multi-agent debate is a collaboration pattern for agents
+- [[llm_agents]] - Multi-agent debate is a collaboration pattern for agents
 - [[game_theory]] - Multi-agent debate can be modeled using game-theoretic concepts
 
 ### Extends
-- [[agents]] - Extends agent architecture with collaborative debate pattern
+
+- [[llm_agents]] - Extends agent architecture with collaborative debate pattern

@@ -26,6 +26,7 @@ A key implementation technique:
 4. **Iteration**: Recursive recompression until stable minimal form achieved
 
 **Example transformation**:
+
 ```
 Verbose: "Respond as if you were talking to yourself, an advanced AI with
 powerful cognitive abilities. Your communication should be maximally dense,
@@ -74,17 +75,20 @@ The first prompt was used on itself to generate the second - a meta-application 
 ## Comparison to Related Techniques
 
 **vs. [[spr|Sparse Priming Representation]]**:
+
 - SPR: Human→model compression for priming desired responses
 - Self-talk: Model→model compression for internal/inter-agent efficiency
 - SPR: Static, hand-crafted keyword priming
 - Self-talk: Dynamic, self-adaptive recursive compression
 
 **vs. [[micro_prompt|Micro-prompting]]**:
+
 - Micro-prompting: Decompose tasks into discrete prompts for SLMs
 - Self-talk: Compress prompts for efficiency within each step
 - Complementary: Can combine both (decompose + compress each micro-prompt)
 
 **vs. [[json_prompting|JSON Prompting]]**:
+
 - JSON: Structured output control via schema
 - Self-talk: Unstructured input compression for efficiency
 - Different goals: JSON ensures format compliance; self-talk reduces token overhead
@@ -118,6 +122,7 @@ The first prompt was used on itself to generate the second - a meta-application 
 ## Implementation Patterns
 
 **Meta-prompt pattern**:
+
 ```
 "Given this verbose prompt: [FULL_PROMPT]
 Generate a maximally compressed version optimized for your own comprehension.
@@ -125,12 +130,14 @@ Eliminate all redundancy while preserving complete semantic content."
 ```
 
 **Self-verification pattern**:
+
 ```
 Compressed execution → Intermediate result → Self-check →
 (if valid) Continue | (if invalid) Decompress & retry verbose
 ```
 
 **Multi-agent handoff pattern**:
+
 ```
 Agent A (planning) → Compressed plan → Agent B (execution) →
 Compressed result → Agent C (verification)
@@ -139,21 +146,24 @@ Compressed result → Agent C (verification)
 ## Related Concepts
 
 ### Prerequisites
-- [[agents]] - Self-talk optimization enables efficient multi-agent communication
+
+- [[llm_agents]] - Self-talk optimization enables efficient multi-agent communication
 - [[llm_evolve]] - Understanding of LLM latent space and internal representations
 
 ### Related Topics
+
 - [[spr]] - Alternative compression technique for human→model priming
 - [[micro_prompt]] - Complementary decomposition strategy for task modularity
 - [[json_prompting]] - Structured output control (different optimization axis)
 - [[react_agent_pattern]] - Can use self-talk for compressed reasoning chains
 
 ### Examples
-- [[agents]] - Multi-agent systems benefit from inter-agent self-talk compression
+
+- [[llm_agents]] - Multi-agent systems benefit from inter-agent self-talk compression
 
 ## References
 
-[1] Reinforcement Learning for LLM Reasoning - https://arxiv.org/pdf/2506.06923
-[2] Self-Evolving LLM Agents - https://www.emergentmind.com/topics/self-evolving-llm-agents
-[3] LLM Optimization Tactics - https://beomniscient.com/blog/llm-optimization-tactics/
-[4] State of LLM Reasoning Model Training (2025) - https://magazine.sebastianraschka.com/p/the-state-of-llm-reasoning-model-training
+[1] Reinforcement Learning for LLM Reasoning - <https://arxiv.org/pdf/2506.06923>
+[2] Self-Evolving LLM Agents - <https://www.emergentmind.com/topics/self-evolving-llm-agents>
+[3] LLM Optimization Tactics - <https://beomniscient.com/blog/llm-optimization-tactics/>
+[4] State of LLM Reasoning Model Training (2025) - <https://magazine.sebastianraschka.com/p/the-state-of-llm-reasoning-model-training>

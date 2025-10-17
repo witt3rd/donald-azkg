@@ -46,17 +46,20 @@ While nothing technically prevents an MCP tool from using an LLM internally or a
 ## Summary: Key Talking Points
 
 **Role Distinction**
+
 - Agents: LLM-powered reasoning, planning, and orchestration
-- MCP Tools: Deterministic actions with semantic interfaces for LLM consumption  
+- MCP Tools: Deterministic actions with semantic interfaces for LLM consumption
 - Raw APIs: Backend functionality without LLM considerations
 
 **Why MCP Over Direct API Access**
+
 - Eliminates translation burden between LLM reasoning and API mechanics
 - Uses standardized JSON schema format that frontier models are trained on
 - Prevents agent code from accumulating API-specific integration logic
 - Isolates API changes to MCP layer, not agent code
 
 **Security Benefits**
+
 - Credentials stay in MCP layer, never exposed to agents
 - Centralized access control and policy enforcement
 - Single point for audit logging and compliance monitoring
@@ -65,6 +68,7 @@ While nothing technically prevents an MCP tool from using an LLM internally or a
 - Isolation limits blast radius of compromised agents
 
 **Architectural Advantages**
+
 - Clean separation of concerns across layers
 - Independent evolution of each component
 - MCP tools provide semantic abstraction, not simple API wrapping
@@ -73,13 +77,16 @@ While nothing technically prevents an MCP tool from using an LLM internally or a
 ## Related Concepts
 
 ### Prerequisites
-- [[agents]] - Need to understand agent architecture before MCP integration
+
+- [[llm_agents]] - Need to understand agent architecture before MCP integration
 
 ### Related Topics
+
 - [[a2a]] - A2A and MCP are complementary protocols
 - [[alita]] - Alita uses MCP to dynamically create and manage tools
 - [[mcp_tools]] - Agents use MCP tools for task execution
 - [[filesystem]] - Agents use filesystem tools via MCP
 
 ### Extends
-- [[agents]] - Extends agents with MCP tool integration
+
+- [[llm_agents]] - Extends agents with MCP tool integration

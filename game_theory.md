@@ -4,12 +4,14 @@ tags: [theory, reference]
 # Game Theory Cheat Sheet for Computer Scientists
 
 ## Introduction
+
 - **Definition**: Mathematical study of strategic interactions among rational decision-makers.
 - **Motivations**: Predict outcomes, optimize strategies, design robust systems.
 - **Goals**: Find equilibria, ensure fairness, incentivize desired behaviors.
 - **CS Relevance**: Multi-agent systems, auctions, routing, security, AI.
 
 ## Basic Concepts
+
 - **Players**: Decision-makers (e.g., agents, users).
 - **Strategies**: Available actions.
 - **Payoffs**: Outcomes/utilities from strategy combinations.
@@ -24,6 +26,7 @@ tags: [theory, reference]
   - Extensive Form: Tree for sequential games.
 
 ## Solution Concepts
+
 - **Nash Equilibrium (NE)**: No player benefits by unilaterally changing strategy.
   - Pure: Single strategy.
   - Mixed: Randomized strategies.
@@ -32,6 +35,7 @@ tags: [theory, reference]
 - **Subgame Perfect Equilibrium**: NE in every subgame (extensive form).
 
 ## Algorithmic Game Theory
+
 - **Focus**: Algorithms for strategic settings.
 - **Key Metrics**:
   - Price of Anarchy: Worst NE welfare vs. optimal.
@@ -40,11 +44,13 @@ tags: [theory, reference]
 - **Applications**: Auctions, routing, resource allocation, voting.
 
 ## Mechanism Design
+
 - **Goal**: Design games for desired outcomes with self-interested players.
 - **Incentive Compatibility**: Truthful reporting is optimal.
 - **Examples**: Vickrey auction, VCG mechanism.
 
 ## CS Applications
+
 - Multi-agent systems
 - Auction design
 - Network routing
@@ -52,6 +58,7 @@ tags: [theory, reference]
 - Cryptography (e.g., zero-knowledge proofs)
 
 ## Mathematical Framework
+
 - **Utility Functions**: Represent preferences.
 - **Best Response**: Maximizes payoff given others’ strategies.
 - **Theorems**:
@@ -60,10 +67,12 @@ tags: [theory, reference]
   - Revelation Principle: Truthful mechanisms achieve any implementable outcome.
 
 ## Tools
+
 - **Gambit**: Computes equilibria ([gambit.sourceforge.net](http://gambit.sourceforge.net)).
 - **GAMUT**: Generates test games ([gamut.stanford.edu](http://gamut.stanford.edu)).
 
 ## Further Reading
+
 - *Lectures in Game Theory for Computer Scientists* by Apt & Grädel
 - *Algorithmic Game Theory* by Nisan et al.
 - [MIT OpenCourseWare](https://ocw.mit.edu/courses/6-254-game-theory-with-engineering-applications-spring-2010/)
@@ -73,9 +82,11 @@ tags: [theory, reference]
 # Comprehensive Game Theory Overview for Computer Scientists
 
 ## Introduction
+
 Game theory studies strategic interactions among rational decision-makers, modeling scenarios where outcomes depend on multiple parties’ choices. Its motivations include predicting behaviors, optimizing strategies, and designing systems resilient to strategic manipulation. In computer science, game theory is crucial for multi-agent systems, auctions, network routing, security, and AI, where agents act strategically. The goals are to identify stable outcomes (equilibria), ensure fairness, and create mechanisms that align individual incentives with system objectives.
 
 ## Basic Concepts
+
 - **Players**: Entities making decisions (e.g., agents, users, or systems).
 - **Strategies**: Possible actions a player can take.
 - **Payoffs**: Numerical outcomes reflecting players’ preferences, often represented as utilities.
@@ -100,7 +111,8 @@ Game theory studies strategic interactions among rational decision-makers, model
 | Imperfect Information    | Some moves unknown                           | Poker                          |
 
 ## Solution Concepts
-- **Nash Equilibrium (NE)**: A strategy profile where no player can improve their payoff by unilaterally changing their strategy. 
+
+- **Nash Equilibrium (NE)**: A strategy profile where no player can improve their payoff by unilaterally changing their strategy.
   - **Pure Strategy NE**: Players choose a single strategy.
   - **Mixed Strategy NE**: Players randomize over strategies with probabilities.
   - **Example**: In a coordination game, both players choosing the same action (e.g., “meet at party”) can be a pure NE.
@@ -112,7 +124,9 @@ Game theory studies strategic interactions among rational decision-makers, model
   - **Oddness Theorem** (Wilson, 1971): Finite games typically have an odd number of NE.
 
 ## Algorithmic Game Theory
+
 Algorithmic game theory bridges game theory and computer science, focusing on computational challenges in strategic settings. It analyzes algorithms using game-theoretic tools and designs mechanisms that are computationally efficient and robust to strategic behavior.
+
 - **Key Metrics**:
   - **Price of Anarchy**: Ratio of worst NE welfare to optimal welfare, measuring efficiency loss due to selfish behavior.
   - **Price of Stability**: Ratio of best NE welfare to optimal welfare, indicating potential for efficient equilibria.
@@ -126,7 +140,9 @@ Algorithmic game theory bridges game theory and computer science, focusing on co
   - **Computational Social Choice**: Voting rules and coalition formation.
 
 ## Mechanism Design
-Mechanism design, often called “reverse game theory,” involves creating games to achieve specific outcomes despite self-interested players. 
+
+Mechanism design, often called “reverse game theory,” involves creating games to achieve specific outcomes despite self-interested players.
+
 - **Incentive Compatibility**: Mechanisms where truth-telling is a dominant strategy (e.g., Vickrey auction, where bidders report true valuations).
 - **Examples**:
   - **Vickrey Auction**: Second-price sealed-bid auction, ensuring truthful bidding.
@@ -134,6 +150,7 @@ Mechanism design, often called “reverse game theory,” involves creating game
 - **Revelation Principle**: Any implementable outcome can be achieved by a mechanism where players truthfully report their preferences.
 
 ## Applications in Computer Science
+
 - **Multi-agent Systems**: Agents coordinate or compete (e.g., distributed AI systems).
 - **Auctions**: Online platforms like eBay or Google Ads use game-theoretic principles.
 - **Network Games**: Routing protocols where users choose paths to minimize latency.
@@ -142,9 +159,10 @@ Mechanism design, often called “reverse game theory,” involves creating game
 - **AI**: Strategic decision-making in games like poker or Go.
 
 ## Mathematical Framework
+
 - **Utility Functions**: Map outcomes to numerical values reflecting preferences.
 - **Best Response**: A strategy maximizing a player’s payoff given others’ strategies.
-- **Fixed-Point Theorems**: 
+- **Fixed-Point Theorems**:
   - Brouwer’s fixed-point theorem underpins Nash’s existence proof.
   - Used to guarantee equilibrium in continuous strategy spaces.
 - **Key Equations**:
@@ -152,10 +170,12 @@ Mechanism design, often called “reverse game theory,” involves creating game
   - Mixed strategy NE: Probabilities \( p_i \) satisfy \( u_i(p_i, p_{-i}) = u_i(p_i', p_{-i}) \) for all strategies with positive probability.
 
 ## Tools and Software
+
 - **Gambit**: Open-source tool for computing equilibria in finite games ([gambit.sourceforge.net](http://gambit.sourceforge.net)).
 - **GAMUT**: Generates test games for algorithm evaluation ([gamut.stanford.edu](http://gamut.stanford.edu)).
 
 ## Further Reading
+
 - *Lectures in Game Theory for Computer Scientists* by Apt & Grädel: Focuses on CS applications.
 - *Algorithmic Game Theory* by Nisan, Roughgarden, Tardos, & Vazirani: Covers computational aspects.
 - [MIT OpenCourseWare: Game Theory with Engineering Applications](https://ocw.mit.edu/courses/6-254-game-theory-with-engineering-applications-spring-2010/): Lecture notes with computational focus.
@@ -165,8 +185,9 @@ Mechanism design, often called “reverse game theory,” involves creating game
 ## Related Concepts
 
 ### Related Topics
+
 - [[bayes_theory]] - Both provide mathematical frameworks for decision-making under uncertainty
-- [[agents]] - Game theory applies to multi-agent system design and strategic behavior
+- [[llm_agents]] - Game theory applies to multi-agent system design and strategic behavior
 - [[debate]] - Multi-agent debate can be modeled using game-theoretic concepts
 - [[sutton]] - RL can be viewed through game-theoretic lens for multi-agent scenarios
 - [[optimization]] - Both provide mathematical frameworks for decision-making

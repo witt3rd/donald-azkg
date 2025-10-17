@@ -22,4 +22,4 @@ This MOC connects all notes related to React framework, patterns, and ecosystem.
 
 ## Related Topics
 
-- [[agents]] - React can be used to build agent interfaces
+- [[llm_agents]] - React can be used to build agent interfaces

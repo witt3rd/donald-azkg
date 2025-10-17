@@ -37,11 +37,13 @@ In short, SLMs/SRMs, through micro-prompting, unlock a more efficient, modular, 
 ## Related Concepts
 
 ### Related Topics
-- [[agents]] - Micro-prompting is designed for agentic workflows described in agents.md
+
+- [[llm_agents]] - Micro-prompting is designed for agentic workflows described in agents.md
 - [[json_prompting]] - Both are structured approaches to prompt engineering
 - [[react_agent_pattern]] - ReAct agents can use micro-prompting for decomposed reasoning steps
 - [[spr]] - Both focus on efficiency in prompting - SPR via compression, micro-prompting via decomposition
 - [[nvidia_small]] - Micro-prompting with SLMs for decomposed task execution
 
 ### Alternatives
+
 - [[json_prompting]] - JSON prompting offers structured control while micro-prompting focuses on decomposition

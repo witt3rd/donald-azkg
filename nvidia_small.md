@@ -30,7 +30,7 @@ Rather than wholesale LLM replacement, NVIDIA advocates for **heterogeneous agen
 **Practical Implementation**: The research provides a concrete six-step migration algorithm:[8][1]
 
 1. **Data Collection**: Automated logging of agent interactions
-2. **Curation**: Privacy-protected data preparation 
+2. **Curation**: Privacy-protected data preparation
 3. **Task Clustering**: Unsupervised identification of specialization opportunities
 4. **Model Selection**: Strategic SLM matching to capabilities
 5. **Specialized Training**: Knowledge distillation and fine-tuning
@@ -113,7 +113,8 @@ The future of agentic AI isn't about building bigger models—it's about buildin
 ## Related Concepts
 
 ### Related Topics
-- [[agents]] - SLMs designed specifically for agentic AI systems
+
+- [[llm_agents]] - SLMs designed specifically for agentic AI systems
 - [[llm_evolve]] - SLMs represent evolution toward efficient, specialized models
 - [[micro_prompt]] - Micro-prompting with SLMs for decomposed task execution
 - [[cpu_vs_gpu_decision_guide]] - SLMs enable edge deployment with consumer-grade hardware

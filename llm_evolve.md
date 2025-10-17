@@ -269,7 +269,8 @@ Answer from Perplexity: pplx.ai/share
 ## Related Concepts
 
 ### Related Topics
-- [[agents]] - Modern LLMs exhibit agentic behaviors described in agents.md
+
+- [[llm_agents]] - Modern LLMs exhibit agentic behaviors described in agents.md
 - [[memory]] - LLM evolution includes memory augmentation systems
 - [[spr]] - SPR leverages understanding of LLM latent space and architecture
 - [[dhcg]] - Addresses limitations in current LLM embeddings

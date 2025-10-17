@@ -7,7 +7,7 @@ This MOC connects all notes related to AI agents, agentic workflows, and agent a
 
 ## Core Concepts
 
-- [[agents]] - AI agents powered by LLMs/LRMs/SLMs for autonomous, goal-directed action
+- [[llm_agents]] - AI agents powered by LLMs/LRMs/SLMs for autonomous, goal-directed action
 - [[agentic_development_context]] - Comprehensive development ecosystems for AI-augmented teams with shared context, configurations, and knowledge
 - [[semantic_routing]] - Intelligent model selection based on query semantics for optimal LLM routing
 - [[react_agent_pattern]] - Design pattern for building AI agents using React as the UI framework

@@ -7,6 +7,7 @@ This is not traditional documentation. This is a **living, agent-maintained know
 ## What's In This Knowledge Base
 
 **98+ interconnected notes** covering:
+
 - **AI & Agents** (23 notes) - LLMs, agentic systems, Claude Code, semantic routing
 - **MCP Protocol** (10 notes) - Model Context Protocol implementation across languages
 - **Python Stack** (12 notes) - Python development, async patterns, best practices
@@ -21,6 +22,7 @@ This is not traditional documentation. This is a **living, agent-maintained know
 This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_plugin_azkg]] implementation.
 
 **Plugin Installation:**
+
 ```bash
 # Add the marketplace
 /plugin marketplace add witt3rd/claude-plugins
@@ -34,11 +36,13 @@ This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_p
 **Once installed, the plugin provides 11 slash commands** for automated knowledge management.
 
 **I (human) provide direction:**
+
 - "Create a note about X"
 - "Find relationships between Y and Z"
 - "What should I learn before studying A?"
 
 **Claude (agent) maintains everything:**
+
 - Researches topics via Perplexity
 - Discovers relationships automatically
 - Validates graph integrity
@@ -59,17 +63,20 @@ This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_p
 ## What Makes This Different
 
 **Not Obsidian alone:**
+
 - Obsidian is my GUI for visual exploration
 - Claude is my agent for automated maintenance
 - Best of both: Human intuition + AI automation
 
 **Not a wiki or documentation:**
+
 - Notes are atomic - one complete idea each
 - Structure emerges from links, not folders
 - Knowledge forms a network, not a hierarchy
 - Designed for AI agent consumption (LLM context)
 
 **Not manually maintained:**
+
 - Agent discovers relationships
 - Agent validates integrity
 - Agent handles migrations
@@ -78,6 +85,7 @@ This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_p
 ## Navigating This Knowledge Base
 
 **Start with MOCs (Maps of Content):**
+
 - `agents_moc.md` - AI agents and agentic systems
 - `mcp_moc.md` - Model Context Protocol
 - `python_moc.md` - Python development
@@ -88,6 +96,7 @@ This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_p
 - `csharp_moc.md` - C# development
 
 **Or search by tag:**
+
 - `#agents` - AI agent architectures and patterns
 - `#mcp` - Model Context Protocol across all languages
 - `#python` + `#llm` - Python LLM integration
@@ -95,6 +104,7 @@ This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_p
 - `#guide` - Step-by-step implementation guides
 
 **Or ask Claude:**
+
 - `/graph-note [filename]` - See all relationships for a note
 - `/search-notes [query]` - Semantic search
 - `/learning-path [target]` - Generate prerequisite chain
@@ -104,16 +114,19 @@ This knowledge base implements the [[agentic_zkg]] paradigm using the [[claude_p
 My notes follow three patterns (see [[agentic_zkg]] for the theory):
 
 **1. Reference Notes** - Complete documentation
+
 - `python_mcp_sdk.md` - Full guide to Python MCP SDK and FastMCP
 - `rust_best_practices.md` - Comprehensive Rust coding standards
 - `agent_mcp_apis.md` - Complete MCP API reference for agents
 
 **2. Concept Notes** - Single focused ideas
+
 - `semantic_routing.md` - Model selection based on query semantics
 - `llm_self_talk_optimization.md` - Token-efficient agent communication
 - `react_agent_pattern.md` - Design pattern for agent UIs
 
 **3. MOC Notes** - Navigation hubs
+
 - `agents_moc.md` - Links all AI agent concepts
 - `mcp_moc.md` - Links all MCP protocol notes
 - `writing_moc.md` - Links writing strategies
@@ -125,18 +138,21 @@ All notes are **atomic for LLM context** - they provide complete, usable knowled
 All 98 notes live in the repository root. No folders, no hierarchy.
 
 **Why?**
+
 - A note can connect to ANY other note (folders create silos)
 - Tags provide multi-dimensional organization (better than folders)
 - MOC notes create structure without boundaries
 - "Is MCP a Python topic or an agents topic?" → BOTH (tags: `#python #mcp #agents`)
 
 **Organization through:**
+
 - **Links** - Wikilinks to related concepts
 - **Tags** - Multi-dimensional classification (`#python #mcp #agents #guide`)
 - **MOCs** - Navigation hubs for domains
 - **Relationships** - Typed connections (prerequisites, extends, related, etc.)
 
 This lets me find notes by:
+
 - Domain (via MOCs)
 - Technology (via tags)
 - Relationship type (via Related Concepts sections)
@@ -156,10 +172,11 @@ Relationships between notes are maintained in markdown "Related Concepts" sectio
 - [[mcp_implementation]] - Python-specific implementation
 
 ### Related Topics
-- [[agents]] - Agents use MCP for tool integration
+- [[llm_agents]] - Agents use MCP for tool integration
 ```
 
 Six relationship types:
+
 - **Prerequisites** - Must understand first
 - **Extends** - Builds upon this concept
 - **Extended By** - Others build upon this (inverse of extends)
@@ -174,6 +191,7 @@ All relationships are **bidirectional** - if A extends B, then B has "extended_b
 **The graph lives entirely in markdown files** - no separate JSON, no Python scripts, no hidden state.
 
 **How it works:**
+
 - **Wikilinks** in content → implicit relationships
 - **YAML frontmatter** → metadata (tags, title)
 - **"Related Concepts" sections** → explicit typed relationships with "why" explanations
@@ -191,19 +209,19 @@ Six types of semantic relationships in "Related Concepts" sections:
    - Example: `[[type_theory]]` is a prerequisite for `[[dhcg]]`
 
 2. **Related Concepts** - Connected ideas at the same conceptual level
-   - Example: `[[agents]]` relates to `[[semantic_routing]]` because routing enables task delegation
+   - Example: `[[llm_agents]]` relates to `[[semantic_routing]]` because routing enables task delegation
 
 3. **Extends** - This note builds upon another concept
    - Example: `[[agent_mcp_apis]]` extends `[[mcp_overview]]`
 
 4. **Extended By** - Other notes that build upon this concept (inverse of extends)
-   - Example: `[[agents]]` is extended by `[[react_agent_pattern]]`
+   - Example: `[[llm_agents]]` is extended by `[[react_agent_pattern]]`
 
 5. **Alternatives** - Different approaches to the same problem
    - Example: `[[marker]]` is an alternative to `[[firecrawl]]` for content conversion
 
 6. **Examples** - Concrete implementations of abstract concepts
-   - Example: `[[alita]]` is an example implementation of `[[agents]]`
+   - Example: `[[alita]]` is an example implementation of `[[llm_agents]]`
 
 ### How Relationships Are Maintained
 
@@ -216,17 +234,19 @@ Six types of semantic relationships in "Related Concepts" sections:
 - [[type_theory]] - Builds on homotopy type theory foundations
 
 ### Related Topics
-- [[agents]] - Proposes better representations for agent reasoning
+- [[llm_agents]] - Proposes better representations for agent reasoning
 
 ### Extends
 - [[category_theory]] - Uses categorical structures for semantic meaning
 ```
 
 **Bidirectional consistency** - When Claude adds a relationship, it updates both notes:
+
 - If A extends B → Claude adds A to "Related Concepts" in A, AND adds A to "Extended By" in B
 - No sync needed - the edits ARE the graph
 
 **How Claude discovers relationships:**
+
 1. **Content analysis** - Semantic analysis of note content
 2. **Tag analysis** - Notes with similar tags are often related
 3. **Wikilink analysis** - Existing links suggest relationship types
@@ -234,6 +254,7 @@ Six types of semantic relationships in "Related Concepts" sections:
 5. **Confidence scoring** - High/medium/low evidence for each suggestion
 
 **Benefits of markdown-first:**
+
 - ✅ **Single source of truth** - Markdown only, no JSON duplication
 - ✅ **No sync overhead** - Relationships ARE the markdown edits
 - ✅ **Obsidian-native** - Perfect compatibility, no hidden state
@@ -249,27 +270,32 @@ The knowledge graph is a **living network** that both humans (via Obsidian) and 
 ### Finding Context for a Task
 
 **Method 1: Read "Related Concepts" sections**
+
 - Open any note and scroll to "Related Concepts" section
 - Follow prerequisite chains to understand dependencies
 - Explore "Extended By" to find advanced topics
 - Check "Related Topics" for connected ideas
 
 **Method 2: Start with MOC notes**
+
 - Look for `*_moc.md` files (e.g., `agents_moc.md`, `mcp_moc.md`)
 - Follow links to relevant notes
 - Compose the contexts you need
 
 **Method 3: Use Obsidian search/graph**
+
 - Search by topic or tag
 - Explore the graph view to find connections
 - Use backlinks to discover related concepts
 
 **Method 4: Tag-based discovery**
+
 - Every note has tags like `#python #mcp #agents`
 - Search by tag combinations to find cross-cutting concepts
 - See [[tag_system]] for the complete tag catalog and strategy
 
 **Method 5: Ask Claude**
+
 - `/graph-note [filename]` - Show all relationships for a note
 - `/search-notes [query]` - Semantic search across all notes
 - `/learning-path [target]` - Generate prerequisite learning sequence
@@ -277,11 +303,13 @@ The knowledge graph is a **living network** that both humans (via Obsidian) and 
 ### Creating New Notes
 
 **Before Creating:**
+
 1. Search: Does this note already exist?
 2. Atomicity: Is this one complete, usable idea?
 3. Links: What existing notes does this connect to?
 
 **Note Structure:**
+
 ```markdown
 ---
 tags: [python, mcp, api]
@@ -307,6 +335,7 @@ External sources if applicable.
 ```
 
 **Naming Convention:**
+
 - `topic_specific_concept.md` - lowercase with underscores
 - Descriptive: `python_mcp_sdk.md` not `sdk.md`
 - No folders in name: `mcp_protocol.md` not `agents_mcp_protocol.md`
@@ -314,22 +343,26 @@ External sources if applicable.
 ### Evolving the Repository
 
 **Add a new concept:**
+
 1. Create atomic note
 2. Add relevant tags
 3. Link from related notes
 4. Add to appropriate MOC
 
 **Refactor existing content:**
+
 1. If a note covers multiple concepts, consider splitting
 2. If concepts are duplicated, consolidate and link
 3. Update MOCs when structure changes
 4. Let connections emerge naturally
 
 **Quality checks:**
+
 - Can an LLM use this note independently?
 - Is it focused on one topic/task?
 - Are links meaningful (not just "related")?
 - Do tags accurately describe cross-cutting themes?
+
 ## Organization Principles
 
 - **Minimal folders**: Flat structure preferred, folders only for broad functional separation if needed
@@ -364,6 +397,7 @@ Tags are the primary organizational mechanism in this repository. A well-designe
 **Tag Discovery:**
 
 The power of multi-dimensional tagging:
+
 - `#mcp` finds all MCP-related notes across Python, C#, TypeScript, and protocol specs
 - `#python AND #llm` finds specifically Python LLM integration contexts
 - `#pattern` reveals patterns across Rust, React, agents, and writing strategies
@@ -376,12 +410,14 @@ See [[tag_system]] for the complete, maintained catalog of tags with description
 This system is **Obsidian-compatible** but **agent-enhanced**:
 
 **You can use Obsidian** for:
+
 - Visual graph exploration
 - Manual note browsing
 - Quick edits and reading
 - Human-friendly navigation
 
 **The agent handles** for you:
+
 - Automated note creation with research (Write, Edit tools)
 - Relationship discovery across the entire graph (Grep, Read, Edit tools)
 - Maintaining graph integrity and bidirectionality (Read, Edit tools)
@@ -396,22 +432,26 @@ This system is **Obsidian-compatible** but **agent-enhanced**:
 **Commands provided by the installed AZKG plugin** (`azkg@witt3rd`):
 
 **Creation & Discovery:**
+
 - `/create-note [topic]` - Research via Perplexity, create note, discover relationships
 - `/expand-graph [note]` - Multi-strategy relationship discovery with confidence scoring
 - `/search-notes [query]` - Semantic search across all notes
 - `/learning-path [target]` - Generate prerequisite learning sequence
 
 **Maintenance & Quality:**
+
 - `/conform-note [file]` - Restructure notes to standard format
 - `/rename-note [old] [new]` - Rename file + update all wikilinks
 
 **Graph Operations:**
+
 - `/graph-validate` - Check wikilinks, bidirectionality, YAML frontmatter
 - `/graph-stats` - Count notes, relationships, tags
 - `/graph-note [file]` - Show relationships and backlinks
 - `/graph-moc [name]` - View MOC (Map of Content) files
 
 **Research & Updates:**
+
 - `/refresh-topic [file]` - Query Perplexity, update note with latest info
 
 **All operations use Claude's built-in tools** - no Python scripts, no JSON files. Markdown is the graph.
