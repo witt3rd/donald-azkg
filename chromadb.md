@@ -1,8 +1,6 @@
 ---
 tags: [chromadb, reference, tutorial, guide, api, best-practices]
 ---
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
-
 # ChromaDB Python SDK: Comprehensive Guide for Text Embeddings
 
 ChromaDB has emerged as a leading open-source vector database specifically designed for building applications with long-term memory capabilities using embeddings[^1]. This comprehensive guide explores the ChromaDB Python SDK, covering fundamental concepts, practical implementation strategies, and optimization techniques for creating and managing text embeddings. The platform distinguishes itself through its simplicity, offering a core API with just four essential functions while supporting both in-memory prototyping and persistent storage solutions[^1]. Whether you're building retrieval-augmented generation systems, semantic search applications, or any LLM-powered solution requiring vector similarity search, ChromaDB provides the infrastructure to efficiently store, query, and manage embedding vectors at scale.

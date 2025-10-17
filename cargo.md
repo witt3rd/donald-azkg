@@ -697,5 +697,5 @@ This comprehensive guide should enable you to be highly productive with Cargo fr
 
 ### Extended By
 - [[burn]] - Burn projects use Cargo for dependency and build management
-- [[cli]] - Cargo used to build and run Rust CLI applications
+- [[cli_rust]] - Cargo used to build and run Rust CLI applications
 - [[cubecl]] - Cargo needed to build CubeCL projects

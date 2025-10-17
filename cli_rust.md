@@ -1,5 +1,12 @@
 ---
-tags: [cli, tutorial, guide, api, best-practices, patterns]
+tags:
+  - cli
+  - tutorial
+  - guide
+  - api
+  - best-practices
+  - patterns
+  - rust
 ---
 # The Complete Guide to Building Amazing CLI Applications in Rust
 

@@ -327,4 +327,4 @@ dotnet list package --outdated --format json |
 
 ### Alternatives
 - [[python_coding_standards]] - Python alternative for development
-- [[typescript]] - TypeScript alternative for development
+- [[typescript_react]] - TypeScript alternative for development

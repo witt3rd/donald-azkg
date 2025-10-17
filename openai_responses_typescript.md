@@ -1368,7 +1368,7 @@ The patterns and practices outlined in this guide serve as a foundation for Type
 ## Related Concepts
 
 ### Prerequisites
-- [[typescript]] - Need TypeScript knowledge to use OpenAI TypeScript patterns
+- [[typescript_react]] - Need TypeScript knowledge to use OpenAI TypeScript patterns
 
 ### Related Topics
 - [[openai_responses_python]] - Same OpenAI API with Python implementation for comparison

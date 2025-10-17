@@ -23,5 +23,5 @@ This MOC connects all notes related to Python language, tools, libraries, and de
 
 ## Related Topics
 
-- [[typescript]] - Alternative language with similar async patterns
+- [[typescript_react]] - Alternative language with similar async patterns
 - [[mcp_overview]] - Protocol often implemented in Python

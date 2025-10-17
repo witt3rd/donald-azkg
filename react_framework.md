@@ -528,13 +528,13 @@ This guide provides a foundation for adopting React 19's modern patterns while m
 ## Related Concepts
 
 ### Prerequisites
-- [[typescript]] - React development uses TypeScript for type safety
+- [[typescript_react]] - React development uses TypeScript for type safety
 - [[node]] - Node.js provides runtime environment for React development
 
 ### Related Topics
 - [[vite]] - Vite is the recommended build tool for React
 - [[tailwind]] - Tailwind CSS commonly used for React styling
-- [[typescript]] - TypeScript used extensively with React 19 development
+- [[typescript_react]] - TypeScript used extensively with React 19 development
 - [[node]] - Node.js provides runtime for React development
 - [[category_theory]] - Monads from category theory used in functional programming patterns
 - [[motion_canvas_cheatsheet]] - Motion Canvas uses React-like JSX component syntax

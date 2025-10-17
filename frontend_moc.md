@@ -19,7 +19,7 @@ This MOC connects all notes related to frontend development, UI frameworks, and 
 
 ## Prerequisites
 
-- [[typescript]] - Type-safe frontend development
+- [[typescript_react]] - Type-safe frontend development
 - [[node]] - JavaScript runtime for frontend tooling
 
 ## Related Topics

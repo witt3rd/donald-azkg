@@ -93,6 +93,58 @@ External citations if applicable.
 
 ### Custom Commands
 
+#### Telegram Message Processing Workflow
+
+**`/telegram:next-message`** - Get next unprocessed Telegram Saved Message
+- Location: `.claude/commands/telegram-next-message.md`
+- Usage: `/telegram:next-message`
+- State tracking: `.telegram_state.json` tracks last processed message
+- Process:
+  1. Reads state file to get last processed message
+  2. Fetches next message from Saved Messages
+  3. Presents message with options: create note, skip, or stop
+  4. Updates state after processing
+- Uses: `mcp__plugin_telegram_telegram__read_messages`, Read, Write tools
+- Interactive: User decides how to handle each message
+
+#### Content Handler Commands (Generic)
+
+**`/scrape-url`** - Scrape URL and create knowledge graph note
+- Location: `.claude/commands/scrape-url.md`
+- Usage: `/scrape-url <url> [note_filename]`
+- Process:
+  1. Scrapes URL using Firecrawl
+  2. Analyzes content and extracts key concepts
+  3. Generates structured note with proper frontmatter
+  4. Identifies relationships to existing notes
+  5. Adds bidirectional links
+- Uses: `mcp__firecrawl__firecrawl_scrape`, Grep, Write, Edit tools
+- Generic: Can be used with any URL source (not Telegram-specific)
+
+**`/youtube-transcript`** - Get YouTube transcript and create note
+- Location: `.claude/commands/youtube-transcript.md`
+- Usage: `/youtube-transcript <youtube_url> [note_filename]`
+- Process:
+  1. Extracts video metadata and transcript
+  2. Summarizes key points and insights
+  3. Creates structured note with Key Points section
+  4. Links to related concepts
+- Uses: `mcp__firecrawl__firecrawl_scrape`, Grep, Write, Edit tools
+- Generic: Can be used with any YouTube video (not Telegram-specific)
+
+**`/process-pdf`** - Extract PDF content and create note
+- Location: `.claude/commands/process-pdf.md`
+- Usage: `/process-pdf <pdf_url_or_path> [note_filename]`
+- Process:
+  1. Extracts content from PDF (URL or local file)
+  2. Analyzes document structure and key concepts
+  3. Creates structured note with appropriate sections
+  4. Preserves document metadata (title, authors)
+- Uses: `mcp__firecrawl__firecrawl_scrape` (URLs), Read (local), Write, Edit tools
+- Generic: Can be used with any PDF source (not Telegram-specific)
+
+#### Knowledge Graph Maintenance
+
 **`/refresh-topic`** - Refresh a topic page with latest information
 - Location: `.claude/commands/refresh-topic.md`
 - Usage: `/refresh-topic game_theory.md`
@@ -229,6 +281,18 @@ MOCs contain links and brief context, not content itself.
 3. Update bidirectional relationships in connected notes (Edit tool)
 4. Add to relevant MOC notes (Edit tool)
 5. No JSON to update - markdown is the source of truth
+
+**Process Telegram Saved Messages**:
+1. Use `/telegram:next-message` to get next unprocessed message
+2. Review message content and decide action:
+   - Create note: Identify content type (URL, YouTube, PDF, text)
+   - Skip: Move to next message
+   - Stop: Exit workflow
+3. For note creation, use appropriate handler:
+   - `/scrape-url <url>` for web articles
+   - `/youtube-transcript <url>` for videos
+   - `/process-pdf <url>` for documents
+4. State automatically tracks progress in `.telegram_state.json`
 
 **Refresh existing topic**:
 1. Use `/refresh-topic topic_name.md`

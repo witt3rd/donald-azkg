@@ -463,7 +463,7 @@ PowerShell’s object pipeline, rich module ecosystem, and tight integration wit
 - [[dotnet]] - PowerShell often used alongside .NET development
 - [[cpp_project]] - PowerShell used for C++ build automation on Windows
 - [[windows_app_sdk_setup]] - PowerShell used for Windows environment configuration
-- [[cli]] - Similar CLI patterns in different languages
+- [[cli_rust]] - Similar CLI patterns in different languages
 - [[cargo]] - Cargo used from PowerShell command line on Windows
 
 ### Extended By
@@ -471,4 +471,4 @@ PowerShell’s object pipeline, rich module ecosystem, and tight integration wit
 - [[windows_app_sdk_setup]] - PowerShell used for Windows environment configuration
 
 ### Alternatives
-- [[cli]] - Rust CLI alternative for cross-platform tools
+- [[cli_rust]] - Rust CLI alternative for cross-platform tools

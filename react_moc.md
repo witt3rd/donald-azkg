@@ -17,7 +17,7 @@ This MOC connects all notes related to React framework, patterns, and ecosystem.
 
 ## Prerequisites
 
-- [[typescript]] - TypeScript provides type safety for React applications
+- [[typescript_react]] - TypeScript provides type safety for React applications
 - [[node]] - Node.js runtime for React development
 
 ## Related Topics

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "telegram_bot_python.md",
+                "file": "debate.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "telegram_bot_python"
+              "title": "debate"
             }
           }
         ]
@@ -168,6 +168,22 @@
   },
   "active": "cc0e2ef41058fdd8",
   "lastOpenFiles": [
+    "cubecl.md",
+    "cargo.md",
+    "burn.md",
+    "chromadb.md",
+    "copilot_runtime.md",
+    "click_repl_python.md",
+    "cli_rust.md",
+    "agentic_zkg.md",
+    "dhcg.md",
+    "typescript_react.md",
+    "typescript.md",
+    "spr.md",
+    "style_technical.md",
+    "telegram_bot_python.md",
+    "CLAUDE.md.tmp.11756.1760621421962",
+    "CLAUDE.md.tmp.11756.1760621399069",
     "claude_code_plugins.md.tmp.11756.1760615971443",
     "claude_code_plugins.md.tmp.11756.1760615942724",
     "telegram-reader/telegram_mcp_troubleshooting.md.tmp.9692.1760590622241",
@@ -178,31 +194,15 @@
     "telegram-reader/mcp_plugin_setup.md",
     "telegram-reader/telegram_mcp_troubleshooting.md",
     "telegram-reader/telegram_mcp_troubleshooting.md.tmp.20308.1760564067410",
-    "telegram-reader/telegram_session.session-journal",
-    "telegram-reader/src/telegram_reader/cli.py.tmp.41176.1760476228441",
-    "telegram-reader/src/telegram_reader/cli.py.tmp.41176.1760474565976",
     "telegram-reader/telegram_setup_guide.md",
     "telegram-reader/README.md",
     "telegram_setup_guide.md",
     "claude_code_plugins.md",
-    "telegram_bot_python.md",
     "claude_code_internals.md",
     "claude_code_efficiency_optimization.md",
     "claude_plugin_zkg.md",
-    "agentic_zkg.md",
     "claude_code_hooks.md",
     "python_mcp_sdk.md",
-    "agentic_development_context.md",
-    "zettelkasten_claude_plugin.md",
-    "claude_code_agents.md",
-    "claude_code.md",
-    "agents.md",
-    "alita.md",
-    "agent_mcp_apis.md",
-    "adding_mcp_to_claude_code.md",
-    "debate.md",
-    "a2a.md",
-    "CLAUDE.md",
-    "llm_self_talk_optimization.md"
+    "agentic_development_context.md"
   ]
 }

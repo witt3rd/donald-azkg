@@ -21,5 +21,5 @@ This MOC connects all notes related to build tools, package managers, and develo
 ## Related Topics
 
 - [[react_framework]] - Vite commonly used with React
-- [[typescript]] - TypeScript configuration for build tools
+- [[typescript_react]] - TypeScript configuration for build tools
 - [[tailwind]] - CSS framework integrated with build tools

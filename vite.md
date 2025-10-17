@@ -294,7 +294,7 @@ This configuration provides an optimal balance between performance, developer ex
 
 ### Prerequisites
 - [[node]] - Vite runs on Node.js runtime
-- [[typescript]] - Vite configured for TypeScript projects
+- [[typescript_react]] - Vite configured for TypeScript projects
 
 ### Related Topics
 - [[react_framework]] - Vite is the recommended build tool for React

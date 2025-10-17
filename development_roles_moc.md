@@ -18,7 +18,7 @@ This MOC connects all notes related to role definitions and development guidelin
 
 Each role references its foundational knowledge:
 - [[python_coding_standards]] - Python language fundamentals
-- [[typescript]] - TypeScript language fundamentals
+- [[typescript_react]] - TypeScript language fundamentals
 - [[style_technical]] - Writing style guide
 
 ## Related Topics

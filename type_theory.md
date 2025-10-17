@@ -195,7 +195,7 @@ In essence, category theory offers the mathematical scaffolding for HoTT’s sem
 
 ### Related Topics
 - [[category_theory]] - Category theory provides semantics for type theory, especially HoTT
-- [[typescript]] - TypeScript implements practical type system based on type theory
+- [[typescript_react]] - TypeScript implements practical type system based on type theory
 - [[python_coding_standards]] - Python 3.13+ uses type hints based on type theory principles
 
 ### Extends
@@ -205,5 +205,5 @@ In essence, category theory offers the mathematical scaffolding for HoTT’s sem
 - [[dhcg]] - Builds on homotopy type theory foundations
 
 ### Examples
-- [[typescript]] - TypeScript is practical application of type theory
+- [[typescript_react]] - TypeScript is practical application of type theory
 - [[python_coding_standards]] - Python type hints are practical application of type theory

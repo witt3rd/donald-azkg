@@ -209,9 +209,9 @@ These patterns form the foundation of idiomatic Rust:
 ## Related Concepts
 
 ### Related Topics
-- [[cli]] - Best practices demonstrate enum-based CLI argument handling
+- [[cli_rust]] - Best practices demonstrate enum-based CLI argument handling
 - [[cargo]] - Cargo project structure follows Rust best practices
 
 ### Examples
-- [[cli]] - CLI guide shows practical application of best practices
+- [[cli_rust]] - CLI guide shows practical application of best practices
 - [[burn]] - Burn framework follows Rust best practices

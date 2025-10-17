@@ -7,7 +7,7 @@ This MOC connects all notes related to TypeScript language, patterns, and develo
 
 ## Language & Patterns
 
-- [[typescript]] - Comprehensive TypeScript guide covering modern features, type system, and async patterns
+- [[typescript_react]] - Comprehensive TypeScript guide covering modern features, type system, and async patterns
 - [[typescript_role]] - Role definition and coding standards for TypeScript development
 
 ## Runtime & Tools

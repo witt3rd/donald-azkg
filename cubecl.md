@@ -1,8 +1,12 @@
 ---
-tags: [reference, guide, api, best-practices, patterns]
+tags:
+  - reference
+  - guide
+  - api
+  - best-practices
+  - patterns
+  - rust
 ---
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # CubeCL: Comprehensive Guide \& Cheatsheet
 
 ## Overview

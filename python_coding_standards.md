@@ -599,13 +599,13 @@ This comprehensive guide ensures high-quality, maintainable Python code that fol
 
 ### Related Topics
 - [[python_role]] - Role-specific guidance applies Python standards
-- [[typescript]] - Alternative language with similar async patterns
+- [[typescript_react]] - Alternative language with similar async patterns
 - [[cpp_spec]] - C++23 formatting inspired by Python f-strings
 - [[onnx_runtime]] - ONNX Runtime available for Python
 - [[python3_13]] - Shares Python 3.13 coding standards content
 - [[uv]] - uv is used for Python workspace management
 - [[tenacity]] - Tenacity is a Python library following Python best practices
-- [[click_repl]] - click-repl is a Python CLI library
+- [[click_repl_python]] - click-repl is a Python CLI library
 - [[bayes_theory]] - Python tools (PyMC, Stan) used for Bayesian inference
 - [[type_theory]] - Python 3.13+ uses type hints based on type theory principles
 - [[chromadb]] - ChromaDB provides Python SDK
@@ -626,5 +626,5 @@ This comprehensive guide ensures high-quality, maintainable Python code that fol
 - [[numpy_pytorch_rust_guide]] - Need Python knowledge for NumPy/PyTorch sections
 
 ### Alternatives
-- [[typescript]] - TypeScript alternative for similar use cases
+- [[typescript_react]] - TypeScript alternative for similar use cases
 - [[dotnet]] - .NET/C# alternative for development

@@ -755,7 +755,7 @@ This cheatsheet covers the essential aspects of Motion Canvas development. Refer
 ## Related Concepts
 
 ### Prerequisites
-- [[typescript]] - Motion Canvas uses TypeScript
+- [[typescript_react]] - Motion Canvas uses TypeScript
 - [[node]] - Motion Canvas runs on Node.js runtime
 
 ### Related Topics

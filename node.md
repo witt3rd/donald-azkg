@@ -570,7 +570,7 @@ Node.js 24 represents a significant step forward in server-side JavaScript devel
 ## Related Concepts
 
 ### Related Topics
-- [[typescript]] - Node.js 24 provides native TypeScript support
+- [[typescript_react]] - Node.js 24 provides native TypeScript support
 - [[react_framework]] - Node.js provides runtime for React development
 - [[vite]] - Vite runs on Node.js runtime
 
