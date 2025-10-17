@@ -300,4 +300,5 @@ This is knowledge management **with the agent, not just for the agent**.
 
 - [[personal_knowledge_management]] - Broader PKM context
 - [[second_brain]] - Related concept from Tiago Forte
+- [[progressive_summarization]] - Tiago Forte's layered compression technique for note discoverability
 - [[semantic_web]] - Related vision from W3C
