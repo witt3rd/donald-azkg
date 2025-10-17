@@ -1,7 +1,6 @@
 ---
 tags: [paradigm, zettelkasten, knowledge-graph, agents, innovation]
 ---
-
 # Agentic Zettelkasten Knowledge Graph (Agentic-ZKG)
 
 **Agentic-ZKG** is a paradigm for knowledge management that combines three distinct innovations to create self-managing, conversational knowledge systems.

@@ -18,6 +18,10 @@ This MOC connects all notes related to technical writing, documentation, and con
 - [[progressive_summarization]] - Tiago Forte's technique for compressing notes through layered highlighting
 - [[knowledge_capture_workflow]] - Conceptual framework for transforming external signals into integrated knowledge
 
+## Creative Applications
+
+- [[ai_filmmaking]] - AI systems applied to creative content production and filmmaking workflows
+
 ## Related Topics
 
 - [[strategy_first_principles]] - Both emphasize clarity and reasoning from fundamentals

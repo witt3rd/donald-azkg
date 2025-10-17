@@ -1,8 +1,6 @@
 ---
 tags: [ai, agents, mcp, architecture, claude-code, tools]
 ---
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # Claude Code Agents: Complete Guide to Context Management and Parallelization
 
 ## What Are Claude Code Agents?

@@ -84,6 +84,8 @@ Future developments will likely address current limitations in context window si
 
 The trend toward multimodal integration will probably continue, with future systems supporting even richer input and output modalities. The convergence of language models with computer vision, audio processing, and potentially robotics suggests a future where AI systems can interact with the physical world through multiple sensory channels.
 
+### Artificial General Intelligence
+![[A Definition of AGI.pdf]]
 ## Conclusion
 
 The evolution from the original transformer architecture to modern AI systems represents a fundamental transformation in how we conceptualize and deploy artificial intelligence. What began as an improvement in machine translation has become a comprehensive platform for intelligent task execution, reasoning, and system integration. The addition of memory systems, tool use capabilities, and sophisticated reasoning abilities has transformed LLMs from text generators into intelligent agents capable of complex, multi-step workflows.

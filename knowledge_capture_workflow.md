@@ -160,6 +160,7 @@ The knowledge graph isn't an archive - it's **cognitive infrastructure** that ma
 
 - [[information_diet]] - (future note) Managing information consumption
 - [[progressive_summarization]] - Tiago Forte's method for compressing notes through opportunistic layered highlighting
+- [[ai_filmmaking]] - Similar multi-stage transformation from creative intent to production output
 
 ### Examples
 

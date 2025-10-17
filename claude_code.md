@@ -1,7 +1,6 @@
 ---
 tags: [ai, coding-assistant, agents, tools, ide]
 ---
-
 # Claude Code: Agentic AI Coding Assistant
 
 **Claude Code** is Anthropic's advanced agentic AI coding assistant that operates natively within developer terminals and IDEs. Unlike traditional code completion tools, Claude Code functions as an autonomous agent framework capable of understanding entire codebases, orchestrating multi-agent workflows, executing terminal commands, and managing complex development tasks end-to-end.

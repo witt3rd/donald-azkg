@@ -1,7 +1,6 @@
 ---
 tags: [claude-code, plugins, zettelkasten, knowledge-graph, implementation, agentic-zkg]
 ---
-
 # Claude Code Plugin for Agentic-ZKG
 
 **A Claude Code plugin implementing the [[agentic_zkg]] paradigm** - providing conversational, agent-maintained knowledge management through slash commands, MCP servers, specialized subagents, and workflow hooks.

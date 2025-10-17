@@ -180,6 +180,7 @@ That transformation happens at Layer 4, which is why it's optional in Forte's me
 - [[knowledge_capture_workflow]] - Workflow-level decisions about what to process and when
 - [[agentic_zkg]] - The paradigm for building LLM-ready knowledge graphs
 - [[zettelkasten]] - Atomic note-taking methodology that inspired this approach
+- [[ai_filmmaking]] - Analogous progressive refinement from rough concept to production-quality output
 
 ### Extends
 

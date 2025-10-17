@@ -12,6 +12,7 @@ This MOC connects all notes related to AI and ML development across platforms an
 - [[semantic_routing]] - Intelligent model selection for LLM orchestration
 - [[llm_self_talk_optimization]] - Dense, terse prompting for efficient LLM internal reasoning and inter-agent communication
 - [[claude_code_efficiency_optimization]] - Performance optimization strategies for Claude Code workflows including search, routing, and token management
+- [[ai_filmmaking]] - Application of AI systems to film production workflows including generation, synthesis, and automation
 
 ## Platform-Specific
 

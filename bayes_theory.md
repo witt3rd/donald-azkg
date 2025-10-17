@@ -1,9 +1,7 @@
 ---
 tags: [theory, python]
 ---
-
 # Bayesian Theory Cheat Sheet for Computer Scientists
-
 ## 1. Introduction
 - **Definition**: Uses probability to represent uncertainty, updates beliefs with Bayes' theorem.
 - **Vs. Frequentist**: Parameters are random variables with priors, not fixed.

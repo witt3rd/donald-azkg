@@ -145,6 +145,8 @@ For sensitive or high-impact decisions, agents escalate to humans for confirmati
 
 **Autonomous Operations**: Robotics, logistics, warehouse management, and systems requiring real-time adaptation and complex planning.
 
+**Agentic Filmmaking**: Multi-agent production systems where autonomous agents embody all film roles (cast, crew, leadership) with persistent identity, creative debate, and collaborative decision-making coordinated by human Orchestrator.
+
 ## Limitations and Challenges
 
 ### Reliability
@@ -221,3 +223,5 @@ The field is evolving from "can we build agents?" to "how do we build reliable, 
 
 - [[alita]] - Alita is a concrete example of self-evolving agent
 - [[a2a]] - A2A protocol enables multi-agent interoperability
+- [[ai_filmmaking]] - AI filmmaking workflows use agent orchestration to coordinate multiple generation systems
+- [[agentic_filmmaking]] - Multi-agent production system for autonomous filmmaking
