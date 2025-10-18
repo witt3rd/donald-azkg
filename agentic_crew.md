@@ -583,6 +583,7 @@ Managing processing demands:
 ### Extended By
 
 - [[agentic_crew_implementation]] - System design framework for implementing crew using Claude Agent SDK
+- [[agentic_production_studio]] - Desktop application for managing agentic film productions
 - [[agent_specialization_training]] - (future note) Configuring domain-specific agents
 - [[crew_collaboration_protocols]] - (future note) Communication patterns between crew agents
 - [[agentic_producer_workflow]] - (future note) Logistics and resource management

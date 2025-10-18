@@ -207,11 +207,13 @@ Unlike rigid authority boundaries, agents operate along a **dynamic autonomy spe
 Each agent uses a **hybrid approach** combining general guidelines with self-assessment:
 
 **1. Baseline Guidelines:**
+
 - Decision types have default autonomy levels (e.g., "shot composition" → autonomous, "visual style change" → collaborative)
 - Provides starting point for agent reasoning
 - Prevents decision paralysis while allowing flexibility
 
 **2. Contextual Self-Assessment:**
+
 - Agents evaluate current context to escalate or de-escalate from baseline
 - Factors considered:
   - **Impact scope**: How many agents/systems affected?
@@ -222,6 +224,7 @@ Each agent uses a **hybrid approach** combining general guidelines with self-ass
   - **Resources**: Budget or timeline impact?
 
 **3. Adaptive Learning:**
+
 - Track approval/rejection patterns → calibrate confidence
 - Learn Orchestrator preferences → personalize autonomy
 - Recognize decision patterns → increase autonomy for proven patterns
@@ -229,18 +232,21 @@ Each agent uses a **hybrid approach** combining general guidelines with self-ass
 ### Decision Autonomy Levels
 
 **Autonomous Execution:**
+
 - Agent makes decision and acts immediately
 - No collaboration or approval required
 - Logged for learning and audit trail
 - **Example**: Director agent selecting camera angle for routine dialogue scene
 
 **Collaborative Decision:**
+
 - Agent creates plan and shares with relevant peer agents
 - Time-boxed debate (typically 5 minutes)
 - Consensus → execute; No consensus → escalate
 - **Example**: Director and DP negotiating lighting approach for new location
 
 **Approval Required:**
+
 - Agent creates plan with rationale
 - Requests approval from appropriate authority (peer agent, leadership agent, or Orchestrator)
 - Waits for approval before executing
@@ -923,18 +929,21 @@ class AgentLearningSystem:
 The learning system enables agents to progressively increase autonomy as production continues:
 
 **Episode 1: Learning Phase**
+
 - Many decisions escalated to Orchestrator for approval
 - Agents learning vision, preferences, style
 - High approval request rate (~60-70%)
 - Orchestrator provides detailed feedback
 
 **Episode 4-6: Internalization Phase**
+
 - Agents recognize patterns from prior episodes
 - Autonomy increases for proven decision types
 - Approval request rate drops (~30-40%)
 - Collaborative decisions dominate
 
 **Episode 9-12: Autonomous Phase**
+
 - Agents operate mostly autonomously
 - Strong pattern recognition and confidence
 - Approval requests rare, only for novel situations (~10-15%)
@@ -1649,29 +1658,35 @@ Crew agents improve through production experience:
 The **agentic crew implementation** combines three key innovations:
 
 ### 1. Context-Aware Autonomy
+
 Every decision includes contextual assessment—agents don't follow rigid rules but evaluate impact, confidence, risk, dependencies, and learned patterns to determine whether to act autonomously, collaborate, or seek approval. The same agent making the same type of decision will adapt autonomy level based on context.
 
 ### 2. Structured Collaboration
+
 Time-boxed debate protocols enable efficient multi-agent collaboration without endless deliberation. Agents propose, discuss, refine, and either reach consensus (5-minute cycle) or escalate to higher authority. This balances creative exploration with production efficiency.
 
 ### 3. Adaptive Learning
+
 Agents track decision patterns, approval rates, and Orchestrator preferences to progressively increase autonomy over production. Episode 1 requires heavy oversight as agents learn vision; by Episode 12, agents operate mostly autonomously, internalizing "What Would Orchestrator Decide."
 
 ### Integration with Three-Layer Architecture
 
 **Orchestrator Layer:**
+
 - Sets vision and style guidelines (baseline autonomy rules)
 - Reviews approval requests from agents
 - Provides feedback that agents learn from
 - Monitors production via dashboard showing agent autonomy patterns
 
 **Agent Coordination Layer:**
+
 - Each agent has `AgentDecision` and `AgentLearningSystem` components
 - Agents self-assess autonomy for every decision
 - Time-boxed debates happen peer-to-peer within this layer
 - Learning systems share pattern libraries across related agents
 
 **Production Tools Layer:**
+
 - MCP servers provide decision logging and pattern storage
 - Character Memory MCP tracks agent learning history
 - Production Database MCP stores approval workflows and feedback
@@ -1679,6 +1694,7 @@ Agents track decision patterns, approval rates, and Orchestrator preferences to 
 ### Key Metrics for Orchestrator
 
 The learning system enables tracking:
+
 - **Autonomy distribution**: % decisions autonomous vs. collaborative vs. approval-required
 - **Approval rates**: Success rate by autonomy level and decision type
 - **Debate efficiency**: Consensus rate and average debate duration
@@ -1686,6 +1702,7 @@ The learning system enables tracking:
 - **Orchestrator workload**: Approval requests trending down as agents learn
 
 **Expected trajectory** (Arcadian Summers 12-episode season):
+
 - **Episodes 1-3**: 60-70% approval requests, agents learning
 - **Episodes 4-8**: 30-40% approval requests, pattern internalization
 - **Episodes 9-12**: 10-15% approval requests, autonomous operation
@@ -1703,6 +1720,7 @@ This architecture enables true **collaborative co-creation** where agents progre
 
 ### Related Topics
 
+- [[agentic_production_studio]] - Desktop application architecture implementing this system design
 - [[claude_agent_sdk_production]] - Production deployment patterns, observability, and monitoring strategies
 - [[python_mcp_sdk]] - MCP server implementation for production tools
 - [[mcp_overview]] - Protocol enabling agent-tool integration

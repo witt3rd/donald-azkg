@@ -311,6 +311,7 @@ Are agentic performances "authentic" emotional expression or computational simul
 - [[agentic_character]] - Character agent implementation with cross-production persistence
 - [[agentic_crew]] - Specialized crew agents for production roles
 - [[agentic_crew_implementation]] - System design framework for implementing crew using Claude Agent SDK
+- [[agentic_production_studio]] - Desktop application providing production environment for agentic filmmaking
 - [[arcadian_summers]] - First fully agentic TV series demonstrating paradigm at scale
 - [[agentic_production_workflow]] - (future note) Concrete multi-agent coordination example
 

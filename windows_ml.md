@@ -79,6 +79,7 @@ The relationship between Windows ML and DirectML exemplifies Microsoft's commitm
 There are **two different Windows ML API sets** that can cause confusion:
 
 #### 1. Legacy Windows ML APIs (Ships with Windows - 2018)
+
 ⚠️ **Note**: These are the **original Windows ML APIs from 2018** that ship with Windows. While still functional and convenient for simple scenarios, these APIs use an older architecture. The modern Windows ML (2024+) has been rearchitected to use ONNX Runtime as its core engine.
 
 - **Status**: Legacy/superseded (but still works)
@@ -91,6 +92,7 @@ There are **two different Windows ML API sets** that can cause confusion:
 - **Device selection**: `LearningModelDevice` with predefined kinds (CPU, DirectX, DirectXHighPerformance)
 - **Use case**: Simple ML inference, quick prototyping, tensor operations, zero-dependency scenarios
 - **Example**:
+
 ```cpp
 #include <winrt/Windows.AI.MachineLearning.h>
 using namespace Windows::AI::MachineLearning;
@@ -100,6 +102,7 @@ auto tensor = TensorFloat::CreateFromArray(shape, data);
 ```
 
 #### 2. Current Windows ML APIs via Windows App SDK (2024-2025)
+
 ✅ **Note**: These are the **current, recommended Windows ML APIs** that represent the modern Windows ML architecture. Part of the Windows AI Foundry platform announced at Build 2024 and launched in 2024-2025. This version uses ONNX Runtime as its core inference engine.
 
 - **Status**: Current/recommended
@@ -111,6 +114,7 @@ auto tensor = TensorFloat::CreateFromArray(shape, data);
 - **Integration**: Direct ONNX Runtime C API access
 - **Use case**: Production applications, advanced provider management, latest optimizations
 - **Example**:
+
 ```cpp
 #include <winrt/Microsoft.Windows.AI.MachineLearning.h>
 using namespace Microsoft::Windows::AI::MachineLearning;
@@ -138,6 +142,7 @@ catalog.EnsureAndRegisterAllAsync().get();
 ### Why Both Still Exist
 
 The legacy APIs continue to work because:
+
 1. **Backward compatibility** - Existing applications rely on them
 2. **Zero dependencies** - Useful for lightweight scenarios
 3. **Simplicity** - Lower barrier to entry for basic ML tasks
@@ -161,6 +166,7 @@ The Microsoft.WindowsAppSDK.ML NuGet package provides Windows ML runtime .winmd 
 #### Framework-Dependent Deployment
 
 Windows ML is delivered as a framework-dependent component. Applications must either:
+
 - Reference the main Windows App SDK NuGet package by adding `Microsoft.WindowsAppSDK` (recommended)
 - Or reference both `Microsoft.WindowsAppSDK.ML` and `Microsoft.WindowsAppSDK.Runtime`
 
@@ -172,7 +178,7 @@ The ExecutionProviderCatalog class is the entry point for accessing hardware-opt
 
 ```cpp
 // Get the default catalog
-winrt::Microsoft::Windows::AI::MachineLearning::ExecutionProviderCatalog catalog = 
+winrt::Microsoft::Windows::AI::MachineLearning::ExecutionProviderCatalog catalog =
     winrt::Microsoft::Windows::AI::MachineLearning::ExecutionProviderCatalog::GetDefault();
 
 // Ensure and register all compatible execution providers
@@ -184,6 +190,7 @@ catalog.EnsureAndRegisterAllAsync().get();
 #### Key Methods
 
 ##### GetDefault Method
+
 Returns the default ExecutionProviderCatalog instance that provides access to all execution providers on the system.
 
 ```cpp
@@ -191,6 +198,7 @@ auto catalog = winrt::Microsoft::Windows::AI::MachineLearning::ExecutionProvider
 ```
 
 ##### FindAllProviders Method
+
 Returns a collection of all execution providers compatible with the current hardware.
 
 ```cpp
@@ -199,30 +207,32 @@ auto providers = catalog.FindAllProviders();
 
 for (const auto& provider : providers)
 {
-    std::wcout << L"Found provider: " << provider.Name().c_str() 
+    std::wcout << L"Found provider: " << provider.Name().c_str()
               << L", Type: " << static_cast<int>(provider.DeviceType()) << L"\n";
 }
 ```
 
 ##### EnsureAndRegisterAllAsync Method
+
 Ensures all compatible execution providers are ready and registers them with ONNX Runtime. This method may trigger downloads of required components.
 
 ```cpp
 auto catalog = winrt::Microsoft::Windows::AI::MachineLearning::ExecutionProviderCatalog::GetDefault();
 
-try 
+try
 {
     // This will ensure providers are ready and register them with ONNX Runtime
     catalog.EnsureAndRegisterAllAsync().get();
     std::wcout << L"All execution providers are ready and registered\n";
 }
-catch (const winrt::hresult_error& ex) 
+catch (const winrt::hresult_error& ex)
 {
     std::wcout << L"Failed to prepare execution providers: " << ex.message().c_str() << L"\n";
 }
 ```
 
 ##### RegisterAllAsync Method
+
 Registers all compatible execution providers with ONNX Runtime without ensuring they are ready. This only registers providers already present on the machine, avoiding potentially long download times.
 
 ```cpp
@@ -237,6 +247,7 @@ The ExecutionProvider class represents a specific hardware accelerator that can 
 #### Methods
 
 ##### EnsureReadyAsync Method
+
 Ensures the execution provider is ready for use by downloading and installing any required components.
 
 ```cpp
@@ -251,6 +262,7 @@ for (const auto& provider : providers)
 ```
 
 ##### TryRegister Method
+
 Attempts to register the execution provider with ONNX Runtime and returns a boolean indicating success.
 
 ```cpp
@@ -261,7 +273,7 @@ for (const auto& provider : providers)
 {
     provider.EnsureReadyAsync().get();
     bool registered = provider.TryRegister();
-    std::wcout << L"Provider " << provider.Name().c_str() 
+    std::wcout << L"Provider " << provider.Name().c_str()
               << L" registration: " << (registered ? L"Success" : L"Failed") << L"\n";
 }
 ```
@@ -289,6 +301,7 @@ The Windows ML runtime integrates with the Windows App SDK and relies on its dep
 After registering execution providers through Windows ML, applications can use the ONNX Runtime directly:
 
 #### C++ Applications
+
 Use the ONNX Runtime C API directly to create sessions and run inference after provider registration.
 
 ```cpp
@@ -302,9 +315,11 @@ Ort::Session session(env, L"model.onnx", session_options);
 ```
 
 #### C# Applications
+
 Use the ONNX Runtime directly for inference using the `Microsoft.ML.OnnxRuntime` namespace.
 
 #### Python Applications
+
 Use the separate ONNX Runtime wheel (`onnxruntime`) for inference. For experimental release, use `onnxruntime-winml==1.22.0.post2` package.
 
 ### Best Practices for C++ Development
@@ -367,9 +382,11 @@ This dual approach allows gradual migration from legacy to modern APIs while mai
 ## Related Concepts
 
 ### Prerequisites
+
 - [[windows_ai_stack_explained]] - Need to understand overall architecture before diving into Windows ML specifics
 
 ### Related Topics
+
 - [[onnx_runtime]] - Windows ML is powered by ONNX Runtime internally
 - [[dotnet]] - Windows ML provides .NET/C# APIs
 - [[cpp_project]] - Windows ML provides C++ APIs
@@ -380,10 +397,14 @@ This dual approach allows gradual migration from legacy to modern APIs while mai
 - [[cpu_vs_gpu_decision_guide]] - Windows ML supports CPU and GPU hardware acceleration
 
 ### Extends
+
 - [[windows_ai_stack_explained]] - Detailed implementation of Windows ML layer from the stack
 
 ### Extended By
+
 - [[windows_app_sdk_setup]] - Shows how to set up Windows ML via App SDK
+- [[windows_app_sdk_ai]] - Windows App SDK AI namespaces build on Windows ML foundation
 
 ### Alternatives
+
 - [[onnx_runtime]] - Direct ONNX Runtime for cross-platform scenarios

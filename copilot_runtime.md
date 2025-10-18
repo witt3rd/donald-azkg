@@ -216,10 +216,12 @@ The Windows Copilot Runtime represents Microsoft's vision for democratizing AI d
 ## Related Concepts
 
 ### Prerequisites
+
 - [[windows_ai_stack_explained]] - Need to understand where Copilot Runtime fits in the AI stack
 - [[dotnet]] - .NET knowledge required for Copilot Runtime APIs
 
 ### Related Topics
+
 - [[windows_ml]] - Copilot Runtime sits above Windows ML layer
 - [[windows_app_sdk_setup]] - Accessed through Windows App SDK
 - [[onnx_runtime]] - Uses ONNX Runtime under the hood
@@ -228,4 +230,9 @@ The Windows Copilot Runtime represents Microsoft's vision for democratizing AI d
 - [[foundry_local]] - Both provide local AI capabilities on Windows
 
 ### Extends
+
 - [[windows_ai_stack_explained]] - Higher-level AI runtime layer in the stack
+
+### Related Topics
+
+- [[windows_app_sdk_ai]] - Windows App SDK provides access to Copilot Runtime AI capabilities

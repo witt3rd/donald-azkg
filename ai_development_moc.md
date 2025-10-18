@@ -28,6 +28,7 @@ This MOC connects all notes related to AI and ML development across platforms an
 - [[claude_agent_sdk]] - Production SDK for building autonomous AI agents with Claude models
 - [[claude_agent_sdk_production]] - Production deployment patterns, observability, and monitoring for Agent SDK
 - [[agentic_crew_implementation]] - System design framework for implementing autonomous film production crew using Agent SDK
+- [[agentic_production_studio]] - Windows desktop application for creating and managing agentic film productions
 
 ## Platform-Specific
 

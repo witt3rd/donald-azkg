@@ -640,15 +640,19 @@ For most developers building Windows desktop apps with local AI, **Windows ML wi
 ## Related Concepts
 
 ### Related Topics
+
 - [[windows_ml]] - Windows ML is a key layer in the stack
 - [[onnx_runtime]] - ONNX Runtime is the core inference engine
 - [[copilot_runtime]] - Copilot Runtime sits above Windows ML for Copilot+ PCs
 
 ### Extended By
+
 - [[windows_ml]] - Detailed implementation of Windows ML layer
 - [[onnx_runtime]] - Detailed implementation of inference engine
 - [[copilot_runtime]] - Higher-level AI runtime layer
 - [[foundry_local]] - Foundry Local sits as model management layer in Windows AI stack
+- [[windows_app_sdk_ai]] - Specific implementation of Windows AI platform capabilities through App SDK
 
 ### Examples
+
 - [[windows_app_sdk_setup]] - Practical setup example using Windows App SDK
