@@ -420,6 +420,10 @@ var response = await safeModel.GenerateResponseAsync(userInput);
 
 - [[windows_ai_stack_explained]] - Specific implementation of Windows AI platform capabilities
 
+### Extended By
+
+- [[windows_agents_platform]] - OS-level multi-agent platform building on App SDK AI foundation
+
 ### Alternatives
 
 - **Azure OpenAI Service** - Cloud-based LLM access (GPT-4, etc.)

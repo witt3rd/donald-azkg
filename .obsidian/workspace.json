@@ -168,19 +168,20 @@
   },
   "active": "268757c7edc7551a",
   "lastOpenFiles": [
+    "ai_filmmaking_moc.md.tmp.32320.1760809806215",
+    "ai_development_moc.md.tmp.32320.1760809758217",
+    "windows_moc.md.tmp.32320.1760809724160",
+    "claude_code_internals.md.tmp.32320.1760809700256",
+    "claude_agent_sdk_production.md.tmp.32320.1760809657839",
+    "claude_agent_sdk.md.tmp.32320.1760809599145",
+    "windows_app_sdk_ai.md.tmp.32320.1760809513324",
+    "agentic_production_studio.md.tmp.32320.1760809476064",
+    "windows_agents_platform.md",
+    "windows_agents_platform.md.tmp.32320.1760809335673",
     "windows_moc.md.tmp.32320.1760808128415",
     "windows_ml.md.tmp.32320.1760808107149",
-    "copilot_runtime.md.tmp.32320.1760808104805",
-    "windows_ai_stack_explained.md.tmp.32320.1760808101461",
     "windows_app_sdk_ai.md",
-    "windows_app_sdk_ai.md.tmp.32320.1760807894915",
     "attachments/Windows App SDK AI Namespaces.md",
-    "ai_filmmaking_moc.md.tmp.32320.1760803018139",
-    "ai_development_moc.md.tmp.32320.1760803004232",
-    "orchestrator_role.md.tmp.32320.1760802993055",
-    "agentic_filmmaking.md.tmp.32320.1760802981946",
-    "agentic_crew.md.tmp.32320.1760802971079",
-    "agentic_crew_implementation.md.tmp.32320.1760802959960",
     "agentic_production_studio.md",
     "agentic_crew_implementation.md",
     "claude_agent_sdk_examples.md",
@@ -203,7 +204,6 @@
     "bayes_theory.md",
     "attachments/Pasted image 20251017060210.png",
     "click_repl_python.md",
-    "cli_rust.md",
-    "claude_plugin_azkg.md"
+    "cli_rust.md"
   ]
 }

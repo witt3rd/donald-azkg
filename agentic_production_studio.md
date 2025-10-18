@@ -1437,6 +1437,7 @@ public class Studio
 - [[claude_agent_sdk]] - Underlying technology for agent runtime (transitional state)
 - [[mcp_overview]] - Tool integration protocol for production capabilities
 - [[windows_ai_stack_explained]] - Windows AI capabilities that inform aspirational design
+- [[windows_agents_platform]] - Aspirational OS-level multi-agent platform enabling production studio capabilities
 
 ### Extends
 

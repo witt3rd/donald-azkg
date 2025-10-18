@@ -11,6 +11,7 @@ This MOC connects all notes related to Windows platform development, AI stack, a
 - [[windows_ml]] - Windows ML API evolution and implementation guide
 - [[copilot_runtime]] - Windows Copilot Runtime for AI on Copilot+ PCs
 - [[windows_app_sdk_ai]] - Windows App SDK AI capabilities (Phi Silica, vision, content safety)
+- [[windows_agents_platform]] - Aspirational OS-level multi-agent platform architecture
 
 ## Related Topics
 

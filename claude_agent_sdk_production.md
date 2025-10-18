@@ -1144,6 +1144,7 @@ class BatchAgent:
 - [[mcp_overview]] - MCP servers are critical for extending agent capabilities
 - [[python_mcp_sdk]] - Building custom MCP servers for production agents
 - [[claude_code]] - Understanding Claude Code architecture informs Agent SDK patterns
+- [[windows_agents_platform]] - OS-level platform architecture provides comparison for production patterns
 
 ### Extends
 

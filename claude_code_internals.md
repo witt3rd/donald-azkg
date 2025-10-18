@@ -651,6 +651,7 @@ claude-code/
 - [[claude_code_efficiency_optimization]] - Performance optimization builds on these internals
 - [[mcp_overview]] - MCP provides standardized tool integration that could replace custom tools
 - [[llm_self_talk_optimization]] - Prompt compression techniques applicable to system prompts
+- [[windows_agents_platform]] - OS-level platform architecture inspired by Claude Code capabilities
 
 ### Extends
 

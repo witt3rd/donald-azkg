@@ -165,3 +165,4 @@ This MOC organizes concepts related to AI-assisted and autonomous filmmaking, sp
 - [[character_animation]] - Visual performance generation
 - [[crew_collaboration_protocols]] - Inter-agent communication
 - [[orchestrator_intervention_patterns]] - Strategic coordination
+- [[windows_agents_platform]] - Aspirational OS-level multi-agent platform enabling production studio capabilities

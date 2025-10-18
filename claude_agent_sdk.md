@@ -349,6 +349,7 @@ console.log(result.summary);
 ### Decision Matrix
 
 **Choose Agent SDK when:**
+
 - Task requires multiple steps with verification loops
 - Agent needs file system or command execution access
 - Workflow must run autonomously without human per-step intervention
@@ -357,12 +358,14 @@ console.log(result.summary);
 - Production reliability (error handling, retry, logging) is essential
 
 **Choose Direct API when:**
+
 - Single completion or chat turn is sufficient
 - No file/command access needed
 - Stateless operation is acceptable
 - Integration complexity not justified for use case
 
 **Choose Claude Code when:**
+
 - Human developer wants interactive AI coding assistant
 - Working locally in terminal or IDE
 - Task requires iterative human feedback per step
@@ -596,13 +599,20 @@ If yes to most of these, Agent SDK is likely the right choice.
 
 - [[llm_agents]] - Agent SDK is a specific implementation of AI agents for production use
 
+### Alternatives
+
+- [[windows_agents_platform]] - Aspirational OS-level multi-agent platform (vs application-level framework)
+- **LangChain/LangGraph** - Alternative multi-agent framework with broader ecosystem
+- **AutoGen** - Microsoft's multi-agent conversation framework
+- **CrewAI** - Role-based multi-agent orchestration framework
+
 ## References
 
-[1] https://artechway.com/blog/claude-agent-sdk-the-complete-developer-guide-to-building-powerful-autonomous-ai-agents-in-2025 - Complete developer guide
-[2] https://www.datacamp.com/tutorial/how-to-use-claude-agent-sdk - DataCamp tutorial
-[3] https://www.youtube.com/watch?v=i6N8oQQ0tUE - Video walkthrough
-[4] https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk - Official engineering blog
-[5] https://docs.claude.com/en/api/agent-sdk/overview - Official SDK documentation
-[6] https://blog.promptlayer.com/building-agents-with-claude-codes-sdk/ - PromptLayer guide
-[7] https://www.anthropic.com/news/claude-sonnet-4-5 - Model recommendation
-[8] https://skywork.ai/blog/claude-agent-sdk-best-practices-ai-agents-2025/ - Best practices guide
+[1] <https://artechway.com/blog/claude-agent-sdk-the-complete-developer-guide-to-building-powerful-autonomous-ai-agents-in-2025> - Complete developer guide
+[2] <https://www.datacamp.com/tutorial/how-to-use-claude-agent-sdk> - DataCamp tutorial
+[3] <https://www.youtube.com/watch?v=i6N8oQQ0tUE> - Video walkthrough
+[4] <https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk> - Official engineering blog
+[5] <https://docs.claude.com/en/api/agent-sdk/overview> - Official SDK documentation
+[6] <https://blog.promptlayer.com/building-agents-with-claude-codes-sdk/> - PromptLayer guide
+[7] <https://www.anthropic.com/news/claude-sonnet-4-5> - Model recommendation
+[8] <https://skywork.ai/blog/claude-agent-sdk-best-practices-ai-agents-2025/> - Best practices guide

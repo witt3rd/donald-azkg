@@ -34,6 +34,7 @@ This MOC connects all notes related to AI and ML development across platforms an
 
 - [[windows_ai_stack_explained]] - Windows AI ecosystem architecture
 - [[windows_ml]] - Windows ML API for ML inference
+- [[windows_agents_platform]] - Aspirational OS-level multi-agent platform for Windows
 
 ## Frameworks
 
