@@ -548,6 +548,7 @@ Defining interaction style with autonomous agents:
 ### Related Topics
 
 - [[agentic_crew]] - Crew agents that Orchestrator coordinates
+- [[agentic_crew_implementation]] - System design showing Orchestrator's technical coordination layer
 - [[agentic_character]] - Character agents under Orchestrator's creative direction
 - [[human_ai_collaboration]] - (future note) Patterns for human-AI creative partnership
 - [[multi_agent_coordination]] - (future note) Orchestrator's coordination mechanisms

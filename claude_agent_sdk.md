@@ -586,6 +586,7 @@ If yes to most of these, Agent SDK is likely the right choice.
 - [[python_mcp_sdk]] - MCP SDK enables custom tool development for Agent SDK
 - [[agent_mcp_apis]] - Understanding MCP tool architecture enhances Agent SDK usage
 - [[claude_code_skills]] - Skills provide similar modularity but for Claude Code, not Agent SDK
+- [[agentic_crew_implementation]] - System design for autonomous film production crew using Agent SDK
 
 ### Extended By
 

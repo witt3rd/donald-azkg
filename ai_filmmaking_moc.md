@@ -21,6 +21,8 @@ This MOC organizes concepts related to AI-assisted and autonomous filmmaking, sp
 ### Crew
 **[[agentic_crew]]** - Specialized production agents (director, writer, DP, editor, composer, sound designer, set designer) with domain expertise and autonomous creative decision-making.
 
+**[[agentic_crew_implementation]]** - System design framework for implementing agentic crew using Claude Agent SDK. Three-layer architecture (Orchestrator, Agent Coordination, Production Tools) with multi-agent coordination patterns, MCP tool integration, and production observability.
+
 ### Leadership
 **[[orchestrator_role]]** - Human meta-role coordinating autonomous agent production system. Supreme creative authority operating at strategic level above traditional hierarchy.
 

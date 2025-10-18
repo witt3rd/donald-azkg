@@ -581,6 +581,7 @@ Arcadian Summers establishes precedent for:
 ### Related Topics
 
 - [[orchestrator_role]] - Human meta-role coordinating Arcadian Summers production
+- [[agentic_crew_implementation]] - System design framework used for Arcadian Summers production architecture
 - [[multi_agent_systems]] - Coordination patterns for distributed agent collaboration
 - [[persistent_character_systems]] - Memory and identity continuity across episodes
 - [[agent_debate_protocols]] - Structured negotiation for creative decisions

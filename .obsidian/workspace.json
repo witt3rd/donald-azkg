@@ -168,19 +168,21 @@
   },
   "active": "268757c7edc7551a",
   "lastOpenFiles": [
+    "ai_filmmaking_moc.md.tmp.32320.1760722901135",
+    "ai_development_moc.md.tmp.32320.1760722870550",
+    "claude_agent_sdk.md.tmp.32320.1760722861159",
+    "arcadian_summers.md.tmp.32320.1760722815088",
+    "orchestrator_role.md.tmp.32320.1760722802660",
+    "agentic_filmmaking.md.tmp.32320.1760722793532",
+    "agentic_crew.md.tmp.32320.1760722784282",
+    "agentic_crew_implementation.md",
+    "agentic_crew_implementation.md.tmp.32320.1760722769469",
     "claude_agent_sdk_examples.md",
     "claude_agent_sdk_examples.md.tmp.32320.1760721685332",
     "ai_filmmaking_moc.md.tmp.43644.1760721466703",
     "agentic_crew.md.tmp.43644.1760721425933",
-    "arcadian_summers.md.tmp.43644.1760721410311",
     "arcadian_summers_cast_and_crew.md",
-    "arcadian_summers_cast_and_crew.md.tmp.43644.1760721394784",
-    "ai_development_moc.md.tmp.32320.1760721283942",
-    "claude_code.md.tmp.32320.1760721282257",
-    "mcp_overview.md.tmp.32320.1760721279565",
-    "claude_agent_sdk.md.tmp.32320.1760721278235",
     "claude_agent_sdk_production.md",
-    "claude_agent_sdk_production.md.tmp.32320.1760721257047",
     "claude_agent_sdk.md",
     "arcadian_summers_narrative_questions.md",
     "claude_code_skills.md",
@@ -202,8 +204,6 @@
     "claude_plugin_azkg.md",
     "claude_code_slash_commands.md",
     "claude_code_plugins.md",
-    "claude_code_internals.md",
-    "claude_code_hooks.md",
-    "claude_code_efficiency_optimization.md"
+    "claude_code_internals.md"
   ]
 }
